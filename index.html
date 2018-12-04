@@ -262,6 +262,365 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/04/python01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537555558334&di=9448a181ae0fa313b3f8b866e828d63d&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fwallpaper%2F1301%2F25%2Fc0%2F17711458_1359094576548.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/04/python01/" itemprop="url">Linux常用命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-04T16:30:08+08:00">
+                2018-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/04/python01/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/12/04/python01/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Linux终端命令的重要性"><a href="#Linux终端命令的重要性" class="headerlink" title="Linux终端命令的重要性"></a>Linux终端命令的重要性</h1><ol>
+<li>Linux 刚面世时并没有图形界面，所有的操作全靠命令完成，如 磁盘操作、文件存取、目录操作、进程管理、文件权限 设定等</li>
+<li>在职场中，大量的 服务器维护工作 都是在 远程 通过 SSH 客户端 来完成的，并没有图形界面，所有的维护工作都需要通过命令来完成</li>
+<li>在职场中，作为后端程序员，必须要或多或少的掌握一些 Linux 常用的终端命令</li>
+<li>Linux 发行版本的命令大概有 200 多个，但是常用的命令只有 10 多个而已</li>
+</ol>
+<h1 id="学习终端命令的技巧："><a href="#学习终端命令的技巧：" class="headerlink" title="学习终端命令的技巧："></a>学习终端命令的技巧：</h1><ol>
+<li>不需要死记硬背，对于常用命令，用的多了，自然就记住了</li>
+<li>不要尝试一次学会所有的命令，有些命令是非常不常用的，临时遇到，临时百度就可以</li>
+</ol>
+<h1 id="常用-Linux-命令的基本使用"><a href="#常用-Linux-命令的基本使用" class="headerlink" title="常用 Linux 命令的基本使用"></a>常用 Linux 命令的基本使用</h1><table><br><thead><br><tr><br><th>序号</th><br><th>命令</th><br><th>对应英文</th><br><th>作用</th><br></tr><br></thead><br><br><tbody><br><tr><br><td>01</td><br><td>ls</td><br><td>list</td><br><td>查看当前文件夹下的内容</td><br></tr><br><tr><br><td>02</td><br><td>pwd</td><br><td>print wrok directory</td><br><td>查看当前所在文件夹</td><br></tr><br><tr><br><td>03</td><br><td>cd [目录名]</td><br><td>change directory</td><br><td>切换文件夹</td><br></tr><br><tr><br><td>04</td><br><td>touch [文件名]</td><br><td>touch</td><br><td>如果文件不存在，新建文件</td><br></tr><br><tr><br><td>05</td><br><td>mkdir [目录名]</td><br><td>make directory</td><br><td>创建目录</td><br></tr><br><tr><br><td>06</td><br><td>rm [文件名]</td><br><td>remove</td><br><td>删除指定的文件名</td><br></tr><br><tr><br><td>07</td><br><td>clear</td><br><td>clear</td><br><td>清屏</td><br></tr><br></tbody><br></table>
+
+<blockquote><br><p>小技巧</p><br><br><ul><br><li><code>ctrl + shift + =</code> <strong>放大</strong>终端窗口的字体显示</li><br><li><code>ctrl + -</code> <strong>缩小</strong>终端窗口的字体显示</li><br></ul><br></blockquote>
+
+<h1 id="自动补全"><a href="#自动补全" class="headerlink" title="自动补全"></a>自动补全</h1><ul><br><li>在敲出 <code>文件</code>／<code>目录</code>／<code>命令</code> 的前几个字母之后，按下 <code>tab</code> 键<br><br><ul><br><li>如果输入的没有歧义，系统会自动补全</li><br><li>如果还存在其他 <code>文件</code>／<code>目录</code>／<code>命令</code>，再按一下 <code>tab</code> 键，系统会提示可能存在的命令</li><br></ul></li><br></ul>
+
+<blockquote><br><p>小技巧</p><br><br><ul><br><li>按 <code>上</code>／<code>下</code> 光标键可以在曾经使用过的命令之间来回切换</li><br><li>如果想要退出选择，并且不想执行当前选中的命令，可以按 <code>ctrl + c</code></li><br></ul><br></blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/29/NLP1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537555558334&di=9448a181ae0fa313b3f8b866e828d63d&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fwallpaper%2F1301%2F25%2Fc0%2F17711458_1359094576548.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/29/NLP1/" itemprop="url">NLP1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-29T16:22:08+08:00">
+                2018-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/29/NLP1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/29/NLP1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="CS224N"><a href="#CS224N" class="headerlink" title="CS224N"></a><a href="https://web.stanford.edu/class/cs224n/" target="_blank" rel="noopener">CS224N</a></h1><h2 id="自然语言处理"><a href="#自然语言处理" class="headerlink" title="自然语言处理"></a>自然语言处理</h2><p>自然语言处理的目标是让计算机处理或说“理解”自然语言，以完成有意义的任务，比如订机票购物或QA等。完全理解和表达语言是极其困难的，完美的语言理解等效于实现人工智能。<br><img src="http://photo.weibo.com/5732903894/photos/detail/photo_id/4311743059902810/album_id/4311743001149311" alt="层次"></p>
+<p></p><p><br>作为输入一共有两个来源，语音与文本。所以第一级是语音识别和OCR或分词。形态分析（Morphological）是分析该词的构造形式（主要针对英语而言，例如，uninterested = un(前缀）+ interest(词干) + ed(后缀)）。句法分析是确定句子的语法结构句子中词汇之间的依存关系。本课程着重讲解句法分析和语义表示。</p>
+<h2 id="自然语言处理的应用"><a href="#自然语言处理的应用" class="headerlink" title="自然语言处理的应用"></a>自然语言处理的应用</h2><ol>
+<li>拼写检查、关键词检索……</li>
+<li>文本挖掘（产品价格、日期、时间、地点、人名、公司名）</li>
+<li>文本分类</li>
+<li>机器翻译</li>
+<li>客服系统</li>
+<li>复杂对话系统</li>
+</ol>
+<p>在工业界从搜索到广告投放、自动\辅助翻译、情感舆情分析、语音识别、聊天机器人等。</p>
+<h3 id="人类语言的特殊之处"><a href="#人类语言的特殊之处" class="headerlink" title="人类语言的特殊之处"></a>人类语言的特殊之处</h3><p>与信号处理、数据挖掘不同，自然语言的随机性小而目的性强；语言是用来传输有意义的信息的，这种传输连小孩子都能很快学会。人类语言是离散的、明确的符号系统。但又允许出现各种变种，比如颜文字，随意的错误拼写“I loooove it”。这种自由性可能是因为语言的可靠性（赘余性）。所以说语言文字绝对不是形式逻辑或传统AI的产物。<br>语言符号有多种形式（声音、手势、书写），在这些不同的形式中，其意义保持不变。<br>虽然人类语言是明确的符号系统，但符号传输到大脑的过程是通过连续的声学光学信号，大脑编码似乎是连续的激活值上的模式。另外巨大的词表也导致数据稀疏，不利于机器学习。这构成一种动机，是不是应该用连续的信号而不是离散的符号去处理语言。</p>
+<p>因为NVDIA官网即使是科学上网也经常崩，所以把<a href="https://pan.baidu.com/s/1Kip1hIzGq9C_NlvDDY3-bg" target="_blank" rel="noopener">百度网盘连接</a>分享到文件里，需要的可以自取，密码ia9l</p>
+<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><p>只要要三步：</p>
+<p>（1）下载并安装<a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">cuda9.1</a></p>
+<p>（2）下载并安装<a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener">cudnn7.1</a></p>
+<p>  (3) 下载并安装<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="noopener">annaconda3-5.1.0</a></p>
+<p>注意：1.查看cuda能否安装成功：在cmd(win+r)中输入：nvcc -V</p>
+<p>2.安装cudnn7.0详细方法：</p>
+<p>将cudnn压缩包中所有文件放入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0</span><br></pre></td></tr></table></figure></p>
+<p>目录下对应目录中，同时将<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\extras\CUPTI\libx64\cupti64_91.dll</span><br></pre></td></tr></table></figure></p>
+<p>拷贝到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin</span><br></pre></td></tr></table></figure></p>
+<h3 id="CUDA环境测试"><a href="#CUDA环境测试" class="headerlink" title="CUDA环境测试"></a>CUDA环境测试</h3><p>CMD中输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure></p>
+<p>如果成功出现下图，则说明CUDA和Cudnn已经配置成功<br><img src="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvm2m4p0whj30e00240sk.jpg" alt="Alt Cuda"></p>
+<h3 id="安装tensorflow"><a href="#安装tensorflow" class="headerlink" title="安装tensorflow"></a>安装tensorflow</h3><p>打开Anaconda Prompt，创建tensorflow虚拟环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n tensorflow python=3.5</span><br></pre></td></tr></table></figure></p>
+<p>然后启用虚拟环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activate tensorflow</span><br></pre></td></tr></table></figure></p>
+<p>最后安装tensorflow<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow-gpu</span><br></pre></td></tr></table></figure></p>
+<p>如果安装速度较慢，可以使用清华大学开源软件镜像站的<a href="https://mirrors.tuna.tsinghua.edu.cn/help/tensorflow/" target="_blank" rel="noopener">TensorFlow 镜像</a>。</p>
+<h3 id="测试tensorflow安装情况"><a href="#测试tensorflow安装情况" class="headerlink" title="测试tensorflow安装情况"></a>测试tensorflow安装情况</h3><p>在刚才的Anaconda Prompt中输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Python</span><br></pre></td></tr></table></figure></p>
+<p>在Python的交互界面中输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">hello=tf.constant(&apos;Hello tensorflow!&apos;)</span><br><span class="line">sess=tf.Session()</span><br><span class="line">sess.run(hello)</span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure></p>
+<p>然后激动人心的时刻，我们可以使用TF了。<br><img src="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvm639w5pij30x70fcq59.jpg" alt="Alt tf"></p>
+<h3 id="可能出现的问题"><a href="#可能出现的问题" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h3><ol>
+<li>找不到cudart64_90.dll:</li>
+<li>ImportError: DLL loaded failed: 找不到指定模块<br>出现上述问题是显卡驱动没有更新，手动到<a href="https://www.geforce.com/drivers" target="_blank" rel="noopener">NVDIA对应网站</a>下载对应显卡最新驱动安装，即可。</li>
+</ol>
+<h3 id="额外内容"><a href="#额外内容" class="headerlink" title="额外内容"></a>额外内容</h3><p>为了方便之后的开发，我们可以安装Spyder这款十分强大的科学计算IDE。<br>首先添加清华大学镜像源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/  </span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure></p>
+<p>然后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install spyder</span><br></pre></td></tr></table></figure></p>
+<p>记得输入Yes，这样进行深度学习的环境就配置好了。</p>
+<h1 id="To-be-continue。。。"><a href="#To-be-continue。。。" class="headerlink" title="To be continue。。。"></a>To be continue。。。</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/first blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -643,7 +1002,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -654,7 +1013,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -665,7 +1024,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

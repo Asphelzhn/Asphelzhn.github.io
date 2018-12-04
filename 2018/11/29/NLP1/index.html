@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Deep learning,科研 - 学习," />
+  <meta name="keywords" content="NLP - 学习 - 笔记," />
 
 
 
@@ -79,22 +79,22 @@
 
 
 
-<meta name="description" content="Tensorflow内核探究1研究生期间要做的课题是深度学习inference任务的加速和调度问题，因为已经有很多不错的开源深度学习框架（Tensorflow，Pytorch2，Caffe2。。。），所以想在框架的基础上来做调度器和加速。然后Google大法确实厉害，有很多充足的文档、资料和论文实现，所以决定以Tensorflow入手，最近在学习Tensorflow的相关实现和原理，想在这篇博客里">
-<meta name="keywords" content="Deep learning,科研 - 学习">
+<meta name="description" content="CS224N自然语言处理自然语言处理的目标是让计算机处理或说“理解”自然语言，以完成有意义的任务，比如订机票购物或QA等。完全理解和表达语言是极其困难的，完美的语言理解等效于实现人工智能。 作为输入一共有两个来源，语音与文本。所以第一级是语音识别和OCR或分词。形态分析（Morphological）是分析该词的构造形式（主要针对英语而言，例如，uninterested = un(前缀）+ inte">
+<meta name="keywords" content="NLP - 学习 - 笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tensorflow内核学习">
-<meta property="og:url" content="http://yoursite.com/2018/09/20/tensor/index.html">
+<meta property="og:title" content="NLP1">
+<meta property="og:url" content="http://yoursite.com/2018/11/29/NLP1/index.html">
 <meta property="og:site_name" content="Edward">
-<meta property="og:description" content="Tensorflow内核探究1研究生期间要做的课题是深度学习inference任务的加速和调度问题，因为已经有很多不错的开源深度学习框架（Tensorflow，Pytorch2，Caffe2。。。），所以想在框架的基础上来做调度器和加速。然后Google大法确实厉害，有很多充足的文档、资料和论文实现，所以决定以Tensorflow入手，最近在学习Tensorflow的相关实现和原理，想在这篇博客里">
+<meta property="og:description" content="CS224N自然语言处理自然语言处理的目标是让计算机处理或说“理解”自然语言，以完成有意义的任务，比如订机票购物或QA等。完全理解和表达语言是极其困难的，完美的语言理解等效于实现人工智能。 作为输入一共有两个来源，语音与文本。所以第一级是语音识别和OCR或分词。形态分析（Morphological）是分析该词的构造形式（主要针对英语而言，例如，uninterested = un(前缀）+ inte">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvlx100l95j30u00gwaae.jpg">
+<meta property="og:image" content="http://photo.weibo.com/5732903894/photos/detail/photo_id/4311743059902810/album_id/4311743001149311">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvm2m4p0whj30e00240sk.jpg">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvm639w5pij30x70fcq59.jpg">
-<meta property="og:updated_time" content="2018-09-25T15:08:09.335Z">
+<meta property="og:updated_time" content="2018-12-03T14:16:58.789Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tensorflow内核学习">
-<meta name="twitter:description" content="Tensorflow内核探究1研究生期间要做的课题是深度学习inference任务的加速和调度问题，因为已经有很多不错的开源深度学习框架（Tensorflow，Pytorch2，Caffe2。。。），所以想在框架的基础上来做调度器和加速。然后Google大法确实厉害，有很多充足的文档、资料和论文实现，所以决定以Tensorflow入手，最近在学习Tensorflow的相关实现和原理，想在这篇博客里">
-<meta name="twitter:image" content="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvlx100l95j30u00gwaae.jpg">
+<meta name="twitter:title" content="NLP1">
+<meta name="twitter:description" content="CS224N自然语言处理自然语言处理的目标是让计算机处理或说“理解”自然语言，以完成有意义的任务，比如订机票购物或QA等。完全理解和表达语言是极其困难的，完美的语言理解等效于实现人工智能。 作为输入一共有两个来源，语音与文本。所以第一级是语音识别和OCR或分词。形态分析（Morphological）是分析该词的构造形式（主要针对英语而言，例如，uninterested = un(前缀）+ inte">
+<meta name="twitter:image" content="http://photo.weibo.com/5732903894/photos/detail/photo_id/4311743059902810/album_id/4311743001149311">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/20/tensor/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/29/NLP1/"/>
 
 
 
 
 
-  <title>Tensorflow内核学习 | Edward</title>
+  <title>NLP1 | Edward</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/tensor/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/29/NLP1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Tensorflow内核学习</h1>
+          <h1 class="post-title" itemprop="name headline">NLP1</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-20T21:30:00+08:00">
-                2018-09-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-29T16:22:08+08:00">
+                2018-11-29
               </time>
             
 
@@ -319,8 +319,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tensorflow/" itemprop="url" rel="index">
-                    <span itemprop="name">Tensorflow</span>
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
                   </a>
                 </span>
 
@@ -337,9 +337,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/09/20/tensor/#comments" itemprop="discussionUrl">
+                <a href="/2018/11/29/NLP1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/20/tensor/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/11/29/NLP1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -367,11 +367,19 @@
       
 
       
-        <h1 id="Tensorflow内核探究1"><a href="#Tensorflow内核探究1" class="headerlink" title="Tensorflow内核探究1"></a><a href="https://www.tensorflow.org/&#39;Tensorflow官网&#39;" target="_blank" rel="noopener">Tensorflow</a>内核探究1</h1><p>研究生期间要做的课题是深度学习inference任务的加速和调度问题，因为已经有很多不错的开源深度学习框架（Tensorflow，Pytorch2，Caffe2。。。），所以想在框架的基础上来做调度器和加速。<br>然后Google大法确实厉害，有很多充足的文档、资料和论文实现，所以决定以Tensorflow入手，最近在学习Tensorflow的相关实现和原理，想在这篇博客里总结一下所学。<br><img src="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvlx100l95j30u00gwaae.jpg" alt="Alt tensorflow"></p>
-<h2 id="Tensorflow-GPU版本安装"><a href="#Tensorflow-GPU版本安装" class="headerlink" title="Tensorflow GPU版本安装"></a>Tensorflow GPU版本安装</h2><p>要安装进行train，inference加速，我们需要一块好的GPU。如果你有NVDIA 1080 Ti或者NVDIA TitanX，那加速效果可能达到10——20倍，效果是很直观的。其他Nvdia显卡也可以，只是性能没有这么好。可以在NVDIA官网查看市面上常用显卡的计算性（使用Tensorflow GPU版本需要大于等于3.0以上的显卡）<a href="https://developer.nvidia.com/cuda-gpus" title="显卡性能排行" target="_blank" rel="noopener">Nvdia显卡计算性</a></p>
-<h3 id="安装包准备"><a href="#安装包准备" class="headerlink" title="安装包准备"></a>安装包准备</h3><p>安装的Tensorflow为V1.8版本，需要CUDA9.0和Cudnn7.1，推荐使用Anaconda来使用Tensorflow。<br>anaconda3-5.1.0-windows10<br>cuda-9.1-windows10<br>cudnn-7.1-windows10<br>关于Tensorflow和CUDA，Cudnn的版本对应关系可以参考下图。</p>
-<p></p><p></p>
-<p><table border="1"><br>    <tr><br>        <td>Tensorflow版本</td><br>        <td>CUDA版本</td><br>        <td>Cudnn版本</td><br>        <td>Python版本</td><br>    </tr><br>    <tr><br>        <td>1.1-1.2</td><br>        <td>8.0</td><br>        <td>v5.1</td><br>        <td>3.5</td><br>    </tr><br>    <tr><br>        <td>1.3</td><br>        <td>8.0</td><br>        <td>v6，V6.1</td><br>        <td>3.5，3.6</td><br>    </tr><br>    <tr><br>        <td>1.4</td><br>        <td>8.0</td><br>        <td>V6.1</td><br>        <td>3.5，3.6</td><br>    </tr><br>    <tr><br>        <td>1.5-1.8</td><br>        <td>9.0</td><br>        <td>V7.0</td><br>        <td>3.5，3.6</td><br>    </tr><br></table><br></p><br>因为NVDIA官网即使是科学上网也经常崩，所以把<a href="https://pan.baidu.com/s/1Kip1hIzGq9C_NlvDDY3-bg" target="_blank" rel="noopener">百度网盘连接</a>分享到文件里，需要的可以自取，密码ia9l<p></p>
+        <h1 id="CS224N"><a href="#CS224N" class="headerlink" title="CS224N"></a><a href="https://web.stanford.edu/class/cs224n/" target="_blank" rel="noopener">CS224N</a></h1><h2 id="自然语言处理"><a href="#自然语言处理" class="headerlink" title="自然语言处理"></a>自然语言处理</h2><p>自然语言处理的目标是让计算机处理或说“理解”自然语言，以完成有意义的任务，比如订机票购物或QA等。完全理解和表达语言是极其困难的，完美的语言理解等效于实现人工智能。<br><img src="http://photo.weibo.com/5732903894/photos/detail/photo_id/4311743059902810/album_id/4311743001149311" alt="层次"></p>
+<p></p><p><br>作为输入一共有两个来源，语音与文本。所以第一级是语音识别和OCR或分词。形态分析（Morphological）是分析该词的构造形式（主要针对英语而言，例如，uninterested = un(前缀）+ interest(词干) + ed(后缀)）。句法分析是确定句子的语法结构句子中词汇之间的依存关系。本课程着重讲解句法分析和语义表示。</p>
+<h2 id="自然语言处理的应用"><a href="#自然语言处理的应用" class="headerlink" title="自然语言处理的应用"></a>自然语言处理的应用</h2><ol>
+<li>拼写检查、关键词检索……</li>
+<li>文本挖掘（产品价格、日期、时间、地点、人名、公司名）</li>
+<li>文本分类</li>
+<li>机器翻译</li>
+<li>客服系统</li>
+<li>复杂对话系统</li>
+</ol>
+<p>在工业界从搜索到广告投放、自动\辅助翻译、情感舆情分析、语音识别、聊天机器人等。</p>
+<h3 id="人类语言的特殊之处"><a href="#人类语言的特殊之处" class="headerlink" title="人类语言的特殊之处"></a>人类语言的特殊之处</h3><p>与信号处理、数据挖掘不同，自然语言的随机性小而目的性强；语言是用来传输有意义的信息的，这种传输连小孩子都能很快学会。人类语言是离散的、明确的符号系统。但又允许出现各种变种，比如颜文字，随意的错误拼写“I loooove it”。这种自由性可能是因为语言的可靠性（赘余性）。所以说语言文字绝对不是形式逻辑或传统AI的产物。<br>语言符号有多种形式（声音、手势、书写），在这些不同的形式中，其意义保持不变。<br>虽然人类语言是明确的符号系统，但符号传输到大脑的过程是通过连续的声学光学信号，大脑编码似乎是连续的激活值上的模式。另外巨大的词表也导致数据稀疏，不利于机器学习。这构成一种动机，是不是应该用连续的信号而不是离散的符号去处理语言。</p>
+<p>因为NVDIA官网即使是科学上网也经常崩，所以把<a href="https://pan.baidu.com/s/1Kip1hIzGq9C_NlvDDY3-bg" target="_blank" rel="noopener">百度网盘连接</a>分享到文件里，需要的可以自取，密码ia9l</p>
 <h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><p>只要要三步：</p>
 <p>（1）下载并安装<a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">cuda9.1</a></p>
 <p>（2）下载并安装<a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener">cudnn7.1</a></p>
@@ -414,9 +422,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Deep-learning/" rel="tag"># Deep learning</a>
-          
-            <a href="/tags/科研-学习/" rel="tag"># 科研 - 学习</a>
+            <a href="/tags/NLP-学习-笔记/" rel="tag"># NLP - 学习 - 笔记</a>
           
         </div>
       
@@ -429,14 +435,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/09/20/first blog/" rel="next" title="博客正式上线">
+                <i class="fa fa-chevron-left"></i> 博客正式上线
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/20/first blog/" rel="prev" title="博客正式上线">
-                博客正式上线 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/04/python01/" rel="prev" title="Linux常用命令">
+                Linux常用命令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -583,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow内核探究1"><span class="nav-number">1.</span> <span class="nav-text">Tensorflow内核探究1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorflow-GPU版本安装"><span class="nav-number">1.1.</span> <span class="nav-text">Tensorflow GPU版本安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装包准备"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装包准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装过程"><span class="nav-number">1.1.2.</span> <span class="nav-text">安装过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CUDA环境测试"><span class="nav-number">1.1.3.</span> <span class="nav-text">CUDA环境测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装tensorflow"><span class="nav-number">1.1.4.</span> <span class="nav-text">安装tensorflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试tensorflow安装情况"><span class="nav-number">1.1.5.</span> <span class="nav-text">测试tensorflow安装情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可能出现的问题"><span class="nav-number">1.1.6.</span> <span class="nav-text">可能出现的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外内容"><span class="nav-number">1.1.7.</span> <span class="nav-text">额外内容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#To-be-continue。。。"><span class="nav-number">2.</span> <span class="nav-text">To be continue。。。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CS224N"><span class="nav-number">1.</span> <span class="nav-text">CS224N</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自然语言处理"><span class="nav-number">1.1.</span> <span class="nav-text">自然语言处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自然语言处理的应用"><span class="nav-number">1.2.</span> <span class="nav-text">自然语言处理的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#人类语言的特殊之处"><span class="nav-number">1.2.1.</span> <span class="nav-text">人类语言的特殊之处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装过程"><span class="nav-number">1.2.2.</span> <span class="nav-text">安装过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CUDA环境测试"><span class="nav-number">1.2.3.</span> <span class="nav-text">CUDA环境测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装tensorflow"><span class="nav-number">1.2.4.</span> <span class="nav-text">安装tensorflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试tensorflow安装情况"><span class="nav-number">1.2.5.</span> <span class="nav-text">测试tensorflow安装情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可能出现的问题"><span class="nav-number">1.2.6.</span> <span class="nav-text">可能出现的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外内容"><span class="nav-number">1.2.7.</span> <span class="nav-text">额外内容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#To-be-continue。。。"><span class="nav-number">2.</span> <span class="nav-text">To be continue。。。</span></a></li></ol></div>
             
 
           </div>
@@ -765,9 +775,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/09/20/tensor/';
-          this.page.identifier = '2018/09/20/tensor/';
-          this.page.title = 'Tensorflow内核学习';
+          this.page.url = 'http://yoursite.com/2018/11/29/NLP1/';
+          this.page.identifier = '2018/11/29/NLP1/';
+          this.page.title = 'NLP1';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Edward.disqus.com/embed.js';
