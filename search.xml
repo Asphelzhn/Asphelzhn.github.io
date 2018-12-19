@@ -5,21 +5,23 @@
     <url>%2F2018%2F12%2F19%2Fhexo%2F</url>
     <content type="text"><![CDATA[Hexo Next主题美化Hexo支持很多自定义主题和插件，本人使用的是Next主题，也涉及很多美化，为此记录一下。 添加页脚访客人数和总访问量使用的是不蒜子来进行统计,不蒜子是一款记录访客和访问量的插件. 1.安装脚本要使用不蒜子必须在页面中引入busuanzi.js，在themes/next/layout/_partial/footer.swig中添加脚本，代码如下 1&lt;script async src=&quot;//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt; 2.安装标签要显示站点总访问量，复制以下代码添加到你需要显示的位置。有两种算法可选： 算法a：pv的方式，单个用户连续点击n篇文章，记录n次访问量。 123&lt;span id=&quot;busuanzi_container_site_pv&quot;&gt; 本站总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次&lt;/span&gt; 算法b：uv的方式，单个用户连续点击n篇文章，只记录1次访客数。123&lt;span id=&quot;busuanzi_container_site_uv&quot;&gt; 本站访客数&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;人次&lt;/span&gt; 3.安装步骤一般显示站点访问量在页脚，所以在footer.swig中添加标签，在themes/next/_config.yml中加入以下配置： 12# visitors count counter: true 在themes/next/layout/_partial/footer.swig中添加以下代码： 123456&#123;% if theme.footer.counter %&#125; &lt;script async src=&quot;//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt; &lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;本站总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次&lt;/span&gt; &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt; &lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;本站访客数&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;人&lt;/span&gt;&#123;% endif %&#125; 这样便可以在底部显示访问量了。之后使用hexo clean清空缓存，使用hexo generate重新生成站点文件，使用hexo deploy部署，就能看到效果了。 设置Menu菜单栏会显示可以跳转的页面。 如果还要添加，编辑themes/next/_config.yml： 12345678menu: home: / || home //首页 about: /about/ || user //关于 tags: /tags/ || tags //标签 categories: /categories/ || th //分类 archives: /archives/ || archive //归档 schedule: /schedule/ || calendar //日程表 sitemap: /sitemap.xml || sitemap //站点地图 将需要的Menu前面#号去掉。 设置动态背景主题配置文件中找到canvas_nest，设置成ture 12# Canvas-nestcanvas_nest: ture 修改底部标签样式 修改Blog\themes\next\layout\_macro\post.swig中文件，搜索rel=&quot;tag&quot;&gt;#，将#替换成&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;。 侧边栏社交图标设置 打开主题配置文件_config.yml，搜索Social，社交账号前面的#号去掉。 12345678910111213#social: GitHub: https://github.com/yourname || github 简书: https://www.jianshu.com/u/63445e24e8bf || heartbeat 掘金: https://juejin.im/user/5a371ae551882512d0607108 || spinner #E-Mail: mailto:yourname@gmail.com || envelope #Google: https://plus.google.com/yourname || google #Twitter: https://twitter.com/yourname || twitter #FB Page: https://www.facebook.com/yourname || facebook #VK Group: https://vk.com/yourname || vk #StackOverflow: https://stackoverflow.com/yourname || stack-overflow #YouTube: https://youtube.com/yourname || youtube #Instagram: https://instagram.com/yourname || instagram #Skype: skype:yourname?call|chat || skype 添加网页顶部进度加载条 编辑主题配置文件，搜索pace，将其值改为ture就可以了，选择一款你喜欢的样式。 12345678910111213141516171819# Progress bar in the top during page loading.pace: ture# Themes list:#pace-theme-big-counter#pace-theme-bounce#pace-theme-barber-shop#pace-theme-center-atom#pace-theme-center-circle#pace-theme-center-radar#pace-theme-center-simple#pace-theme-corner-indicator#pace-theme-fill-left#pace-theme-flash#pace-theme-loading-bar#pace-theme-mac-osx#pace-theme-minimal# For example# pace_theme: pace-theme-center-simplepace_theme: pace-theme-minimal 添加点击爱心效果 在/themes/next/source/js/src下新建文件 clicklove.js ，接着把代码拷贝粘贴到 clicklove.js 文件中。 1!function(e,t,a)&#123;function n()&#123;c(&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &apos;&apos;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;),o(),r()&#125;function r()&#123;for(var e=0;e&lt;d.length;e++)d[e].alpha&lt;=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText=&quot;left:&quot;+d[e].x+&quot;px;top:&quot;+d[e].y+&quot;px;opacity:&quot;+d[e].alpha+&quot;;transform:scale(&quot;+d[e].scale+&quot;,&quot;+d[e].scale+&quot;) rotate(45deg);background:&quot;+d[e].color+&quot;;z-index:99999&quot;);requestAnimationFrame(r)&#125;function o()&#123;var t=&quot;function&quot;==typeof e.onclick&amp;&amp;e.onclick;e.onclick=function(e)&#123;t&amp;&amp;t(),i(e)&#125;&#125;function i(e)&#123;var a=t.createElement(&quot;div&quot;);a.className=&quot;heart&quot;,d.push(&#123;el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()&#125;),t.body.appendChild(a)&#125;function c(e)&#123;var a=t.createElement(&quot;style&quot;);a.type=&quot;text/css&quot;;try&#123;a.appendChild(t.createTextNode(e))&#125;catch(t)&#123;a.styleSheet.cssText=e&#125;t.getElementsByTagName(&quot;head&quot;)[0].appendChild(a)&#125;function s()&#123;return&quot;rgb(&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;)&quot;&#125;var d=[];e.requestAnimationFrame=function()&#123;return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e)&#123;setTimeout(e,1e3/60)&#125;&#125;(),n()&#125;(window,document); 在\themes\next\layout\_layout.swig文件末尾添加： 1&lt;script type=&quot;text/javascript&quot; src=&quot;/js/src/clicklove.js&quot;&gt;&lt;/script&gt;]]></content>
       <categories>
-        <category>Hexo</category>
+        <category>笔记</category>
       </categories>
       <tags>
-        <tag>博客 - Hexo - 记录</tag>
+        <tag>Hexo</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[Python字符串常用方法]]></title>
-    <url>%2F2018%2F12%2F19%2Fpython%E5%AD%97%E7%AC%A6%E4%B8%B2%2F</url>
+    <url>%2F2018%2F12%2F19%2Fpython_02_%E5%AD%97%E7%AC%A6%E4%B8%B2%2F</url>
     <content type="text"><![CDATA[1.字符串的常用操作1) 判断类型 - 9 方法 说明 string.isspace() 如果 string 中只包含空格，则返回 True string.isalnum() 如果 string 至少有一个字符并且所有字符都是字母或数字则返回 True string.isalpha() 如果 string 至少有一个字符并且所有字符都是字母则返回 True string.isdecimal() 如果 string 只包含数字则返回 True，全角数字，（常用） string.isdigit() 如果 string 只包含数字则返回 True，全角数字、⑴、\u00b2 string.isnumeric() 如果 string 只包含数字则返回 True，全角数字，汉字数字 string.istitle() 如果 string 是标题化的(每个单词的首字母大写)则返回 True string.islower() 如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写，则返回 True string.isupper() 如果 string 中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写，则返回 True 2) 查找和替换 - 7 方法 说明 string.startswith(str) 检查字符串是否是以 str 开头，是则返回 True string.endswith(str) 检查字符串是否是以 str 结束，是则返回 True string.find(str, start=0, end=len(string)) 检测 str 是否包含在 string 中，如果 start 和 end 指定范围，则检查是否包含在指定范围内，如果是返回开始的索引值，否则返回 -1 string.rfind(str, start=0, end=len(string)) 类似于 find()，不过是从右边开始查找 string.index(str, start=0, end=len(string)) 跟 find() 方法类似，不过如果 str 不在 string 会报错 string.rindex(str, start=0, end=len(string)) 类似于 index()，不过是从右边开始 string.replace(old_str, new_str, num=string.count(old)) 把 string 中的 old_str 替换成 new_str，如果 num 指定，则替换不超过 num 次 3) 大小写转换 - 5 方法 说明 string.capitalize() 把字符串的第一个字符大写 string.title() 把字符串的每个单词首字母大写 string.lower() 转换 string 中所有大写字符为小写 string.upper() 转换 string 中的小写字母为大写 string.swapcase() 翻转 string 中的大小写 4) 文本对齐 - 3 方法 说明 string.ljust(width) 返回一个原字符串左对齐，并使用空格填充至长度 width 的新字符串 string.rjust(width) 返回一个原字符串右对齐，并使用空格填充至长度 width 的新字符串 string.center(width) 返回一个原字符串居中，并使用空格填充至长度 width 的新字符串 5) 去除空白字符 - 3 方法 说明 string.lstrip() 截掉 string 左边（开始）的空白字符 string.rstrip() 截掉 string 右边（末尾）的空白字符 string.strip() 截掉 string 左右两边的空白字符 6) 拆分和连接 - 5 方法 说明 string.partition(str) 把字符串 string 分成一个 3 元素的元组 (str前面, str, str后面) string.rpartition(str) 类似于 partition() 方法，不过是从右边开始查找 string.split(str=””, num) 以 str 为分隔符拆分 string，如果 num 有指定值，则仅分隔 num + 1 个子字符串，str 默认包含 ‘\r’, ‘\t’, ‘\n’ 和空格 string.splitlines() 按照行(‘\r’, ‘\n’, ‘\r\n’)分隔，返回一个包含各行作为元素的列表 string.join(seq) 以 string 作为分隔符，将 seq 中所有的元素（的字符串表示）合并为一个新的字符串 2.字符串的切片 切片 方法适用于 字符串、列表、元组 切片 使用 索引值 来限定范围，从一个大的 字符串 中 切出 小的 字符串 列表 和 元组 都是 有序 的集合，都能够 通过索引值 获取到对应的数据 字典 是一个 无序 的集合，是使用 键值对 保存数据 1字符串[开始索引:结束索引:步长] 注意： 指定的区间属于 左闭右开 型 [开始索引, 结束索引) =&gt; 开始索引 &gt;= 范围 &lt; 结束索引 从 起始 位开始，到 结束位的前一位 结束（不包含结束位本身) 从头开始，开始索引 数字可以省略，冒号不能省略 到末尾结束，结束索引 数字可以省略，冒号不能省略 步长默认为 1，如果连续切片，数字和冒号都可以省略 索引的顺序和倒序 在 Python 中不仅支持 顺序索引，同时还支持 倒序索引 所谓倒序索引就是 从右向左 计算索引 最右边的索引值是 -1，依次递减 演练需求 截取从 2 ~ 5 位置 的字符串 截取从 2 ~ 末尾 的字符串 截取从 开始 ~ 5 位置 的字符串 截取完整的字符串 从开始位置，每隔一个字符截取字符串 从索引 1 开始，每隔一个取一个 截取从 2 ~ 末尾 - 1 的字符串 截取字符串末尾两个字符 字符串的逆序（面试题） 答案 1234567891011121314151617181920212223242526272829303132num_str = &quot;0123456789&quot;# 1. 截取从 2 ~ 5 位置 的字符串print(num_str[2:6])# 2. 截取从 2 ~ `末尾` 的字符串print(num_str[2:])# 3. 截取从 `开始` ~ 5 位置 的字符串print(num_str[:6])# 4. 截取完整的字符串print(num_str[:])# 5. 从开始位置，每隔一个字符截取字符串print(num_str[::2])# 6. 从索引 1 开始，每隔一个取一个print(num_str[1::2])# 倒序切片# -1 表示倒数第一个字符print(num_str[-1])# 7. 截取从 2 ~ `末尾 - 1` 的字符串print(num_str[2:-1])# 8. 截取字符串末尾两个字符print(num_str[-2:])# 9. 字符串的逆序（面试题）print(num_str[::-1]) 公共方法1.Python 内置函数Python 包含了以下内置函数： 函数 描述 备注 len(item) 计算容器中元素个数 del(item) 删除变量 del 有两种方式 max(item) 返回容器中元素最大值 如果是字典，只针对 key 比较 min(item) 返回容器中元素最小值 如果是字典，只针对 key 比较 cmp(item1, item2) 比较两个值，-1 小于/0 相等/1 大于 Python 3.x 取消了 cmp 函数 注意 字符串 比较符合以下规则： “0” &lt; “A” &lt; “a” 2.切片 描述 Python 表达式 结果 支持的数据类型 切片 “0123456789”[::-2] “97531” 字符串、列表、元组 切片 使用 索引值 来限定范围，从一个大的 字符串 中 切出 小的 字符串 列表 和 元组 都是 有序 的集合，都能够 通过索引值 获取到对应的数据 字典 是一个 无序 的集合，是使用 键值对 保存数据 3.运算符 运算符 Python 表达式 结果 描述 支持的数据类型 + [1, 2] + [3, 4] [1, 2, 3, 4] 合并 字符串、列表、元组 * [“Hi!”] * 4 [‘Hi!’, ‘Hi!’, ‘Hi!’, ‘Hi!’] 重复 字符串、列表、元组 in 3 in (1, 2, 3) True 元素是否存在 字符串、列表、元组、字典 not in 4 not in (1, 2, 3) True 元素是否不存在 字符串、列表、元组、字典 &gt; &gt;= == &lt; &lt;= (1, 2, 3) &lt; (2, 2, 3) True 元素比较 字符串、列表、元组 注意 in 在对 字典 操作时，判断的是 字典的键 in 和 not in 被称为 成员运算符 成员运算符成员运算符用于 测试 序列中是否包含指定的 成员 运算符 描述 实例 in 如果在指定的序列中找到值返回 True，否则返回 False 3 in (1, 2, 3) 返回 True not in 如果在指定的序列中没有找到值返回 True，否则返回 False 3 not in (1, 2, 3) 返回 False 注意：在对 字典 操作时，判断的是 字典的键 4.完整的 for 循环语法 在 Python 中完整的 for 循环 的语法如下： 12345for 变量 in 集合: 循环体代码else: 没有通过 break 退出循环，循环结束后，会执行的代码 应用场景 在 迭代遍历 嵌套的数据类型时，例如 一个列表包含了多个字典 需求：要判断 某一个字典中 是否存在 指定的 值 如果 存在，提示并且退出循环 如果 不存在，在 循环整体结束 后，希望 得到一个统一的提示 123456789101112131415161718192021222324252627282930students = [ &#123;"name": "阿土", "age": 20, "gender": True, "height": 1.7, "weight": 75.0&#125;, &#123;"name": "小美", "age": 19, "gender": False, "height": 1.6, "weight": 45.0&#125;,]find_name = "阿土"for stu_dict in students: print(stu_dict) # 判断当前遍历的字典中姓名是否为find_name if stu_dict["name"] == find_name: print("找到了") # 如果已经找到，直接退出循环，就不需要再对后续的数据进行比较 breakelse: print("没有找到")print("循环结束")]]></content>
       <categories>
-        <category>Python</category>
+        <category>笔记</category>
       </categories>
       <tags>
-        <tag>笔记 - Python - 学习</tag>
+        <tag>Python</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -34,25 +36,25 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Python学习001_Pycharm常用知识]]></title>
-    <url>%2F2018%2F12%2F05%2Fpython001%2F</url>
+    <title><![CDATA[Pycharm常用知识]]></title>
+    <url>%2F2018%2F12%2F05%2Fpython_01_pycharm%2F</url>
     <content type="text"><![CDATA[PyCharm 的初始设置目标 恢复 PyCharm 的初始设置 第一次启动 PyCharm 新建一个 Python 项目 设置 PyCharm 的字体显示 PyCharm 的升级以及其他 PyCharm 的官方网站地址是：https://www.jetbrains.com/pycharm/ 01. 恢复 PyCharm 的初始设置PyCharm 的 配置信息 是保存在 用户家目录下 的 .PyCharmxxxx.x 目录下的，xxxx.x 表示当前使用的 PyCharm 的版本号 如果要恢复 PyCharm 的初始设置，可以按照以下步骤进行： 关闭正在运行的 PyCharm 在终端中执行以下终端命令，删除 PyCharm 的配置信息目录： 1$ rm -r ~/.PyCharm2016.3 重新启动 PyCharm 02. 设置 PyCharm 的字体显示 03. PyCharm 的升级以及其他 PyCharm 提供了对 学生和教师免费使用的版本 教育版下载地址：https://www.jetbrains.com/pycharm-edu/download/#section=linux 专业版下载地址：https://www.jetbrains.com/pycharm/download/#section=linux 3.1 安装和启动步骤 执行以下终端命令，解压缩下载后的安装包 1$ tar -zxvf pycharm-professional-2017.1.3.tar.gz 将解压缩后的目录移动到 /opt 目录下，可以方便其他用户使用 /opt 目录用户存放给主机额外安装的软件 1$ sudo mv pycharm-2017.1.3/ /opt/ 切换工作目录 1$ cd /opt/pycharm-2017.1.3/bin 启动 PyCharm 1$ ./pycharm.sh 3.2 设置专业版启动图标 在专业版中，选择菜单 Tools / Create Desktop Entry… 可以设置任务栏启动图标 注意：设置图标时，需要勾选 Create the entry for all users 3.3 卸载之前版本的 PyCharm1) 程序安装 程序文件目录 将安装包解压缩，并且移动到 /opt 目录下 所有的相关文件都保存在解压缩的目录中 配置文件目录 启动 PyCharm 后，会在用户家目录下建立一个 .PyCharmxxx 的隐藏目录 保存 PyCharm 相关的配置信息 快捷方式文件 /usr/share/applications/jetbrains-pycharm.desktop 在 ubuntu 中，应用程序启动的快捷方式通常都保存在 /usr/share/applications 目录下 2) 程序卸载 要卸载 PyCharm 只需要做以下两步工作： 删除解压缩目录 1$ sudo rm -r /opt/pycharm-2016.3.1/ 删除家目录下用于保存配置信息的隐藏目录 1$ rm -r ~/.PyCharm2016.3/ 如果不再使用 PyCharm 还需要将 /usr/share/applications/ 下的 jetbrains-pycharm.desktop 删掉]]></content>
       <categories>
-        <category>Python笔记</category>
+        <category>笔记</category>
       </categories>
       <tags>
-        <tag>Python - 学习 - 笔记</tag>
+        <tag>Python - 学习</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Linux常用命令001]]></title>
-    <url>%2F2018%2F12%2F04%2Flinux001%2F</url>
+    <title><![CDATA[Linux常用命令]]></title>
+    <url>%2F2018%2F12%2F04%2Flinux_01_%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
     <content type="text"><![CDATA[Linux终端命令的重要性 Linux 刚面世时并没有图形界面，所有的操作全靠命令完成，如 磁盘操作、文件存取、目录操作、进程管理、文件权限 设定等 在职场中，大量的 服务器维护工作 都是在 远程 通过 SSH 客户端 来完成的，并没有图形界面，所有的维护工作都需要通过命令来完成 在职场中，作为后端程序员，必须要或多或少的掌握一些 Linux 常用的终端命令 Linux 发行版本的命令大概有 200 多个，但是常用的命令只有 10 多个而已 学习终端命令的技巧： 不需要死记硬背，对于常用命令，用的多了，自然就记住了 不要尝试一次学会所有的命令，有些命令是非常不常用的，临时遇到，临时百度就可以 常用 Linux 命令的基本使用序号命令对应英文作用01lslist查看当前文件夹下的内容02pwdprint wrok directory查看当前所在文件夹03cd [目录名]change directory切换文件夹04touch [文件名]touch如果文件不存在，新建文件05mkdir [目录名]make directory创建目录06rm [文件名]remove删除指定的文件名07clearclear清屏 小技巧ctrl + shift + = 放大终端窗口的字体显示ctrl + - 缩小终端窗口的字体显示 自动补全在敲出 文件／目录／命令 的前几个字母之后，按下 tab 键如果输入的没有歧义，系统会自动补全如果还存在其他 文件／目录／命令，再按一下 tab 键，系统会提示可能存在的命令 小技巧按 上／下 光标键可以在曾经使用过的命令之间来回切换如果想要退出选择，并且不想执行当前选中的命令，可以按 ctrl + c]]></content>
       <categories>
-        <category>Linux笔记</category>
+        <category>笔记</category>
       </categories>
       <tags>
-        <tag>Linux - 学习 - 笔记</tag>
+        <tag>Linux - 学习</tag>
       </tags>
   </entry>
   <entry>
@@ -68,14 +70,13 @@
   </entry>
   <entry>
     <title><![CDATA[博客正式上线]]></title>
-    <url>%2F2018%2F09%2F20%2Ffirst%20blog%2F</url>
-    <content type="text"><![CDATA[博客正式上线说了好久的博客现在终于用上了，准备记录一下自己研究生期间的所学和所思所想吧。也把个人博客作为展示自己的一个平台，为之后工作、科研做些积累。 A Good Programmer’s abilityA fool can write code that a computer can understand.Good programmers write code that humans can understand. Hexo tutorialsQuick startCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    <url>%2F2018%2F09%2F20%2Ffirst_blog%2F</url>
+    <content type="text"><![CDATA[博客正式上线想了好久的博客现在终于用上了，准备记录一下自己研究生期间的所学和所思所想吧。也把个人博客作为展示自己的一个平台，为之后工作、科研做些积累。 A Good Programmer’s abilityA fool can write code that a computer can understand.Good programmers write code that humans can understand. Hexo 指令Quick startCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
       <categories>
-        <category>随感</category>
+        <category>随笔</category>
       </categories>
       <tags>
         <tag>随笔</tag>
-        <tag>感想 - 日志</tag>
       </tags>
   </entry>
   <entry>
