@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Deep learning,科研 - 学习," />
+  <meta name="keywords" content="Python,学习," />
 
 
 
@@ -86,22 +86,18 @@
 
 
 
-<meta name="description" content="Tensorflow内核探究1研究生期间要做的课题是深度学习inference任务的加速和调度问题，因为已经有很多不错的开源深度学习框架（Tensorflow，Pytorch2，Caffe2。。。），所以想在框架的基础上来做调度器和加速。然后Google大法确实厉害，有很多充足的文档、资料和论文实现，所以决定以Tensorflow入手，最近在学习Tensorflow的相关实现和原理，想在这篇博客里">
-<meta name="keywords" content="Deep learning,科研 - 学习">
+<meta name="description" content="量化策略1.量化策略通过一套固定的逻辑来分析，判断和决策，自动化地进行股票交易。 2.核心内容 选股 择时 仓位管理 止盈止损  3.策略的周期 产生想法/学习知识 实现策略：Python 检验策略：回测/模拟交易 实盘交易 优化策略  123456789101112131415161718graph TB	行情数据--&amp;gt;选股	止盈止损--&amp;gt;买入信号    subgraph 输出">
+<meta name="keywords" content="Python,学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tensorflow内核学习">
-<meta property="og:url" content="http://yoursite.com/2018/09/20/tensor/index.html">
+<meta property="og:title" content="Python金融量化">
+<meta property="og:url" content="http://yoursite.com/2018/12/21/python_03_金融量化/index.html">
 <meta property="og:site_name" content="Edward">
-<meta property="og:description" content="Tensorflow内核探究1研究生期间要做的课题是深度学习inference任务的加速和调度问题，因为已经有很多不错的开源深度学习框架（Tensorflow，Pytorch2，Caffe2。。。），所以想在框架的基础上来做调度器和加速。然后Google大法确实厉害，有很多充足的文档、资料和论文实现，所以决定以Tensorflow入手，最近在学习Tensorflow的相关实现和原理，想在这篇博客里">
+<meta property="og:description" content="量化策略1.量化策略通过一套固定的逻辑来分析，判断和决策，自动化地进行股票交易。 2.核心内容 选股 择时 仓位管理 止盈止损  3.策略的周期 产生想法/学习知识 实现策略：Python 检验策略：回测/模拟交易 实盘交易 优化策略  123456789101112131415161718graph TB	行情数据--&amp;gt;选股	止盈止损--&amp;gt;买入信号    subgraph 输出">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvlx100l95j30u00gwaae.jpg">
-<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvm2m4p0whj30e00240sk.jpg">
-<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvm639w5pij30x70fcq59.jpg">
-<meta property="og:updated_time" content="2018-09-25T15:08:09.335Z">
+<meta property="og:updated_time" content="2018-12-21T05:18:17.118Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tensorflow内核学习">
-<meta name="twitter:description" content="Tensorflow内核探究1研究生期间要做的课题是深度学习inference任务的加速和调度问题，因为已经有很多不错的开源深度学习框架（Tensorflow，Pytorch2，Caffe2。。。），所以想在框架的基础上来做调度器和加速。然后Google大法确实厉害，有很多充足的文档、资料和论文实现，所以决定以Tensorflow入手，最近在学习Tensorflow的相关实现和原理，想在这篇博客里">
-<meta name="twitter:image" content="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvlx100l95j30u00gwaae.jpg">
+<meta name="twitter:title" content="Python金融量化">
+<meta name="twitter:description" content="量化策略1.量化策略通过一套固定的逻辑来分析，判断和决策，自动化地进行股票交易。 2.核心内容 选股 择时 仓位管理 止盈止损  3.策略的周期 产生想法/学习知识 实现策略：Python 检验策略：回测/模拟交易 实盘交易 优化策略  123456789101112131415161718graph TB	行情数据--&amp;gt;选股	止盈止损--&amp;gt;买入信号    subgraph 输出">
 
 
 
@@ -131,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/20/tensor/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/12/21/python_03_金融量化/"/>
 
 
 
 
 
-  <title>Tensorflow内核学习 | Edward</title>
+  <title>Python金融量化 | Edward</title>
   
 
 
@@ -264,7 +260,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/tensor/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/python_03_金融量化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -281,7 +277,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Tensorflow内核学习</h1>
+          <h1 class="post-title" itemprop="name headline">Python金融量化</h1>
         
 
         <div class="post-meta">
@@ -293,8 +289,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-20T21:30:00+08:00">
-                2018-09-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-21T22:22:08+08:00">
+                2018-12-21
               </time>
             
 
@@ -316,8 +312,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tensorflow/" itemprop="url" rel="index">
-                    <span itemprop="name">Tensorflow</span>
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
                   </a>
                 </span>
 
@@ -334,9 +330,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/09/20/tensor/#comments" itemprop="discussionUrl">
+                <a href="/2018/12/21/python_03_金融量化/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/09/20/tensor/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/12/21/python_03_金融量化/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -364,37 +360,48 @@
       
 
       
-        <h1 id="Tensorflow内核探究1"><a href="#Tensorflow内核探究1" class="headerlink" title="Tensorflow内核探究1"></a><a href="https://www.tensorflow.org/&#39;Tensorflow官网&#39;" target="_blank" rel="noopener">Tensorflow</a>内核探究1</h1><p>研究生期间要做的课题是深度学习inference任务的加速和调度问题，因为已经有很多不错的开源深度学习框架（Tensorflow，Pytorch2，Caffe2。。。），所以想在框架的基础上来做调度器和加速。<br>然后Google大法确实厉害，有很多充足的文档、资料和论文实现，所以决定以Tensorflow入手，最近在学习Tensorflow的相关实现和原理，想在这篇博客里总结一下所学。<br><img src="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvlx100l95j30u00gwaae.jpg" alt="Alt tensorflow"></p>
-<h2 id="Tensorflow-GPU版本安装"><a href="#Tensorflow-GPU版本安装" class="headerlink" title="Tensorflow GPU版本安装"></a>Tensorflow GPU版本安装</h2><p>要安装进行train，inference加速，我们需要一块好的GPU。如果你有NVDIA 1080 Ti或者NVDIA TitanX，那加速效果可能达到10——20倍，效果是很直观的。其他Nvdia显卡也可以，只是性能没有这么好。可以在NVDIA官网查看市面上常用显卡的计算性（使用Tensorflow GPU版本需要大于等于3.0以上的显卡）<a href="https://developer.nvidia.com/cuda-gpus" title="显卡性能排行" target="_blank" rel="noopener">Nvdia显卡计算性</a></p>
-<h3 id="安装包准备"><a href="#安装包准备" class="headerlink" title="安装包准备"></a>安装包准备</h3><p>安装的Tensorflow为V1.8版本，需要CUDA9.0和Cudnn7.1，推荐使用Anaconda来使用Tensorflow。<br>anaconda3-5.1.0-windows10<br>cuda-9.1-windows10<br>cudnn-7.1-windows10<br>关于Tensorflow和CUDA，Cudnn的版本对应关系可以参考下图。</p>
-<p></p><p></p>
-<p><table border="1"><br>    <tr><br>        <td>Tensorflow版本</td><br>        <td>CUDA版本</td><br>        <td>Cudnn版本</td><br>        <td>Python版本</td><br>    </tr><br>    <tr><br>        <td>1.1-1.2</td><br>        <td>8.0</td><br>        <td>v5.1</td><br>        <td>3.5</td><br>    </tr><br>    <tr><br>        <td>1.3</td><br>        <td>8.0</td><br>        <td>v6，V6.1</td><br>        <td>3.5，3.6</td><br>    </tr><br>    <tr><br>        <td>1.4</td><br>        <td>8.0</td><br>        <td>V6.1</td><br>        <td>3.5，3.6</td><br>    </tr><br>    <tr><br>        <td>1.5-1.8</td><br>        <td>9.0</td><br>        <td>V7.0</td><br>        <td>3.5，3.6</td><br>    </tr><br></table><br></p><br>因为NVDIA官网即使是科学上网也经常崩，所以把<a href="https://pan.baidu.com/s/1Kip1hIzGq9C_NlvDDY3-bg" target="_blank" rel="noopener">百度网盘连接</a>分享到文件里，需要的可以自取，密码ia9l<p></p>
-<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><p>只要要三步：</p>
-<p>（1）下载并安装<a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">cuda9.1</a></p>
-<p>（2）下载并安装<a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener">cudnn7.1</a></p>
-<p>  (3) 下载并安装<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="noopener">annaconda3-5.1.0</a></p>
-<p>注意：1.查看cuda能否安装成功：在cmd(win+r)中输入：nvcc -V</p>
-<p>2.安装cudnn7.0详细方法：</p>
-<p>将cudnn压缩包中所有文件放入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0</span><br></pre></td></tr></table></figure></p>
-<p>目录下对应目录中，同时将<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\extras\CUPTI\libx64\cupti64_91.dll</span><br></pre></td></tr></table></figure></p>
-<p>拷贝到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin</span><br></pre></td></tr></table></figure></p>
-<h3 id="CUDA环境测试"><a href="#CUDA环境测试" class="headerlink" title="CUDA环境测试"></a>CUDA环境测试</h3><p>CMD中输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure></p>
-<p>如果成功出现下图，则说明CUDA和Cudnn已经配置成功<br><img src="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvm2m4p0whj30e00240sk.jpg" alt="Alt Cuda"></p>
-<h3 id="安装tensorflow"><a href="#安装tensorflow" class="headerlink" title="安装tensorflow"></a>安装tensorflow</h3><p>打开Anaconda Prompt，创建tensorflow虚拟环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n tensorflow python=3.5</span><br></pre></td></tr></table></figure></p>
-<p>然后启用虚拟环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activate tensorflow</span><br></pre></td></tr></table></figure></p>
-<p>最后安装tensorflow<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow-gpu</span><br></pre></td></tr></table></figure></p>
-<p>如果安装速度较慢，可以使用清华大学开源软件镜像站的<a href="https://mirrors.tuna.tsinghua.edu.cn/help/tensorflow/" target="_blank" rel="noopener">TensorFlow 镜像</a>。</p>
-<h3 id="测试tensorflow安装情况"><a href="#测试tensorflow安装情况" class="headerlink" title="测试tensorflow安装情况"></a>测试tensorflow安装情况</h3><p>在刚才的Anaconda Prompt中输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Python</span><br></pre></td></tr></table></figure></p>
-<p>在Python的交互界面中输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">hello=tf.constant(&apos;Hello tensorflow!&apos;)</span><br><span class="line">sess=tf.Session()</span><br><span class="line">sess.run(hello)</span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure></p>
-<p>然后激动人心的时刻，我们可以使用TF了。<br><img src="http://wx1.sinaimg.cn/mw690/006fYGbQly1fvm639w5pij30x70fcq59.jpg" alt="Alt tf"></p>
-<h3 id="可能出现的问题"><a href="#可能出现的问题" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h3><ol>
-<li>找不到cudart64_90.dll:</li>
-<li>ImportError: DLL loaded failed: 找不到指定模块<br>出现上述问题是显卡驱动没有更新，手动到<a href="https://www.geforce.com/drivers" target="_blank" rel="noopener">NVDIA对应网站</a>下载对应显卡最新驱动安装，即可。</li>
+        <h1 id="量化策略"><a href="#量化策略" class="headerlink" title="量化策略"></a>量化策略</h1><h2 id="1-量化策略"><a href="#1-量化策略" class="headerlink" title="1.量化策略"></a>1.量化策略</h2><p>通过一套固定的逻辑来分析，判断和决策，自动化地进行股票交易。</p>
+<h2 id="2-核心内容"><a href="#2-核心内容" class="headerlink" title="2.核心内容"></a>2.核心内容</h2><ul>
+<li>选股</li>
+<li>择时</li>
+<li>仓位管理</li>
+<li>止盈止损</li>
+</ul>
+<h2 id="3-策略的周期"><a href="#3-策略的周期" class="headerlink" title="3.策略的周期"></a>3.策略的周期</h2><ul>
+<li>产生想法/学习知识</li>
+<li>实现策略：Python</li>
+<li>检验策略：回测/模拟交易</li>
+<li>实盘交易</li>
+<li>优化策略</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">	行情数据--&gt;选股</span><br><span class="line">	止盈止损--&gt;买入信号</span><br><span class="line">    subgraph 输出</span><br><span class="line">    买入信号---卖出信号</span><br><span class="line">    卖出信号---交易费用</span><br><span class="line">    交易费用---收益</span><br><span class="line">    end</span><br><span class="line">    subgraph 策略</span><br><span class="line">    选股--&gt;择时</span><br><span class="line">    择时--&gt;仓位管理</span><br><span class="line">    仓位管理--&gt;止盈止损</span><br><span class="line">    end</span><br><span class="line">    subgraph 输入</span><br><span class="line">    行情数据---财务数据</span><br><span class="line">    财务数据---自定义数据</span><br><span class="line">    自定义数据---投资经验</span><br><span class="line">    end</span><br></pre></td></tr></table></figure>
+<h1 id="量化投资与Python"><a href="#量化投资与Python" class="headerlink" title="量化投资与Python"></a>量化投资与Python</h1><ol>
+<li><p>常用分析工具</p>
+<p>Excel，SAS/SPSS，R语言</p>
+</li>
+<li><p>量化投资第三方模块</p>
+<ul>
+<li>NumPy：数值计算</li>
+<li>Pandas：数据分析</li>
+<li>Matplotlib：图表绘制</li>
+</ul>
+</li>
+<li><p>使用Python进行量化投资</p>
+<ul>
+<li>自己编写</li>
+<li>在线平台：聚宽，优矿，米筐，Quantopian</li>
+<li>开源框架：RQAlpha，QUANTAXIS</li>
+</ul>
+</li>
 </ol>
-<h3 id="额外内容"><a href="#额外内容" class="headerlink" title="额外内容"></a>额外内容</h3><p>为了方便之后的开发，我们可以安装Spyder这款十分强大的科学计算IDE。<br>首先添加清华大学镜像源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/  </span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure></p>
-<p>然后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install spyder</span><br></pre></td></tr></table></figure></p>
-<p>记得输入Yes，这样进行深度学习的环境就配置好了。</p>
-<h1 id="To-be-continue。。。"><a href="#To-be-continue。。。" class="headerlink" title="To be continue。。。"></a>To be continue。。。</h1>
+<h1 id="NumPy"><a href="#NumPy" class="headerlink" title="NumPy"></a>NumPy</h1><p>NumPy是一个功能强大的Python库，主要用于对多维数组执行计算。这类数值计算广泛用于以下任务：</p>
+<ul>
+<li><strong>机器学习模型</strong>：在编写机器学习算法时，需要对矩阵进行各种数值计算。例如矩阵乘法、换位、加法等。NumPy提供了一个非常好的库，用于简单(在编写代码方面)和快速(在速度方面)计算。NumPy数组用于存储训练数据和机器学习模型的参数。</li>
+<li><strong>图像处理和计算机图形学</strong>：计算机中的图像表示为多维数字数组。NumPy成为同样情况下最自然的选择。实际上，NumPy提供了一些优秀的库函数来快速处理图像。例如，镜像图像、按特定角度旋转图像等。</li>
+<li><strong>数学任务</strong>：NumPy对于执行各种数学任务非常有用，如数值积分、微分、内插、外推等。因此，当涉及到数学任务时，它形成了一种基于Python的MATLAB的快速替代。</li>
+</ul>
+<h2 id="NumPy-中的数组"><a href="#NumPy-中的数组" class="headerlink" title="NumPy 中的数组"></a>NumPy 中的数组</h2><p>NumPy提供的最重要的数据结构是一个称为NumPy数组的强大对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </span><br><span class="line">my_array = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]) </span><br><span class="line"><span class="keyword">print</span> my_array</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -411,9 +418,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Deep-learning/" rel="tag"><i class="fa fa-tag"></i> Deep learning</a>
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
           
-            <a href="/tags/科研-学习/" rel="tag"><i class="fa fa-tag"></i> 科研 - 学习</a>
+            <a href="/tags/学习/" rel="tag"><i class="fa fa-tag"></i> 学习</a>
           
         </div>
       
@@ -426,15 +433,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/12/20/linux_02_系统目录/" rel="next" title="linux系统目录">
+                <i class="fa fa-chevron-left"></i> linux系统目录
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/20/first_blog/" rel="prev" title="博客正式上线">
-                博客正式上线 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -596,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow内核探究1"><span class="nav-number">1.</span> <span class="nav-text">Tensorflow内核探究1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorflow-GPU版本安装"><span class="nav-number">1.1.</span> <span class="nav-text">Tensorflow GPU版本安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装包准备"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装包准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装过程"><span class="nav-number">1.1.2.</span> <span class="nav-text">安装过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CUDA环境测试"><span class="nav-number">1.1.3.</span> <span class="nav-text">CUDA环境测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装tensorflow"><span class="nav-number">1.1.4.</span> <span class="nav-text">安装tensorflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试tensorflow安装情况"><span class="nav-number">1.1.5.</span> <span class="nav-text">测试tensorflow安装情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可能出现的问题"><span class="nav-number">1.1.6.</span> <span class="nav-text">可能出现的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外内容"><span class="nav-number">1.1.7.</span> <span class="nav-text">额外内容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#To-be-continue。。。"><span class="nav-number">2.</span> <span class="nav-text">To be continue。。。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#量化策略"><span class="nav-number">1.</span> <span class="nav-text">量化策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-量化策略"><span class="nav-number">1.1.</span> <span class="nav-text">1.量化策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-核心内容"><span class="nav-number">1.2.</span> <span class="nav-text">2.核心内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-策略的周期"><span class="nav-number">1.3.</span> <span class="nav-text">3.策略的周期</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#量化投资与Python"><span class="nav-number">2.</span> <span class="nav-text">量化投资与Python</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy"><span class="nav-number">3.</span> <span class="nav-text">NumPy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NumPy-中的数组"><span class="nav-number">3.1.</span> <span class="nav-text">NumPy 中的数组</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -772,9 +779,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/09/20/tensor/';
-          this.page.identifier = '2018/09/20/tensor/';
-          this.page.title = 'Tensorflow内核学习';
+          this.page.url = 'http://yoursite.com/2018/12/21/python_03_金融量化/';
+          this.page.identifier = '2018/12/21/python_03_金融量化/';
+          this.page.title = 'Python金融量化';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Edward.disqus.com/embed.js';
