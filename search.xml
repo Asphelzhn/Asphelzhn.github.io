@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[linux命令格式]]></title>
     <url>%2F2018%2F12%2F24%2FLinux_04_linux%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F%2F</url>
-    <content type="text"><![CDATA[@media print{ .hljs{overflow: visible; word-wrap: break-word !important;} } Linux 终端命令格式 目标 了解终端命令格式知道如何查阅终端命令帮助信息 01. 终端命令格式 command [-options] [parameter] 说明： command：命令名，相应功能的英文单词或单词的缩写[-options]：选项，可用来对命令进行控制，也可以省略parameter：传给命令的参数，可以是 零个、一个 或者 多个 [] 代表可选 02. 查阅命令帮助信息（知道） 提示现阶段只需要 知道 通过以下两种方式可以查询命令的帮助信息先学习常用命令及常用选项的使用即可，工作中如果遇到问题可以借助 网络搜索 2.1 –help command --help 说明： 显示 command 命令的帮助信息 2.2 man man command 说明： 查阅 command 命令的使用手册 man 是 manual 的缩写，是 Linux 提供的一个 手册，包含了绝大部分的命令、函数的详细使用说明 使用 man 时的操作键： 操作键功能空格键显示手册页的下一屏Enter 键一次滚动手册页的一行b回滚一屏f前滚一屏q退出/word搜索 word 字符串]]></content>
+    <content type="text"><![CDATA[@media print{ .hljs{overflow: visible; word-wrap: break-word !important;} } Linux 终端命令格式 目标 了解终端命令格式知道如何查阅终端命令帮助信息 01. 终端命令格式 command [-options] [parameter] 说明： command：命令名，相应功能的英文单词或单词的缩写[-options]：选项，可用来对命令进行控制，也可以省略parameter：传给命令的参数，可以是 零个、一个 或者 多个 [] 代表可选 02. 查阅命令帮助信息（知道） 提示 现阶段只需要 知道 通过以下两种方式可以查询命令的帮助信息先学习常用命令及常用选项的使用即可，工作中如果遇到问题可以借助 网络搜索2.1 –helpcommand –help说明：显示 command 命令的帮助信息 2.2 man man command 说明： 查阅 command 命令的使用手册 man 是 manual 的缩写，是 Linux 提供的一个 手册，包含了绝大部分的命令、函数的详细使用说明 使用 man 时的操作键： 操作键功能空格键显示手册页的下一屏Enter 键一次滚动手册页的一行b回滚一屏f前滚一屏q退出/word搜索 word 字符串]]></content>
       <categories>
         <category>笔记</category>
       </categories>
