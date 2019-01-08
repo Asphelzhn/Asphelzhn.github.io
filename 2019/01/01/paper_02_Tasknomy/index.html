@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习任务调度 - 论文阅读 - 科研," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Taskonomy: Disentangling Task Transfer Learning摘要这篇论文是计算机视觉顶会 CVPR 2018 最佳论文奖的文章：Taskonomy: Disentangling Task Transfer Learning。文章作者团队来自斯坦福大学和加州大学伯克利分校。文章的主题是探索任务迁移学习，通过做大量的实验，来揭示任务迁移学习中的一些现象。   人类的视">
+<meta name="keywords" content="深度学习任务调度 - 论文阅读 - 科研">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Taskonomy Disentangling Task Transfer Learning">
+<meta property="og:url" content="http://yoursite.com/2019/01/01/paper_02_Tasknomy/index.html">
+<meta property="og:site_name" content="Edward">
+<meta property="og:description" content="Taskonomy: Disentangling Task Transfer Learning摘要这篇论文是计算机视觉顶会 CVPR 2018 最佳论文奖的文章：Taskonomy: Disentangling Task Transfer Learning。文章作者团队来自斯坦福大学和加州大学伯克利分校。文章的主题是探索任务迁移学习，通过做大量的实验，来揭示任务迁移学习中的一些现象。   人类的视">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/tasknomy/2.jpg">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cgamma">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cmathcal%7BT%7D%3D%5C%7Bt_1%2C...%2Ct_n%5C%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cmathcal%7BS%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cgamma">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cmathcal%7BT%7D%5C+%5Csetminus%5C+%5Cmathcal%7BS%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cmathcal%7BS%7D%5C+%5Csetminus%5C+%5Cmathcal%7BT%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cmathcal%7BT%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cmathcal%7BT%7D%5C+%5Ccap%5C+%5Cmathcal%7BS%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cmathcal%7BV%7D%3D+%5Cmathcal%7BT%7D%5C+%5Ccup%5C+%5Cmathcal%7BS%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=t">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=f_t">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cmathcal%7BS%7D">
+<meta property="og:image" content="http://yoursite.com/images/tasknomy/3.jpg">
+<meta property="og:image" content="http://yoursite.com/images/tasknomy/4.jpg">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=s%5Cin%5Cmathcal%7BS%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=t%5Cin%5Cmathcal%7BT%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=s">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=t">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=s">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=E_s">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=s">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=f_t">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=t">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=L_t">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=t">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=I%5Cin+%5Cmathcal%7BD%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5C%5C+D_%7Bs+%5Crightarrow+t%7D+%3A%3D%5Carg+%5Cmin_%7B%5Ctheta%7D+%5Cmathbb%7BE%7D_%7BI+%5Cin+%5Cmathcal%7BD%7D%7D%5CBig%5BL_t%5CBig%28D_%7B%5Ctheta%7D%5Cbig%28E_s%28I%29%5Cbig%29%2C+f_t%28I%29%5CBig%29%5CBig%5D+%5C%5C">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=s">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=t">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=D_%7Bs+%5Crightarrow+t%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=t">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=E_s%28I%29">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=D_%7Bs+%5Crightarrow+t%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=s">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=t">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=s">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=D_%7Bs+%5Crightarrow+t%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=t">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=s">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=t">
+<meta property="og:image" content="http://yoursite.com/images/tasknomy/6.jpg">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=+%5C%5C%5Cbegin%7Balign%2A%7D+%5Ctext%7Bmaximize+%7D+%26+c%5ET+x%5C%2C%2C%5C%5C+%5Ctext%7Bsubject+to+%7D+%26+Ax+%5Cpreceq+b%5C%5C+%5Ctext%7Band+%7D+%26+x+%5Cin+%5C%7B0%2C+1%5C%7D%5E%7B%7CE%7C+%2B+%7C%5Cmathcal%7BV%7D%7C%7D%5C%2C.+%5Cend%7Balign%2A%7D+%5C%5C">
+<meta property="og:updated_time" content="2019-01-08T12:07:07.433Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Taskonomy Disentangling Task Transfer Learning">
+<meta name="twitter:description" content="Taskonomy: Disentangling Task Transfer Learning摘要这篇论文是计算机视觉顶会 CVPR 2018 最佳论文奖的文章：Taskonomy: Disentangling Task Transfer Learning。文章作者团队来自斯坦福大学和加州大学伯克利分校。文章的主题是探索任务迁移学习，通过做大量的实验，来揭示任务迁移学习中的一些现象。   人类的视">
+<meta name="twitter:image" content="http://yoursite.com/images/tasknomy/2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/01/paper_02_Tasknomy/"/>
+
+
+
+
+
+  <title>Taskonomy Disentangling Task Transfer Learning | Edward</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Edward</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">The Blog of Edward</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/paper_02_Tasknomy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Taskonomy Disentangling Task Transfer Learning</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T21:22:08+08:00">
+                2019-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科研/" itemprop="url" rel="index">
+                    <span itemprop="name">科研</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/01/paper_02_Tasknomy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/01/paper_02_Tasknomy/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Taskonomy-Disentangling-Task-Transfer-Learning"><a href="#Taskonomy-Disentangling-Task-Transfer-Learning" class="headerlink" title="Taskonomy: Disentangling Task Transfer Learning"></a>Taskonomy: Disentangling Task Transfer Learning</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p><strong>这篇论文是计算机视觉顶会 CVPR 2018 最佳论文奖的文章：Taskonomy: Disentangling Task Transfer Learning。</strong>文章作者团队来自斯坦福大学和加州大学伯克利分校。<strong>文章的主题是探索任务迁移学习，通过做大量的实验，来揭示任务迁移学习中的一些现象</strong>。 </p>
+<ol>
+<li><p>人类的视觉具备多种多样的能力，计算机视觉届基于此定义了许多不同的视觉任务。长远来看，计算机视觉着眼于解决<strong>大多数</strong>甚至<strong>所有</strong>视觉任务，但现有方法大多尝试将视觉任务逐一击破。这种方法造成了两个问题：第一， 逐一击破需要为每一项任务收集大量数据，随着任务数量的增多，这将会是不可行的；第二，逐一击破会带来不同任务之间的冗余计算和重复学习。总的来说，逐一击破的策略忽略了视觉任务之间的<strong>关联性</strong>，比如法线 (Surface Normals) 是由深度 (Depth) 求导得来，语义分割 (Semantic Segmentation) 又似乎和遮挡边缘测试 (Occlusion edge detection) 有着千丝万缕的关联。<strong>基于上述两个问题，我们希望能有效测量并利用视觉任务之间的关联来避免重复学习，从而用更少的数据学习我们感兴趣的一组任务</strong>。</p>
+</li>
+<li><p>Taskonomy是一项<strong>量化</strong>不同视觉任务之间关联、并利用这些关联来最优化<strong>学习策略</strong>的研究。如果两个视觉任务A、B具有关联性，那么在任务A中习得的representations理应可为解决任务B提供有效的统计信息 。由此我们通过迁移学习计算了26个不同视觉任务之间的一阶以及高阶关联。如图一，如果有预测法线的网络和预测遮挡边缘测试的网络，我们可以通过结合两个网络的representations来快速通过少量数据解决Reshading和点匹配 (Point matching)。基于这些关联，我们利用0-1整数规划 (Binary Integer Programming) 求得一组我们感兴趣的任务，如何去最优分配训练数据量。 比如，如果想最高效地解决10个问题，利用Taskonomy提供的学习策略可以减少2/3的训练数据量。</p>
+</li>
+</ol>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>文章的方法概括起来就叫做 Taskonomy (Task taxonomy)，这是一个计算图，它定义了任务之间的可迁移性。图中的节点表示任务，节点之间的边就表示迁移性，边的权重表示从一个任务迁移到另一个任务的可能表现。这个方法是文章的核心。它一共由下图所示的 4 个步骤构成。这 4 个步骤从逻辑上非常好理解。首先我们要对不同任务进行建模，然后让它们两两之间进行迁移并获取迁移的表现。接着为了构建一个统一的字典，我们对这些迁移结果进行归一化。最后，我们构建可迁移图。在迁移实验开始前，最重要的是，需要一个可用的超大型数据集，要包含不同的任务。然而目前没有。怎么办？很简单，作者构建了一个！这个数据集有从 600 个建筑物内拍摄的 400 万张图片。每张图片都针对不同的任务做了标注，也就是说都适用于每个任务。</p>
+<p><img src="/images/tasknomy/2.jpg" alt=""></p>
+<h3 id="1-问题定义"><a href="#1-问题定义" class="headerlink" title="1.问题定义"></a>1.问题定义</h3><p>首先，定义要解决的问题。我们想在有限的<strong>监督预算</strong> <img src="https://www.zhihu.com/equation?tex=%5Cgamma" alt="\gamma"> 下最大化在一组<strong>目标任务</strong> <img src="https://www.zhihu.com/equation?tex=%5Cmathcal%7BT%7D%3D%5C%7Bt_1%2C...%2Ct_n%5C%7D" alt="\mathcal{T}=\{t_1,...,t_n\}"> 上的表现。同时，我们有一组<strong>起始任务</strong> <img src="https://www.zhihu.com/equation?tex=%5Cmathcal%7BS%7D" alt="\mathcal{S}">，其定义为我们可从零学习的任务。监督预算 <img src="https://www.zhihu.com/equation?tex=%5Cgamma" alt="\gamma"> 的定义为多少起始任务我们愿意从零开始学习（从零开始学习需要收集大量数据，监督预算表达了我们所面对的金钱、计算力和时间上的限制）。那么， <img src="https://www.zhihu.com/equation?tex=%5Cmathcal%7BT%7D%5C+%5Csetminus%5C+%5Cmathcal%7BS%7D" alt="\mathcal{T}\ \setminus\ \mathcal{S}"> 代表了我们感兴趣但不能从零学习的任务，比如一个只能有少量数据的任务。 <img src="https://www.zhihu.com/equation?tex=%5Cmathcal%7BS%7D%5C+%5Csetminus%5C+%5Cmathcal%7BT%7D" alt="\mathcal{S}\ \setminus\ \mathcal{T}"> 代表了我们不感兴趣但可以从零学习（来帮助我们更好的学习 <img src="https://www.zhihu.com/equation?tex=%5Cmathcal%7BT%7D" alt="\mathcal{T}"> ）的任务，如jigsaw、colorization等自我监督的视觉任务。 <img src="https://www.zhihu.com/equation?tex=%5Cmathcal%7BT%7D%5C+%5Ccap%5C+%5Cmathcal%7BS%7D" alt="\mathcal{T}\ \cap\ \mathcal{S}"> 代表了我们感兴趣也能从零学习的任务，但因为从零学习会消耗监督预算，我们希望从中选择出符合预算的一组从零学习，余下的通过少量数据的迁移学习来实现。我们称 <img src="https://www.zhihu.com/equation?tex=%5Cmathcal%7BV%7D%3D+%5Cmathcal%7BT%7D%5C+%5Ccup%5C+%5Cmathcal%7BS%7D" alt="\mathcal{V}= \mathcal{T}\ \cup\ \mathcal{S}"> 为我们的<strong>任务词典</strong> (task dictionary)。最后，我们对视觉任务 <img src="https://www.zhihu.com/equation?tex=t" alt="t"> 的定义为一个基于图片的方程 <img src="https://www.zhihu.com/equation?tex=f_t" alt="f_t"> 。</p>
+<p>如下图所示，收集了一个有四百万张图片的数据，每张图片均有26个不同视觉任务的标注(ground truth)。这26个任务涵盖了2D的、3D的和语义的任务，构成了本项research的任务词典。因为这26个任务均有标答， <img src="https://www.zhihu.com/equation?tex=%5Cmathcal%7BS%7D" alt="\mathcal{S}"> 也为这26个任务。</p>
+<p><img src="/images/tasknomy/3.jpg" alt=""></p>
+<p>下面，进入第一大阶段，量化视觉任务的关联。</p>
+<h3 id="2-第一步：从零学习"><a href="#2-第一步：从零学习" class="headerlink" title="2.第一步：从零学习"></a>2.第一步：从零学习</h3><p>对于每个起始任务, 我们为其从零开始学习一个神经网络。为了能更好地控制变量从而比较任务关联，每个任务的神经网络具有相似的encoder decoder结构。所有的encoder都是相同的类ResNet 50结构。因为每个任务的output维度各不相同，decoder的结构对不同的任务各不相同，但都只有几层，远小于encoder的大小。</p>
+<p><img src="/images/tasknomy/4.jpg" alt=""></p>
+<h3 id="3-第二步：迁移学习"><a href="#3-第二步：迁移学习" class="headerlink" title="3.第二步：迁移学习"></a>3.第二步：迁移学习</h3><p>如上图所示，对于一个起始任务 <img src="https://www.zhihu.com/equation?tex=s%5Cin%5Cmathcal%7BS%7D" alt="s\in\mathcal{S}"> 和一个目标任务 <img src="https://www.zhihu.com/equation?tex=t%5Cin%5Cmathcal%7BT%7D" alt="t\in\mathcal{T}"> ，我们将以 <img src="https://www.zhihu.com/equation?tex=s" alt="s"> 的representation作为输入来学习 <img src="https://www.zhihu.com/equation?tex=t" alt="t"> 。我们将freeze任务 <img src="https://www.zhihu.com/equation?tex=s" alt="s"> 的encoder 参数，并基于encoder的输出 (representations) 学习一个浅层神经网络read out function。严谨来讲，如果我们用 <img src="https://www.zhihu.com/equation?tex=E_s" alt="E_s"> 表示 <img src="https://www.zhihu.com/equation?tex=s" alt="s"> 的encoder， <img src="https://www.zhihu.com/equation?tex=f_t" alt="f_t"> 表示 <img src="https://www.zhihu.com/equation?tex=t" alt="t"> 的标注， <img src="https://www.zhihu.com/equation?tex=L_t" alt="L_t"> 表示 <img src="https://www.zhihu.com/equation?tex=t" alt="t"> 的loss函数， <img src="https://www.zhihu.com/equation?tex=I%5Cin+%5Cmathcal%7BD%7D" alt="I\in \mathcal{D}"> 来表示图片和迁移训练集， <img src="https://www.zhihu.com/equation?tex=D" alt="D"> 表示要迁移学习的浅层神经网络，学习目标为：</p>
+<p><img src="https://www.zhihu.com/equation?tex=%5C%5C+D_%7Bs+%5Crightarrow+t%7D+%3A%3D%5Carg+%5Cmin_%7B%5Ctheta%7D+%5Cmathbb%7BE%7D_%7BI+%5Cin+%5Cmathcal%7BD%7D%7D%5CBig%5BL_t%5CBig%28D_%7B%5Ctheta%7D%5Cbig%28E_s%28I%29%5Cbig%29%2C+f_t%28I%29%5CBig%29%5CBig%5D+%5C%5C" alt="\\ D_{s \rightarrow t} :=\arg \min_{\theta} \mathbb{E}_{I \in \mathcal{D}}\Big[L_t\Big(D_{\theta}\big(E_s(I)\big), f_t(I)\Big)\Big] \\"></p>
+<p>对于所有 <img src="https://www.zhihu.com/equation?tex=s" alt="s"> 和 <img src="https://www.zhihu.com/equation?tex=t" alt="t"> 组合，我们均训练了一个 <img src="https://www.zhihu.com/equation?tex=D_%7Bs+%5Crightarrow+t%7D" alt="D_{s \rightarrow t}"> 。如下图所示，对于 <img src="https://www.zhihu.com/equation?tex=t" alt="t"> ，不同的 <img src="https://www.zhihu.com/equation?tex=E_s%28I%29" alt="E_s(I)"> 会对 <img src="https://www.zhihu.com/equation?tex=D_%7Bs+%5Crightarrow+t%7D" alt="D_{s \rightarrow t}"> 的表现造成不同的影响。更具关联的 <img src="https://www.zhihu.com/equation?tex=s" alt="s"> 会为 <img src="https://www.zhihu.com/equation?tex=t" alt="t"> 提供更有效的统计信息，从而仅用1/60的训练数据（相较于从零学习）就能取得不错的结果；相反不具备关联的 <img src="https://www.zhihu.com/equation?tex=s" alt="s"> 则并不能有此表现。因此，我们认为 <img src="https://www.zhihu.com/equation?tex=D_%7Bs+%5Crightarrow+t%7D" alt="D_{s \rightarrow t}"> 在 <img src="https://www.zhihu.com/equation?tex=t" alt="t"> 任务中的<strong>表现</strong>可以很好地代表了 <img src="https://www.zhihu.com/equation?tex=s" alt="s"> 之于 <img src="https://www.zhihu.com/equation?tex=t" alt="t"> 的关联性。</p>
+<p>上述迁移代表了任务之间一对一的关联，我们称其为一阶关联。如下图，几个任务之间可能具有互补性，结合几个起始任务的representations会对解决目标任务起到帮助。因此，我们也研究了任务之间多对一的关联，我们称其问高阶关联。在这种情况下，我们将几个起始任务的representation结合起来当作目标任务的输入，其余细节跟上段类似。</p>
+<p>因为高阶的任务组合数量太大，我们基于一阶表现选择了一部分的组合进行迁移学习。对于小于五阶的高阶，我们根据一阶的表现，将前五的所有组合作为输入。对于n&gt;5阶，我们选择结合一阶表现前n的起始任务作为输入。</p>
+<p><img src="/images/tasknomy/6.jpg" alt=""></p>
+<h3 id="4-第三步：任务相似性标准化"><a href="#4-第三步：任务相似性标准化" class="headerlink" title="4.第三步：任务相似性标准化"></a>4.第三步：任务相似性标准化</h3><p>这一步的目标很明确，就是构建一个迁移学习的相似度矩阵，从中我们可以很清楚地知道哪两个任务迁移效果最好。如何构建？我们本能地想到，可以把上一步中训练的损失函数拿来用。然而，不同任务下的损失函数不具有可比性，因此不能用。自然地，我们又想到了归一化，把所有的结果归一化到 [0,1] 之间。这也是通常用的办法。但是问题又来了，通常来说，神经网络的损失函数具有很大的震荡幅度，直接拿来用是不可行的。 </p>
+<p><strong>作者提出了一种基于序列的方法</strong>，使得训练的表现和损失函数的值呈正相关。对于目标任务 <em>t</em>，用矩阵 <em>Wt</em>来表示可迁移到 <em>t</em> 的源域任务的表现。矩阵中的元素 <em>wij</em> 就表示：在同一个分出来的测试集上，源域 <em>si</em> 迁移到 <em>t</em>，比 <em>sj</em> 迁移到 <em>t</em> 的表现好的百分比。比如 <em>s1</em> 到 <em>t</em> 要比 <em>s2</em> 到 <em>t</em> 好 15%。这个矩阵表示的是两两之间的比较，因此作者形象地把它叫做 <strong>tournament matrix（锦标赛矩阵）</strong>。 最后作者对得到的新矩阵进行了特征分解，则 <em>si</em> 到 <em>t</em> 的迁移表现就是第 <em>i</em> 个特征向量。把所有目标域 <em>t</em> 的特征向量组合起来就得到了一个相似度矩阵。这个矩阵是归一化过的。 </p>
+<p>这个方法不是作者发明的，是之前有人发明的，叫做 Analytic Hierarchy Process。</p>
+<h3 id="5-第四步：计算可迁移图"><a href="#5-第四步：计算可迁移图" class="headerlink" title="5.第四步：计算可迁移图"></a>5.第四步：计算可迁移图</h3><p>最后一步，我们要基于affinity matrix求得如何最有效地学习一组我们感兴趣的任务。我们可以这个问题想象成一个subgraph selection的问题：选择一些任务从零学习，剩下的任务用少量数据进行迁移学习，具体迁移学习的策略由subgraph中的edge来决定（对一条directed edge，起始点代表我们从零学习的一个任务，终点代表要进行迁移的目标任务）。基于此，我们可以通过解如下BIP最优化问题来得到最优解：</p>
+<p><img src="https://www.zhihu.com/equation?tex=+%5C%5C%5Cbegin%7Balign%2A%7D+%5Ctext%7Bmaximize+%7D+%26+c%5ET+x%5C%2C%2C%5C%5C+%5Ctext%7Bsubject+to+%7D+%26+Ax+%5Cpreceq+b%5C%5C+%5Ctext%7Band+%7D+%26+x+%5Cin+%5C%7B0%2C+1%5C%7D%5E%7B%7CE%7C+%2B+%7C%5Cmathcal%7BV%7D%7C%7D%5C%2C.+%5Cend%7Balign%2A%7D+%5C%5C" alt=" \\\begin{align*} \text{maximize } &amp; c^T x\,,\\ \text{subject to } &amp; Ax \preceq b\\ \text{and } &amp; x \in \{0, 1\}^{|E| + |\mathcal{V}|}\,. \end{align*} \\"></p>
+<p>这个最优问题有三个限制条件：</p>
+<ol>
+<li>如果我们选择了一个迁移，那么迁移的起始任务（可能为高阶起始集）和目标任务均要出现在subgraph中；</li>
+<li>每个目标任务有且仅有一个迁移（我们将从零学习在途中定义为从自己到自己的迁移，即一条自己到自己的edge）；</li>
+<li>不超过监督预算。</li>
+</ol>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>实验部分是本文的重点。作者收集的数据集共包含 26 个计算机视觉的通用任务。在这些任务上，作者进行源领域训练、单一迁移、高阶迁移，一共构建了大约 <strong>3000 个学习任务</strong>，一共需要<strong>47886 个 GPU 小时</strong>来进行计算。</p>
+<p>实验所用的所有编码器都是相同的，都基于 ResNet-50，去掉了 pooling 层。所有的迁移网络用的都是包含 2 个卷积的网络。损失函数和解码器就相应地根据不同任务进行调整。调整方式可见文章。</p>
+<p>作者在一部分数据上进行实验，把这部分数据进行了如下的划分：训练集 120k，验证集 16k，测试集 17k。主要进行了以下方面的实验：</p>
+<p><strong>目标网络的性能</strong></p>
+<p>作者首先比较了不迁移情况下，目标网络的性能，也就是方法部分中的第 1 步。对比两个最近的方法可以看出，文章的网络性能不错。 </p>
+<p><strong>领域相似度情况</strong></p>
+<p>作者验证了根据构建出的相似度矩阵进行相似度挖掘的实验，对不同的任务都画出了迁移性能图。从图中就可以清楚地知道哪些任务是对目标任务的迁移效果好坏。 作者又进一步对这些结果进行了更好的图示。 </p>
+<p><strong>新任务上的泛化能力</strong></p>
+<p>将一个任务作为目标任务，其他 25 个任务作为源领域任务，考察模型在新任务上的泛化能力。实现效果显示这种迁移会比当前一些最好的非迁移深度方法还要好。从中我们得出的结论是，如果能够选择好源域任务，那么通常来说迁移学习的表现都要比直接从目标领域训练要好。 </p>
+<p><strong>模型的扩展性</strong></p>
+<p>另外，作者还在 MIT Place 和 ImageNet 两个大型图像数据集上测试了方法的可扩展性。并且根据迁移效果，构建了<strong>迁移树</strong>用于进一步分析迁移表现。</p>
+<h2 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h2><p>作者还在文章花费很多篇幅讨论了<strong>自己方法的局限性</strong>。主要有以下几点：</p>
+<p><strong>方法可能依赖于特定的数据和模型：</strong>尽管作者在不同的大型数据集上做了大量实验，作者依然担心，方法可能会依赖于特定的数据和网络。这么实诚的人不多了。</p>
+<p><strong>任务的通用性：</strong>作者只是在一些认为定义的任务上进行了实验。但有没有可能有更复杂更高级的任务？</p>
+<p><strong>任务空间限制：</strong>可能还需要更多的实验。迁移到非视觉和机器人任务。这是一个值得考虑的问题。</p>
+<p><strong>终身学习：</strong>此方法目前还是离线的。如何实现在线终身学习？</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文最大的亮点是，构建了非常多的迁移学习任务，详尽地探索了不同任务之间进行迁移的效果，为以后的研究提供了宝贵的基础。方法比较朴素，但是实现完备，很值得我们学习。作者在探索之外，还专门提供了一个数据集，这种精神值得钦佩！我们在今后的研究中，也要学习这种实验精神，多做，少说，慢慢积累。 迁移到非视觉和机器人任务。这是一个值得考虑的问题。 </p>
+<p>终身学习。此方法目前还是离线的。如何实现在线终身学习？</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>Zamir A R, Sax A, Shen W, et al. Taskonomy: Disentangling Task Transfer Learning[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018: 3712-3722.</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习任务调度-论文阅读-科研/" rel="tag"><i class="fa fa-tag"></i> 深度学习任务调度 - 论文阅读 - 科研</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/31/Journal2018/" rel="next" title="2018年末碎语">
+                <i class="fa fa-chevron-left"></i> 2018年末碎语
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry！Stay foolish！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Asphelzhn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/asphel96" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Taskonomy-Disentangling-Task-Transfer-Learning"><span class="nav-number">1.</span> <span class="nav-text">Taskonomy: Disentangling Task Transfer Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">1.2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-问题定义"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.问题定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-第一步：从零学习"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.第一步：从零学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-第二步：迁移学习"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.第二步：迁移学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-第三步：任务相似性标准化"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.第三步：任务相似性标准化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-第四步：计算可迁移图"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.第四步：计算可迁移图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">1.3.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局限性"><span class="nav-number">1.4.</span> <span class="nav-text">局限性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">1.6.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/01/01/paper_02_Tasknomy/';
+          this.page.identifier = '2019/01/01/paper_02_Tasknomy/';
+          this.page.title = 'Taskonomy Disentangling Task Transfer Learning';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
