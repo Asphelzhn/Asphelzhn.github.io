@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Deep Learning - 学习 - 科研," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux性能监测工具相关链接：Linux 如何查看 CPU 利用率？ 1.toptop 命令会显示 Linux 的进程。它提供了一个运行中系统的实时动态视图，即实际的进程活动。默认情况下，它显示在服务器上运行的 CPU 占用率最高的任务，并且每五秒更新一次。  top 的常用快捷键常用快捷键列表：  htop - 交互式的进程查看器htop 命令详解 htop 是一款免费并开源的基于 ncurs">
+<meta name="keywords" content="Deep Learning - 学习 - 科研">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux性能监测工具（深度学习资源监控）">
+<meta property="og:url" content="http://yoursite.com/2019/01/12/Linux_07_性能监控/index.html">
+<meta property="og:site_name" content="Edward">
+<meta property="og:description" content="Linux性能监测工具相关链接：Linux 如何查看 CPU 利用率？ 1.toptop 命令会显示 Linux 的进程。它提供了一个运行中系统的实时动态视图，即实际的进程活动。默认情况下，它显示在服务器上运行的 CPU 占用率最高的任务，并且每五秒更新一次。  top 的常用快捷键常用快捷键列表：  htop - 交互式的进程查看器htop 命令详解 htop 是一款免费并开源的基于 ncurs">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-0e35c52f1475d3215bbc456c19d79bda_hd.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-86ad2f9d2fe7f1635b977c0f225eb842_hd.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-46746854305cff7d1eed7fd1a46a6b4a_hd.jpg">
+<meta property="og:image" content="https://www.cyberciti.biz/media/new/tips/2009/12/cpu-ksar.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-e4487f6f9fce13e300e68e66d11ede74_hd.jpg">
+<meta property="og:image" content="http://yoursite.com/images/linux_07/1.png">
+<meta property="og:image" content="http://yoursite.com/images/linux_07/2.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-df8d2d03efeefa2142de53c701cc4cbd_hd.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-84f91f9734636a9553ed3e94ae5141ed_hd.jpg">
+<meta property="og:updated_time" content="2019-01-12T08:22:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux性能监测工具（深度学习资源监控）">
+<meta name="twitter:description" content="Linux性能监测工具相关链接：Linux 如何查看 CPU 利用率？ 1.toptop 命令会显示 Linux 的进程。它提供了一个运行中系统的实时动态视图，即实际的进程活动。默认情况下，它显示在服务器上运行的 CPU 占用率最高的任务，并且每五秒更新一次。  top 的常用快捷键常用快捷键列表：  htop - 交互式的进程查看器htop 命令详解 htop 是一款免费并开源的基于 ncurs">
+<meta name="twitter:image" content="https://pic3.zhimg.com/80/v2-0e35c52f1475d3215bbc456c19d79bda_hd.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/12/Linux_07_性能监控/"/>
+
+
+
+
+
+  <title>linux性能监测工具（深度学习资源监控） | Edward</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Edward</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">The Blog of Edward</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/Linux_07_性能监控/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux性能监测工具（深度学习资源监控）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-12T14:30:55+08:00">
+                2019-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/12/Linux_07_性能监控/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/12/Linux_07_性能监控/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux性能监测工具"><a href="#Linux性能监测工具" class="headerlink" title="Linux性能监测工具"></a>Linux性能监测工具</h1><p>相关链接：<a href="https://www.cyberciti.biz/tips/how-do-i-find-out-linux-cpu-utilization.html" target="_blank" rel="noopener">Linux 如何查看 CPU 利用率？</a></p>
+<h2 id="1-top"><a href="#1-top" class="headerlink" title="1.top"></a>1.top</h2><p><code>top</code> 命令会显示 Linux 的进程。它提供了一个运行中系统的实时动态视图，即实际的进程活动。默认情况下，它显示在服务器上运行的 CPU 占用率最高的任务，并且每五秒更新一次。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-0e35c52f1475d3215bbc456c19d79bda_hd.jpg" alt="img"></p>
+<h2 id="top-的常用快捷键"><a href="#top-的常用快捷键" class="headerlink" title="top 的常用快捷键"></a><code>top 的常用快捷键</code></h2><p>常用快捷键列表：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-86ad2f9d2fe7f1635b977c0f225eb842_hd.jpg" alt="img"></p>
+<h2 id="htop-交互式的进程查看器"><a href="#htop-交互式的进程查看器" class="headerlink" title="htop - 交互式的进程查看器"></a><strong>htop - 交互式的进程查看器</strong></h2><p><a href="https://blog.csdn.net/freeking101/article/details/79173903" target="_blank" rel="noopener">htop 命令详解</a></p>
+<p><code>htop</code> 是一款免费并开源的基于 ncurses 的 Linux 进程查看器。它比 <code>top</code> 命令更简单易用。您无需使用 PID、无需离开 <code>htop</code> 界面，便可以杀掉进程或调整其调度优先级。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ htop</span><br></pre></td></tr></table></figure>
+<p>输出示例：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-46746854305cff7d1eed7fd1a46a6b4a_hd.jpg" alt="img"></p>
+<p><strong>htop输出到文件</strong></p>
+<p>先安装 <code>aha</code> 和 <code>html2text</code> 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo q | htop -C | aha --line-fix | html2text -width 999 | grep -v &quot;F1Help&quot; | grep -v &quot;xml version=&quot; &gt; file.txt</span><br></pre></td></tr></table></figure>
+<h2 id="2-mpstat-监控多处理器的使用情况"><a href="#2-mpstat-监控多处理器的使用情况" class="headerlink" title="2.mpstat - 监控多处理器的使用情况"></a>2.<strong>mpstat - 监控多处理器的使用情况</strong></h2><p><code>mpstat</code> 命令显示每个可用处理器的使用情况，编号从 0 开始。命令 <code>mpstat -P ALL</code> 显示了每个处理器的平均使用率：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># mpstat -P ALL</span><br></pre></td></tr></table></figure>
+<p>输出示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Linux 2.6.18-128.1.14.el5 (www03.nixcraft.in)       06/26/2018</span><br><span class="line"></span><br><span class="line">06:48:11 PM CPU %user %nice %sys %iowait %irq %soft %steal %idle intr/s</span><br><span class="line">06:48:11 PM all 3.50 0.09 0.34 0.03 0.01 0.17 0.00 95.86 1218.04</span><br><span class="line">06:48:11 PM 0 3.44 0.08 0.31 0.02 0.00 0.12 0.00 96.04 1000.31</span><br><span class="line">06:48:11 PM 1 3.10 0.08 0.32 0.09 0.02 0.11 0.00 96.28 34.93</span><br><span class="line">06:48:11 PM 2 4.16 0.11 0.36 0.02 0.00 0.11 0.00 95.25 0.00</span><br><span class="line">06:48:11 PM 3 3.77 0.11 0.38 0.03 0.01 0.24 0.00 95.46 44.80</span><br></pre></td></tr></table></figure>
+<h2 id="3-Sysstat-Package"><a href="#3-Sysstat-Package" class="headerlink" title="3. Sysstat Package"></a>3. Sysstat Package</h2><p>相关链接：<a href="https://www.cyberciti.biz/tips/identifying-linux-bottlenecks-sar-graphs-with-ksar.html" target="_blank" rel="noopener">利用Ksar分析系统瓶颈</a></p>
+<p><a href="https://linux.cn/article-9398-1.html" target="_blank" rel="noopener">中文教程</a></p>
+<p><code>sar</code> 命令用用收集、报告、或者保存 UNIX / Linux 系统的活动信息：</p>
+<ol>
+<li>CPU 使用率</li>
+<li>内存页面和使用率</li>
+<li>网络 I/O 和传输统计</li>
+<li>进程创建活动</li>
+<li>所有的块设备活动</li>
+<li>每秒中断数等等</li>
+</ol>
+<p><code>sar</code> 命令的输出能够用于识别服务器瓶颈。但是，分析 <code>sar</code> 命令提供的信息可能比较困难，所以要使用 kSar 工具。kSar 工具可以将 <code>sar</code> 命令的输出绘制成基于时间周期的、易于理解的图表。</p>
+<p><code>sar</code>、<code>sa1</code>、和 <code>sa2</code> 命令都是 sysstat 包的一部分。它是 Linux 包含的性能监视工具集合。</p>
+<ol>
+<li><code>sar</code>：显示数据</li>
+<li><code>sa1</code> 和 <code>sa2</code>：收集和保存数据用于以后分析。<code>sa2</code> shell 脚本在 <code>/var/log/sa</code> 目录中每日写入一个报告。<code>sa1</code> shell 脚本将每日的系统活动信息以二进制数据的形式写入到文件中。</li>
+<li><p>sadc —— 系统活动数据收集器。可以通过修改<code>sa1</code>和<code>sa2</code>脚本去配置各种选项。它们位于以下的目录：</p>
+<ul>
+<li><p><code>/usr/lib64/sa/sa1</code> （64 位）或者 <code>/usr/lib/sa/sa1</code> （32 位） —— 它调用 <code>sadc</code> 去记录报告到 <code>/var/log/sa/sadX</code> 格式。</p>
+</li>
+<li><p><code>/usr/lib64/sa/sa2</code> （64 位）或者 <code>/usr/lib/sa/sa2</code> （32 位） —— 它调用 <code>sar</code> 去记录报告到 <code>/var/log/sa/sarX</code> 格式。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://www.cyberciti.biz/media/new/tips/2009/12/cpu-ksar.png" alt="Fig.03: Processes for server1"></p>
+<h2 id="4-KDE-系统监控器-实时系统报告和图形化显示"><a href="#4-KDE-系统监控器-实时系统报告和图形化显示" class="headerlink" title="4.KDE 系统监控器 - 实时系统报告和图形化显示"></a>4.<strong>KDE 系统监控器 - 实时系统报告和图形化显示</strong></h2><p>详细用法，参阅 <a href="https://www.kde.org/applications/system/ksysguard/" target="_blank" rel="noopener">KSysguard 手册</a>。</p>
+<p>KSysguard 是 KDE 桌面的网络化系统监控程序。这个工具可以通过 ssh 会话运行。它提供了许多功能，比如可以监控本地和远程主机的客户端-服务器模式。前端图形界面使用传感器来检索信息。传感器可以返回简单的值或更复杂的信息，如表格。每种类型的信息都有一个或多个显示界面，并被组织成工作表的形式，这些工作表可以分别保存和加载。所以，KSysguard 不仅是一个简单的任务管理器，还是一个控制大型服务器平台的强大工具。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-e4487f6f9fce13e300e68e66d11ede74_hd.jpg" alt="img"></p>
+<h2 id="5-Holy-Lance"><a href="#5-Holy-Lance" class="headerlink" title="5. Holy Lance"></a>5. Holy Lance</h2><p>Holy Lance 是一个简单易用的 基于 PHP]的 Linux 图形化性能监视器。</p>
+<p>基于PHP，单文件，易于部署。Web界面，动态更新，实时简便，即开即用。目前可以动态监控CPU占用率、内存、磁盘、网络、进程，还带有环境探针以及性能测试功能。</p>
+<p><img src="/images/linux_07/1.png" alt=""></p>
+<p><img src="/images/linux_07/2.png" alt=""></p>
+<h2 id="6-GPU监控"><a href="#6-GPU监控" class="headerlink" title="6. GPU监控"></a>6. GPU监控</h2><p>nvidia-smi`是Nvidia显卡命令行管理套件，基于NVML库，旨在管理和监控Nvidia GPU设备。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-df8d2d03efeefa2142de53c701cc4cbd_hd.jpg" alt="img"></p>
+<p>这是nvidia-smi命令的输出，其中最重要的两个指标：</p>
+<ol>
+<li>显存占用</li>
+<li>GPU利用率</li>
+</ol>
+<p>显存占用和GPU利用率是两个不一样的东西，显卡是由GPU计算单元和显存等组成的，显存和GPU的关系有点类似于内存和CPU的关系。</p>
+<p>工具：<code>gpustat</code>,<code>pip install gpustat</code>即可安装，gpustat基于<code>nvidia-smi</code>，可以提供更美观简洁的展示，结合watch命令，可以<strong>动态实时监控</strong>GPU的使用情况。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch --color -n1 gpustat -cpu</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic2.zhimg.com/80/v2-84f91f9734636a9553ed3e94ae5141ed_hd.jpg" alt="img"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning-学习-科研/" rel="tag"><i class="fa fa-tag"></i> Deep Learning - 学习 - 科研</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/10/Linux_06_远程管理/" rel="next" title="linux远程管理">
+                <i class="fa fa-chevron-left"></i> linux远程管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry！Stay foolish！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Asphelzhn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/asphel96" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux性能监测工具"><span class="nav-number">1.</span> <span class="nav-text">Linux性能监测工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-top"><span class="nav-number">1.1.</span> <span class="nav-text">1.top</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top-的常用快捷键"><span class="nav-number">1.2.</span> <span class="nav-text">top 的常用快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#htop-交互式的进程查看器"><span class="nav-number">1.3.</span> <span class="nav-text">htop - 交互式的进程查看器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-mpstat-监控多处理器的使用情况"><span class="nav-number">1.4.</span> <span class="nav-text">2.mpstat - 监控多处理器的使用情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Sysstat-Package"><span class="nav-number">1.5.</span> <span class="nav-text">3. Sysstat Package</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-KDE-系统监控器-实时系统报告和图形化显示"><span class="nav-number">1.6.</span> <span class="nav-text">4.KDE 系统监控器 - 实时系统报告和图形化显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Holy-Lance"><span class="nav-number">1.7.</span> <span class="nav-text">5. Holy Lance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-GPU监控"><span class="nav-number">1.8.</span> <span class="nav-text">6. GPU监控</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/01/12/Linux_07_性能监控/';
+          this.page.identifier = '2019/01/12/Linux_07_性能监控/';
+          this.page.title = 'linux性能监测工具（深度学习资源监控）';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
