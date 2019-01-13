@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Deep Learning - 学习 - 科研," />
 
 
 
@@ -86,16 +86,21 @@
 
 
 
-<meta name="description" content="Stay hungry！Stay foolish！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Edward">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+<meta name="description" content="GPU监测工具在进行深度学习实验时，GPU 的实时状态监测很重要。nvidia-smi 是最常用的命令。  上图是服务器上 GeForce GTX 1080 Ti 的信息，下面一一解读参数。上面的表格中的红框中的信息与下面的四个框的信息是一一对应的： GPU：GPU 编号；Name：GPU 型号；Persistence-M：持续模式的状态。持续模式虽然耗能大，但是在新的GPU应用启动时，花费的时间">
+<meta name="keywords" content="Deep Learning - 学习 - 科研">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习GPU监控">
+<meta property="og:url" content="http://yoursite.com/2019/01/12/Linux_08_GPU监控 /index.html">
 <meta property="og:site_name" content="Edward">
-<meta property="og:description" content="Stay hungry！Stay foolish！">
+<meta property="og:description" content="GPU监测工具在进行深度学习实验时，GPU 的实时状态监测很重要。nvidia-smi 是最常用的命令。  上图是服务器上 GeForce GTX 1080 Ti 的信息，下面一一解读参数。上面的表格中的红框中的信息与下面的四个框的信息是一一对应的： GPU：GPU 编号；Name：GPU 型号；Persistence-M：持续模式的状态。持续模式虽然耗能大，但是在新的GPU应用启动时，花费的时间">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/linux_08/1.png">
+<meta property="og:image" content="http://yoursite.com/images/linux_08/2.png">
+<meta property="og:updated_time" content="2019-01-12T14:35:35.520Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Edward">
-<meta name="twitter:description" content="Stay hungry！Stay foolish！">
+<meta name="twitter:title" content="深度学习GPU监控">
+<meta name="twitter:description" content="GPU监测工具在进行深度学习实验时，GPU 的实时状态监测很重要。nvidia-smi 是最常用的命令。  上图是服务器上 GeForce GTX 1080 Ti 的信息，下面一一解读参数。上面的表格中的红框中的信息与下面的四个框的信息是一一对应的： GPU：GPU 编号；Name：GPU 型号；Persistence-M：持续模式的状态。持续模式虽然耗能大，但是在新的GPU应用启动时，花费的时间">
+<meta name="twitter:image" content="http://yoursite.com/images/linux_08/1.png">
 
 
 
@@ -125,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/12/Linux_08_GPU监控 /"/>
 
 
 
 
 
-  <title>归档 | Edward</title>
+  <title>深度学习GPU监控 | Edward</title>
   
 
 
@@ -150,7 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,411 +249,185 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/Linux_08_GPU监控 /">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">深度学习GPU监控</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-12T14:30:55+08:00">
+                2019-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 19 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/12/Linux_08_GPU监控 /#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/12/Linux_08_GPU监控 /" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/31/Journal2018/" itemprop="url">
-              
-                <span itemprop="name">2018年末碎语</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-31T21:30:00+08:00"
-              content="2018-12-31" >
-          12-31
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/25/Linux_05_文件目录常用命令/" itemprop="url">
-              
-                <span itemprop="name">linux文件目录常用命令</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-25T11:30:55+08:00"
-              content="2018-12-25" >
-          12-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/24/Linux_04_linux命令格式/" itemprop="url">
-              
-                <span itemprop="name">linux命令格式</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-24T21:30:55+08:00"
-              content="2018-12-24" >
-          12-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/24/python_04_函数进阶/" itemprop="url">
-              
-                <span itemprop="name">Python函数进阶</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-24T21:22:08+08:00"
-              content="2018-12-24" >
-          12-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h1 id="GPU监测工具"><a href="#GPU监测工具" class="headerlink" title="GPU监测工具"></a>GPU监测工具</h1><p>在进行深度学习实验时，GPU 的实时状态监测很重要。nvidia-smi 是最常用的命令。</p>
+<p><img src="/images/linux_08/1.png" alt=""></p>
+<p>上图是服务器上 GeForce GTX 1080 Ti 的信息，下面一一解读参数。<br>上面的表格中的红框中的信息与下面的四个框的信息是一一对应的：</p>
+<p>GPU：GPU 编号；<br>Name：GPU 型号；<br>Persistence-M：持续模式的状态。持续模式虽然耗能大，但是在新的GPU应用启动时，花费的时间更少，这里显示的是off的状态；<br>Fan：风扇转速，从0到100%之间变动；<br>Temp：温度，单位是摄氏度；<br>Perf：性能状态，从P0到P12，P0表示最大性能，P12表示状态最小性能（即 GPU 未工作时为P0，达到最大工作限度时为P12）。<br>Pwr:Usage/Cap：能耗；<br>Memory Usage：显存使用率；<br>Bus-Id：涉及GPU总线的东西，domain bus:device.function；<br>Disp.A：Display Active，表示GPU的显示是否初始化；<br>Volatile GPU-Util：浮动的GPU利用率；<br>Uncorr. ECC：Error Correcting Code，错误检查与纠正；<br>Compute M：compute mode，计算模式。<br>下方的 Processes 表示每个进程对 GPU 的显存使用率。</p>
+<h1 id="第二个命令：nvidia-smi-L"><a href="#第二个命令：nvidia-smi-L" class="headerlink" title="第二个命令：nvidia-smi -L"></a><strong>第二个命令：nvidia-smi -L</strong></h1><p>该命令用于列出所有可用的 NVIDIA 设备信息。</p>
+<p><img src="/images/linux_08/2.png" alt=""></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/21/python_03_金融量化/" itemprop="url">
-              
-                <span itemprop="name">Python金融量化</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-21T22:22:08+08:00"
-              content="2018-12-21" >
-          12-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/20/Linux_03_shebang符号/" itemprop="url">
-              
-                <span itemprop="name">linux Shebang符号</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-20T00:52:55+08:00"
-              content="2018-12-20" >
-          12-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/20/linux_02_系统目录/" itemprop="url">
-              
-                <span itemprop="name">linux系统目录</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-20T00:52:55+08:00"
-              content="2018-12-20" >
-          12-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/19/hexo/" itemprop="url">
-              
-                <span itemprop="name">Hexo Next主题美化</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-19T22:22:08+08:00"
-              content="2018-12-19" >
-          12-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/19/python_02_字符串/" itemprop="url">
-              
-                <span itemprop="name">Python字符串常用方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-19T22:22:08+08:00"
-              content="2018-12-19" >
-          12-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/07/paper_01_Gandiva/" itemprop="url">
-              
-                <span itemprop="name">Gandiva Introspective Cluster Scheduling for Deep Learning</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-12-07T22:22:08+08:00"
-              content="2018-12-07" >
-          12-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning-学习-科研/" rel="tag"><i class="fa fa-tag"></i> Deep Learning - 学习 - 科研</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/12/Linux_07_性能监控/" rel="next" title="linux性能监测工具（深度学习资源监控）">
+                <i class="fa fa-chevron-left"></i> linux性能监测工具（深度学习资源监控）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -656,6 +435,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -676,8 +469,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -757,6 +559,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GPU监测工具"><span class="nav-number">1.</span> <span class="nav-text">GPU监测工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二个命令：nvidia-smi-L"><span class="nav-number">2.</span> <span class="nav-text">第二个命令：nvidia-smi -L</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -903,6 +721,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -920,6 +742,18 @@
       <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/01/12/Linux_08_GPU监控 /';
+          this.page.identifier = '2019/01/12/Linux_08_GPU监控 /';
+          this.page.title = '深度学习GPU监控';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
