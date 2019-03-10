@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Deep learning,科研 - 学习," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="从实验到生产，简单快速部署机器学习模型一直是一个挑战。这个过程要做的就是将训练好的模型对外提供预测服务。在生产中，这个过程需要可重现，隔离和安全。这里，我们使用基于Docker的TensorFlow Serving来简单地完成这个过程。TensorFlow 从1.8版本开始支持Docker部署，包括CPU和GPU，非常方便。 获得训练好的模型获取模型的第一步当然是训练一个模型，但是这不是本篇的重点">
+<meta name="keywords" content="Deep learning,科研 - 学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 TensorFlow Serving 和 Docker 快速部署机器学习服务">
+<meta property="og:url" content="http://yoursite.com/2019/03/10/tensor_04_docker_serving/index.html">
+<meta property="og:site_name" content="Edward">
+<meta property="og:description" content="从实验到生产，简单快速部署机器学习模型一直是一个挑战。这个过程要做的就是将训练好的模型对外提供预测服务。在生产中，这个过程需要可重现，隔离和安全。这里，我们使用基于Docker的TensorFlow Serving来简单地完成这个过程。TensorFlow 从1.8版本开始支持Docker部署，包括CPU和GPU，非常方便。 获得训练好的模型获取模型的第一步当然是训练一个模型，但是这不是本篇的重点">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-10T12:19:48.464Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 TensorFlow Serving 和 Docker 快速部署机器学习服务">
+<meta name="twitter:description" content="从实验到生产，简单快速部署机器学习模型一直是一个挑战。这个过程要做的就是将训练好的模型对外提供预测服务。在生产中，这个过程需要可重现，隔离和安全。这里，我们使用基于Docker的TensorFlow Serving来简单地完成这个过程。TensorFlow 从1.8版本开始支持Docker部署，包括CPU和GPU，非常方便。 获得训练好的模型获取模型的第一步当然是训练一个模型，但是这不是本篇的重点">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/10/tensor_04_docker_serving/"/>
+
+
+
+
+
+  <title>使用 TensorFlow Serving 和 Docker 快速部署机器学习服务 | Edward</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Edward</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">The Blog of Edward</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/10/tensor_04_docker_serving/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用 TensorFlow Serving 和 Docker 快速部署机器学习服务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-10T22:30:00+08:00">
+                2019-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tensorflow/" itemprop="url" rel="index">
+                    <span itemprop="name">Tensorflow</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/10/tensor_04_docker_serving/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/10/tensor_04_docker_serving/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>从实验到生产，简单快速部署机器学习模型一直是一个挑战。这个过程要做的就是将训练好的模型对外提供预测服务。在生产中，这个过程需要可重现，隔离和安全。这里，我们使用基于Docker的TensorFlow Serving来简单地完成这个过程。TensorFlow 从1.8版本开始支持Docker部署，包括CPU和GPU，非常方便。</p>
+<h2 id="获得训练好的模型"><a href="#获得训练好的模型" class="headerlink" title="获得训练好的模型"></a>获得训练好的模型</h2><p>获取模型的第一步当然是训练一个模型，但是这不是本篇的重点，所以我们使用一个已经训练好的模型，比如ResNet。TensorFlow Serving 使用SavedModel这种格式来保存其模型，SavedModel是一种独立于语言的，可恢复，密集的序列化格式，支持使用更高级别的系统和工具来生成，使用和转换TensorFlow模型。这里我们直接下载一个预训练好的模型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir /tmp/resnet</span><br><span class="line">$ curl -s https://storage.googleapis.com/download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz | tar --strip-components=2 -C /tmp/resnet -xvz</span><br></pre></td></tr></table></figure>
+<p>如果是使用其他框架比如Keras生成的模型，则需要将模型转换为SavedModel格式，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">from keras.models import Sequential</span><br><span class="line">from keras import backend as K</span><br><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line">model = Sequential()</span><br><span class="line"># 中间省略模型构建</span><br><span class="line"></span><br><span class="line"># 模型转换为SavedModel</span><br><span class="line">signature = tf.saved_model.signature_def_utils.predict_signature_def(</span><br><span class="line">    inputs=&#123;&apos;input_param&apos;: model.input&#125;, outputs=&#123;&apos;type&apos;: model.output&#125;)</span><br><span class="line">builder = tf.saved_model.builder.SavedModelBuilder(&apos;/tmp/output_model_path/1/&apos;)</span><br><span class="line">builder.add_meta_graph_and_variables(</span><br><span class="line">    sess=K.get_session(),</span><br><span class="line">    tags=[tf.saved_model.tag_constants.SERVING],</span><br><span class="line">    signature_def_map=&#123;</span><br><span class="line">        tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:</span><br><span class="line">            signature</span><br><span class="line">    &#125;)</span><br><span class="line">builder.save()</span><br></pre></td></tr></table></figure>
+<p>下载完成后，文件目录树为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ tree /tmp/resnet</span><br><span class="line">/tmp/resnet</span><br><span class="line">└── 1538687457</span><br><span class="line">    ├── saved_model.pb</span><br><span class="line">    └── variables</span><br><span class="line">        ├── variables.data-00000-of-00001</span><br><span class="line">        └── variables.index</span><br></pre></td></tr></table></figure>
+<h2 id="部署模型"><a href="#部署模型" class="headerlink" title="部署模型"></a>部署模型</h2><p>第一步是<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">安装Docker CE</a>。这将为您提供运行和管理Docker容器所需的所有工具。现在我们有了我们的模型，使用Docker服务就像拉动最新发布的TensorFlow服务服务环境镜像一样简单，并将其指向模型：</p>
+<p>使用Docker部署模型服务：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker pull tensorflow/serving</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker run -p 8501:8501 --name tfserving_resnet \</span></span><br><span class="line">--mount type=bind,source=/tmp/resnet,target=/models/resnet \</span><br><span class="line">-e MODEL_NAME=resnet -t tensorflow/serving &amp;</span><br><span class="line">…</span><br><span class="line">… main.cc:327] Running ModelServer at 0.0.0.0:8500…</span><br><span class="line">… main.cc:337] Exporting HTTP/REST API at:localhost:8501 …</span><br></pre></td></tr></table></figure>
+<p>分解命令行参数，分别是：</p>
+<ul>
+<li><code>-p 8501:8501</code> ：将容器的端口8501（TF服务响应<a href="https://www.tensorflow.org/serving/api_rest" target="_blank" rel="noopener">REST API</a>请求）发布到主机的端口8501</li>
+<li><code>--name tfserving_resnet</code> ：给容器我们创建名称“tfserving_resnet”，以便我们稍后可以参考它</li>
+<li><code>--mount type=bind,source=/tmp/resnet,target=/models/resnet</code> ：在主机（/ models / resnet）上安装主机的本地目录（/ tmp / resnet），以便TF服务可以从容器内部读取模型。</li>
+<li><code>-e MODEL_NAME=resnet</code> ：Telling TensorFlow服务加载名为“resnet”的模型</li>
+<li><code>-t tensorflow/serving</code> ：根据服务镜像“tensorflow / serving”运行Docker容器</li>
+</ul>
+<p>其中，<code>8500</code>端口对于TensorFlow Serving提供的gRPC端口，<code>8501</code>为REST API服务端口。上述命令输出为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">2019-03-04 02:52:26.610387: I tensorflow_serving/model_servers/server.cc:82] Building single TensorFlow model file config:  model_name: resnet model_base_path: /models/resnet</span><br><span class="line">2019-03-04 02:52:26.618200: I tensorflow_serving/model_servers/server_core.cc:461] Adding/updating models.</span><br><span class="line">2019-03-04 02:52:26.618628: I tensorflow_serving/model_servers/server_core.cc:558]  (Re-)adding model: resnet</span><br><span class="line">2019-03-04 02:52:26.745813: I tensorflow_serving/core/basic_manager.cc:739] Successfully reserved resources to load servable &#123;name: resnet version: 1538687457&#125;</span><br><span class="line">2019-03-04 02:52:26.745901: I tensorflow_serving/core/loader_harness.cc:66] Approving load for servable version &#123;name: resnet version: 1538687457&#125;</span><br><span class="line">2019-03-04 02:52:26.745935: I tensorflow_serving/core/loader_harness.cc:74] Loading servable version &#123;name: resnet version: 1538687457&#125;</span><br><span class="line">2019-03-04 02:52:26.747590: I external/org_tensorflow/tensorflow/contrib/session_bundle/bundle_shim.cc:363] Attempting to load native SavedModelBundle in bundle-shim from: /models/resnet/1538687457</span><br><span class="line">2019-03-04 02:52:26.747705: I external/org_tensorflow/tensorflow/cc/saved_model/reader.cc:31] Reading SavedModel from: /models/resnet/1538687457</span><br><span class="line">2019-03-04 02:52:26.795363: I external/org_tensorflow/tensorflow/cc/saved_model/reader.cc:54] Reading meta graph with tags &#123; serve &#125;</span><br><span class="line">2019-03-04 02:52:26.828614: I external/org_tensorflow/tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA</span><br><span class="line">2019-03-04 02:52:26.923902: I external/org_tensorflow/tensorflow/cc/saved_model/loader.cc:162] Restoring SavedModel bundle.</span><br><span class="line">2019-03-04 02:52:28.098479: I external/org_tensorflow/tensorflow/cc/saved_model/loader.cc:138] Running MainOp with key saved_model_main_op on SavedModel bundle.</span><br><span class="line">2019-03-04 02:52:28.144510: I external/org_tensorflow/tensorflow/cc/saved_model/loader.cc:259] SavedModel load for tags &#123; serve &#125;; Status: success. Took 1396689 microseconds.</span><br><span class="line">2019-03-04 02:52:28.146646: I tensorflow_serving/servables/tensorflow/saved_model_warmup.cc:83] No warmup data file found at /models/resnet/1538687457/assets.extra/tf_serving_warmup_requests</span><br><span class="line">2019-03-04 02:52:28.168063: I tensorflow_serving/core/loader_harness.cc:86] Successfully loaded servable version &#123;name: resnet version: 1538687457&#125;</span><br><span class="line">2019-03-04 02:52:28.174902: I tensorflow_serving/model_servers/server.cc:286] Running gRPC ModelServer at 0.0.0.0:8500 ...</span><br><span class="line">[warn] getaddrinfo: address family for nodename not supported</span><br><span class="line">2019-03-04 02:52:28.186724: I tensorflow_serving/model_servers/server.cc:302] Exporting HTTP/REST API at:localhost:8501 ...</span><br><span class="line">[evhttp_server.cc : 237] RAW: Entering the event loop ...</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，TensorFlow Serving使用<code>1538687457</code>作为模型的版本号。我们使用curl命令来查看一下启动的服务状态，也可以看到提供服务的模型版本以及模型状态。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ curl http://localhost:8501/v1/models/resnet</span><br><span class="line">&#123;</span><br><span class="line"> &quot;model_version_status&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">   &quot;version&quot;: &quot;1538687457&quot;,</span><br><span class="line">   &quot;state&quot;: &quot;AVAILABLE&quot;,</span><br><span class="line">   &quot;status&quot;: &#123;</span><br><span class="line">    &quot;error_code&quot;: &quot;OK&quot;,</span><br><span class="line">    &quot;error_message&quot;: &quot;&quot;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="查看模型输入输出"><a href="#查看模型输入输出" class="headerlink" title="查看模型输入输出"></a>查看模型输入输出</h2><p>很多时候我们需要查看模型的输出和输出参数的具体形式，TensorFlow提供了一个<code>saved_model_cli</code>命令来查看模型的输入和输出参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">$ saved_model_cli show --dir /tmp/resnet/1538687457/ --all</span><br><span class="line"></span><br><span class="line">MetaGraphDef with tag-set: &apos;serve&apos; contains the following SignatureDefs:</span><br><span class="line"></span><br><span class="line">signature_def[&apos;predict&apos;]:</span><br><span class="line">  The given SavedModel SignatureDef contains the following input(s):</span><br><span class="line">    inputs[&apos;image_bytes&apos;] tensor_info:</span><br><span class="line">        dtype: DT_STRING</span><br><span class="line">        shape: (-1)</span><br><span class="line">        name: input_tensor:0</span><br><span class="line">  The given SavedModel SignatureDef contains the following output(s):</span><br><span class="line">    outputs[&apos;classes&apos;] tensor_info:</span><br><span class="line">        dtype: DT_INT64</span><br><span class="line">        shape: (-1)</span><br><span class="line">        name: ArgMax:0</span><br><span class="line">    outputs[&apos;probabilities&apos;] tensor_info:</span><br><span class="line">        dtype: DT_FLOAT</span><br><span class="line">        shape: (-1, 1001)</span><br><span class="line">        name: softmax_tensor:0</span><br><span class="line">  Method name is: tensorflow/serving/predict</span><br><span class="line"></span><br><span class="line">signature_def[&apos;serving_default&apos;]:</span><br><span class="line">  The given SavedModel SignatureDef contains the following input(s):</span><br><span class="line">    inputs[&apos;image_bytes&apos;] tensor_info:</span><br><span class="line">        dtype: DT_STRING</span><br><span class="line">        shape: (-1)</span><br><span class="line">        name: input_tensor:0</span><br><span class="line">  The given SavedModel SignatureDef contains the following output(s):</span><br><span class="line">    outputs[&apos;classes&apos;] tensor_info:</span><br><span class="line">        dtype: DT_INT64</span><br><span class="line">        shape: (-1)</span><br><span class="line">        name: ArgMax:0</span><br><span class="line">    outputs[&apos;probabilities&apos;] tensor_info:</span><br><span class="line">        dtype: DT_FLOAT</span><br><span class="line">        shape: (-1, 1001)</span><br><span class="line">        name: softmax_tensor:0</span><br><span class="line">  Method name is: tensorflow/serving/predict</span><br></pre></td></tr></table></figure>
+<p>注意到<code>signature_def</code>，<code>inputs</code>的名称，类型和输出，这些参数在接下来的模型预测请求中需要。</p>
+<h2 id="使用模型接口预测：REST和gRPC"><a href="#使用模型接口预测：REST和gRPC" class="headerlink" title="使用模型接口预测：REST和gRPC"></a>使用模型接口预测：REST和gRPC</h2><p>TensorFlow Serving提供REST API和gRPC两种请求方式，接下来将具体这两种方式。</p>
+<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><p>我们下载一个客户端脚本，这个脚本会下载一张猫的图片，同时使用这张图片来计算服务请求时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -o /tmp/resnet/resnet_client.py https://raw.githubusercontent.com/tensorflow/serving/master/tensorflow_serving/example/resnet_client.py</span><br></pre></td></tr></table></figure>
+<p>以下脚本使用<code>requests</code>库来请求接口，使用图片的base64编码字符串作为请求内容，返回图片分类，并计算了平均处理时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">from __future__ import print_function</span><br><span class="line"></span><br><span class="line">import base64</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line"># The server URL specifies the endpoint of your server running the ResNet</span><br><span class="line"># model with the name &quot;resnet&quot; and using the predict interface.</span><br><span class="line">SERVER_URL = &apos;http://localhost:8501/v1/models/resnet:predict&apos;</span><br><span class="line"></span><br><span class="line"># The image URL is the location of the image we should send to the server</span><br><span class="line">IMAGE_URL = &apos;https://tensorflow.org/images/blogs/serving/cat.jpg&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">  # Download the image</span><br><span class="line">  dl_request = requests.get(IMAGE_URL, stream=True)</span><br><span class="line">  dl_request.raise_for_status()</span><br><span class="line"></span><br><span class="line">  # Compose a JSON Predict request (send JPEG image in base64).</span><br><span class="line">  jpeg_bytes = base64.b64encode(dl_request.content).decode(&apos;utf-8&apos;)</span><br><span class="line">  predict_request = &apos;&#123;&quot;instances&quot; : [&#123;&quot;b64&quot;: &quot;%s&quot;&#125;]&#125;&apos; % jpeg_bytes</span><br><span class="line"></span><br><span class="line">  # Send few requests to warm-up the model.</span><br><span class="line">  for _ in range(3):</span><br><span class="line">    response = requests.post(SERVER_URL, data=predict_request)</span><br><span class="line">    response.raise_for_status()</span><br><span class="line"></span><br><span class="line">  # Send few actual requests and report average latency.</span><br><span class="line">  total_time = 0</span><br><span class="line">  num_requests = 10</span><br><span class="line">  for _ in range(num_requests):</span><br><span class="line">    response = requests.post(SERVER_URL, data=predict_request)</span><br><span class="line">    response.raise_for_status()</span><br><span class="line">    total_time += response.elapsed.total_seconds()</span><br><span class="line">    prediction = response.json()[&apos;predictions&apos;][0]</span><br><span class="line"></span><br><span class="line">  print(&apos;Prediction class: &#123;&#125;, avg latency: &#123;&#125; ms&apos;.format(</span><br><span class="line">      prediction[&apos;classes&apos;], (total_time*1000)/num_requests))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">  main()</span><br></pre></td></tr></table></figure>
+<p>输出结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python resnet_client.py</span><br><span class="line">Prediction class: 286, avg latency: 210.12310000000002 ms</span><br></pre></td></tr></table></figure>
+<h3 id="gRPC"><a href="#gRPC" class="headerlink" title="gRPC"></a>gRPC</h3><p>让我们下载另一个客户端脚本，这个脚本使用gRPC作为服务，传入图片并获取输出结果。这个脚本需要安装<code>tensorflow-serving-api</code>这个库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -o /tmp/resnet/resnet_client_grpc.py https://raw.githubusercontent.com/tensorflow/serving/master/tensorflow_serving/example/resnet_client_grpc.py</span><br><span class="line">$ pip install tensorflow-serving-api</span><br></pre></td></tr></table></figure>
+<p>脚本内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">from __future__ import print_function</span><br><span class="line"></span><br><span class="line"># This is a placeholder for a Google-internal import.</span><br><span class="line"></span><br><span class="line">import grpc</span><br><span class="line">import requests</span><br><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line">from tensorflow_serving.apis import predict_pb2</span><br><span class="line">from tensorflow_serving.apis import prediction_service_pb2_grpc</span><br><span class="line"></span><br><span class="line"># The image URL is the location of the image we should send to the server</span><br><span class="line">IMAGE_URL = &apos;https://tensorflow.org/images/blogs/serving/cat.jpg&apos;</span><br><span class="line"></span><br><span class="line">tf.app.flags.DEFINE_string(&apos;server&apos;, &apos;localhost:8500&apos;,</span><br><span class="line">                           &apos;PredictionService host:port&apos;)</span><br><span class="line">tf.app.flags.DEFINE_string(&apos;image&apos;, &apos;&apos;, &apos;path to image in JPEG format&apos;)</span><br><span class="line">FLAGS = tf.app.flags.FLAGS</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main(_):</span><br><span class="line">  if FLAGS.image:</span><br><span class="line">    with open(FLAGS.image, &apos;rb&apos;) as f:</span><br><span class="line">      data = f.read()</span><br><span class="line">  else:</span><br><span class="line">    # Download the image since we weren&apos;t given one</span><br><span class="line">    dl_request = requests.get(IMAGE_URL, stream=True)</span><br><span class="line">    dl_request.raise_for_status()</span><br><span class="line">    data = dl_request.content</span><br><span class="line"></span><br><span class="line">  channel = grpc.insecure_channel(FLAGS.server)</span><br><span class="line">  stub = prediction_service_pb2_grpc.PredictionServiceStub(channel)</span><br><span class="line">  # Send request</span><br><span class="line">  # See prediction_service.proto for gRPC request/response details.</span><br><span class="line">  request = predict_pb2.PredictRequest()</span><br><span class="line">  request.model_spec.name = &apos;resnet&apos;</span><br><span class="line">  request.model_spec.signature_name = &apos;serving_default&apos;</span><br><span class="line">  request.inputs[&apos;image_bytes&apos;].CopyFrom(</span><br><span class="line">      tf.contrib.util.make_tensor_proto(data, shape=[1]))</span><br><span class="line">  result = stub.Predict(request, 10.0)  # 10 secs timeout</span><br><span class="line">  print(result)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">  tf.app.run()</span><br></pre></td></tr></table></figure>
+<p>输出的结果可以看到图片的分类，概率和使用的模型信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">$ python resnet_client_grpc.py</span><br><span class="line">outputs &#123;</span><br><span class="line">  key: &quot;classes&quot;</span><br><span class="line">  value &#123;</span><br><span class="line">    dtype: DT_INT64</span><br><span class="line">    tensor_shape &#123;</span><br><span class="line">      dim &#123;</span><br><span class="line">        size: 1</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    int64_val: 286</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">outputs &#123;</span><br><span class="line">  key: &quot;probabilities&quot;</span><br><span class="line">  value &#123;</span><br><span class="line">    dtype: DT_FLOAT</span><br><span class="line">    tensor_shape &#123;</span><br><span class="line">      dim &#123;</span><br><span class="line">        size: 1</span><br><span class="line">      &#125;</span><br><span class="line">      dim &#123;</span><br><span class="line">        size: 1001</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    float_val: 2.4162832232832443e-06</span><br><span class="line">    float_val: 1.9012182974620373e-06</span><br><span class="line">    float_val: 2.7247710022493266e-05</span><br><span class="line">    float_val: 4.426385658007348e-07</span><br><span class="line">    ...(中间省略)</span><br><span class="line">    float_val: 1.4636580090154894e-05</span><br><span class="line">    float_val: 5.812107133351674e-07</span><br><span class="line">    float_val: 6.599806511076167e-05</span><br><span class="line">    float_val: 0.0012952701654285192</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">model_spec &#123;</span><br><span class="line">  name: &quot;resnet&quot;</span><br><span class="line">  version &#123;</span><br><span class="line">    value: 1538687457</span><br><span class="line">  &#125;</span><br><span class="line">  signature_name: &quot;serving_default&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><h3 id="通过编译优化的TensorFlow-Serving二进制来提高性能"><a href="#通过编译优化的TensorFlow-Serving二进制来提高性能" class="headerlink" title="通过编译优化的TensorFlow Serving二进制来提高性能"></a>通过编译优化的TensorFlow Serving二进制来提高性能</h3><p>TensorFlows serving有时会有输出如下的日志：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA</span><br></pre></td></tr></table></figure>
+<p>TensorFlow Serving已发布Docker镜像旨在尽可能多地使用CPU架构，因此省略了一些优化以最大限度地提高兼容性。如果你没有看到此消息，则你的二进制文件可能已针对你的CPU进行了优化。根据你的模型执行的操作，这些优化可能会对你的服务性能产生重大影响。幸运的是，编译优化的TensorFlow Serving二进制非常简单。官方已经提供了自动化脚本，分以下两部进行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 1. 编译开发版本：首先，我们要构建TensorFlow服务的优化版本。最简单的方法是构建官方的Tensorflow服务开发环境Docker镜像。这具有为图像构建的系统自动生成优化的TensorFlow服务二进制文件的良好特性。为了区分我们创建的图像和官方图像，我们将$ USER /添加到镜像名称之前。让我们称这个开发镜像为$ USER / tensorflow-serving-devel</span><br><span class="line"></span><br><span class="line">$ docker build -t $USER/tensorflow-serving-devel -f Dockerfile.devel https://github.com/tensorflow/serving.git#:tensorflow_serving/tools/docker</span><br><span class="line"></span><br><span class="line"># 2. 生产新的镜像：构建TensorFlow服务开发映像可能需要一段时间，具体取决于计算机的速度。完成后，让我们使用优化的二进制文件构建一个新的服务图像，并将其命名为$ USER / tensorflow-serving：</span><br><span class="line"></span><br><span class="line">$ docker build -t $USER/tensorflow-serving --build-arg TF_SERVING_BUILD_IMAGE=$USER/tensorflow-serving-devel https://github.com/tensorflow/serving.git#:tensorflow_serving/tools/docker</span><br></pre></td></tr></table></figure>
+<p>现在我们有了新的服务图像，让我们再次启动服务器：:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker kill tfserving_resnet</span><br><span class="line">$ docker run -p 8501:8501 --name tfserving_resnet \</span><br><span class="line">  --mount type=bind,source=/tmp/resnet,target=/models/resnet \</span><br><span class="line">  -e MODEL_NAME=resnet -t $USER/tensorflow-serving &amp;</span><br></pre></td></tr></table></figure>
+<p>最后运行我们的客户端程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python /tmp/resnet/resnet_client.py</span><br><span class="line">Prediction class: 282, avg latency: 84.8849 ms</span><br></pre></td></tr></table></figure>
+<p>在我们的机器上，我们看到使用我们的原生优化二进制文件，每次预测平均加速超过100毫秒（119％）。根据您的机器（和型号），您可能会看到不同的结果。</p>
+<p>最后，结束TensorFlow Serving容器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker kill tfserving_resnet</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://medium.com/tensorflow/serving-ml-quickly-with-tensorflow-serving-and-docker-7df7094aa008" target="_blank" rel="noopener">Serving ML Quickly with TensorFlow Serving and Docker</a></li>
+<li><a href="https://www.tensorflow.org/tfx/serving/tutorials/Serving_REST_simple" target="_blank" rel="noopener">Train and serve a TensorFlow model with TensorFlow Serving</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-learning/" rel="tag"><i class="fa fa-tag"></i> Deep learning</a>
+          
+            <a href="/tags/科研-学习/" rel="tag"><i class="fa fa-tag"></i> 科研 - 学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/10/tensor_05_print_tensor/" rel="next" title="tensorflow打印tensor值">
+                <i class="fa fa-chevron-left"></i> tensorflow打印tensor值
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry！Stay foolish！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Asphelzhn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/asphel96" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#获得训练好的模型"><span class="nav-number">1.</span> <span class="nav-text">获得训练好的模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署模型"><span class="nav-number">2.</span> <span class="nav-text">部署模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看模型输入输出"><span class="nav-number">3.</span> <span class="nav-text">查看模型输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用模型接口预测：REST和gRPC"><span class="nav-number">4.</span> <span class="nav-text">使用模型接口预测：REST和gRPC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#REST"><span class="nav-number">4.1.</span> <span class="nav-text">REST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gRPC"><span class="nav-number">4.2.</span> <span class="nav-text">gRPC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能"><span class="nav-number">5.</span> <span class="nav-text">性能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过编译优化的TensorFlow-Serving二进制来提高性能"><span class="nav-number">5.1.</span> <span class="nav-text">通过编译优化的TensorFlow Serving二进制来提高性能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/03/10/tensor_04_docker_serving/';
+          this.page.identifier = '2019/03/10/tensor_04_docker_serving/';
+          this.page.title = '使用 TensorFlow Serving 和 Docker 快速部署机器学习服务';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
