@@ -94,14 +94,10 @@
 <meta property="og:site_name" content="Edward">
 <meta property="og:description" content="HTML1. web概念概述 2. HTML web概念概述* JavaWeb：     * 使用Java语言开发基于互联网的项目  * 软件架构：     1. C/S: Client/Server 客户端/服务器端         * 在用户本地有一个客户端程序，在远程有一个服务器端程序         * 如：QQ，迅雷...         * 优点：             1. 用户体">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/03/17/front_01_HTML/image/icon_7.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/17/front_01_HTML/image/jiangwai_1.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/17/front_01_HTML/image/footer_service.png">
-<meta property="og:updated_time" content="2019-03-17T03:09:47.261Z">
+<meta property="og:updated_time" content="2019-03-17T03:18:10.035Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML使用">
 <meta name="twitter:description" content="HTML1. web概念概述 2. HTML web概念概述* JavaWeb：     * 使用Java语言开发基于互联网的项目  * 软件架构：     1. C/S: Client/Server 客户端/服务器端         * 在用户本地有一个客户端程序，在远程有一个服务器端程序         * 如：QQ，迅雷...         * 优点：             1. 用户体">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/17/front_01_HTML/image/icon_7.jpg">
 
 
 
@@ -527,82 +523,91 @@
                     版权所有Copyright 2006-2018&amp;copy;, All Rights Reserved 苏ICP备16007882
                 &lt;/center&gt;
             &lt;/font&gt;
-</code></pre><p>​<br>​<br>​                <br>​                <br>​<br>​        3. 图片标签：<br>​            <em> img：展示图片<br>​                </em> 属性：<br>​                    * src：指定图片的位置<br>​    </p>
-<pre><code>    * 代码：
-         &lt;!--展示一张图片 img--&gt;
-
-        &lt;img src=&quot;image/jingxuan_2.jpg&quot; align=&quot;right&quot; alt=&quot;古镇&quot; width=&quot;500&quot; height=&quot;500&quot;/&gt;
-
-        &lt;!--
-            相对路径
-                * 以.开头的路径
-                    * ./：代表当前目录  ./image/1.jpg
-                    * ../:代表上一级目录
-         --&gt;
-
-        &lt;img src=&quot;./image/jiangwai_1.jpg&quot;&gt;
-
-        &lt;img src=&quot;../image/jiangwai_1.jpg&quot;&gt;
-4. 列表标签：
-    * 有序列表：
-        * ol:
-        * li:
-    * 无序列表：
-        * ul:
-        * li:
-5. 链接标签：
-    * a:定义一个超链接
-        * 属性：
-            * href：指定访问资源的URL(统一资源定位符)
-            * target：指定打开资源的方式
-                * _self:默认值，在当前页面打开
-                * _blank：在空白页面打开
-
-    * 代码：
-         &lt;!--超链接  a--&gt;
-
-        &lt;a href=&quot;http://www.itcast.cn&quot;&gt;点我&lt;/a&gt;
-        &lt;br&gt;
-
-        &lt;a href=&quot;http://www.itcast.cn&quot; target=&quot;_self&quot;&gt;点我&lt;/a&gt;
-        &lt;br&gt;
-        &lt;a href=&quot;http://www.itcast.cn&quot; target=&quot;_blank&quot;&gt;点我&lt;/a&gt;
-
-        &lt;br&gt;
-
-        &lt;a href=&quot;./5_列表标签.html&quot;&gt;列表标签&lt;/a&gt;&lt;br&gt;
-        &lt;a href=&quot;mailto:itcast@itcast.cn&quot;&gt;联系我们&lt;/a&gt;
-
-        &lt;br&gt;
-        &lt;a href=&quot;http://www.itcast.cn&quot;&gt;&lt;img src=&quot;image/jiangwai_1.jpg&quot;&gt;&lt;/a&gt;
-6. div和span：
-    * div:每一个div占满一整行。块级标签
-    * span：文本信息在一行展示，行内标签 内联标签
-
-7. 语义化标签：html5中为了提高程序的可读性，提供了一些标签。
-    1. &lt;header&gt;：页眉
-    2. &lt;footer&gt;：页脚
+​                
+​                &lt;/body&gt;
+​                &lt;/html&gt;
+​    
+​        3. 图片标签：
+​            * img：展示图片
+​                * 属性：
+​                    * src：指定图片的位置
+​    
+            * 代码：
+                 &lt;!--展示一张图片 img--&gt;
 
 
-8. 表格标签：
-    * table：定义表格
-        * width：宽度
-        * border：边框
-        * cellpadding：定义内容和单元格的距离
-        * cellspacing：定义单元格之间的距离。如果指定为0，则单元格的线会合为一条、
-        * bgcolor：背景色
-        * align：对齐方式
-    * tr：定义行
-        * bgcolor：背景色
-        * align：对齐方式
-    * td：定义单元格
-        * colspan：合并列
-        * rowspan：合并行
-    * th：定义表头单元格
-    * &lt;caption&gt;：表格标题
-    * &lt;thead&gt;：表示表格的头部分
-    * &lt;tbody&gt;：表示表格的体部分
-    * &lt;tfoot&gt;：表示表格的脚部分
+            &lt;img src=&quot;image/jingxuan_2.jpg&quot; align=&quot;right&quot; alt=&quot;古镇&quot; width=&quot;500&quot; height=&quot;500&quot;/&gt;
+
+            &lt;!--
+                相对路径
+                    * 以.开头的路径
+                        * ./：代表当前目录  ./image/1.jpg
+                        * ../:代表上一级目录
+             --&gt;
+
+            &lt;img src=&quot;./image/jiangwai_1.jpg&quot;&gt;
+
+            &lt;img src=&quot;../image/jiangwai_1.jpg&quot;&gt;
+    4. 列表标签：
+        * 有序列表：
+            * ol:
+            * li:
+        * 无序列表：
+            * ul:
+            * li:
+    5. 链接标签：
+        * a:定义一个超链接
+            * 属性：
+                * href：指定访问资源的URL(统一资源定位符)
+                * target：指定打开资源的方式
+                    * _self:默认值，在当前页面打开
+                    * _blank：在空白页面打开
+
+        * 代码：
+             &lt;!--超链接  a--&gt;
+
+            &lt;a href=&quot;http://www.itcast.cn&quot;&gt;点我&lt;/a&gt;
+            &lt;br&gt;
+
+            &lt;a href=&quot;http://www.itcast.cn&quot; target=&quot;_self&quot;&gt;点我&lt;/a&gt;
+            &lt;br&gt;
+            &lt;a href=&quot;http://www.itcast.cn&quot; target=&quot;_blank&quot;&gt;点我&lt;/a&gt;
+
+            &lt;br&gt;
+
+            &lt;a href=&quot;./5_列表标签.html&quot;&gt;列表标签&lt;/a&gt;&lt;br&gt;
+            &lt;a href=&quot;mailto:itcast@itcast.cn&quot;&gt;联系我们&lt;/a&gt;
+
+            &lt;br&gt;
+            &lt;a href=&quot;http://www.itcast.cn&quot;&gt;&lt;img src=&quot;image/jiangwai_1.jpg&quot;&gt;&lt;/a&gt;
+    6. div和span：
+        * div:每一个div占满一整行。块级标签
+        * span：文本信息在一行展示，行内标签 内联标签
+
+    7. 语义化标签：html5中为了提高程序的可读性，提供了一些标签。
+        1. &lt;header&gt;：页眉
+        2. &lt;footer&gt;：页脚
+
+
+    8. 表格标签：
+        * table：定义表格
+            * width：宽度
+            * border：边框
+            * cellpadding：定义内容和单元格的距离
+            * cellspacing：定义单元格之间的距离。如果指定为0，则单元格的线会合为一条、
+            * bgcolor：背景色
+            * align：对齐方式
+        * tr：定义行
+            * bgcolor：背景色
+            * align：对齐方式
+        * td：定义单元格
+            * colspan：合并列
+            * rowspan：合并行
+        * th：定义表头单元格
+        * &lt;caption&gt;：表格标题
+        * &lt;thead&gt;：表示表格的头部分
+        * &lt;tbody&gt;：表示表格的体部分
+        * &lt;tfoot&gt;：表示表格的脚部分
 </code></pre><h2 id="案例：旅游网站首页"><a href="#案例：旅游网站首页" class="headerlink" title="案例：旅游网站首页"></a>案例：旅游网站首页</h2><pre><code>1. 确定使用table来完成布局    
 2. 如果某一行只有一个单元格，则使用&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
 3. 如果某一行有多个单元格，则使用
@@ -815,53 +820,98 @@
                                 &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
                                 &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
                             &lt;/td&gt;
-</code></pre><p>​<br>​                            <br>​                        <br>​                    <br>​                <br>​<br>​                <!-- 第9行 境外游 --><br>​                <tr><br>​                    <td><br>​                        <img src="image/icon_7.jpg" alt=""><br>​                        境外游<br>​                        <hr color="#ffd700"><br>​                    </td><br>​                </tr><br>​<br>                <!-- 第10行 --><br>                <tr><br>                    <td><br>                        <table align="center" width="95%"><br>                            <tr><br>                                <td rowspan="2"><br>                                    <img src="image/jiangwai_1.jpg" alt=""><br>                                </td></tr></table></td></tr></p>
-<pre><code>    &lt;td&gt;
+​                            &lt;/tr&gt;
+​                        &lt;/table&gt;
+​                    &lt;/td&gt;
+​                &lt;/tr&gt;
+​        
+​                &lt;!-- 第9行 境外游 --&gt;
+​                &lt;tr&gt;
+​                    &lt;td&gt;
+​                        &lt;img src=&quot;image/icon_7.jpg&quot; alt=&quot;&quot;&gt;
+​                        境外游
+​                        &lt;hr  color=&quot;#ffd700&quot; &gt;
+​                    &lt;/td&gt;
+​                &lt;/tr&gt;
+​        
+                &lt;!-- 第10行 --&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;
+                        &lt;table align=&quot;center&quot; width=&quot;95%&quot;&gt;
+                            &lt;tr&gt;
+                                &lt;td rowspan=&quot;2&quot;&gt;
+                                    &lt;img src=&quot;image/jiangwai_1.jpg&quot; alt=&quot;&quot;&gt;
+                                &lt;/td&gt;
 
-        &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot; height=&quot;100%&quot;&gt;
-        &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-        &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-    &lt;/td&gt;
 
-    &lt;td&gt;
+                            &lt;td&gt;
 
-       &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
-        &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-        &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-    &lt;/td&gt;
+                                &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot; height=&quot;100%&quot;&gt;
+                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
+                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                            &lt;/td&gt;
 
-    &lt;td&gt;
+                            &lt;td&gt;
 
-       &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
-        &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-        &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-    &lt;/td&gt;
-&lt;/tr&gt;
+                               &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
+                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                            &lt;/td&gt;
 
-&lt;tr&gt;
-    &lt;td&gt;
+                            &lt;td&gt;
 
-       &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
-        &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-        &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-    &lt;/td&gt;
+                               &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
+                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
 
-    &lt;td&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;
 
-       &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
-        &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-        &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-    &lt;/td&gt;
+                               &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
+                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                            &lt;/td&gt;
 
-    &lt;td&gt;
+                            &lt;td&gt;
 
-       &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
-        &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-        &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-    &lt;/td&gt;
-</code></pre><p>​<br>​                            <br>​                        <br>​                    <br>​                <br>​                <!-- 第11行 --><br>​                <tr><br>​                    <td><br>​                        <img src="image/footer_service.png" alt="" width="100%"><br>​                    </td><br>​                </tr><br>​<br>​                <!-- 第12行 --><br>​                <tr><br>​                    <td align="center" bgcolor="#ffd700" height="40"><br>​                        <font color="gray" size="2"><br>​                        江苏传智播客教育科技股份有限公司<br>​                        版权所有Copyright 2006-2018&copy;, All Rights Reserved 苏ICP备16007882<br>​                        </font><br>​                    </td><br>​                </tr><br>​<br>            </p>
-<p>​<br>​        <br>​        </p>
+                               &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
+                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                            &lt;/td&gt;
 
+                            &lt;td&gt;
+
+                               &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
+                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
+                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
+                            &lt;/td&gt;
+​                            &lt;/tr&gt;
+​                        &lt;/table&gt;
+​                    &lt;/td&gt;
+​                &lt;/tr&gt;
+​                &lt;!-- 第11行 --&gt;
+​                &lt;tr&gt;
+​                    &lt;td&gt;
+​                        &lt;img src=&quot;image/footer_service.png&quot; alt=&quot;&quot; width=&quot;100%&quot;&gt;
+​                    &lt;/td&gt;
+​                &lt;/tr&gt;
+​        
+​                &lt;!-- 第12行 --&gt;
+​                &lt;tr&gt;
+​                    &lt;td align=&quot;center&quot; bgcolor=&quot;#ffd700&quot; height=&quot;40&quot;&gt;
+​                        &lt;font color=&quot;gray&quot; size=&quot;2&quot;&gt;
+​                        江苏传智播客教育科技股份有限公司
+​                        版权所有Copyright 2006-2018&amp;copy;, All Rights Reserved 苏ICP备16007882
+​                        &lt;/font&gt;
+​                    &lt;/td&gt;
+​                &lt;/tr&gt;
+​                
+            &lt;/table&gt;    
+​        &lt;/body&gt;
+​        &lt;/html&gt;
+</code></pre>
       
     </div>
     
@@ -902,6 +952,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/17/front_02_CSS/" rel="prev" title="CSS使用">
+                CSS使用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -992,7 +1046,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
