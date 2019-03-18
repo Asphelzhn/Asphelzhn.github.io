@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习任务调度 - 论文阅读 - 科研," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Dynamic Space-Time Scheduling for GPU Inference摘要1.在线推断任务典型的小批量导致GPU利用率较低，GPU资源共享可以解决性能差距。 2.在本文中，探索了几种利用时间和空间复用来提高深度学习推理工作负载的GPU利用率的技术。 3.与传统的批量推理相比，评估每种方法在资源效率，延迟可预测性和隔离方面的性能。 4.实验分析表明，通过探索更先进的空间和时间">
+<meta name="keywords" content="深度学习任务调度 - 论文阅读 - 科研">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dynamic Space-Time Scheduling for GPU Inference">
+<meta property="og:url" content="http://yoursite.com/2019/03/18/paper_03_Dynamic Space-Time Scheduling for GPU Inference/index.html">
+<meta property="og:site_name" content="Edward">
+<meta property="og:description" content="Dynamic Space-Time Scheduling for GPU Inference摘要1.在线推断任务典型的小批量导致GPU利用率较低，GPU资源共享可以解决性能差距。 2.在本文中，探索了几种利用时间和空间复用来提高深度学习推理工作负载的GPU利用率的技术。 3.与传统的批量推理相比，评估每种方法在资源效率，延迟可预测性和隔离方面的性能。 4.实验分析表明，通过探索更先进的空间和时间">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/Dynamic/1.png">
+<meta property="og:updated_time" content="2019-03-18T14:38:08.540Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dynamic Space-Time Scheduling for GPU Inference">
+<meta name="twitter:description" content="Dynamic Space-Time Scheduling for GPU Inference摘要1.在线推断任务典型的小批量导致GPU利用率较低，GPU资源共享可以解决性能差距。 2.在本文中，探索了几种利用时间和空间复用来提高深度学习推理工作负载的GPU利用率的技术。 3.与传统的批量推理相比，评估每种方法在资源效率，延迟可预测性和隔离方面的性能。 4.实验分析表明，通过探索更先进的空间和时间">
+<meta name="twitter:image" content="http://yoursite.com/images/Dynamic/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/18/paper_03_Dynamic Space-Time Scheduling for GPU Inference/"/>
+
+
+
+
+
+  <title>Dynamic Space-Time Scheduling for GPU Inference | Edward</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Edward</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">The Blog of Edward</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/18/paper_03_Dynamic Space-Time Scheduling for GPU Inference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Dynamic Space-Time Scheduling for GPU Inference</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-18T21:22:08+08:00">
+                2019-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科研/" itemprop="url" rel="index">
+                    <span itemprop="name">科研</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/18/paper_03_Dynamic Space-Time Scheduling for GPU Inference/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/18/paper_03_Dynamic Space-Time Scheduling for GPU Inference/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Dynamic-Space-Time-Scheduling-for-GPU-Inference"><a href="#Dynamic-Space-Time-Scheduling-for-GPU-Inference" class="headerlink" title="Dynamic Space-Time Scheduling for GPU Inference"></a>Dynamic Space-Time Scheduling for GPU Inference</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p><strong>1.在线推断任务典型的小批量导致GPU利用率较低，GPU资源共享可以解决性能差距。</strong></p>
+<p><strong>2.在本文中，探索了几种利用时间和空间复用来提高深度学习推理工作负载的GPU利用率的技术。</strong></p>
+<p><strong>3.与传统的批量推理相比，评估每种方法在资源效率，延迟可预测性和隔离方面的性能。</strong></p>
+<p><strong>4.实验分析表明，通过探索更先进的空间和时间复用策略，可以提高5倍的利用率。</strong></p>
+<p><strong>5.动态空时调度器的初步原型比仅用空间复用的策略高3.23倍浮点吞吐量，在卷积上比仅用时间复用策略增加7.73倍，同时还提供了更好的隔离和延迟可预测性。</strong></p>
+<h2 id="出发点1"><a href="#出发点1" class="headerlink" title="出发点1"></a>出发点1</h2><p>1.GPU对于深度学习至关重要， 通过利用并行性，高内存带宽和张量加速，GPU可以快速计算大批量输入数据。</p>
+<p>2.深度学习部署在视频监控，语言翻译和语音识别等应用中，对并行硬件加速的需求很大以支持推理。虽然有许多专用推理处理器，但GPU的广泛性，对通用深度学习模型的支持使GPU成为推理必不可少的。</p>
+<p>3.DNN训练成本高，但不频繁。而在线推理需要每天数十亿次查询。亚马逊宣布大约90％的机器学习计算用于推理（而非训练）。关键的应用程序指标会因延迟增加而受到严重影响。 </p>
+<p>4.端到端延迟预算（&lt;100ms），高准确性的模型尺寸和复杂性不断增加。SENet-184模型具有4：1的CPU推断延迟。 CPU无法支持今天的交互模型服务工作负载</p>
+<h2 id="出发点2"><a href="#出发点2" class="headerlink" title="出发点2"></a>出发点2</h2><p>1.训练负载大并且很容易使GPU饱和，但推理具有不同的性能要求，导致GPU利用率较低。与面向吞吐量的模型训练相比，推断查询会随机到达，推理必须满足延迟目标。</p>
+<p>2.在线推理无法实现小批量迭代训练时的高并行性; 较低的并行性导致GPU利用率低。</p>
+<p>3.推理小批量所引发的问题随着模型复杂性增加而加剧，GPU推理延迟不断接近交互式SLO。由于推理工作负载必须连续运行并响应高度可变的需求，必须为需求峰值配置容量，这进一步降低了GPU利用率。</p>
+<p>4.由于当前硬件的低利用率，目前独占访问GPU的做法无法得到扩展。小批量可能导致GPU低利用率低于15％，此问题影响其他面向吞吐量的加速器; 谷歌的Tensor Processing Unit的吞吐量平均低于峰值的23％，某些模型的吞吐量低于4％</p>
+<p><img src="\images\Dynamic\1.png" alt=""></p>
+<p>图1表示DNN模型的复杂性随着时间在CPU和GPU上不断增加。 大多数型号都无法满足CPU上300ms的延迟SLO。 </p>
+<p>图2表示为了满足延迟SLO，必须使用小批量尺寸，这导致GPU利用率较低。 SLO中ResNet-50的最大批量为26，但仅达到峰值V100 FP32吞吐量的28％。</p>
+<h2 id="改进做法概述"><a href="#改进做法概述" class="headerlink" title="改进做法概述"></a>改进做法概述</h2><p>1.在随机请求负载下，提高利用率的常用方法是利用多租户。通过多个预测工作负载之间共享GPU，可以潜在地利用工作负载级并行性并实现统计复用。但在GPU上利用多租户是一个开放的研究问题。首先，它的运行时性能必须是可预测的，但它并不总是正确的。 第二，它必须是资源有效的，作者探索了几种在一组执行内核之间共享GPU的技术，每种技术都有其缺点。 第三，需要衡量性能隔离度，通过公平的资源分配来实现。</p>
+<p>2.当前方法通过空间或时间复用GPU。作者认为只有跨空间或时间的多路复用才能满足上述条件。第3节评估了针对上述三个标准的现行方法。通过使用动态查询批处理将多个执行内核打包在不相交的DNN图上，显示多租户解决方案吞吐量增加3倍，同时提供隔离和可预测性。</p>
+<h2 id="应用程序模型：托管云推理服务"><a href="#应用程序模型：托管云推理服务" class="headerlink" title="应用程序模型：托管云推理服务"></a>应用程序模型：托管云推理服务</h2><ol>
+<li><p>使用云托管服务部署在线推理ML模型，如AWS SageMaker或GoogleCloud ML Engine。用户将训练好的模型上传到在线服务器。在线服务将模型部署到一个或多个副本上，每个副本可以使用CPU和GPU。用户设定某些服务级别目标（SLO），例如模型推断的尾延迟。</p>
+</li>
+<li><p>简化了模型，隔离多租户执行而产生的干扰影响。首先，在单个GPU上运行的所有模型都有相同的架构（权重不同）。将异构模型架构的影响与多租户分开。其次，请求队列总是饱和，从而将模型服务延迟与请求排队延迟隔离开来。解决模型异构性和排队延迟是未来工作的重点。</p>
+</li>
+</ol>
+<h2 id="仅限空间和仅限时间多路复用的限制"><a href="#仅限空间和仅限时间多路复用的限制" class="headerlink" title="仅限空间和仅限时间多路复用的限制"></a>仅限空间和仅限时间多路复用的限制</h2><p>1.当前模型推理的三种主要方法：<br>（1）独占。每个型号独占GPU，AWS SageMaker，GoogleCloud ML Engine，Clipper 和TensorFlow Serving都使用这种方法。推断是分批进行的，执行前向传播时，新查询必须在队列中等待，直到之前的前向转播完成。</p>
+<p>（2）时间复用。设备上调度程序一次启用多个CUDA上下文环境交叉执行。当多个进程使用相同的GPU并发运行时，这种方法很常见。当不同的进程竞争相同的资源时，这种方法依赖于内核来时间复用进程和GPU来交换上下文。</p>
+<p>（3）空间复用。 利用NVIDIA Hyper-Q，内核执行可以重叠。 CUDA Streams和NVIDIA Multi Process Service（MPS）利用多个硬件队列来实现GPU的空间共享。 CUDA Streams API由ModelBatch和NVIDIA TensorRT 使用。AMD的MxGPU（SR-IOV）是另一种空间复用方法，本文没有考虑。 在本文中，考虑两种空间复用：</p>
+<p>a.使用MPS的隐式空间复用：NVIDIA MPS允许同时在设备上运行多个进程，通过为它们分配不同的cuda流。</p>
+<p>b.使用CUDA流进行显式空间复用：使用此方法，我们可以直接与单个进程内的多个CUDA流进行交互。</p>
+<p><strong>检查每种模型推理方法的延迟可预测性，资源效率和性能隔离。</strong></p>
+<h2 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h2><p>在两个图像分类神经网络上评估这三种虚拟化方法：MobileNet V2和ResNet-50。 这两种模型分别是低计算和高精度分类应用的流行选择。</p>
+<p>1.在GPU上执行单个模型批量查询测试独占访问。虽然我们不能在单个GPU上使用多个模型，但此测试表示了单租户延迟下限，以及性能的理想最佳情况。</p>
+<p>2.在单独的CUDA上下文中运行每个模型并利用调度器来交错执行测试时间复用。 这提供了内存安全性和租户之间的基本隔离。</p>
+<p>3.通过使用NVIDIA MPS服务器对跨CUDA Streams pool的不同模型的查询进行分区来测试空间复用。</p>
+<p><strong>所有实验都在Amazon AWS上使用p3.2xlarge或p3.8xlarge实例。 这些实例可直接访问NVIDIA V100数据中心级GPU，具有高达14 TFLOP / s的单精度浮点运算量。 在实验中没有测试Tensor Core共享。</strong></p>
+<h2 id="实验设置-1"><a href="#实验设置-1" class="headerlink" title="实验设置"></a>实验设置</h2><p>作者还在文章花费很多篇幅讨论了<strong>自己方法的局限性</strong>。主要有以下几点：</p>
+<p><strong>方法可能依赖于特定的数据和模型：</strong>尽管作者在不同的大型数据集上做了大量实验，作者依然担心，方法可能会依赖于特定的数据和网络。这么实诚的人不多了。</p>
+<p><strong>任务的通用性：</strong>作者只是在一些认为定义的任务上进行了实验。但有没有可能有更复杂更高级的任务？</p>
+<p><strong>任务空间限制：</strong>可能还需要更多的实验。迁移到非视觉和机器人任务。这是一个值得考虑的问题。</p>
+<p><strong>终身学习：</strong>此方法目前还是离线的。如何实现在线终身学习？</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文最大的亮点是，构建了非常多的迁移学习任务，详尽地探索了不同任务之间进行迁移的效果，为以后的研究提供了宝贵的基础。方法比较朴素，但是实现完备，很值得我们学习。作者在探索之外，还专门提供了一个数据集，这种精神值得钦佩！我们在今后的研究中，也要学习这种实验精神，多做，少说，慢慢积累。 迁移到非视觉和机器人任务。这是一个值得考虑的问题。 </p>
+<p>终身学习。此方法目前还是离线的。如何实现在线终身学习？</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>Zamir A R, Sax A, Shen W, et al. Taskonomy: Disentangling Task Transfer Learning[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018: 3712-3722.</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习任务调度-论文阅读-科研/" rel="tag"><i class="fa fa-tag"></i> 深度学习任务调度 - 论文阅读 - 科研</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/17/front_01_HTML/" rel="next" title="HTML使用">
+                <i class="fa fa-chevron-left"></i> HTML使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry！Stay foolish！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Asphelzhn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/asphel96" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dynamic-Space-Time-Scheduling-for-GPU-Inference"><span class="nav-number">1.</span> <span class="nav-text">Dynamic Space-Time Scheduling for GPU Inference</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#出发点1"><span class="nav-number">1.2.</span> <span class="nav-text">出发点1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#出发点2"><span class="nav-number">1.3.</span> <span class="nav-text">出发点2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改进做法概述"><span class="nav-number">1.4.</span> <span class="nav-text">改进做法概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用程序模型：托管云推理服务"><span class="nav-number">1.5.</span> <span class="nav-text">应用程序模型：托管云推理服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仅限空间和仅限时间多路复用的限制"><span class="nav-number">1.6.</span> <span class="nav-text">仅限空间和仅限时间多路复用的限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验设置"><span class="nav-number">1.7.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验设置-1"><span class="nav-number">1.8.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.9.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">1.10.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/03/18/paper_03_Dynamic Space-Time Scheduling for GPU Inference/';
+          this.page.identifier = '2019/03/18/paper_03_Dynamic Space-Time Scheduling for GPU Inference/';
+          this.page.title = 'Dynamic Space-Time Scheduling for GPU Inference';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
