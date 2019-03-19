@@ -95,7 +95,8 @@
 <meta property="og:description" content="Dynamic Space-Time Scheduling for GPU Inference摘要1.在线推断任务典型的小批量导致GPU利用率较低，GPU资源共享可以解决性能差距。 2.在本文中，探索了几种利用时间和空间复用来提高深度学习推理工作负载的GPU利用率的技术。 3.与传统的批量推理相比，评估每种方法在资源效率，延迟可预测性和隔离方面的性能。 4.实验分析表明，通过探索更先进的空间和时间">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/Dynamic/1.png">
-<meta property="og:updated_time" content="2019-03-18T14:38:08.540Z">
+<meta property="og:image" content="http://yoursite.com/images/Dynamic/2.png">
+<meta property="og:updated_time" content="2019-03-18T14:53:24.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dynamic Space-Time Scheduling for GPU Inference">
 <meta name="twitter:description" content="Dynamic Space-Time Scheduling for GPU Inference摘要1.在线推断任务典型的小批量导致GPU利用率较低，GPU资源共享可以解决性能差距。 2.在本文中，探索了几种利用时间和空间复用来提高深度学习推理工作负载的GPU利用率的技术。 3.与传统的批量推理相比，评估每种方法在资源效率，延迟可预测性和隔离方面的性能。 4.实验分析表明，通过探索更先进的空间和时间">
@@ -397,6 +398,7 @@
 <p>2.在单独的CUDA上下文中运行每个模型并利用调度器来交错执行测试时间复用。 这提供了内存安全性和租户之间的基本隔离。</p>
 <p>3.通过使用NVIDIA MPS服务器对跨CUDA Streams pool的不同模型的查询进行分区来测试空间复用。</p>
 <p><strong>所有实验都在Amazon AWS上使用p3.2xlarge或p3.8xlarge实例。 这些实例可直接访问NVIDIA V100数据中心级GPU，具有高达14 TFLOP / s的单精度浮点运算量。 在实验中没有测试Tensor Core共享。</strong></p>
+<p><img src="\images\Dynamic\2.png" alt=""></p>
 <h2 id="实验设置-1"><a href="#实验设置-1" class="headerlink" title="实验设置"></a>实验设置</h2><p>作者还在文章花费很多篇幅讨论了<strong>自己方法的局限性</strong>。主要有以下几点：</p>
 <p><strong>方法可能依赖于特定的数据和模型：</strong>尽管作者在不同的大型数据集上做了大量实验，作者依然担心，方法可能会依赖于特定的数据和网络。这么实诚的人不多了。</p>
 <p><strong>任务的通用性：</strong>作者只是在一些认为定义的任务上进行了实验。但有没有可能有更复杂更高级的任务？</p>
@@ -437,8 +439,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/17/front_01_HTML/" rel="next" title="HTML使用">
-                <i class="fa fa-chevron-left"></i> HTML使用
+              <a href="/2019/03/17/front_02_CSS/" rel="next" title="CSS使用">
+                <i class="fa fa-chevron-left"></i> CSS使用
               </a>
             
           </div>
@@ -446,6 +448,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/19/Database_01_MySQLbasic/" rel="prev" title="Mysql基础知识">
+                Mysql基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -536,7 +542,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -547,7 +553,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -558,7 +564,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
