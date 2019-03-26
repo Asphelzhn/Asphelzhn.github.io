@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Deep learning,科研 - 学习," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="profiler分析TensorFlow程序性能1.TensorFlow profiler 功能从r1.3版本开始， tensorflow 提供profiler模块，参见github上的官网文档 profiler打开tf执行的黑盒，以graph node（神经网络模型简称为graph，其中的节点称为node.）为细粒度，从多个维度、多个层面去统计神经网络运行的时间和内存消耗，为进一步优化神经网络模">
+<meta name="keywords" content="Deep learning,科研 - 学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tensorflow Profile分析神经网络性能">
+<meta property="og:url" content="http://yoursite.com/2019/03/26/tensor_06_profile/index.html">
+<meta property="og:site_name" content="Edward">
+<meta property="og:description" content="profiler分析TensorFlow程序性能1.TensorFlow profiler 功能从r1.3版本开始， tensorflow 提供profiler模块，参见github上的官网文档 profiler打开tf执行的黑盒，以graph node（神经网络模型简称为graph，其中的节点称为node.）为细粒度，从多个维度、多个层面去统计神经网络运行的时间和内存消耗，为进一步优化神经网络模">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/tensor_06/1.png">
+<meta property="og:image" content="http://yoursite.com/images/tensor_06/2.png">
+<meta property="og:updated_time" content="2019-03-26T09:00:08.224Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tensorflow Profile分析神经网络性能">
+<meta name="twitter:description" content="profiler分析TensorFlow程序性能1.TensorFlow profiler 功能从r1.3版本开始， tensorflow 提供profiler模块，参见github上的官网文档 profiler打开tf执行的黑盒，以graph node（神经网络模型简称为graph，其中的节点称为node.）为细粒度，从多个维度、多个层面去统计神经网络运行的时间和内存消耗，为进一步优化神经网络模">
+<meta name="twitter:image" content="http://yoursite.com/images/tensor_06/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/26/tensor_06_profile/"/>
+
+
+
+
+
+  <title>tensorflow Profile分析神经网络性能 | Edward</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Edward</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Edward's Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/26/tensor_06_profile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">tensorflow Profile分析神经网络性能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-26T22:30:00+08:00">
+                2019-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tensorflow/" itemprop="url" rel="index">
+                    <span itemprop="name">Tensorflow</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/26/tensor_06_profile/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/26/tensor_06_profile/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="profiler分析TensorFlow程序性能"><a href="#profiler分析TensorFlow程序性能" class="headerlink" title="profiler分析TensorFlow程序性能"></a>profiler分析TensorFlow程序性能</h1><h2 id="1-TensorFlow-profiler-功能"><a href="#1-TensorFlow-profiler-功能" class="headerlink" title="1.TensorFlow profiler 功能"></a>1.TensorFlow profiler 功能</h2><p>从r1.3版本开始， tensorflow 提供profiler模块，<a href="https://github.com/tensorflow/tensorflow/tree/r1.3/tensorflow/core/profiler" target="_blank" rel="noopener">参见github上的官网文档</a></p>
+<p>profiler打开tf执行的黑盒，以graph node（神经网络模型简称为graph，其中的节点称为node.）为细粒度，从多个维度、多个层面去统计神经网络运行的时间<br>和内存消耗，为进一步优化神经网络模型的运行效率提供最直接的数据依据。功能如下：</p>
+<ul>
+<li>分析 TensorFlow 模型架构。<ul>
+<li>参数量、tensor的shape、浮点运算数、运算设备等。</li>
+</ul>
+</li>
+<li>分析 multiple-steps 模型性能。<ul>
+<li>执行时间，内存消耗。</li>
+</ul>
+</li>
+<li>自动 分析及建议。<ul>
+<li>训练加速设备使用情况的检查</li>
+<li>较耗时op的检查</li>
+<li>op配置的检查</li>
+<li>分布式runtime检查（非OSS）</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-profiler-主要步骤"><a href="#2-profiler-主要步骤" class="headerlink" title="2.profiler 主要步骤"></a>2.profiler 主要步骤</h3><p>profiler分为数据搜集和数据显示两个主要步骤。</p>
+<p><strong>数据收集</strong></p>
+<p><img src="/images/tensor_06/1.png" alt=""></p>
+<ol>
+<li>graph node的每一次执行，记录单步统计数据，主要是执行时间和占用内存，格式参见<a href="https://github.com/tensorflow/tensorflow/blob/r1.3/tensorflow/core/framework/step_stats.proto" target="_blank" rel="noopener">step_stats.proto</a>，作为原始的最小粒度统计数据源；</li>
+<li>每一次session.Run()，所有执行到的graph node的统计数据，都集中汇总保存到 <a href="https://github.com/tensorflow/tensorflow/blob/r1.3/tensorflow/core/protobuf/config.proto" target="_blank" rel="noopener">RunMetadata</a> 数据结构中;</li>
+<li>用户程序把每一次搜集到的 RunMetadata 添加到profiler实例，做数据累计和加工处理。</li>
+</ol>
+<p><strong>数据显示： 数据的过滤、视图组织和显示输出</strong><br>部分规则需要用户自己指定：<br>- 数据的过滤： 比如graph node过滤条件、 显示的字段、排序方式等。</p>
+<ul>
+<li>四种视图： 对应显示节点之前的不同组织方式。<ol>
+<li>scope：应该是 python 层代码中用 <code>tf.name_scope()</code> 包起来的视图</li>
+<li>graph：TensorFlow 计算图的视图</li>
+<li>op：把 TensorFlow 计算图再细化一层</li>
+<li>code：Python 代码视图</li>
+</ol>
+</li>
+<li>视图输出方式：<ol>
+<li>time line : 输出JSON events file, 再用chrome浏览器tracing功能进行查看，可视性很棒。</li>
+<li>stdout ： 标准输出设备打印。</li>
+<li>pprof file: 输出pprof的文件格式，再用pprof工具查看。</li>
+<li>file: 输出到普通的文本文件。</li>
+</ol>
+</li>
+</ul>
+<p>视图和输出方式，可以自由组合，除了部分特例不能输出，比如op view 不支持time line输出，只有code view能够输出pprof格式的文件等，<br>详细规则参见<a href="https://github.com/tensorflow/tensorflow/blob/r1.3/tensorflow/core/profiler/g3doc/options.md" target="_blank" rel="noopener"> Options</a></p>
+<h1 id="2-快速教程"><a href="#2-快速教程" class="headerlink" title="2.快速教程"></a>2.快速教程</h1><p>首先，确认下载<a href="https://www.tensorflow.org/install/" target="_blank" rel="noopener">安装了 r1.3 以上的tensorflow</a>。网络模型使用<a href="https://github.com/tensorflow/tensorflow/blob/r1.3/tensorflow/examples/tutorials/mnist/mnist.py" target="_blank" rel="noopener">mnist.py</a> . </p>
+<p><strong>import相关的包</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</span><br><span class="line"><span class="keyword">from</span> tensorflow.python.profiler <span class="keyword">import</span> model_analyzer</span><br><span class="line"><span class="keyword">from</span> tensorflow.python.profiler <span class="keyword">import</span> option_builder</span><br><span class="line"><span class="number">12341234</span></span><br></pre></td></tr></table></figure>
+<p><strong>定义网络模型，创建session.、</strong><br>网络模型为 hidden1 + hidden2 + softmax 三层架构， hidden1和hidden2都是(Wx+b)-&gt;Relu的路径。 默认都运行在gpu:0 上。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># placeholder</span></span><br><span class="line">batch_size = <span class="number">100</span></span><br><span class="line">inputs = tf.placeholder(tf.float32, [batch_size,<span class="number">784</span>])</span><br><span class="line">targets = tf.placeholder(tf.int32, [batch_size])</span><br><span class="line"></span><br><span class="line"><span class="comment"># model</span></span><br><span class="line">hidden1 = tf.layers.dense(inputs, <span class="number">128</span>, activation=tf.nn.relu, name=<span class="string">'hidden1'</span>)</span><br><span class="line">hidden2 = tf.layers.dense(hidden1, <span class="number">32</span>, activation=tf.nn.relu, name=<span class="string">'hidden2'</span>)</span><br><span class="line">logits = tf.layers.dense(hidden2, <span class="number">10</span>, activation=<span class="keyword">None</span>, name=<span class="string">'softmax_linear'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss + train_op</span></span><br><span class="line">loss = tf.losses.sparse_softmax_cross_entropy(labels=targets, logits=logits)</span><br><span class="line">global_step = tf.Variable(<span class="number">0</span>, name=<span class="string">'global_step'</span>, trainable=<span class="keyword">False</span>)</span><br><span class="line">train_op = tf.train.GradientDescentOptimizer(<span class="number">0.01</span>).minimize(loss, global_step=global_step)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">sess = tf.Session()</span><br><span class="line">sess.run(init)</span><br></pre></td></tr></table></figure>
+<p><strong>创建tfprofiler实例，作为记录、处理和显示数据的主体</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">profiler = model_analyzer.Profiler(graph=sess.graph)</span><br><span class="line"><span class="number">11</span></span><br></pre></td></tr></table></figure>
+<p><strong>定义trace level为FULL_TRACE，这样我们才能搜集到包括GPU硬件在内的最全统计数据</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">run_options = tf.RunOptions(trace_level = tf.RunOptions.FULL_TRACE)</span><br><span class="line"><span class="number">11</span></span><br></pre></td></tr></table></figure>
+<p><strong>创建RunMetadata， 用于在每次session.Run()时汇总统计数据</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">run_metadata = tf.RunMetadata()</span><br><span class="line"><span class="number">11</span></span><br></pre></td></tr></table></figure>
+<p><strong>循环执行session.Run()，搜集统计数据并添加到tfprofiler实例中</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mnist = input_data.read_data_sets(train_dir=<span class="string">'./'</span>,fake_data=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">feed_dict = dict()</span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">    images_feed, labels_feed = mnist.train.next_batch(batch_size, fake_data=<span class="keyword">False</span>)</span><br><span class="line">    feed_dict = &#123;inputs: images_feed, targets: labels_feed&#125;</span><br><span class="line">    <span class="comment">#每 10 步，搜集一下统计数据：</span></span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">10</span> == <span class="number">0</span>:</span><br><span class="line">        _, loss_value = sess.run(fetches=[train_op, loss],feed_dict=feed_dict, options=run_options, run_metadata=run_metadata)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#将本步搜集的统计数据添加到tfprofiler实例中     </span></span><br><span class="line">        profiler.add_step(step=step, run_meta=run_metadata)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        _, loss_value = sess.run(fetches=[train_op, loss],</span><br><span class="line">                               feed_dict=feed_dict)</span><br></pre></td></tr></table></figure>
+<p>接下来我们就可以显示统计视图了<br><strong>定义显示option 和 视图方式</strong></p>
+<p><strong>定义显示option 和 视图方式</strong><br>option用于设置过滤条件、显示字段，完整option 参见<a href="https://github.com/tensorflow/tensorflow/blob/r1.3/tensorflow/core/profiler/g3doc/options.md" target="_blank" rel="noopener">Options</a>，常用设置项目：</p>
+<ul>
+<li>account_type_regexes：采用<a href="https://github.com/google/re2/blob/master/doc/syntax.txt" target="_blank" rel="noopener">Google RE2</a>规则的正则表达式，<br>过滤要显示的node的op type 和 device，比如 ‘.<em>MatMul.</em>‘, ‘.<em>Conv2D’, ‘.</em>gpu:0’等。</li>
+<li>select：要显示的字段：<br>[bytes|micros|accelerator_micros|cpu_micros|params|float_ops|occurrence|tensor_value|device|op_types|input_shapes]</li>
+<li>order_by: 显示结果排序方式：<br>[name|depth|bytes|micros|accelerator_micros|cpu_micros|params|float_ops|occurrence]</li>
+<li>output: 输出方式：stdout, file 或者 <a href="https://www.baidu.com/s?wd=timeline&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" target="_blank" rel="noopener">timeline</a>。</li>
+<li>step: 显示在某个具体的Run() step的统计值. 缺省值-1，显示所有步骤的平均值。</li>
+</ul>
+<p>一般来说， option和试图总是结合起来使用，这里举几个典型应用例子：</p>
+<p><strong>例子1：grpah view显示每个graph node运行时间，并输出到timeline</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计内容为每个graph node的运行时间和占用内存</span></span><br><span class="line">profile_graph_opts_builder = option_builder.ProfileOptionBuilder(</span><br><span class="line">  option_builder.ProfileOptionBuilder.time_and_memory())</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出方式为timeline</span></span><br><span class="line"><span class="comment"># 输出文件夹必须存在</span></span><br><span class="line">profile_graph_opts_builder.with_timeline_output(timeline_file=<span class="string">'/tmp/mnist_profiler.json'</span>)</span><br><span class="line"><span class="comment">#定义显示sess.Run() 第70步的统计数据</span></span><br><span class="line">profile_graph_opts_builder.with_step(<span class="number">70</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#显示视图为graph view</span></span><br><span class="line">profiler.profile_graph(profile_graph_opts_builder.build())</span><br><span class="line"><span class="number">123456789101112123456789101112</span></span><br></pre></td></tr></table></figure>
+<p>我们得到第70步的详细time line结果，打开chrome浏览器，输入about:tracing, 然后load “/tmp/mnist_profiler.json” 文件，这时候可以看见time line的显示结果。 </p>
+<p><img src="/images/tensor_06/2.png" alt=""></p>
+<ul>
+<li>横向是时间轴：各device对graph node的kernel调度时间轴、执行时间轴。</li>
+<li>整个graph中所有执行到的node在devices上的运行分布。由于本例中node缺省使用gpu:0，所以cpu:0上没有执行node的分布。</li>
+<li>一个kernel的执行包括调度和执行两个阶段，这两个阶段是异步操作，所以我们看到同一个时间点, 当 gpu:0/stream 上还在执行<em>hidden1/Matmul</em>, 而gpu：0已经开始调度下一个node: <em>hidden1/add</em> 的kernel, 这样实现了最大程度上不同node 间的并发。</li>
+<li>你可以通过tf.device()将部分node分布到其他gpu上或者cpu上，看看做model parallel的结果。</li>
+</ul>
+<p><strong>例子2：scope view显示模型中的参数数量分布</strong><br>通过这种方式，查看各个layer中参数的总数，以控制模型的大小和参数分布。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#统计内容为所有trainable Variable Op</span></span><br><span class="line">profile_scope_opt_builder = option_builder.ProfileOptionBuilder(</span><br><span class="line">  option_builder.ProfileOptionBuilder.trainable_variables_parameter())</span><br><span class="line"></span><br><span class="line"><span class="comment">#显示的嵌套深度为4</span></span><br><span class="line">profile_scope_opt_builder.with_max_depth(<span class="number">4</span>)</span><br><span class="line"><span class="comment">#显示字段是params，即参数</span></span><br><span class="line">profile_scope_opt_builder.select([<span class="string">'params'</span>])</span><br><span class="line"><span class="comment">#根据params数量进行显示结果排序</span></span><br><span class="line">profile_scope_opt_builder.order_by(<span class="string">'params'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#显示视图为scope view</span></span><br><span class="line">profiler.profile_name_scope(profile_scope_opt_builder.build())</span><br><span class="line"><span class="number">1234567891011121312345678910111213</span></span><br></pre></td></tr></table></figure>
+<p>我们得到param数量从高到低的排序显示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">==================Model Analysis Report======================</span><br><span class="line">node name | <span class="comment"># parameters</span></span><br><span class="line">_TFProfRoot (--/<span class="number">104.94</span>k params)</span><br><span class="line">  hidden1 (--/<span class="number">100.48</span>k params)</span><br><span class="line">    hidden1/weights (<span class="number">784</span>x128, <span class="number">100.35</span>k/<span class="number">100.35</span>k params)</span><br><span class="line">    hidden1/biases (<span class="number">128</span>, <span class="number">128</span>/<span class="number">128</span> params)</span><br><span class="line">  hidden2 (--/<span class="number">4.13</span>k params)</span><br><span class="line">    hidden2/weights (<span class="number">128</span>x32, <span class="number">4.10</span>k/<span class="number">4.10</span>k params)</span><br><span class="line">    hidden2/biases (<span class="number">32</span>, <span class="number">32</span>/<span class="number">32</span> params)</span><br><span class="line">  softmax_linear (--/<span class="number">330</span> params)</span><br><span class="line">    softmax_linear/weights (<span class="number">32</span>x10, <span class="number">320</span>/<span class="number">320</span> params)</span><br><span class="line">    softmax_linear/biases (<span class="number">10</span>, <span class="number">10</span>/<span class="number">10</span> params)</span><br><span class="line"></span><br><span class="line">======================End of Report==========================</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-learning/" rel="tag"><i class="fa fa-tag"></i> Deep learning</a>
+          
+            <a href="/tags/科研-学习/" rel="tag"><i class="fa fa-tag"></i> 科研 - 学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/22/Java_06_ String/" rel="next" title="Java String和StringBuffer区别">
+                <i class="fa fa-chevron-left"></i> Java String和StringBuffer区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry！Stay foolish！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Asphelzhn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:asphel96@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#profiler分析TensorFlow程序性能"><span class="nav-number">1.</span> <span class="nav-text">profiler分析TensorFlow程序性能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-TensorFlow-profiler-功能"><span class="nav-number">1.1.</span> <span class="nav-text">1.TensorFlow profiler 功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-profiler-主要步骤"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.profiler 主要步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-快速教程"><span class="nav-number">2.</span> <span class="nav-text">2.快速教程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/03/26/tensor_06_profile/';
+          this.page.identifier = '2019/03/26/tensor_06_profile/';
+          this.page.title = 'tensorflow Profile分析神经网络性能';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
