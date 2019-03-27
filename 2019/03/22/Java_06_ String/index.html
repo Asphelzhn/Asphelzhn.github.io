@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Edward">
 <meta property="og:description" content="String可变性 　 简单的来说：String 类中使用 final 关键字字符数组保存字符串，private　final　char　value[]，所以 String 对象是不可变的。而StringBuilder 与 StringBuffer 都继承自 AbstractStringBuilder 类，在 AbstractStringBuilder 中也是使用字符数组保存字符串char[]val">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-27T03:05:29.603Z">
+<meta property="og:updated_time" content="2019-03-27T03:08:10.203Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java String和StringBuffer区别">
 <meta name="twitter:description" content="String可变性 　 简单的来说：String 类中使用 final 关键字字符数组保存字符串，private　final　char　value[]，所以 String 对象是不可变的。而StringBuilder 与 StringBuffer 都继承自 AbstractStringBuilder 类，在 AbstractStringBuilder 中也是使用字符数组保存字符串char[]val">
@@ -379,6 +379,11 @@
 <p>例如：《Think in Java》中，描述HashTable和HashMap区别一样，就是因为HashTable支持线程同步、保证线程安全而导致的性能下降。</p>
 <p>　　HashTable是线程安全的，很多方法都是synchronized方法。</p>
 <p>　　HashMap不是线程安全的，但在单线程程序中的性能比HashTable要高。</p>
+<h2 id="使用总结"><a href="#使用总结" class="headerlink" title="使用总结"></a>使用总结</h2><ol>
+<li>操作少量的数据 = String</li>
+<li>单线程操作字符串缓冲区下操作大量数据 = StringBuilder</li>
+<li>多线程操作字符串缓冲区下操作大量数据 = StringBuffer</li>
+</ol>
 
       
     </div>
@@ -583,7 +588,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">1.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuffer"><span class="nav-number">2.</span> <span class="nav-text">StringBuffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuild"><span class="nav-number">3.</span> <span class="nav-text">StringBuild</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">1.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuffer"><span class="nav-number">2.</span> <span class="nav-text">StringBuffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuild"><span class="nav-number">3.</span> <span class="nav-text">StringBuild</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用总结"><span class="nav-number">4.</span> <span class="nav-text">使用总结</span></a></li></ol></div>
             
 
           </div>
