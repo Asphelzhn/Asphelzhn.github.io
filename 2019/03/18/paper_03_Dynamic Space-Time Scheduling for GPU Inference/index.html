@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/images/Dynamic/3.png">
 <meta property="og:image" content="http://yoursite.com/images/Dynamic/4.png">
 <meta property="og:image" content="http://yoursite.com/images/Dynamic/5.png">
-<meta property="og:updated_time" content="2019-03-19T13:45:27.806Z">
+<meta property="og:updated_time" content="2019-03-28T15:23:21.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dynamic Space-Time Scheduling for GPU Inference论文总结">
 <meta name="twitter:description" content="Dynamic Space-Time Scheduling for GPU Inference论文总结摘要1.在线推断任务典型的小批量导致GPU利用率较低，GPU资源共享可以解决性能差距。 2.在本文中，探索了几种利用时间和空间复用来提高深度学习推理工作负载的GPU利用率的技术。 3.与传统的批量推理相比，评估每种方法在资源效率，延迟可预测性和隔离方面的性能。 4.实验分析表明，通过探索更先进的空">
@@ -371,46 +371,47 @@
 <p><strong>3.与传统的批量推理相比，评估每种方法在资源效率，延迟可预测性和隔离方面的性能。</strong></p>
 <p><strong>4.实验分析表明，通过探索更先进的空间和时间复用策略，可以提高5倍的利用率。</strong></p>
 <p><strong>5.动态空时调度器的初步原型比仅用空间复用的策略高3.23倍浮点吞吐量，在卷积上比仅用时间复用策略增加7.73倍，同时还提供了更好的隔离和延迟可预测性。</strong></p>
-<h2 id="出发点1"><a href="#出发点1" class="headerlink" title="出发点1"></a>出发点1</h2><p>1.GPU对于深度学习至关重要， 通过利用并行性，高内存带宽和张量加速，GPU可以快速计算大批量输入数据。</p>
+<h2 id="出发点1"><a href="#出发点1" class="headerlink" title="出发点1"></a>出发点1</h2><p>1.GPU通过并行性，高内存带宽和张量加速，可以快速计算大批量输入数据，对于深度学习至关重要。</p>
 <p>2.深度学习部署在视频监控，语言翻译和语音识别等应用中，对并行硬件加速的需求很大以支持推理。虽然有许多专用推理处理器，但GPU的广泛性，对通用深度学习模型的支持使GPU成为推理必不可少的。</p>
 <p>3.DNN训练成本高，但不频繁。而在线推理需要每天数十亿次查询。亚马逊宣布大约90％的机器学习计算用于推理（而非训练）。关键的应用程序指标会因延迟增加而受到严重影响。 </p>
 <p>4.端到端延迟预算（&lt;100ms），高准确性的模型尺寸和复杂性不断增加。SENet-184模型具有4：1的CPU推断延迟。 CPU无法支持今天的交互模型服务工作负载</p>
-<h2 id="出发点2"><a href="#出发点2" class="headerlink" title="出发点2"></a>出发点2</h2><p>1.训练负载大并且很容易使GPU饱和，但推理具有不同的性能要求，导致GPU利用率较低。与面向吞吐量的模型训练相比，推断查询会随机到达，推理必须满足延迟目标。</p>
+<h2 id="出发点2"><a href="#出发点2" class="headerlink" title="出发点2"></a>出发点2</h2><p>1.训练负载大，很容易使GPU饱和。但推理具有不同的性能要求，导致GPU利用率较低。与面向吞吐量的模型训练相比，推断查询会随机到达，推理必须满足延迟目标（牺牲吞吐量）。</p>
 <p>2.在线推理无法实现小批量迭代训练时的高并行性; 较低的并行性导致GPU利用率低。</p>
 <p>3.推理小批量所引发的问题随着模型复杂性增加而加剧，GPU推理延迟不断接近交互式SLO。由于推理工作负载必须连续运行并响应高度可变的需求，必须为需求峰值配置容量，这进一步降低了GPU利用率。</p>
-<p>4.由于当前硬件的低利用率，目前独占访问GPU的做法无法得到扩展。小批量可能导致GPU低利用率低于15％，此问题影响其他面向吞吐量的加速器; 谷歌的Tensor Processing Unit的吞吐量平均低于峰值的23％，某些模型的吞吐量低于4％</p>
+<p>4.小批量可能导致GPU低利用率低于15％，测试中谷歌的Tensor Processing Unit的吞吐量平均低于峰值的23％，某些模型的吞吐量低于4％。目前独占访问GPU的做法导致硬件的低利用率，且无法得到扩展。</p>
 <p><img src="\images\Dynamic\1.png" alt=""></p>
+<p>系统中总会有少量响应的延迟高于均值，我们把这些响应称为尾延迟（Tail<br>Latency）。</p>
 <p>图1表示DNN模型的复杂性随着时间在CPU和GPU上不断增加。 大多数型号都无法满足CPU上300ms的延迟SLO。 </p>
 <p>图2表示为了满足延迟SLO，必须使用小批量尺寸，这导致GPU利用率较低。 SLO中ResNet-50的最大批量为26，但仅达到峰值V100 FP32吞吐量的28％。</p>
-<h2 id="改进做法概述"><a href="#改进做法概述" class="headerlink" title="改进做法概述"></a>改进做法概述</h2><p>1.在随机请求负载下，提高利用率的常用方法是利用多租户。通过多个预测工作负载之间共享GPU，可以潜在地利用工作负载级并行性并实现统计复用。但在GPU上利用多租户是一个开放的研究问题。首先，它的运行时性能必须是可预测的，但它并不总是正确的。 第二，它必须是资源有效的，作者探索了几种在一组执行内核之间共享GPU的技术，每种技术都有其缺点。 第三，需要衡量性能隔离度，通过公平的资源分配来实现。</p>
+<h2 id="改进做法概述"><a href="#改进做法概述" class="headerlink" title="改进做法概述"></a>改进做法概述</h2><p>1.在随机请求负载下，提高利用率的常用方法是利用多用户。通过多个预测工作负载之间共享GPU，可以潜在地利用工作负载级并行性并实现统计复用。但在GPU上利用多用户是一个开放的研究问题。首先，它的运行时性能必须是可预测的，但它并不总是正确的。 第二，它必须是资源有效的，作者探索了几种在一组执行内核之间共享GPU的技术，每种技术都有其缺点。 第三，需要衡量性能隔离度，通过公平的资源分配来实现。</p>
 <p>2.当前方法通过空间或时间复用GPU。作者认为只有跨空间或时间的多路复用才能满足上述条件。第3节评估了针对上述三个标准的现行方法。通过使用动态查询批处理将多个执行内核打包在不相交的DNN图上，显示多租户解决方案吞吐量增加3倍，同时提供隔离和可预测性。</p>
 <h2 id="应用程序模型：托管云推理服务"><a href="#应用程序模型：托管云推理服务" class="headerlink" title="应用程序模型：托管云推理服务"></a>应用程序模型：托管云推理服务</h2><ol>
 <li><p>使用云托管服务部署在线推理ML模型，如AWS SageMaker或GoogleCloud ML Engine。用户将训练好的模型上传到在线服务器。在线服务将模型部署到一个或多个副本上，每个副本可以使用CPU和GPU。用户设定某些服务级别目标（SLO），例如模型推断的尾延迟。</p>
 </li>
-<li><p>简化了模型，隔离多租户执行而产生的干扰影响。首先，在单个GPU上运行的所有模型都有相同的架构（权重不同）。将异构模型架构的影响与多租户分开。其次，请求队列总是饱和，从而将模型服务延迟与请求排队延迟隔离开来。解决模型异构性和排队延迟是未来工作的重点。</p>
+<li><p>简化了模型，隔离多租户执行而产生的干扰影响。首先，在单个GPU上运行的所有模型都有相同的架构（权重不同），将异构模型架构的影响与多租户分开。其次，请求队列总是饱和，从而将模型服务延迟与请求排队延迟隔离开来。解决模型异构性和排队延迟是未来工作的重点。</p>
 </li>
 </ol>
-<h2 id="仅限空间和仅限时间多路复用的限制"><a href="#仅限空间和仅限时间多路复用的限制" class="headerlink" title="仅限空间和仅限时间多路复用的限制"></a>仅限空间和仅限时间多路复用的限制</h2><p>1.当前模型推理的三种主要方法：<br>（1）独占。每个型号独占GPU，AWS SageMaker，GoogleCloud ML Engine，Clipper 和TensorFlow Serving都使用这种方法。推断是分批进行的，执行前向传播时，新查询必须在队列中等待，直到之前的前向转播完成。</p>
+<h2 id="仅空间和仅时间多路复用的限制"><a href="#仅空间和仅时间多路复用的限制" class="headerlink" title="仅空间和仅时间多路复用的限制"></a>仅空间和仅时间多路复用的限制</h2><p>1.当前模型推理的三种主要方法：<br>（1）独占。每个型号独占GPU，AWS SageMaker，GoogleCloud ML Engine，Clipper 和TensorFlow Serving都使用这种方法。推断是分批进行的，执行前向传播时，新查询必须在队列中等待，直到之前的前向传播完成。</p>
 <p>（2）时间复用。设备上调度程序一次启用多个CUDA上下文环境交叉执行。当多个进程使用相同的GPU并发运行时，这种方法很常见。当不同的进程竞争相同的资源时，这种方法依赖于内核来时间复用进程和GPU来交换上下文。</p>
 <p>（3）空间复用。 利用NVIDIA Hyper-Q，内核执行可以重叠。 CUDA Streams和NVIDIA Multi Process Service（MPS）利用多个硬件队列来实现GPU的空间共享。 CUDA Streams API由ModelBatch和NVIDIA TensorRT 使用。AMD的MxGPU（SR-IOV）是另一种空间复用方法，本文没有考虑。 在本文中，考虑两种空间复用：</p>
-<p>a.使用MPS的隐式空间复用：NVIDIA MPS允许同时在设备上运行多个进程，通过为它们分配不同的cuda流。</p>
+<p>a.使用MPS的隐式空间复用：NVIDIA MPS通过为它们分配不同的cuda流，允许同时在设备上运行多个进程。</p>
 <p>b.使用CUDA流进行显式空间复用：使用此方法，我们可以直接与单个进程内的多个CUDA流进行交互。</p>
-<p><strong>检查每种模型推理方法的延迟可预测性，资源效率和性能隔离。</strong></p>
-<h2 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h2><p>在两个图像分类神经网络上评估这三种虚拟化方法：MobileNet V2和ResNet-50。 这两种模型分别是低计算和高精度分类应用的流行选择。</p>
-<p>1.在GPU上执行单个模型批量查询测试独占访问。虽然我们不能在单个GPU上使用多个模型，但此测试表示了单租户延迟下限，以及性能的理想最佳情况。</p>
-<p>2.在单独的CUDA上下文中运行每个模型并利用调度器来交错执行测试时间复用。 这提供了内存安全性和租户之间的基本隔离。</p>
-<p>3.通过使用NVIDIA MPS服务器对跨CUDA Streams pool的不同模型的查询进行分区来测试空间复用。</p>
+<p><strong>评测每种模型推理方法的延迟可预测性，资源效率和性能隔离。</strong></p>
+<h2 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h2><p>在两个图像分类神经上评估这三种虚拟化方法：MobileNet V2和ResNet-50。 这两种模型分别是低计算和高精度分类的代表。</p>
+<p>1.在GPU上执行单个模型批量查询测试独占访问。虽然我们不能在单个GPU上使用多个模型，但此测试表示了单用户延迟下限，以及性能的理想情况。</p>
+<p>2.在单独的CUDA上下文中运行每个模型并利用调度器来交错执行，测试时间复用。 这提供了内存安全性和租户之间的基本隔离。</p>
+<p>3.通过使用NVIDIA MPS对跨CUDA Streams pool的不同模型的查询进行分区来测试空间复用。</p>
 <p><strong>所有实验都在Amazon AWS上使用p3.2xlarge或p3.8xlarge实例。 这些实例可直接访问NVIDIA V100数据中心级GPU，具有高达14 TFLOP / s的单精度浮点运算量。 在实验中没有测试Tensor Core共享。</strong></p>
 <p><img src="\images\Dynamic\2.png" alt=""></p>
-<p>图3表示，时间和空间复用都不符合独占访问的性能; 空间复用比时间复用推理延迟更低。<br>我们比较了GPU多租户的三种方法。 独占访问（通过对单个模型进行批处理建模）以高成本提供快速且可预测的延迟。 随着共享的增加，时间复用显着增加了推理延迟。 通过NVIDIA MPS进行空间复用可以通过共享资源更好地管理延迟。</p>
+<p>图3表示，时间和空间复用都不如独占访问的性能; 空间复用比时间复用推理延迟更低。<br>我们比较了GPU多用户的三种方法。 独占访问（通过对单个模型进行批处理建模）以高成本提供快速且可预测的延迟。 随着共享的增加，时间复用显着增加了推理延迟。 通过NVIDIA MPS进行空间复用可以通过共享资源更好地控制延迟。</p>
 <h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>图3中基准测试的结果，对于MobileNet V2（计算优化模型）和ResNet-50（高精度模型），我们测试了批量独占访问，时间复用和空间复用。 批量独占访问将整个GPU用于单个模型。这代表了如果只有一个模型独占GPU，并且吞吐量是唯一目标时的理想性能。（改变批量大小以增加吞吐量）但是如果希望最小化延迟，则使用更小的批量。</p>
 <p>与独占访问相比，时间复用延迟慢了4.6倍，空间复用延迟慢了2.2倍。单一解决方案无法满足在第1节中建立的三个标准。</p>
 <p><img src="\images\Dynamic\3.png" alt=""></p>
 <p>图4表示，当不同数量的进程同时运行时，隐式空间复用（使用MPS）具有不可预测的延迟。当我们向运行10个多租户模型的GPU添加副本时，我们会发现不可预测性，我们怀疑这是由设备上的调度程序引起的。</p>
 <p>图5表示，时间和隐式空间复用都受内存限制，而 显式空间复用不受。 实验中，大多数方法在18个副本上达到16 GB的内存上限，此时GPU内存耗尽。而显式空间复用（不同线程上的CUDA Streams）能够扩展到至少60个ResNet-50模型。</p>
-<p>1.独占访问允许高吞吐量，低延迟，隔离和可预测性，但是无法共享GPU导致成本非常昂贵。正如图2中所示，这种性能的提升是在权衡在线推理工作负载的低GPU利用率以满足严格的延迟SLO。对于在推理期间具有足够高的请求率，并且批量请求能同时到达开始前向传播，那么这种方法能很好利用GPU。</p>
-<p>2.时间复用（CUDA上下文切换）可以实现多租户良好隔离和延迟可预测性，但代价是吞吐量降低和延迟高。这种方法的主要缺点是它无法利用内核的并行执行，因为GPU一次只允许运行一个CUDA上下文。这种方法在交错过程会略微提高资源效率;然而它在每个调度量程中仍然受到利用率低的影响，随着副本数量的增加，呈现线性减速。较差的延迟可伸缩性使得时间复用不能成为交互式推理查询服务的方法。</p>
-<p>3.空间复用（Hyper-Q）提高了利用率，并实现了更好的资源效率，但是可预测性和隔离性较差。空间多路复用对租户数量的选择极其敏感。一旦模型运行，每个租户都具有相当一致的行为。 但是，在多个模型租户中，GPU上最快的模型与最慢的模型存在高达25％的延迟差距，如图4所示，当奇数个进程与启用MPS同时运行时，不同进程之间的延迟不可预测性和差异会加剧。</p>
+<p>1.独占访问满足低延迟，隔离和可预测性，但是无法共享GPU导致成本非常昂贵。正如图2中所示，这种性能是在权衡在线推理工作负载的低GPU利用率以满足严格的延迟SLO。如果在推理期间具有足够高的请求率，并且批量请求能同时到达开始前向传播，那么这种方法能很好利用GPU。</p>
+<p>2.时间复用（CUDA上下文切换）可以实现多租户良好隔离和延迟可预测性，但代价是吞吐量降低和延迟高。这种方法的主要缺点是它无法利用内核的并行执行，因为GPU一次只允许运行一个CUDA上下文。这种方法在交错过程会略微提高资源效率;然而它在每个调度量程中仍然受到利用率低的影响，随着副本数量的增加，呈现线性减速。较差的延迟使得时间复用不能成为交互式推理查询服务的方法。</p>
+<p>3.空间复用（Hyper-Q）提高了利用率，并实现了更好的资源效率，但是可预测性和隔离性较差。空间多路复用对租户数量的选择极其敏感。模型运行时，每个租户都具有一致的行为。 但是，在多个模型租户中，GPU上最快的模型与最慢的模型存在高达25％的延迟差距，如图4所示，当奇数个进程启用MPS同时运行时，不同进程之间的延迟不可预测性和差异会加剧。</p>
 <h2 id="动态时空调度"><a href="#动态时空调度" class="headerlink" title="动态时空调度"></a>动态时空调度</h2><p>1.图3和图5展示了仅空间和仅时间复用策略的可扩展性限制。图4详细说明了将租户添加到GPU时无法预测的延迟。图5显示了在GPU上安排数百个模型的唯一方法是在单个进程中每个线程使用一个CUDA流;<br>因为我们通过将内核分派到不同的流来微观地管理推理，所以有机会对流进行更细粒度的调度以优化延迟和吞吐量。</p>
 <p>2.鉴于这些限制，我们提出了动态时空调度，以便有效地利用GPU，同时保持隔离和可预测性。通过监控每个内核的推理延迟来保持虚拟化时的可预测性和隔离性，允许在租户之间重新分配资源。注意到CUDA Stream调度异常只会产生一些落后者，我们可以简单地驱逐落后者而不会显着影响总体系统吞吐量。</p>
 <p>3.该方法显着提高了GPU上的资源效率，与仅时间多路复用相比，吞吐量平均速度提高了7.71，与仅空间多路复用相比增加了3.23。如图7所示，时空调度合并了许多不相交的DNN图上的并发小内核，成为较大的超级内核一起填充GPU。 超级内核避免了仅空间复用方法相关联的调度惩罚。<br>交互式推理查询随机到达，我们无法提前计算超级内核。时空调度程序必须在内核到达时动态调度内核，我们正在研究更通用的动态调度程序设计。我们注意到，如果缓存超级内核，随着工作负载随时间稳定，开销会逐渐减少。</p>
@@ -419,9 +420,11 @@
 <p>我们的方法是对Guevara等人开发的方法的动态替代方案。他们通过手动组合流中的小内核以提高GPU利用率，在高斯消除算法上产生高达1.3倍的加速。Guevara等人的工作侧重于在CUDA块级手动合并内核，我们的方法侧重于批量处理大量动态执行类似的矩阵乘法例程的内核，以及交错的CUDA流。我们的方法在多个神经网络任务中具有高可扩展性，并与现有生态系统相辅相成。</p>
 <h2 id="动态时空调度基准"><a href="#动态时空调度基准" class="headerlink" title="动态时空调度基准"></a>动态时空调度基准</h2><p>通过单精度浮点通用矩阵乘法内核（SGEMM）按仅时间，仅空间和空时多路复用策略评估总吞吐量。除了傅立叶域，Winograd域和直接内核实现之外，矩阵乘法通常用于在神经网络中实现卷积运算。</p>
 <p>图7表明，与GPU共享的时间分割方法相比，通过Hyper-Q / CUDA流实现的空间复用可以提高吞吐量。但是吞吐量远低于V100提供的单精度吞吐量（3.1节）。我们设计了一种调度程序，它可以跨模型对内核进行批处理，而不是维护设备可以精细调度的单独内核流。通过将内核跨多个模型批处理组成单个超级内核中，有可能使GPU上的所有时间片资源饱和。</p>
-<p>为了模拟时空多路复用软件调度器的性能，我们测量了标称方法的吞吐量 - 从同一架构的几个模型收集SGEMM问题到单个批量矩阵乘法超级内核。 这些模型具有不同的权重和输入，这可能在多租户设置中。 批量超级内核比许多较小的内核调用更有效，并且还可以更好地对GPU进行空间多路复用。 这还允许更好地预测延迟，因为动态内核调度程序可以选择性地批量内核并确定何时基于每个模型的SLO执行工作负载。</p>
+<p>为了模拟时空多路复用软件调度器的性能，我们测量了标称方法的吞吐量 - 从同一架构的几个模型收集SGEMM问题到单个批量矩阵乘法超级内核。在多租户设置中，这些模型具有不同的权重和输入。 批量超级内核比许多较小的内核调用更有效，并且还可以更好地对GPU进行空间多路复用。 这还允许更好地预测延迟，因为动态内核调度程序可以选择性地将内核组成批并确定何时基于每个模型的SLO执行工作负载。</p>
 <p><img src="\images\Dynamic\5.png" alt=""></p>
-<h2 id="未来工作"><a href="#未来工作" class="headerlink" title="未来工作"></a>未来工作</h2><p>这项工作中，我们评估了空间和时间复用技术，以支持在单个GPU上多个模型进行推理。我们首先考虑了流行的DNN框架和GPU供应商（如NVIDIA）使用的标准方法。虽然这些技术提高了利用率，但它们增加了基准测试中的延迟和预测可变性。仅空间和仅时间的多路复用技术都不能实现高资源效率，可预测的延迟和隔离。<br>我们观察到批量级并行和仅空间复用之间存在巨大的性能差距，这表明有很多提高利用率的机会。我们提出了一个动态的空时调度程序，它可以满足上述三个标准。跨多模型和输入的内核运算的软件级融合，提供了一种有效的在线推理调度方法。<br>作为方法的早期评估，我们通过SGEMM融合所有排队问题来研究性能上限，这提供了GPU多租户或多模型扩展的吞吐量。与在线推理先前技术水平相比，有超过3倍的加速比。我们相信这项工作指向通过智能模型间融合内核调度实现深度神经网络高效多租户执行的新方法。</p>
+<p>我们的目标是动态优化一批不同的模型，与先前的DNN图优化器相比，如TVM，Tensor Comprehensions，Halide，GLOW和TensorRT。这些优化器通过内核融合和自动调整优于单租户优化。但是，我们的方法侧重于优化许多不相交图的性能。</p>
+<p>我们的方法是对Guevara等人开发的方法的动态替代方案。他们通过手动组合流中的小内核以提高GPU利用率，在高斯消除算法上产生高达1.3倍的加速。Guevara等人的工作侧重于在CUDA块级手动合并内核，我们的方法侧重于批量处理大量动态执行的矩阵乘法内核，以及交错的CUDA流。我们的方法在多个神经网络任务中具有高可扩展性，并与现有生态系统相辅相成。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这项工作中，我们评估了空间和时间复用技术，以支持在单个GPU上多个模型进行推理。我们首先考虑了流行的DNN框架和GPU供应商（如NVIDIA）使用的标准方法。虽然这些技术提高了利用率，但它们增加了基准测试中的延迟和预测可变性。仅空间和仅时间的多路复用技术都不能实现高资源效率，可预测的延迟和隔离。<br>我们观察到批量级并行和仅空间复用之间存在巨大的性能差距，这表明有很多提高利用率的机会。我们提出了一个动态的空时调度程序，它可以满足上述三个标准。跨多模型和输入的内核运算的软件级融合，提供了一种有效的在线推理调度方法。<br>作为方法的早期评估，我们通过SGEMM融合所有排队问题来研究性能上限，这提供了GPU多租户或多模型扩展的吞吐量。与在线推理先前技术水平相比，有超过3倍的加速比。我们相信这项工作指向通过智能模型间融合内核调度实现深度神经网络高效多租户执行的新方法。</p>
 
       
     </div>
@@ -555,7 +558,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -566,7 +569,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -577,7 +580,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -626,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dynamic-Space-Time-Scheduling-for-GPU-Inference论文总结"><span class="nav-number">1.</span> <span class="nav-text">Dynamic Space-Time Scheduling for GPU Inference论文总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#出发点1"><span class="nav-number">1.2.</span> <span class="nav-text">出发点1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#出发点2"><span class="nav-number">1.3.</span> <span class="nav-text">出发点2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改进做法概述"><span class="nav-number">1.4.</span> <span class="nav-text">改进做法概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用程序模型：托管云推理服务"><span class="nav-number">1.5.</span> <span class="nav-text">应用程序模型：托管云推理服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仅限空间和仅限时间多路复用的限制"><span class="nav-number">1.6.</span> <span class="nav-text">仅限空间和仅限时间多路复用的限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验设置"><span class="nav-number">1.7.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验结果"><span class="nav-number">1.8.</span> <span class="nav-text">实验结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态时空调度"><span class="nav-number">1.9.</span> <span class="nav-text">动态时空调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态时空调度基准"><span class="nav-number">1.10.</span> <span class="nav-text">动态时空调度基准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未来工作"><span class="nav-number">1.11.</span> <span class="nav-text">未来工作</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dynamic-Space-Time-Scheduling-for-GPU-Inference论文总结"><span class="nav-number">1.</span> <span class="nav-text">Dynamic Space-Time Scheduling for GPU Inference论文总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#出发点1"><span class="nav-number">1.2.</span> <span class="nav-text">出发点1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#出发点2"><span class="nav-number">1.3.</span> <span class="nav-text">出发点2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改进做法概述"><span class="nav-number">1.4.</span> <span class="nav-text">改进做法概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用程序模型：托管云推理服务"><span class="nav-number">1.5.</span> <span class="nav-text">应用程序模型：托管云推理服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仅空间和仅时间多路复用的限制"><span class="nav-number">1.6.</span> <span class="nav-text">仅空间和仅时间多路复用的限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验设置"><span class="nav-number">1.7.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验结果"><span class="nav-number">1.8.</span> <span class="nav-text">实验结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态时空调度"><span class="nav-number">1.9.</span> <span class="nav-text">动态时空调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态时空调度基准"><span class="nav-number">1.10.</span> <span class="nav-text">动态时空调度基准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.11.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
