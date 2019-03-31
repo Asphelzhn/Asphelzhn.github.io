@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Python,学习," />
+  <meta name="keywords" content="Deep learning," />
 
 
 
@@ -86,18 +86,21 @@
 
 
 
-<meta name="description" content="Flask SECRET_KEY报错在flask项目中，Session, Cookies以及一些第三方扩展都会用到SECRET_KEY值，这是一个比较重要的配置值。 在使用flask时，产生了这个错误： 1RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on th">
-<meta name="keywords" content="Python,学习">
+<meta name="description" content="深度学习中涉及到训练（Training）和推断（Inference），训练也就是搜索和求解模型最优参数的阶段。当模型参数已经求解出来，使用和部署模型，则称为推断阶段。二者的特点不同。  深度学习训练我们可以把深度学习的训练看成学习过程。人工神经网络是分层的、是在层与层之间互相连接的、网络中数据的传播是有向的。训练神经网络的时候，训练数据被输入到网络的第一层。然后所有的神经元，都会根据任务执行的情况">
+<meta name="keywords" content="Deep learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="flask生成 secret key">
-<meta property="og:url" content="http://yoursite.com/2018/12/24/python_05_flaskerror/index.html">
+<meta property="og:title" content="深度学习中训练和推断的区别">
+<meta property="og:url" content="http://yoursite.com/2019/03/31/tensor_08_inference/index.html">
 <meta property="og:site_name" content="Edward">
-<meta property="og:description" content="Flask SECRET_KEY报错在flask项目中，Session, Cookies以及一些第三方扩展都会用到SECRET_KEY值，这是一个比较重要的配置值。 在使用flask时，产生了这个错误： 1RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on th">
+<meta property="og:description" content="深度学习中涉及到训练（Training）和推断（Inference），训练也就是搜索和求解模型最优参数的阶段。当模型参数已经求解出来，使用和部署模型，则称为推断阶段。二者的特点不同。  深度学习训练我们可以把深度学习的训练看成学习过程。人工神经网络是分层的、是在层与层之间互相连接的、网络中数据的传播是有向的。训练神经网络的时候，训练数据被输入到网络的第一层。然后所有的神经元，都会根据任务执行的情况">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-11T11:32:45.758Z">
+<meta property="og:image" content="http://yoursite.com/images/tensor08/2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/tensor08/1.gif">
+<meta property="og:updated_time" content="2019-03-31T07:09:32.193Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="flask生成 secret key">
-<meta name="twitter:description" content="Flask SECRET_KEY报错在flask项目中，Session, Cookies以及一些第三方扩展都会用到SECRET_KEY值，这是一个比较重要的配置值。 在使用flask时，产生了这个错误： 1RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on th">
+<meta name="twitter:title" content="深度学习中训练和推断的区别">
+<meta name="twitter:description" content="深度学习中涉及到训练（Training）和推断（Inference），训练也就是搜索和求解模型最优参数的阶段。当模型参数已经求解出来，使用和部署模型，则称为推断阶段。二者的特点不同。  深度学习训练我们可以把深度学习的训练看成学习过程。人工神经网络是分层的、是在层与层之间互相连接的、网络中数据的传播是有向的。训练神经网络的时候，训练数据被输入到网络的第一层。然后所有的神经元，都会根据任务执行的情况">
+<meta name="twitter:image" content="http://yoursite.com/images/tensor08/2.jpg">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/24/python_05_flaskerror/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/31/tensor_08_inference/"/>
 
 
 
 
 
-  <title>flask生成 secret key | Edward</title>
+  <title>深度学习中训练和推断的区别 | Edward</title>
   
 
 
@@ -260,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/python_05_flaskerror/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/tensor_08_inference/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -277,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">flask生成 secret key</h1>
+          <h1 class="post-title" itemprop="name headline">深度学习中训练和推断的区别</h1>
         
 
         <div class="post-meta">
@@ -289,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-24T21:22:08+08:00">
-                2018-12-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T22:30:00+08:00">
+                2019-03-31
               </time>
             
 
@@ -312,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">笔记</span>
+                  <a href="/categories/Deep-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep learning</span>
                   </a>
                 </span>
 
@@ -330,9 +333,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/24/python_05_flaskerror/#comments" itemprop="discussionUrl">
+                <a href="/2019/03/31/tensor_08_inference/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/12/24/python_05_flaskerror/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/03/31/tensor_08_inference/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -360,13 +363,28 @@
       
 
       
-        <h3 id="Flask-SECRET-KEY报错"><a href="#Flask-SECRET-KEY报错" class="headerlink" title="Flask SECRET_KEY报错"></a>Flask SECRET_KEY报错</h3><p>在flask项目中，Session, Cookies以及一些第三方扩展都会用到SECRET_KEY值，这是一个比较重要的配置值。</p>
-<p>在使用flask时，产生了这个错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on the application to something unique and secret.</span><br></pre></td></tr></table></figure>
-<p>解决方法是在flask项目文件_inti__.py加入设置SECRET_KEY。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">app = Flask(__name__)  </span><br><span class="line">app.config[&apos;SECRET_KEY&apos;] = &apos;123456&apos;  </span><br><span class="line"># or  </span><br><span class="line">app.secret_key = &apos;123456&apos;  </span><br><span class="line"># or  </span><br><span class="line">app.config.update(SECRET_KEY=&apos;123456&apos;)</span><br></pre></td></tr></table></figure>
-<p>如果需要设置一个随机的SECRET_KEY值。我们可以使用os模块的urandom函数来获得随机值:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import os  </span><br><span class="line">&gt;&gt;&gt; os.urandom(24)  </span><br><span class="line">&apos;\xeew\xe4\xc0\xee\xb1]\x9b\xa0\x9e)\x15Qhem\xe5\xf17\xd6\xceB\xb7\xb4&apos;</span><br></pre></td></tr></table></figure>
+        <p>深度学习中涉及到<strong>训练（Training）</strong>和<strong>推断（Inference）</strong>，训练也就是搜索和求解模型最优参数的阶段。当模型参数已经求解出来，使用和部署模型，则称为推断阶段。二者的特点不同。</p>
+<p><img src="/images/tensor08/2.jpg" alt=""></p>
+<h1 id="深度学习训练"><a href="#深度学习训练" class="headerlink" title="深度学习训练"></a>深度学习训练</h1><p>我们可以把深度学习的训练看成学习过程。人工神经网络是分层的、是在层与层之间互相连接的、网络中数据的传播是有向的。训练神经网络的时候，训练数据被输入到网络的第一层。然后所有的神经元，都会根据任务执行的情况，根据其正确或者错误的程度如何，分配一个权重参数（权值）。</p>
+<p><img src="/images/tensor08/1.gif" alt=""></p>
+<p>如图是一个深层神经网络，信息从下到上流动。我们给这个网络大量的输入数据，网络的低层就会提取出不同类别数据的特征信息，通过激活函数、损失函数以后而到了最高层，网络提取到整个数据特征。所以，神经网络从低到高刚好能够提取图片数据中从低到高（从局部到整体）的多层次信息，最终的输出由网络中所有的权值共同决定。对多尺度层级结构的提取才使得深度学习神经网络可以得到很好的效果。</p>
+<p>训练需要分batch多次迭代，inference只需要分batch执行一次计算流图。训练是计算密集型的，以GPU资源为主，CPU主要用于通信，参数更新等低消耗的任务。单次训练任务计算量大，需要用分布式系统才能较快得到结果。训练过程主要关心分布式集群的资源利用率。</p>
+<h1 id="深度学习推断"><a href="#深度学习推断" class="headerlink" title="深度学习推断"></a>深度学习推断</h1><p>推断过程关注的指标为：</p>
+<ul>
+<li>访问延迟</li>
+<li>吞吐量</li>
+<li>模型版本管理</li>
+<li>DevOps</li>
+</ul>
+<p>推断过程常用的工具：TensorFlow Serving 是一个用于机器学习模型 serving 的高性能开源库。它可以将训练好的机器学习模型部署到线上，使用 gRPC和Restful 作为接口接受外部调用。它支持模型热更新与自动模型版本管理。这意味着一旦部署 TensorFlow Serving 后，你再也不需要为线上服务操心，只需要关心你的线下模型训练。</p>
+<ol>
+<li><p>推断的网络权值已经固定下来，无后向传播过程，模型固定，可以对计算图进行优化。还可以输入输出大小固定，做memory优化（fine-tuning只是在已有的训练好的模型上做小的改动和调优，本质上仍然是训练过程，TensorRT没有fine-tuning）</p>
+</li>
+<li><p>推断的batch size要小很多，如果batch size很大，吞吐可以很大。比如每秒可以处理1024个batch，500毫秒处理完，吞吐可以达到2048，可以很好地利用GPU；但是推断关心延迟latency，不能有500毫秒处理延迟。所以batch可以是8或者16，吞吐降低，没有办法很好地利用GPU。</p>
+</li>
+<li><p>训练的时候因为要保证前后向传播，每次梯度的更新很微小，需要相对较高的精度，一般来说需要float型，如FP32，32位的浮点型来处理数据。但是推断对精度的要求没有那么高，可以使用低精度的技术，很多研究表明可以用如半长（16）的float型，即FP16，或者8位的整型（INT8）来做推断，研究结果表明没有特别大的精度损失，尤其对CNN。对Binary（二进制）的使用也处在研究中，即权值只有0和1。低精度计算的好处是一方面可以减少计算量，原来计算32位的单元处理FP16的时候，理论上可以达到两倍的速度，处理INT8的时候理论上可以达到四倍的速度。另一方面是模型需要的空间减少，不管是权值的存储还是中间值的存储，应用更低的精度，模型大小会相应减小。用于inference的模型要进行简化、压缩、针对运行性能优化：查找神经网络中经过训练后并没有用到、尚未激活的清洗掉。把神经网络中的多个层融合为一个单独的计算步骤。（通过神经网络剪枝、训练量化和Huffman编码等压缩模型），但仍能达到几乎一样的预测、识别准确率</p>
+</li>
+</ol>
 
       
     </div>
@@ -384,9 +402,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
-          
-            <a href="/tags/学习/" rel="tag"><i class="fa fa-tag"></i> 学习</a>
+            <a href="/tags/Deep-learning/" rel="tag"><i class="fa fa-tag"></i> Deep learning</a>
           
         </div>
       
@@ -399,8 +415,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/24/python_04_函数进阶/" rel="next" title="Python函数进阶">
-                <i class="fa fa-chevron-left"></i> Python函数进阶
+              <a href="/2019/03/28/tensor_07_glances/" rel="next" title="Glances系统监控工具">
+                <i class="fa fa-chevron-left"></i> Glances系统监控工具
               </a>
             
           </div>
@@ -408,10 +424,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/24/Linux_04_linux命令格式/" rel="prev" title="linux命令格式">
-                linux命令格式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -573,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flask-SECRET-KEY报错"><span class="nav-number">1.</span> <span class="nav-text">Flask SECRET_KEY报错</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#深度学习训练"><span class="nav-number">1.</span> <span class="nav-text">深度学习训练</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深度学习推断"><span class="nav-number">2.</span> <span class="nav-text">深度学习推断</span></a></li></ol></div>
             
 
           </div>
@@ -742,9 +754,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/12/24/python_05_flaskerror/';
-          this.page.identifier = '2018/12/24/python_05_flaskerror/';
-          this.page.title = 'flask生成 secret key';
+          this.page.url = 'http://yoursite.com/2019/03/31/tensor_08_inference/';
+          this.page.identifier = '2019/03/31/tensor_08_inference/';
+          this.page.title = '深度学习中训练和推断的区别';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Edward.disqus.com/embed.js';
