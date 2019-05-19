@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="第1章 Maven介绍1.1 什么是Maven1.1 MavenMaven是一个项目管理工具，它包含了一个项目对象模型 (POM：Project Object Model)，一组标准集合，一个项目生命周期(Project Lifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在生命周期阶段(phase)中插件(plugin)目标(goal">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven笔记">
+<meta property="og:url" content="http://yoursite.com/2019/05/16/Java_11_ maven/index.html">
+<meta property="og:site_name" content="Edward">
+<meta property="og:description" content="第1章 Maven介绍1.1 什么是Maven1.1 MavenMaven是一个项目管理工具，它包含了一个项目对象模型 (POM：Project Object Model)，一组标准集合，一个项目生命周期(Project Lifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在生命周期阶段(phase)中插件(plugin)目标(goal">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558021277769.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558143567760.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558145264329.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558146058001.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558146691764.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558146929478.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558147096880.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558162319602.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558162394543.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558162439026.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558162548707.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558162577554.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558276935567.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558277114903.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558277176056.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558277478006.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558277590094.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558278254481.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558278325973.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558278345358.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558278437932.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558278457849.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558278495316.png">
+<meta property="og:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558278514175.png">
+<meta property="og:updated_time" content="2019-05-19T15:08:41.910Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maven笔记">
+<meta name="twitter:description" content="第1章 Maven介绍1.1 什么是Maven1.1 MavenMaven是一个项目管理工具，它包含了一个项目对象模型 (POM：Project Object Model)，一组标准集合，一个项目生命周期(Project Lifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在生命周期阶段(phase)中插件(plugin)目标(goal">
+<meta name="twitter:image" content="c:/Users/56871/AppData/Roaming/Typora/typora-user-images/1558021277769.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/16/Java_11_ maven/"/>
+
+
+
+
+
+  <title>Maven笔记 | Edward</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Edward</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Edward's Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/Java_11_ maven/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Maven笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-16T16:30:08+08:00">
+                2019-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/16/Java_11_ maven/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/05/16/Java_11_ maven/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第1章-Maven介绍"><a href="#第1章-Maven介绍" class="headerlink" title="第1章 Maven介绍"></a>第1章 Maven介绍</h1><h2 id="1-1-什么是Maven"><a href="#1-1-什么是Maven" class="headerlink" title="1.1 什么是Maven"></a>1.1 什么是Maven</h2><h3 id="1-1-Maven"><a href="#1-1-Maven" class="headerlink" title="1.1 Maven"></a>1.1 Maven</h3><p>Maven是一个项目管理工具，它包含了一个项目对象模型 (POM：Project Object Model)，一组标准集合，一个项目生命周期(Project Lifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在生命周期阶段(phase)中插件(plugin)目标(goal)的逻辑。</p>
+<h3 id="1-2-Maven能解决什么"><a href="#1-2-Maven能解决什么" class="headerlink" title="1.2 Maven能解决什么"></a>1.2 Maven能解决什么</h3><p>项目开发不仅仅是写代码而已，期间会伴随着各种必不可少的事情要做，比如：<br>1、我们需要引用各种jar包，尤其是比较大的工程，引用的jar包往往有几十个乃至上百个， 每用到一种jar包，都需要手动引入工程目录，而且经常遇到各种让人抓狂的jar包冲突，版本冲突。<br>2、写好了Java文件，电脑需要将它编译成二进制字节码。现在这项工作可以由各种集成开发工具帮我们完成，Eclipse、IDEA等都可以将代码即时编译。<br>3、为了减少bug，写完代码我们还要写一些单元测试，然后一个个的运行来检验代码质量。<br>4、再优雅的代码也是要出来卖的。我们后面还需要把代码与各种配置文件、资源整合到一起，定型打包，如果是web项目，还需要将之发布到服务器。<br>如果现在有一种工具，可以把你从上面的繁琐工作中解放出来，能帮你构建工程，管理jar包，编译代码，还能帮你自动运行单元测试，打包，生成报表，甚至能帮你部署项目，生成Web站点，你会心动吗？Maven就可以解决上面所提到的这些问题。</p>
+<h3 id="1-3-Maven优点"><a href="#1-3-Maven优点" class="headerlink" title="1.3 Maven优点"></a>1.3 Maven优点</h3><p>要将web项目运行起来，就必须将该项目所依赖的一些jar包添加到工程中，否则项目就不能运行。试想如果具有相同架构的项目有十个，那么我们就需要将这一份jar包复制到十个不同的工程中。<br>使用传统Web项目构建的CRM项目如下：</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558021277769.png" alt="1558021277769"></p>
+<p>因为上面的WEB程序要运行，我们必须将项目运行所需的Jar包复制到工程目录中，导致了工程很大。<br>同样的项目，如果使用Maven工程来构建，会发现总体上工程的大小会少很多。如下图:</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558143567760.png" alt="1558143567760"></p>
+<h2 id="1-2-Maven的作用"><a href="#1-2-Maven的作用" class="headerlink" title="1.2 Maven的作用"></a>1.2 Maven的作用</h2><h3 id="1-2-1-Maven的依赖管理"><a href="#1-2-1-Maven的依赖管理" class="headerlink" title="1.2.1 Maven的依赖管理"></a>1.2.1 Maven的依赖管理</h3><p>Maven的一个核心特性就是依赖管理。当我们涉及到多模块的项目（包含成百个模块或者子项目），管理依赖就变成一项困难的任务。Maven展示出了它对处理这种情形的高度控制。<br>传统的WEB项目中，我们必须将工程所依赖的jar包复制到工程中，导致了工程的变得很大。那么maven工程是如何使得工程变得很少呢？</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558145264329.png" alt="1558145264329"></p>
+<p>通过分析发现：maven工程中不直接将jar包导入到工程中，而是通过在pom.xml文件中添加所需jar包的坐标，这样就很好的避免了jar直接引入进来，在需要用到jar包的时候，只要查找pom.xml文件，再通过pom.xml文件中的坐标，到一个专门用于”存放jar包的仓库”(maven仓库)中根据坐标从而找到这些jar包，再把这些jar包拿去运行</p>
+<hr>
+<p>通过读取pom.xml 文件中的坐标，再到仓库中找到jar包，会不会很慢？</p>
+<p>通过pom.xml文件配置要引入的jar包的坐标，再读取坐标并到仓库中加载jar包，这样我们就可以直接使用jar包了，为了解决这个过程中速度慢的问题，maven中也有索引的概念，通过建立索引，可以大大提高加载jar包的速度，使得我们认为jar包基本跟放在本地的工程文件中再读取出来的速度是一样的。这个过程就好比我们查阅字典时，为了能够加快查找到内容，书前面的目录就好比是索引，有了这个目录我们就可以方便找到内容了，一样的在maven仓库中有了索引我们就可以认为可以快速找到jar包。</p>
+<hr>
+<h3 id="1-2-2-项目的一键构建"><a href="#1-2-2-项目的一键构建" class="headerlink" title="1.2.2 项目的一键构建"></a>1.2.2 项目的一键构建</h3><p>我们的项目，往往都要经历编译、测试、运行、打包、安装 ，部署等一系列过程。</p>
+<ul>
+<li>什么是构建？<br>指的是项目从编译、测试、运行、打包、安装 ，部署整个过程都交给maven进行管理，这个过程称为构建</li>
+<li>一键构建<br>指的是整个构建过程，使用maven一个命令可以轻松完成整个工作。<br>Maven规范化构建流程如下：</li>
+</ul>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558146058001.png" alt="1558146058001"></p>
+<p>通过tomcat:run的这个命令，我们发现现在的工程编译，测试，运行都变得非常简单。</p>
+<h1 id="第2章-Maven的使用"><a href="#第2章-Maven的使用" class="headerlink" title="第2章 Maven的使用"></a>第2章 Maven的使用</h1><h2 id="2-1-Maven的安装"><a href="#2-1-Maven的安装" class="headerlink" title="2.1 Maven的安装"></a>2.1 Maven的安装</h2><p>Maven下载后，将Maven解压。解压后目录结构如下：</p>
+<p>bin:存放了maven的命令，比如我们前面用到的mvn tomcat:run<br>boot:存放了一些maven本身的引导程序，如类加载器等<br>conf:存放了maven的一些配置文件，如setting.xml文件<br>lib:存放了maven本身运行所需的一些jar包</p>
+<p>通过 mvn -v命令检查 maven是否安装成功，看到maven的版本为3.5.2及java版本为1.8即为安装成功。</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558146691764.png" alt="1558146691764"></p>
+<h3 id="2-2-Maven仓库"><a href="#2-2-Maven仓库" class="headerlink" title="2.2 Maven仓库"></a>2.2 Maven仓库</h3><p>maven的工作需要从仓库下载一些jar包，如下图所示，本地的项目A、项目B等都会通过maven软件从远程仓库（可以理解为互联网上的仓库）下载jar包并存在本地仓库，本地仓库 就是本地文件夹，当第二次需要此jar包时则不再从远程仓库下载，因为本地仓库已经存在了，可以将本地仓库理解为缓存，有了本地仓库就不用每次从远程仓库下载了。</p>
+<p>下图描述了maven中仓库的类型：</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558146929478.png" alt="1558146929478"></p>
+<ul>
+<li>本地仓库 ：用来存储从远程仓库或中央仓库下载的插件和jar包，项目使用一些插件或jar包，优先从本地仓库查找<br>默认本地仓库位置在 ${user.dir}/.m2/repository，${user.dir}表示windows用户目录。</li>
+<li>远程仓库：如果本地需要插件或者jar包，本地仓库没有，默认去远程仓库下载。<br>远程仓库可以在互联网内也可以在局域网内。</li>
+<li>中央仓库 ：在maven软件中内置一个远程仓库地址<a href="http://repo1.maven.org/maven2" target="_blank" rel="noopener">http://repo1.maven.org/maven2</a> ，它是中央仓库，服务于整个互联网，它是由Maven团队自己维护，里面存储了非常全的jar包，它包含了世界上大部分流行的开源项目构件。</li>
+</ul>
+<h3 id="2-2-2-Maven本地仓库的配置"><a href="#2-2-2-Maven本地仓库的配置" class="headerlink" title="2.2.2 Maven本地仓库的配置"></a>2.2.2 Maven本地仓库的配置</h3><p>在MAVE_HOME/conf/settings.xml文件中配置本地仓库位置（maven的安装目录下）：</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558147096880.png" alt="1558147096880"></p>
+<h3 id="2-2-3-全局setting与用户setting"><a href="#2-2-3-全局setting与用户setting" class="headerlink" title="2.2.3 全局setting与用户setting"></a>2.2.3 全局setting与用户setting</h3><p>maven仓库地址、私服等配置信息需要在setting.xml文件中配置，分为全局配置和用户配置。</p>
+<p>在maven安装目录下的有 conf/setting.xml文件，此setting.xml文件用于maven的所有project项目，它作为maven的全局配置。</p>
+<p>如需要个性配置则需要在用户配置中设置，用户配置的setting.xml文件默认的位置在：${user.dir} /.m2/settings.xml目录中,${user.dir} 指windows 中的用户目录。</p>
+<p>maven会先找用户配置，如果找到则以用户配置文件为准，否则使用全局配置文件。</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558162319602.png" alt="1558162319602"></p>
+<h2 id="2-3-Maven工程"><a href="#2-3-Maven工程" class="headerlink" title="2.3 Maven工程"></a>2.3 Maven工程</h2><h3 id="2-3-1-Maven工程的目录结构"><a href="#2-3-1-Maven工程的目录结构" class="headerlink" title="2.3.1 Maven工程的目录结构"></a>2.3.1 Maven工程的目录结构</h3><p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558162394543.png" alt="1558162394543"></p>
+<p>作为一个maven工程，它的src目录和pom.xml是必备的。<br>进入src目录后，里面的目录结构如下：</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558162439026.png" alt="1558162439026"></p>
+<p>src/main/java —— 存放项目的.java文件<br>src/main/resources —— 存放项目资源文件，如spring, hibernate配置文件<br>src/test/java —— 存放所有单元测试.java文件，如JUnit测试类<br>src/test/resources —— 测试资源文件<br>target —— 项目输出位置，编译后的class文件会输出到此目录<br>pom.xml——maven项目核心配置文件</p>
+<p>如果是普通的java项目，那么就没有webapp目录。</p>
+<h3 id="2-3-2-Maven工程的运行"><a href="#2-3-2-Maven工程的运行" class="headerlink" title="2.3.2 Maven工程的运行"></a>2.3.2 Maven工程的运行</h3><p>进入maven工程目录（当前目录有pom.xml文件），运行tomcat:run命令。</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558162548707.png" alt="1558162548707"></p>
+<p>根据上边的提示信息，通过浏览器访问：<a href="http://localhost:8080/maven-helloworld/" target="_blank" rel="noopener">http://localhost:8080/maven-helloworld/</a></p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558162577554.png" alt="1558162577554"></p>
+<h3 id="2-3-3-问题处理"><a href="#2-3-3-问题处理" class="headerlink" title="2.3.3 问题处理"></a>2.3.3 问题处理</h3><p>如果本地仓库配置错误会报下边的错误</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558276935567.png" alt="1558276935567"><br>maven工程运行先从本地仓库找jar包，本地仓库没有再从中央仓库找，上边提示downloading…<br>表示 从中央仓库下载jar，由于本地没有联网，报错。<br>解决：<br>在maven安装目录的conf/setting.xml文件中配置本地仓库。</p>
+<h2 id="第3章-Maven常用命令"><a href="#第3章-Maven常用命令" class="headerlink" title="第3章 Maven常用命令"></a>第3章 Maven常用命令</h2><p>可以在cmd中通过一系列的maven命令来对工程进行编译、测试、运行、打包、安装、部署。</p>
+<h3 id="3-1-1-compile"><a href="#3-1-1-compile" class="headerlink" title="3.1.1 compile"></a>3.1.1 compile</h3><p>compile是maven工程的编译命令，作用是将src/main/java下的文件编译为class文件输出到target目录下。</p>
+<p>进入命令状态，执行mvn compile，如下图提示成功：</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558277114903.png" alt="1558277114903"> </p>
+<p>查看 target目录，class文件已生成，编译完成。</p>
+<h3 id="3-1-2-test"><a href="#3-1-2-test" class="headerlink" title="3.1.2 test"></a>3.1.2 test</h3><p>test是maven工程的测试命令 mvn test，会执行src/test/java下的单元测试类。<br>cmd执行mvn test执行src/test/java下单元测试类，下图为测试结果，运行1个测试用例，全部成功。</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558277176056.png" alt="1558277176056"></p>
+<h3 id="3-1-3-clean"><a href="#3-1-3-clean" class="headerlink" title="3.1.3 clean"></a>3.1.3 clean</h3><p>clean是maven工程的清理命令，执行 clean会删除target目录及内容。</p>
+<h3 id="3-1-4-package"><a href="#3-1-4-package" class="headerlink" title="3.1.4 package"></a>3.1.4 package</h3><p>package是maven工程的打包命令，对于java工程执行package打成jar包，对于web工程打成war包。</p>
+<h3 id="3-1-5-install"><a href="#3-1-5-install" class="headerlink" title="3.1.5 install"></a>3.1.5 install</h3><p>install是maven工程的安装命令，执行install将maven打成jar包或war包发布到本地仓库。<br>从运行结果中，可以看出：<br>当后面的命令执行时，前面的操作过程也都会自动执行，</p>
+<h3 id="3-1-6-Maven指令的生命周期"><a href="#3-1-6-Maven指令的生命周期" class="headerlink" title="3.1.6 Maven指令的生命周期"></a>3.1.6 Maven指令的生命周期</h3><p>maven对项目构建过程分为三套相互独立的生命周期：</p>
+<p>Clean Lifecycle 在进行真正的构建之前进行一些清理工作。<br>Default Lifecycle 构建的核心部分，编译，测试，打包，部署等等。<br>Site Lifecycle 生成项目报告，站点，发布站点。</p>
+<h3 id="3-1-7-maven的概念模型"><a href="#3-1-7-maven的概念模型" class="headerlink" title="3.1.7 maven的概念模型"></a>3.1.7 maven的概念模型</h3><p>Maven包含了一个项目对象模型 (Project Object Model)，一组标准集合，一个项目生命周期(Project Lifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在生命周期阶段(phase)中插件(plugin)目标(goal)的逻辑。</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558277478006.png" alt="1558277478006"></p>
+<ul>
+<li>项目对象模型 (Project Object Model)<br>一个maven工程都有一个pom.xml文件，通过pom.xml文件定义项目的坐标、项目依赖、项目信息、插件目标等。</li>
+<li>依赖管理系统(Dependency Management System)<br>通过maven的依赖管理对项目所依赖的jar 包进行统一管理。<br>比如：项目依赖junit4.9，通过在pom.xml中定义junit4.9的依赖即使用junit4.9，如下所示是junit4.9的依赖定义：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 依赖关系 --&gt;</span><br><span class="line">&lt;dependencies&gt;</span><br><span class="line">&lt;!-- 此项目运行使用junit，所以此项目依赖junit --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;!-- junit的项目名称 --&gt;</span><br><span class="line">&lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">&lt;!-- junit的模块名称 --&gt;</span><br><span class="line">&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">&lt;!-- junit版本 --&gt;</span><br><span class="line">&lt;version&gt;4.9&lt;/version&gt;</span><br><span class="line">&lt;!-- 依赖范围：单元测试时使用junit --&gt;</span><br><span class="line">&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>一个项目生命周期(Project Lifecycle)<br>使用maven完成项目的构建，项目构建包括：清理、编译、测试、部署等过程，maven将这些过程规范为一个生命周期，如下所示是生命周期的各各阶段：</li>
+</ul>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558277590094.png" alt="1558277590094"></p>
+<p>maven通过执行一些简单命令即可实现上边生命周期的各各过程，比如执行mvn compile执行编译、执行mvn clean执行清理。</p>
+<ul>
+<li>一组标准集合<br>maven将整个项目管理过程定义一组标准，比如：通过maven构建工程有标准的目录结构，有标准的生命周期阶段、依赖管理有标准的坐标定义等</li>
+<li>插件(plugin)目标(goal)<br>maven 管理项目生命周期过程都是基于插件完成的。</li>
+</ul>
+<h3 id="3-2-idea开发maven项目"><a href="#3-2-idea开发maven项目" class="headerlink" title="3.2 idea开发maven项目"></a>3.2 idea开发maven项目</h3><h3 id="3-2-1-idea的maven配置"><a href="#3-2-1-idea的maven配置" class="headerlink" title="3.2.1 idea的maven配置"></a>3.2.1 idea的maven配置</h3><p>选择本地maven安装目录，指定maven安装目录下conf文件夹中settings配置文件。</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558278254481.png" alt="1558278254481"></p>
+<h3 id="3-2-2-创建maven的web工程"><a href="#3-2-2-创建maven的web工程" class="headerlink" title="3.2.2 创建maven的web工程"></a>3.2.2 创建maven的web工程</h3><p>打开idea，选择创建一个新工程</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558278325973.png" alt="1558278325973"></p>
+<p>选择idea提供好的maven的web工程模板</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558278345358.png" alt="1558278345358"></p>
+<p>点击Next填写项目信息</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558278437932.png" alt="1558278437932"></p>
+<p>点击Next，此处不做改动。</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558278457849.png" alt="1558278457849"></p>
+<p>点击Next选择项目所在目录</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558278495316.png" alt="1558278495316"></p>
+<p>点击Finish后开始创建工程，耐心等待，直到出现如下界面。</p>
+<p><img src="C:\Users\56871\AppData\Roaming\Typora\typora-user-images\1558278514175.png" alt="1558278514175"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/11/tensor_10_Nvidia visual profiler/" rel="next" title="NVIDIA Visual Profiler总结">
+                <i class="fa fa-chevron-left"></i> NVIDIA Visual Profiler总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry！Stay foolish！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Asphelzhn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:asphel96@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第1章-Maven介绍"><span class="nav-number">1.</span> <span class="nav-text">第1章 Maven介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-什么是Maven"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 什么是Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Maven"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 Maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Maven能解决什么"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 Maven能解决什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Maven优点"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 Maven优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Maven的作用"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Maven的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-Maven的依赖管理"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 Maven的依赖管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-项目的一键构建"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 项目的一键构建</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第2章-Maven的使用"><span class="nav-number">2.</span> <span class="nav-text">第2章 Maven的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Maven的安装"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Maven的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Maven仓库"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.2 Maven仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Maven本地仓库的配置"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.2.2 Maven本地仓库的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-全局setting与用户setting"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.2.3 全局setting与用户setting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Maven工程"><span class="nav-number">2.2.</span> <span class="nav-text">2.3 Maven工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-Maven工程的目录结构"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.3.1 Maven工程的目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-Maven工程的运行"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.3.2 Maven工程的运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3-问题处理"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3.3 问题处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第3章-Maven常用命令"><span class="nav-number">2.3.</span> <span class="nav-text">第3章 Maven常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-compile"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.1.1 compile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-test"><span class="nav-number">2.3.2.</span> <span class="nav-text">3.1.2 test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-clean"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.1.3 clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-4-package"><span class="nav-number">2.3.4.</span> <span class="nav-text">3.1.4 package</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-5-install"><span class="nav-number">2.3.5.</span> <span class="nav-text">3.1.5 install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-6-Maven指令的生命周期"><span class="nav-number">2.3.6.</span> <span class="nav-text">3.1.6 Maven指令的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-7-maven的概念模型"><span class="nav-number">2.3.7.</span> <span class="nav-text">3.1.7 maven的概念模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-idea开发maven项目"><span class="nav-number">2.3.8.</span> <span class="nav-text">3.2 idea开发maven项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-idea的maven配置"><span class="nav-number">2.3.9.</span> <span class="nav-text">3.2.1 idea的maven配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-创建maven的web工程"><span class="nav-number">2.3.10.</span> <span class="nav-text">3.2.2 创建maven的web工程</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/05/16/Java_11_ maven/';
+          this.page.identifier = '2019/05/16/Java_11_ maven/';
+          this.page.title = 'Maven笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
