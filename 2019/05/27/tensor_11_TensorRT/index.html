@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="科研," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一.TensorRT介绍TensorRT项目立项的时候名字叫做GPU Inference Engine（简称GIE），Tensor表示数据流动以张量的形式，RT表示的是Runtime。下图是TensorRT的架构图。  1.训练和推断深度学习分为训练和部署两部分。训练部分首先构建网络结构，准备数据集，使用各种模型进行训练，训练包含validation和test的过程。训练的操作一般在线下，实时数据">
+<meta name="keywords" content="科研">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高性能深度学习推断框架—TensorRT">
+<meta property="og:url" content="http://yoursite.com/2019/05/27/tensor_11_TensorRT/index.html">
+<meta property="og:site_name" content="Edward">
+<meta property="og:description" content="一.TensorRT介绍TensorRT项目立项的时候名字叫做GPU Inference Engine（简称GIE），Tensor表示数据流动以张量的形式，RT表示的是Runtime。下图是TensorRT的架构图。  1.训练和推断深度学习分为训练和部署两部分。训练部分首先构建网络结构，准备数据集，使用各种模型进行训练，训练包含validation和test的过程。训练的操作一般在线下，实时数据">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/Tensor/tensor11/6.png">
+<meta property="og:image" content="http://yoursite.com/images/Tensor/tensor11/3.png">
+<meta property="og:image" content="http://yoursite.com/images/Tensor/tensor11/4.png">
+<meta property="og:image" content="http://yoursite.com/images/Tensor/tensor11/5.png">
+<meta property="og:updated_time" content="2019-05-27T15:54:35.017Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高性能深度学习推断框架—TensorRT">
+<meta name="twitter:description" content="一.TensorRT介绍TensorRT项目立项的时候名字叫做GPU Inference Engine（简称GIE），Tensor表示数据流动以张量的形式，RT表示的是Runtime。下图是TensorRT的架构图。  1.训练和推断深度学习分为训练和部署两部分。训练部分首先构建网络结构，准备数据集，使用各种模型进行训练，训练包含validation和test的过程。训练的操作一般在线下，实时数据">
+<meta name="twitter:image" content="http://yoursite.com/images/Tensor/tensor11/6.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/27/tensor_11_TensorRT/"/>
+
+
+
+
+
+  <title>高性能深度学习推断框架—TensorRT | Edward</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Edward</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Edward's Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/tensor_11_TensorRT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高性能深度学习推断框架—TensorRT</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-27T22:30:00+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科研/" itemprop="url" rel="index">
+                    <span itemprop="name">科研</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/27/tensor_11_TensorRT/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/05/27/tensor_11_TensorRT/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一-TensorRT介绍"><a href="#一-TensorRT介绍" class="headerlink" title="一.TensorRT介绍"></a>一.TensorRT介绍</h1><p>TensorRT项目立项的时候名字叫做GPU Inference Engine（简称GIE），Tensor表示数据流动以张量的形式，RT表示的是Runtime。下图是TensorRT的架构图。</p>
+<p><img src="/images/Tensor/tensor11/6.png" alt=""></p>
+<h2 id="1-训练和推断"><a href="#1-训练和推断" class="headerlink" title="1.训练和推断"></a>1.训练和推断</h2><p>深度学习分为训练和部署两部分。训练部分首先构建网络结构，准备数据集，使用各种模型进行训练，训练包含validation和test的过程。训练的操作一般在线下，实时数据在线训练的情况比较少，大多数情况下数据是离线的，数据更新不频繁。线下有大规模的集群对数据或模型进行更新，训练需要消耗大量的GPU，batch size较大，一般训练模型batch size是128，甚至极端的1024，大的batch可以充分的利用GPU设备，实时性要求相对较低。</p>
+<p>推断（Inference）的时候只需前向计算，将输入通过神经网络得出预测的结果。而推断（Inference）的实际部署可能部署在云端数据中心，比如手机语音输入，声音是传到云端处理好之后把数据返回；还可能部署在嵌入式的摄像头、无人机、机器人或车载的自动驾驶主机上。推断的特点是对实时性要求很高。语音识别对latency非常敏感，要能非常快的给出推断结果。模型如果做得不好，没有优化，可能需要二三百毫秒才能做完一次推断，加上来回网络传输，用户可能一秒后才能得到结果，对于语音识别和自动驾驶影响是非常大的。</p>
+<h2 id="2-推断应用"><a href="#2-推断应用" class="headerlink" title="2.推断应用"></a>2.推断应用</h2><p>在部署阶段，latency是非常重要指标，TensorRT是专门针对部署进行优化的，目前TensorRT支持大部分主流的深度学习应用，除了CNN（卷积神经网络）领域，TensorRT 3.0支持RNN。</p>
+<p>最典型的应用是图片分类，图片的语义分割、目标检测等都是以图片分类网络为基础进行改进的。目标检测训练是对已经打好框的图片进行前向计算，得出的框和实际的框（ground truth）进行对比，然后再做后向更新，更新模型。推断的时候，是一个摄像头实时拍摄图片并进行目标检测，摄像头每秒拍摄25-30帧图片，鉴于实际应用可能是二十路摄像头同时传输进来的数据，必须保证一块卡做到实时处理。</p>
+<h2 id="3-推断和训练区别"><a href="#3-推断和训练区别" class="headerlink" title="3.推断和训练区别"></a>3.推断和训练区别</h2><ol>
+<li>推断的网络权值已经固定，无后向传播过程，因此</li>
+</ol>
+<ul>
+<li><p>模型固定，可以对计算图进行优化</p>
+</li>
+<li><p>输入输出大小固定，可以做memory优化</p>
+</li>
+</ul>
+<ol start="2">
+<li><p>推断的batch size要小很多，因为如果batch size很大，吞吐可以很大，可以很好地利用GPU，但是推断latency会增加。</p>
+</li>
+<li><p>推断可以使用低精度技术，训练的时候因为要保证前后向传播，每次梯度的更新是很微小的，需要相对较高的精度，一般需要float型，如FP32位的浮点型来处理数据。但是推断对精度的要求没有那么高，研究表明可以用半长的float型，即FP16，也可以用8位的整型（INT8）来做推断。研究结果表明没有特别大的精度损失，尤其对CNN。对Binary（二进制）的使用也处在研究过程中，即权值只有0和1。低精度计算的好处是一方面可以减少计算量，原来计算32位的单元处理FP16的时候，理论上可以达到两倍的速度，处理INT8的时候理论上可以达到四倍的速度。另一方面是模型需要的空间减少，不管是权值的存储还是中间值的存储。</p>
+</li>
+</ol>
+<h2 id="4-TensorRT的效果"><a href="#4-TensorRT的效果" class="headerlink" title="4.TensorRT的效果"></a>4.TensorRT的效果</h2><p>使用GPU卡V100，V100有专门针对深度学习优化的TensorCore，TensorCore可以完成4×4矩阵的半精度乘法，（一个4×4的FP16矩阵和另外一个4×4的FP16矩阵相乘，当然可以再加一个矩阵（FP16 或FP32），得到一个FP32或者FP16的矩阵），TensorCore在V100上理论峰值可以达到120 Tflops。</p>
+<p><img src="/images/Tensor/tensor11/3.png" alt=""></p>
+<p>如图所示，如果只是用CPU来做推断，它的吞吐只能达到140，每秒只能处理140张图片，同时整个处理过程需要有14ms的延迟，也就是说用户提交请求后，推断阶段最快需要14ms才能返回结果；如果使用V100，在TensorFlow中去做推断，大概是6.67ms的延时，但是吞吐只能达到305；如果使用V100加TensorRT，在保证延迟不变的情况下，吞吐可以提高15倍，高达5700张图片每秒，这个差别是很大的。</p>
+<p>NVIDIA TensorRT通过针对基于GPU的平台的优化和高性能运行时，加速所有框架（包括TensorFlow）的深度学习推理。ResNet-50模型在7毫秒延迟下的吞吐量提高了8倍。</p>
+<h1 id="二-TensorRT进行的优化"><a href="#二-TensorRT进行的优化" class="headerlink" title="二.TensorRT进行的优化"></a>二.TensorRT进行的优化</h1><p>TensorFlow在实现神经网络的过程中可以使用各种各样的高级库，如用nn来搭建，tf.nn中的convolution中可以加一个卷积，可以用slim来实现卷积，不同的卷积实现效果不同，但是对计算图和GPU都没有做优化，甚至在中间卷积算法的选择上也没有做优化，而TensorRT在这方面做了很多工作。</p>
+<h2 id="1-TensorRT流程"><a href="#1-TensorRT流程" class="headerlink" title="1.TensorRT流程"></a>1.TensorRT流程</h2><p>TensorRT的流程， 首先输入是一个预先训练好的FP32的模型和网络，将模型通过parser等方式输入到TensorRT中，TensorRT可以生成一个Serialization，也就是说将输入串流到内存或文件中。模型解析后，engine会进行优化。得到优化好的engine可以序列化到内存（buffer）或文件（file），读的时候需要反序列化，将其变成engine以供使用。然后在执行的时候创建context，主要是分配预先的资源，engine加context就可以做推断。</p>
+<p><img src="/images/Tensor/tensor11/4.png" alt=""><br>如图所示，TensorRT整个过程可以分三个步骤，即模型的解析（Parser），Engine优化和执行（Execution）。</p>
+<p>一个深度学习模型的前向过程，包括：</p>
+<p>1)  首先实现神经网络的layer，如卷积，pooling的实现。</p>
+<p>2) 管理memory，数据在各层之间如何流动。</p>
+<p>3) 推断的engine来调用各层的实现。</p>
+<p>以上三个步骤在TendorRT都已经实现好了，用户需要做的是如何将网络输入到TensorRT中。目前TensorRT支持两种输入方式：</p>
+<ol>
+<li><p>Parser的方式（即模型解析器），输入一个TF的模型，可以通过API解析出其中的网络层及网络层之间的连接关系，然后将其输入到TensorRT中。</p>
+</li>
+<li><p>API接口可以添加一个convolution或pooling操作。Parser解析模型文件，比如TensorFlow转换成的uff文件，再用API添加到TensorRT中，构建好网络并进行优化。</p>
+<p>a) TensorRT只支持主流的操作，如果有一个网络层不支持，TensorRT是不知道是做什么的。可以构建用户自定义层需要告诉TensorRT该层的连接关系和实现方式。</p>
+<p>b) 目前API支持C++和Python，Python接口实现比较方便。</p>
+<p>c) Parser目前有三个，一个是caffe Parser，支持最完善；另一个是uff，这个是Nvidia定义的一种网络模型文件结构，现在TensorFlow可以直接转成uff；3.5或4.0版本支持的onnx，是Facebook主导的开源、可交换的网络模型文件结构，这个格式目前只在NGC (NVDIA GPU Cloud)上支持，但是下一个版本都会支持。</p>
+</li>
+</ol>
+<h2 id="2-TensorRT所做优化"><a href="#2-TensorRT所做优化" class="headerlink" title="2.TensorRT所做优化"></a>2.TensorRT所做优化</h2><p><img src="/images/Tensor/tensor11/5.png" alt=""></p>
+<ol>
+<li>TensorRT把一些网络层进行了合并。在GPU上跑的函数叫Kernel，TensorRT可以对Kernel进行调用。在绝大部分框架中，比如一个卷积层、一个偏置层和一个reload层，这三层需要调用三次cuDNN对应的API，但实际上这三层的实现完全是可以合并到一起，TensorRT会对一些可以合并网络进行合并。另外网络可能并行做若干个相同大小的卷积，这些卷积计算其实也是可以合并到一起来做的。</li>
+<li></li>
+</ol>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<li><a href="https://yq.aliyun.com/articles/580307" target="_blank" rel="noopener">https://yq.aliyun.com/articles/580307</a></li>
+<li><a href="https://developer.nvidia.com/tensorrt" target="_blank" rel="noopener">https://developer.nvidia.com/tensorrt</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/科研/" rel="tag"><i class="fa fa-tag"></i> 科研</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/26/design_02_abstract factory /" rel="next" title="设计模式——抽象工厂模式">
+                <i class="fa fa-chevron-left"></i> 设计模式——抽象工厂模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry！Stay foolish！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Asphelzhn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:asphel96@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-TensorRT介绍"><span class="nav-number">1.</span> <span class="nav-text">一.TensorRT介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-训练和推断"><span class="nav-number">1.1.</span> <span class="nav-text">1.训练和推断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-推断应用"><span class="nav-number">1.2.</span> <span class="nav-text">2.推断应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-推断和训练区别"><span class="nav-number">1.3.</span> <span class="nav-text">3.推断和训练区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-TensorRT的效果"><span class="nav-number">1.4.</span> <span class="nav-text">4.TensorRT的效果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-TensorRT进行的优化"><span class="nav-number">2.</span> <span class="nav-text">二.TensorRT进行的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-TensorRT流程"><span class="nav-number">2.1.</span> <span class="nav-text">1.TensorRT流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-TensorRT所做优化"><span class="nav-number">2.2.</span> <span class="nav-text">2.TensorRT所做优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/05/27/tensor_11_TensorRT/';
+          this.page.identifier = '2019/05/27/tensor_11_TensorRT/';
+          this.page.title = '高性能深度学习推断框架—TensorRT';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
