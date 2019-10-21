@@ -86,23 +86,31 @@
 
 
 
-<meta name="description" content="Servlet使用 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   执行原理  生命周期Servlet3.0">
+<meta name="description" content="Servlet使用 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   执行原理  生命周期       修改s">
 <meta name="keywords" content="Java web,Servlet">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java Servlet使用">
 <meta property="og:url" content="http://yoursite.com/2019/10/20/Javaweb_01_servlet/index.html">
 <meta property="og:site_name" content="Edward">
-<meta property="og:description" content="Servlet使用 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   执行原理  生命周期Servlet3.0">
+<meta property="og:description" content="Servlet使用 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   执行原理  生命周期       修改s">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/1.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/2.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/3.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/4.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/5.png">
-<meta property="og:updated_time" content="2019-10-21T12:55:25.192Z">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/6.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/7.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/8.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/9.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/10.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/11.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/13.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/12.png">
+<meta property="og:updated_time" content="2019-10-21T17:57:34.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java Servlet使用">
-<meta name="twitter:description" content="Servlet使用 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   执行原理  生命周期Servlet3.0">
+<meta name="twitter:description" content="Servlet使用 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   执行原理  生命周期       修改s">
 <meta name="twitter:image" content="http://yoursite.com/images/JavaWeb/javaweb01/1.png">
 
 
@@ -384,7 +392,16 @@
 <p><img src="\images\JavaWeb\javaweb01\3.png" alt="1571661852564"></p>
 <h2 id="执行原理"><a href="#执行原理" class="headerlink" title="执行原理"></a>执行原理</h2><p><img src="\images\JavaWeb\javaweb01\4.png" alt="1571662308733"></p>
 <p><img src="\images\JavaWeb\javaweb01\5.png" alt="1571662473098"></p>
-<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><h2 id="Servlet3-0-注解配置"><a href="#Servlet3-0-注解配置" class="headerlink" title="Servlet3.0 注解配置"></a>Servlet3.0 注解配置</h2><h2 id="Servlet的体系结构"><a href="#Servlet的体系结构" class="headerlink" title="Servlet的体系结构"></a>Servlet的体系结构</h2><h2 id="Servlet-–-接口"><a href="#Servlet-–-接口" class="headerlink" title="Servlet – 接口"></a>Servlet – 接口</h2><pre><code>|
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p><img src="\images\JavaWeb\javaweb01\6.png" alt="1571679661329"></p>
+<p><img src="\images\JavaWeb\javaweb01\7.png" alt="1571679709690"></p>
+<p><img src="\images\JavaWeb\javaweb01\8.png" alt="1571679776658"></p>
+<p><img src="\images\JavaWeb\javaweb01\9.png" alt="1571679934177"></p>
+<p><img src="\images\JavaWeb\javaweb01\10.png" alt="1571679982423"></p>
+<p><img src="\images\JavaWeb\javaweb01\11.png" alt="1571680506044"></p>
+<p><img src="\images\JavaWeb\javaweb01\13.png" alt="1571680617861"></p>
+<p>修改servlet创建时机：**</p>
+<p><img src="\images\JavaWeb\javaweb01\12.png" alt="1571680156897"></p>
+<h2 id="Servlet3-0-注解配置"><a href="#Servlet3-0-注解配置" class="headerlink" title="Servlet3.0 注解配置"></a>Servlet3.0 注解配置</h2><h2 id="Servlet的体系结构"><a href="#Servlet的体系结构" class="headerlink" title="Servlet的体系结构"></a>Servlet的体系结构</h2><h2 id="Servlet-–-接口"><a href="#Servlet-–-接口" class="headerlink" title="Servlet – 接口"></a>Servlet – 接口</h2><pre><code>|
 </code></pre><p>  GenericServlet – 抽象类<br>      |<br>  HttpServlet  – 抽象类</p>
 
       
