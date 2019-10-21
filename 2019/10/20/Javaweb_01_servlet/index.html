@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="Servlet使用 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   执行原理  生命周期       修改s">
+<meta name="description" content="Servlet使用 1. 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  2. 步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   3. 执行原理  4. 生命">
 <meta name="keywords" content="Java web,Servlet">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java Servlet使用">
 <meta property="og:url" content="http://yoursite.com/2019/10/20/Javaweb_01_servlet/index.html">
 <meta property="og:site_name" content="Edward">
-<meta property="og:description" content="Servlet使用 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   执行原理  生命周期       修改s">
+<meta property="og:description" content="Servlet使用 1. 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  2. 步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   3. 执行原理  4. 生命">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/1.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/2.png">
@@ -107,10 +107,25 @@
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/11.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/13.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/12.png">
-<meta property="og:updated_time" content="2019-10-21T17:57:34.079Z">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/14.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/15.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/16.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/17.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/18.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/19.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/20.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/21.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb01/25.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/JavaWeb/javaweb01/22.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/JavaWeb/javaweb01/23.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/JavaWeb/javaweb01/24.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/JavaWeb/javaweb01/26.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/JavaWeb/javaweb01/27.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/JavaWeb/javaweb01/28.png">
+<meta property="og:updated_time" content="2019-10-21T19:51:27.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java Servlet使用">
-<meta name="twitter:description" content="Servlet使用 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   执行原理  生命周期       修改s">
+<meta name="twitter:description" content="Servlet使用 1. 概念:servlet: server applet 运行在服务器端的程序。  Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。 我们自定义一个类，实现servelet接口，复写方法  2. 步骤 创建javaEE项目 定义一个类，实现servlet接口     实现接口中的抽象方法 配置servlet   3. 执行原理  4. 生命">
 <meta name="twitter:image" content="http://yoursite.com/images/JavaWeb/javaweb01/1.png">
 
 
@@ -375,12 +390,12 @@
 
       
         <h1 id="Servlet使用"><a href="#Servlet使用" class="headerlink" title="Servlet使用"></a>Servlet使用</h1><p><img src="\images\JavaWeb\javaweb01\1.png" alt="1571661624355"></p>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念:"></a>概念:</h2><p><strong>servlet</strong>: server applet 运行在服务器端的程序。</p>
+<h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念:"></a>1. 概念:</h2><p><strong>servlet</strong>: server applet 运行在服务器端的程序。</p>
 <ul>
 <li>Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。</li>
 <li>我们自定义一个类，实现servelet接口，复写方法</li>
 </ul>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<h2 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2. 步骤"></a>2. 步骤</h2><ol>
 <li>创建javaEE项目</li>
 <li>定义一个类，实现servlet接口 </li>
 </ol>
@@ -390,9 +405,9 @@
 <li>配置servlet</li>
 </ol>
 <p><img src="\images\JavaWeb\javaweb01\3.png" alt="1571661852564"></p>
-<h2 id="执行原理"><a href="#执行原理" class="headerlink" title="执行原理"></a>执行原理</h2><p><img src="\images\JavaWeb\javaweb01\4.png" alt="1571662308733"></p>
+<h2 id="3-执行原理"><a href="#3-执行原理" class="headerlink" title="3. 执行原理"></a>3. 执行原理</h2><p><img src="\images\JavaWeb\javaweb01\4.png" alt="1571662308733"></p>
 <p><img src="\images\JavaWeb\javaweb01\5.png" alt="1571662473098"></p>
-<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p><img src="\images\JavaWeb\javaweb01\6.png" alt="1571679661329"></p>
+<h2 id="4-生命周期"><a href="#4-生命周期" class="headerlink" title="4. 生命周期"></a>4. 生命周期</h2><p><img src="\images\JavaWeb\javaweb01\6.png" alt="1571679661329"></p>
 <p><img src="\images\JavaWeb\javaweb01\7.png" alt="1571679709690"></p>
 <p><img src="\images\JavaWeb\javaweb01\8.png" alt="1571679776658"></p>
 <p><img src="\images\JavaWeb\javaweb01\9.png" alt="1571679934177"></p>
@@ -401,8 +416,37 @@
 <p><img src="\images\JavaWeb\javaweb01\13.png" alt="1571680617861"></p>
 <p>修改servlet创建时机：**</p>
 <p><img src="\images\JavaWeb\javaweb01\12.png" alt="1571680156897"></p>
-<h2 id="Servlet3-0-注解配置"><a href="#Servlet3-0-注解配置" class="headerlink" title="Servlet3.0 注解配置"></a>Servlet3.0 注解配置</h2><h2 id="Servlet的体系结构"><a href="#Servlet的体系结构" class="headerlink" title="Servlet的体系结构"></a>Servlet的体系结构</h2><h2 id="Servlet-–-接口"><a href="#Servlet-–-接口" class="headerlink" title="Servlet – 接口"></a>Servlet – 接口</h2><pre><code>|
-</code></pre><p>  GenericServlet – 抽象类<br>      |<br>  HttpServlet  – 抽象类</p>
+<h2 id="5-Servlet3-0-注解配置"><a href="#5-Servlet3-0-注解配置" class="headerlink" title="5. Servlet3.0 注解配置"></a>5. Servlet3.0 注解配置</h2><p><img src="\images\JavaWeb\javaweb01\14.png" alt="1571683156154"></p>
+<p>创建 Java EE 7以上项目，可以使用servlet 3.1以上版本。</p>
+<p><img src="\images\JavaWeb\javaweb01\15.png" alt="1571684815079"></p>
+<p>查看WebServlet接口实现</p>
+<p><img src="\images\JavaWeb\javaweb01\16.png" alt="1571684988786"></p>
+<p>使用注解配置访问路径映射的类。不需要再用web.xml配置</p>
+<p><img src="\images\JavaWeb\javaweb01\17.png" alt="1571685059202"></p>
+<p><img src="\images\JavaWeb\javaweb01\18.png" alt="1571685448764"></p>
+<h2 id="6-IDEA与tomcat配置"><a href="#6-IDEA与tomcat配置" class="headerlink" title="6. IDEA与tomcat配置"></a>6. IDEA与tomcat配置</h2><p><img src="\images\JavaWeb\javaweb01\19.png" alt="1571685893612"></p>
+<p><img src="\images\JavaWeb\javaweb01\20.png" alt="1571685955502"></p>
+<p><strong>WEB-INF目录下的资源浏览器不能直接访问到。</strong></p>
+<p><strong>Tomcat断点调试</strong>：使用“debug”启动</p>
+<h2 id="7-Servlet的体系结构"><a href="#7-Servlet的体系结构" class="headerlink" title="7. Servlet的体系结构"></a>7. Servlet的体系结构</h2><p><img src="\images\JavaWeb\javaweb01\21.png" alt="1571686478373"></p>
+<p><strong>Servlet 接口</strong></p>
+<p><strong>GenericServlet – 抽象类 （实现Servlet接口）</strong></p>
+<p><img src="\images\JavaWeb\javaweb01\25.png" alt="1571687038235"></p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\JavaWeb\javaweb01\22.png" alt="1571686635254"></p>
+<p><strong>HttpServlet  – 抽象类（继承自GenericServlet ）</strong></p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\JavaWeb\javaweb01\23.png" alt="1571686728706"></p>
+<p>HttpServlet封装了Post和Get方法判断。对http协议的一种封装，简化操作。</p>
+<ul>
+<li>定义类继承HttpServlet</li>
+<li>复写doGet/doPost方法</li>
+</ul>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\JavaWeb\javaweb01\24.png" alt="1571686946303"></p>
+<p>查看源码</p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\JavaWeb\javaweb01\26.png" alt="1571687237335"></p>
+<p><strong>通过浏览器直接访问是Get方式。</strong></p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\JavaWeb\javaweb01\27.png" alt="1571687311861"></p>
+<p><strong>可以通过表单访问doPost方法。</strong></p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\JavaWeb\javaweb01\28.png" alt="1571687462277"></p>
 
       
     </div>
@@ -435,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/20/Java_15_junit/" rel="next" title="Junit测试框架使用">
-                <i class="fa fa-chevron-left"></i> Junit测试框架使用
+              <a href="/2019/06/14/Java_14_construction/" rel="next" title="Java类初始化顺序">
+                <i class="fa fa-chevron-left"></i> Java类初始化顺序
               </a>
             
           </div>
@@ -444,6 +488,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/20/Java_15_junit/" rel="prev" title="Junit测试框架使用">
+                Junit测试框架使用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -605,7 +653,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Servlet使用"><span class="nav-number">1.</span> <span class="nav-text">Servlet使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.1.</span> <span class="nav-text">概念:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">1.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行原理"><span class="nav-number">1.3.</span> <span class="nav-text">执行原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期"><span class="nav-number">1.4.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet3-0-注解配置"><span class="nav-number">1.5.</span> <span class="nav-text">Servlet3.0 注解配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet的体系结构"><span class="nav-number">1.6.</span> <span class="nav-text">Servlet的体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet-–-接口"><span class="nav-number">1.7.</span> <span class="nav-text">Servlet – 接口</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Servlet使用"><span class="nav-number">1.</span> <span class="nav-text">Servlet使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概念"><span class="nav-number">1.1.</span> <span class="nav-text">1. 概念:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-步骤"><span class="nav-number">1.2.</span> <span class="nav-text">2. 步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-执行原理"><span class="nav-number">1.3.</span> <span class="nav-text">3. 执行原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-生命周期"><span class="nav-number">1.4.</span> <span class="nav-text">4. 生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Servlet3-0-注解配置"><span class="nav-number">1.5.</span> <span class="nav-text">5. Servlet3.0 注解配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-IDEA与tomcat配置"><span class="nav-number">1.6.</span> <span class="nav-text">6. IDEA与tomcat配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Servlet的体系结构"><span class="nav-number">1.7.</span> <span class="nav-text">7. Servlet的体系结构</span></a></li></ol></li></ol></div>
             
 
           </div>
