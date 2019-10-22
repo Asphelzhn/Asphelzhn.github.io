@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Edward">
 <meta property="og:description" content="HTML笔记1. web概述1.1 JavaWeb： 使用Java语言开发基于互联网的项目  1.2 软件架构：C/S: Client/Server 客户端/服务器端 * 在用户本地有一个客户端程序，在远程有一个服务器端程序 * 如：QQ，迅雷... * 优点：     1. 用户体验好 * 缺点：     1. 开发、安装，部署，维护 麻烦 B/S: Browser/Server 浏览器/服务器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-22T13:59:57.627Z">
+<meta property="og:updated_time" content="2019-10-22T18:07:11.689Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTML笔记">
 <meta name="twitter:description" content="HTML笔记1. web概述1.1 JavaWeb： 使用Java语言开发基于互联网的项目  1.2 软件架构：C/S: Client/Server 客户端/服务器端 * 在用户本地有一个客户端程序，在远程有一个服务器端程序 * 如：QQ，迅雷... * 优点：     1. 用户体验好 * 缺点：     1. 开发、安装，部署，维护 麻烦 B/S: Browser/Server 浏览器/服务器">
@@ -497,47 +497,57 @@
         * width：
             1. 数值：width=&apos;20&apos; ,数值的单位，默认是 px(像素)
             2. 数值%：占比相对于父元素的比例
-       * 例子
+*特殊字符：空格是&amp;nbsp; 版权是&amp;copy
 </code></pre></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">			&lt;html lang=&quot;ch&quot;&gt;</span><br><span class="line">				&lt;head&gt;</span><br><span class="line">				    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">				    &lt;title&gt;hello&lt;/title&gt;</span><br><span class="line">				&lt;/head&gt;</span><br><span class="line">				&lt;body&gt;</span><br><span class="line"></span><br><span class="line">				&lt;h1&gt;</span><br><span class="line">				    简介</span><br><span class="line">				&lt;/h1&gt;</span><br><span class="line">				&lt;hr color=&quot;#ffd700&quot;&gt;		</span><br><span class="line">				&lt;/body&gt;</span><br><span class="line">			&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<pre><code>​    
-​        3. 图片标签：
-​            * img：展示图片
-​                * 属性：
-​                    * src：指定图片的位置
-​    
-​        * 代码：
-​             &lt;!--展示一张图片 img--&gt;
+<li><p>图片标签：</p>
+<ul>
+<li><p>img：展示图片</p>
+<pre><code>* 属性：
+    * src：指定图片的位置
+    * alt: 加载失败显示替换信息
 
+* 代码：
+     &lt;!--展示一张图片 img--&gt;         
+&lt;img src=&quot;image/jingxuan_2.jpg&quot; align=&quot;right&quot; alt=&quot;古镇&quot; width=&quot;500&quot; height=&quot;500&quot;/&gt;
 
-        &lt;img src=&quot;image/jingxuan_2.jpg&quot; align=&quot;right&quot; alt=&quot;古镇&quot; width=&quot;500&quot; height=&quot;500&quot;/&gt;
+*相对路径：
+    * 以.开头的路径
+    * ./：代表当前目录  ./image/1.jpg
+    * ../:代表上一级目录
+    &lt;img src=&quot;./image/jiangwai_1.jpg&quot;&gt;
 
-        &lt;!--
-            相对路径
-                * 以.开头的路径
-                    * ./：代表当前目录  ./image/1.jpg
-                    * ../:代表上一级目录
-         --&gt;
-
-        &lt;img src=&quot;./image/jiangwai_1.jpg&quot;&gt;
-
-        &lt;img src=&quot;../image/jiangwai_1.jpg&quot;&gt;
-4. 列表标签：
-    * 有序列表：
-        * ol:
-        * li:
-    * 无序列表：
-        * ul:
-        * li:
-5. 链接标签：
-    * a:定义一个超链接
-        * 属性：
-            * href：指定访问资源的URL(统一资源定位符)
-            * target：指定打开资源的方式
-                * _self:默认值，在当前页面打开
-                * _blank：在空白页面打开
-
+    &lt;img src=&quot;../image/jiangwai_1.jpg&quot;&gt;            
+</code></pre></li>
+</ul>
+</li>
+<li><p>列表标签：</p>
+<ul>
+<li>有序列表：<ul>
+<li>ol:<ul>
+<li>属性<br>  type: 标识样式<br>  start: 开始顺序</li>
+</ul>
+</li>
+<li>li:</li>
+</ul>
+</li>
+<li>无序列表：<ul>
+<li>ul:<ul>
+<li>属性：<br>  type: 列表项样式</li>
+</ul>
+</li>
+<li>li:</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>链接标签：</p>
+<pre><code>* a:定义一个超链接
+    * 属性：
+        * href：指定访问资源的URL(统一资源定位符)
+        * target：指定打开资源的方式
+            * _self:默认值，在当前页面打开
+            * _blank：在空白页面打开
+        * mailto：发送邮件
     * 代码：
          &lt;!--超链接  a--&gt;
 
@@ -551,342 +561,43 @@
         &lt;br&gt;
 
         &lt;a href=&quot;./5_列表标签.html&quot;&gt;列表标签&lt;/a&gt;&lt;br&gt;
-        &lt;a href=&quot;mailto:itcast@itcast.cn&quot;&gt;联系我们&lt;/a&gt;
+        &lt;a href=&quot;mailto:hello@hello.com&quot;&gt;联系我&lt;/a&gt;
 
         &lt;br&gt;
-        &lt;a href=&quot;http://www.itcast.cn&quot;&gt;&lt;img src=&quot;image/jiangwai_1.jpg&quot;&gt;&lt;/a&gt;
-6. div和span：
-    * div:每一个div占满一整行。块级标签
-    * span：文本信息在一行展示，行内标签 内联标签
+        &lt;a href=&quot;https://www.baidu.com&quot;&gt;&lt;img src=&quot;image/1.jpg&quot;&gt;&lt;/a&gt;
+</code></pre></li>
+<li><p>div和span：用于css控制样式</p>
+<pre><code>* div:每一个div占满一整行。块级标签
+* span：文本信息在一行展示，行内标签 内联标签
+</code></pre></li>
+</ol>
+<ol start="7">
+<li>语义化标签：html5中为了提高程序的可读性，提供了一些标签。没有样式，结合css用</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. &lt;header&gt;：页眉</span><br><span class="line">2. &lt;footer&gt;：页脚</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li><p>表格标签：</p>
+<pre><code>* table：定义表格
+    * width：宽度
+    * border：边框
+    * cellpadding：定义内容和单元格的距离
+    * cellspacing：定义单元格之间的距离。如果指定为0，则单元格的线会合为一条、
+    * bgcolor：背景色
+    * align：对齐方式
+* tr：定义行
+    * bgcolor：背景色
+    * align：对齐方式
+* td：定义单元格
+    * colspan：合并列 &lt;td clospan=&quot;2&quot;&gt;&lt;/td&gt;
+    * rowspan：合并行 
+* th：定义表头单元格
+* &lt;caption&gt;：表格标题
+* &lt;thead&gt;：表示表格的头部分
+* &lt;tbody&gt;：表示表格的体部分
+* &lt;tfoot&gt;：表示表格的脚部分
+</code></pre></li>
+</ol>
 
-7. 语义化标签：html5中为了提高程序的可读性，提供了一些标签。
-    1. &lt;header&gt;：页眉
-    2. &lt;footer&gt;：页脚
-
-
-8. 表格标签：
-    * table：定义表格
-        * width：宽度
-        * border：边框
-        * cellpadding：定义内容和单元格的距离
-        * cellspacing：定义单元格之间的距离。如果指定为0，则单元格的线会合为一条、
-        * bgcolor：背景色
-        * align：对齐方式
-    * tr：定义行
-        * bgcolor：背景色
-        * align：对齐方式
-    * td：定义单元格
-        * colspan：合并列
-        * rowspan：合并行
-    * th：定义表头单元格
-    * &lt;caption&gt;：表格标题
-    * &lt;thead&gt;：表示表格的头部分
-    * &lt;tbody&gt;：表示表格的体部分
-    * &lt;tfoot&gt;：表示表格的脚部分
-</code></pre><h2 id="案例：旅游网站首页"><a href="#案例：旅游网站首页" class="headerlink" title="案例：旅游网站首页"></a>案例：旅游网站首页</h2><pre><code>1. 确定使用table来完成布局    
-2. 如果某一行只有一个单元格，则使用&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-3. 如果某一行有多个单元格，则使用
-    &lt;tr&gt;
-        &lt;td&gt;
-            &lt;table&gt;&lt;/table&gt;
-        &lt;/td&gt;
-    &lt;/tr&gt;
-
-4. 代码实现
-
-    &lt;!DOCTYPE html&gt;
-    &lt;html lang=&quot;en&quot;&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot;&gt;
-        &lt;title&gt;黑马旅游网&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-
-        &lt;!--采用table来完成布局--&gt;
-        &lt;!--最外层的table，用于整个页面的布局--&gt;
-        &lt;table width=&quot;100%&quot; align=&quot;center&quot;&gt;
-           &lt;!-- 第1行 --&gt;
-            &lt;tr&gt;
-                &lt;td&gt;
-                    &lt;img src=&quot;image/top_banner.jpg&quot; width=&quot;100%&quot; alt=&quot;&quot;&gt;
-                &lt;/td&gt;
-            &lt;/tr&gt;
-
-            &lt;!-- 第2行 --&gt;
-            &lt;tr&gt;
-                &lt;td&gt;
-                    &lt;table width=&quot;100%&quot; align=&quot;center&quot;&gt;
-                        &lt;tr&gt;
-                            &lt;td&gt;
-                                &lt;img src=&quot;image/logo.jpg&quot; alt=&quot;&quot;&gt;
-                            &lt;/td&gt;
-                            &lt;td&gt;
-                                &lt;img src=&quot;image/search.png&quot; alt=&quot;&quot;&gt;
-                            &lt;/td&gt;
-                            &lt;td&gt;
-                                &lt;img src=&quot;image/hotel_tel.png&quot; alt=&quot;&quot;&gt;
-                            &lt;/td&gt;
-                        &lt;/tr&gt;
-                    &lt;/table&gt;
-
-                &lt;/td&gt;
-            &lt;/tr&gt;
-
-            &lt;!-- 第3行 --&gt;
-            &lt;tr&gt;
-                &lt;td&gt;
-                    &lt;table width=&quot;100%&quot; align=&quot;center&quot;&gt;
-                        &lt;tr bgcolor=&quot;#ffd700&quot; align=&quot;center&quot; height=&quot;45&quot; &gt;
-                            &lt;td&gt;
-                                &lt;a href=&quot;&quot;&gt;首页&lt;/a&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-                                门票
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-                                门票
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-                                门票
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-                                门票
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-                                门票
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-                                门票
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-                                门票
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-                                门票
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-                                门票
-                            &lt;/td&gt;
-                        &lt;/tr&gt;
-                    &lt;/table&gt;
-                &lt;/td&gt;
-            &lt;/tr&gt;
-
-            &lt;!-- 第4行 轮播图 --&gt;
-            &lt;tr&gt;
-                &lt;td&gt;
-                    &lt;img src=&quot;image/banner_3.jpg&quot; alt=&quot;&quot; width=&quot;100%&quot;&gt;
-                &lt;/td&gt;
-            &lt;/tr&gt;
-
-            &lt;!-- 第5行 黑马精选--&gt;
-            &lt;tr&gt;
-                &lt;td&gt;
-                    &lt;img src=&quot;image/icon_5.jpg&quot; alt=&quot;&quot;&gt;
-                    黑马精选
-                    &lt;hr  color=&quot;#ffd700&quot; &gt;
-                &lt;/td&gt;
-            &lt;/tr&gt;
-
-            &lt;!-- 第6行 --&gt;
-            &lt;tr&gt;
-                &lt;td&gt;
-                    &lt;table align=&quot;center&quot; width=&quot;95%&quot;&gt;
-                        &lt;tr&gt;
-                            &lt;td&gt;
-
-                                &lt;img src=&quot;image/jiangxuan_1.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 899&lt;/font&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                                &lt;img src=&quot;image/jiangxuan_1.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 899&lt;/font&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                                &lt;img src=&quot;image/jiangxuan_1.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 899&lt;/font&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                                &lt;img src=&quot;image/jiangxuan_1.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 899&lt;/font&gt;
-                            &lt;/td&gt;
-                        &lt;/tr&gt;
-                    &lt;/table&gt;
-                &lt;/td&gt;
-            &lt;/tr&gt;
-
-            &lt;!-- 第7行 国内游 --&gt;
-            &lt;tr&gt;
-                &lt;td&gt;
-                    &lt;img src=&quot;image/icon_6.jpg&quot; alt=&quot;&quot;&gt;
-                    国内游
-                    &lt;hr  color=&quot;#ffd700&quot; &gt;
-                &lt;/td&gt;
-            &lt;/tr&gt;
-
-            &lt;!-- 第8行 --&gt;
-            &lt;tr&gt;
-                &lt;td&gt;
-                    &lt;table align=&quot;center&quot; width=&quot;95%&quot;&gt;
-                        &lt;tr&gt;
-                            &lt;td rowspan=&quot;2&quot;&gt;
-                                &lt;img src=&quot;image/guonei_1.jpg&quot; alt=&quot;&quot;&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                                &lt;img src=&quot;image/jiangxuan_2.jpg&quot; alt=&quot;&quot; height=&quot;100%&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                                &lt;img src=&quot;image/jiangxuan_2.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                                &lt;img src=&quot;image/jiangxuan_2.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-                        &lt;/tr&gt;
-
-                        &lt;tr&gt;
-                            &lt;td&gt;
-
-                                &lt;img src=&quot;image/jiangxuan_2.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                                &lt;img src=&quot;image/jiangxuan_2.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                                &lt;img src=&quot;image/jiangxuan_2.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-​                            &lt;/tr&gt;
-​                        &lt;/table&gt;
-​                    &lt;/td&gt;
-​                &lt;/tr&gt;
-​        
-​                &lt;!-- 第9行 境外游 --&gt;
-​                &lt;tr&gt;
-​                    &lt;td&gt;
-​                        &lt;img src=&quot;image/icon_7.jpg&quot; alt=&quot;&quot;&gt;
-​                        境外游
-​                        &lt;hr  color=&quot;#ffd700&quot; &gt;
-​                    &lt;/td&gt;
-​                &lt;/tr&gt;
-​        
-                &lt;!-- 第10行 --&gt;
-                &lt;tr&gt;
-                    &lt;td&gt;
-                        &lt;table align=&quot;center&quot; width=&quot;95%&quot;&gt;
-                            &lt;tr&gt;
-                                &lt;td rowspan=&quot;2&quot;&gt;
-                                    &lt;img src=&quot;image/jiangwai_1.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;/td&gt;
-
-
-                            &lt;td&gt;
-
-                                &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot; height=&quot;100%&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                               &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                               &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-                        &lt;/tr&gt;
-
-                        &lt;tr&gt;
-                            &lt;td&gt;
-
-                               &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                               &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-
-                            &lt;td&gt;
-
-                               &lt;img src=&quot;image/jiangxuan_3.jpg&quot; alt=&quot;&quot;&gt;
-                                &lt;p&gt;上海飞三亚五天4晚自由行(春节销售+亲子+蜜月+自由行)&lt;/p&gt;
-                                &lt;font color=&quot;red&quot;&gt;&amp;yen; 699&lt;/font&gt;
-                            &lt;/td&gt;
-​                            &lt;/tr&gt;
-​                        &lt;/table&gt;
-​                    &lt;/td&gt;
-​                &lt;/tr&gt;
-​                &lt;!-- 第11行 --&gt;
-​                &lt;tr&gt;
-​                    &lt;td&gt;
-​                        &lt;img src=&quot;image/footer_service.png&quot; alt=&quot;&quot; width=&quot;100%&quot;&gt;
-​                    &lt;/td&gt;
-​                &lt;/tr&gt;
-​        
-​                &lt;!-- 第12行 --&gt;
-​                &lt;tr&gt;
-​                    &lt;td align=&quot;center&quot; bgcolor=&quot;#ffd700&quot; height=&quot;40&quot;&gt;
-​                        &lt;font color=&quot;gray&quot; size=&quot;2&quot;&gt;
-​                        江苏传智播客教育科技股份有限公司
-​                        版权所有Copyright 2006-2018&amp;copy;, All Rights Reserved 苏ICP备16007882
-​                        &lt;/font&gt;
-​                    &lt;/td&gt;
-​                &lt;/tr&gt;
-​                
-            &lt;/table&gt;    
-​        &lt;/body&gt;
-​        &lt;/html&gt;
-</code></pre>
       
     </div>
     
@@ -916,8 +627,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/10/tensor_05_print_tensor/" rel="next" title="tensorflow打印tensor值">
-                <i class="fa fa-chevron-left"></i> tensorflow打印tensor值
+              <a href="/2019/03/17/front_02_CSS/" rel="next" title="CSS笔记">
+                <i class="fa fa-chevron-left"></i> CSS笔记
               </a>
             
           </div>
@@ -926,8 +637,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/17/front_02_CSS/" rel="prev" title="CSS笔记">
-                CSS笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/18/paper_03_Dynamic Space-Time Scheduling for GPU Inference/" rel="prev" title="Dynamic Space-Time Scheduling for GPU Inference论文总结">
+                Dynamic Space-Time Scheduling for GPU Inference论文总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1090,7 +801,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML笔记"><span class="nav-number">1.</span> <span class="nav-text">HTML笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-web概述"><span class="nav-number">1.1.</span> <span class="nav-text">1. web概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-JavaWeb："><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 JavaWeb：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-软件架构："><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 软件架构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-B-S架构详解"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 B/S架构详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-HTML笔记"><span class="nav-number">1.2.</span> <span class="nav-text">2. HTML笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-标签笔记："><span class="nav-number">1.3.</span> <span class="nav-text">3. 标签笔记：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例：旅游网站首页"><span class="nav-number">1.4.</span> <span class="nav-text">案例：旅游网站首页</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML笔记"><span class="nav-number">1.</span> <span class="nav-text">HTML笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-web概述"><span class="nav-number">1.1.</span> <span class="nav-text">1. web概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-JavaWeb："><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 JavaWeb：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-软件架构："><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 软件架构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-B-S架构详解"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 B/S架构详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-HTML笔记"><span class="nav-number">1.2.</span> <span class="nav-text">2. HTML笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-标签笔记："><span class="nav-number">1.3.</span> <span class="nav-text">3. 标签笔记：</span></a></li></ol></li></ol></div>
             
 
           </div>
