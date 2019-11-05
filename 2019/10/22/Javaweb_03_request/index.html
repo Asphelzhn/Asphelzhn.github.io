@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/2.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/3.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/5.png">
-<meta property="og:updated_time" content="2019-11-05T21:10:15.802Z">
+<meta property="og:updated_time" content="2019-11-05T21:22:10.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java web Request对象">
 <meta name="twitter:description" content="Request对象1. request对象和response对象的原理  request和response对象是由服务器创建的。我们来使用它们 request对象是来获取请求消息，response对象是来设置响应消息  2. request对象继承体系结构：ServletRequest        –    接口        |    继承HttpServletRequest    – 接口">
@@ -372,44 +372,56 @@
 </ol>
 <h2 id="2-request对象继承体系结构："><a href="#2-request对象继承体系结构：" class="headerlink" title="2. request对象继承体系结构："></a>2. request对象继承体系结构：</h2><p>ServletRequest        –    接口<br>        |    继承<br>HttpServletRequest    – 接口<br>        |    实现<br>org.apache.catalina.connector.RequestFacade 类(tomcat)</p>
 <p><img src="\images\JavaWeb\javaweb03\2.png" alt="1571781863668"></p>
-<h2 id="3-request功能："><a href="#3-request功能：" class="headerlink" title="3. request功能："></a>3. request功能：</h2><ol>
-<li><strong>获取请求消息数据</strong></li>
+<h2 id="3-request功能：获取请求消息数据"><a href="#3-request功能：获取请求消息数据" class="headerlink" title="3. request功能：获取请求消息数据"></a>3. request功能：获取请求消息数据</h2><ol>
+<li><strong><em>获取请求行数据</em></strong></li>
 </ol>
-<pre><code>1. ***获取请求行数据***
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /day14/demo1?name=zhangsan	HTTP/1.1</span><br></pre></td></tr></table></figure>
-
-
-* 方法：
-
-1. 获取请求方式 ：GET
-
-    * String getMethod()  
-2. (*)**获取虚拟目录**：/day14
-
-    * String getContextPath()
-
-    3. 获取Servlet路径: /demo1
-        * String getServletPath()
-4. 获取get方式请求参数：name=zhangsan&amp;age=18
-
-* String getQueryString()
-    * 获取的请求参数之间用&amp;分割
-5. (*)**获取请求URI**：/day14/demo1
-    * String getRequestURI():        /day14/demo1
-* StringBuffer getRequestURL()  :http://localhost/day14/demo1
-
-    * URL:统一资源定位符 ： http://localhost/day14/demo1    中华人民共和国
-    * URI：统一资源标识符 : /day14/demo1                    共和国
-
-6. 获取协议及版本：HTTP/1.1
-* String getProtocol()
-* 不在HttpServletRequest中，在父类ServletRequest中
-
-7. 获取客户机的IP地址：
-
-* String getRemoteAddr()
-</code></pre><ol start="2">
+<ul>
+<li>方法：</li>
+</ul>
+<ol>
+<li><p>获取请求方式 ：GET</p>
+<ul>
+<li>String getMethod()  </li>
+</ul>
+</li>
+<li><p>(*)<strong>获取虚拟目录</strong>：/day14</p>
+<ul>
+<li>String getContextPath()</li>
+</ul>
+</li>
+<li><p>获取Servlet路径: /demo1</p>
+<pre><code>* String getServletPath()
+</code></pre></li>
+<li>获取get方式请求参数：name=zhangsan&amp;age=18</li>
+</ol>
+<ul>
+<li>String getQueryString()<ul>
+<li>获取的请求参数之间用&amp;分割</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li>(*)<strong>获取请求URI</strong>：/day14/demo1<ul>
+<li>String getRequestURI():        /day14/demo1</li>
+<li>StringBuffer getRequestURL()  :<a href="http://localhost/day14/demo1" target="_blank" rel="noopener">http://localhost/day14/demo1</a></li>
+<li>URL:统一资源定位符 ： <a href="http://localhost/day14/demo1" target="_blank" rel="noopener">http://localhost/day14/demo1</a>    中华人民共和国</li>
+<li>URI：统一资源标识符 : /day14/demo1                    共和国</li>
+</ul>
+</li>
+<li>获取协议及版本：HTTP/1.1</li>
+</ol>
+<ul>
+<li>String getProtocol()</li>
+<li>不在HttpServletRequest中，在父类ServletRequest中</li>
+</ul>
+<ol start="7">
+<li>获取客户机的IP地址：</li>
+</ol>
+<ul>
+<li>String getRemoteAddr()</li>
+</ul>
+<ol start="2">
 <li><p><strong><em>获取请求头数据</em></strong></p>
 <pre><code>* 方法：
     * (*)String getHeader(String name):通过请求头的名称获取请求头的值
@@ -759,7 +771,7 @@ druid数据库连接池druid.properties
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Request对象"><span class="nav-number">1.</span> <span class="nav-text">Request对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-request对象和response对象的原理"><span class="nav-number">1.1.</span> <span class="nav-text">1. request对象和response对象的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-request对象继承体系结构："><span class="nav-number">1.2.</span> <span class="nav-text">2. request对象继承体系结构：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-request功能："><span class="nav-number">1.3.</span> <span class="nav-text">3. request功能：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-request其他功能"><span class="nav-number">1.4.</span> <span class="nav-text">4. request其他功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-用户登录案例"><span class="nav-number">1.5.</span> <span class="nav-text">5. 用户登录案例</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Request对象"><span class="nav-number">1.</span> <span class="nav-text">Request对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-request对象和response对象的原理"><span class="nav-number">1.1.</span> <span class="nav-text">1. request对象和response对象的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-request对象继承体系结构："><span class="nav-number">1.2.</span> <span class="nav-text">2. request对象继承体系结构：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-request功能：获取请求消息数据"><span class="nav-number">1.3.</span> <span class="nav-text">3. request功能：获取请求消息数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-request其他功能"><span class="nav-number">1.4.</span> <span class="nav-text">4. request其他功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-用户登录案例"><span class="nav-number">1.5.</span> <span class="nav-text">5. 用户登录案例</span></a></li></ol></li></ol></div>
             
 
           </div>
