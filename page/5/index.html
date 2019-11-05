@@ -1776,7 +1776,7 @@ command：命令名，相应功能的英文单词或单词的缩写[-options]：
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/python_04_函数进阶/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/python_05_flaskerror/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1795,7 +1795,7 @@ command：命令名，相应功能的英文单词或单词的缩写[-options]：
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/24/python_04_函数进阶/" itemprop="url">Python函数进阶</a></h1>
+                <a class="post-title-link" href="/2018/12/24/python_05_flaskerror/" itemprop="url">flask生成 secret key</a></h1>
         
 
         <div class="post-meta">
@@ -1848,9 +1848,9 @@ command：命令名，相应功能的英文单词或单词的缩写[-options]：
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/24/python_04_函数进阶/#comments" itemprop="discussionUrl">
+                <a href="/2018/12/24/python_05_flaskerror/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/12/24/python_04_函数进阶/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/12/24/python_05_flaskerror/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1880,29 +1880,13 @@ command：命令名，相应功能的英文单词或单词的缩写[-options]：
       
         
           
-          函数进阶目标
-函数参数和返回值的作用
-函数的返回值 进阶
-函数的参数 进阶
-递归函数
-
-01. 函数参数和返回值的作用函数根据 有没有参数 以及 有没有返回值，可以 相互组合，一共有 4 种 组合形式
-
-无参数，无返回值
-无参数，有返回值
-有参数，无返回值
-有参数，有返回值
-
-
-
-定义函数时，是否接收参数，或者是否返回结果，是根据 实际的功能需求 来决定的！
-
-
-如果函数 内部处理的数据不确定，就
+          Flask SECRET_KEY报错在flask项目中，Session, Cookies以及一些第三方扩展都会用到SECRET_KEY值，这是一个比较重要的配置值。
+在使用flask时，产生了这个错误：
+1RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on th
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/12/24/python_04_函数进阶/#more" rel="contents">
+            <a class="btn" href="/2018/12/24/python_05_flaskerror/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
