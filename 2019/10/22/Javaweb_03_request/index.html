@@ -97,8 +97,9 @@
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/1.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/2.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/3.png">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/4.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/5.png">
-<meta property="og:updated_time" content="2019-11-05T21:43:31.520Z">
+<meta property="og:updated_time" content="2019-11-05T22:22:59.997Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java web Request对象">
 <meta name="twitter:description" content="Request对象1. request对象和response对象的原理  request和response对象是由服务器创建的。我们来使用它们 request对象是来获取请求消息，response对象是来设置响应消息  2. request对象继承体系结构：ServletRequest        –    接口        |    继承HttpServletRequest    – 接口">
@@ -402,14 +403,16 @@
 </li>
 </ul>
 <ol start="5">
-<li>(*)<strong>获取请求URI</strong>：/day14/demo1<ul>
+<li><p>(*)<strong>获取请求URI</strong>：/day14/demo1</p>
+<ul>
 <li>String getRequestURI():        /day14/demo1</li>
 <li>StringBuffer getRequestURL()  :<a href="http://localhost/day14/demo1" target="_blank" rel="noopener">http://localhost/day14/demo1</a></li>
 <li>URL:统一资源定位符 ： <a href="http://localhost/day14/demo1" target="_blank" rel="noopener">http://localhost/day14/demo1</a>    中华人民共和国</li>
 <li>URI：统一资源标识符 : /day14/demo1                    共和国</li>
 </ul>
 </li>
-<li>获取协议及版本：HTTP/1.1</li>
+<li><p>获取协议及版本：HTTP/1.1</p>
+</li>
 </ol>
 <ul>
 <li>String getProtocol()</li>
@@ -481,8 +484,7 @@
 
       <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.setCharacterEncoding(&quot;utf-8&quot;);</span><br></pre></td></tr></table></figure>
 </code></pre><ol start="2">
-<li><p><strong>请求转发：</strong>一种在服务器内部的资源跳转方式</p>
-<p> 步骤：</p>
+<li><p><strong>请求转发：</strong>一种在服务器内部的资源跳转方式<br> 步骤：</p>
 <ol>
 <li><p>通过request对象获取请求转发器对象：</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RequestDispatcher getRequestDispatcher(String path)</span><br></pre></td></tr></table></figure>
@@ -524,8 +526,10 @@
 </ol>
 <ol start="4">
 <li><strong>获取ServletContext：</strong><pre><code>* ServletContext getServletContext()
-* ![1571854342133](\images\JavaWeb\javaweb03\4.png)
-</code></pre></li>
+</code></pre><ul>
+<li><img src="\images\JavaWeb\javaweb03\4.png" alt="1571854342133"></li>
+</ul>
+</li>
 </ol>
 <h2 id="5-用户登录案例"><a href="#5-用户登录案例" class="headerlink" title="5. 用户登录案例"></a>5. 用户登录案例</h2><ul>
 <li><p>用户登录案例需求：</p>
@@ -610,6 +614,10 @@ druid数据库连接池druid.properties
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/05/Java_16_IDEA/" rel="prev" title="IDEA工具常用命令">
+                IDEA工具常用命令 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -700,7 +708,7 @@ druid数据库连接池druid.properties
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -711,7 +719,7 @@ druid数据库连接池druid.properties
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -722,7 +730,7 @@ druid数据库连接池druid.properties
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
