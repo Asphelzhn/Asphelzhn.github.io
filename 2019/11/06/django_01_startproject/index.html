@@ -86,21 +86,24 @@
 
 
 
-<meta name="description" content="Django1.1 软件框架一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。 一个软件框架是由其中各个软件模块组成的，每一个模块都有特定的功能，模块与模块之间通过相互配合来完成软件的开发。 软件框架是针对某一类软件设计问题而产生的。  1.2 MVC框架1.2.1 MVC简介MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人">
+<meta name="description" content="Django1 软件框架一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。 一个软件框架是由其中各个软件模块组成的，每一个模块都有特定的功能，模块与模块之间通过相互配合来完成软件的开发。 软件框架是针对某一类软件设计问题而产生的。  2 MVC框架2.1 MVC简介MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人员给 sma">
 <meta name="keywords" content="Python,Django">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Django框架笔记">
 <meta property="og:url" content="http://yoursite.com/2019/11/06/django_01_startproject/index.html">
 <meta property="og:site_name" content="Edward">
-<meta property="og:description" content="Django1.1 软件框架一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。 一个软件框架是由其中各个软件模块组成的，每一个模块都有特定的功能，模块与模块之间通过相互配合来完成软件的开发。 软件框架是针对某一类软件设计问题而产生的。  1.2 MVC框架1.2.1 MVC简介MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人">
+<meta property="og:description" content="Django1 软件框架一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。 一个软件框架是由其中各个软件模块组成的，每一个模块都有特定的功能，模块与模块之间通过相互配合来完成软件的开发。 软件框架是针对某一类软件设计问题而产生的。  2 MVC框架2.1 MVC简介MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人员给 sma">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/Django/django01/1.png">
 <meta property="og:image" content="http://yoursite.com/images/Django/django01/2.png">
 <meta property="og:image" content="http://yoursite.com/images/Django/django01/3.png">
-<meta property="og:updated_time" content="2019-11-06T22:09:48.269Z">
+<meta property="og:image" content="http://yoursite.com/images/Django/django01/4.png">
+<meta property="og:image" content="http://yoursite.com/images/Django/django01/5.png">
+<meta property="og:image" content="http://yoursite.com/images/Django/django01/6.png">
+<meta property="og:updated_time" content="2019-11-06T22:20:24.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django框架笔记">
-<meta name="twitter:description" content="Django1.1 软件框架一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。 一个软件框架是由其中各个软件模块组成的，每一个模块都有特定的功能，模块与模块之间通过相互配合来完成软件的开发。 软件框架是针对某一类软件设计问题而产生的。  1.2 MVC框架1.2.1 MVC简介MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人">
+<meta name="twitter:description" content="Django1 软件框架一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。 一个软件框架是由其中各个软件模块组成的，每一个模块都有特定的功能，模块与模块之间通过相互配合来完成软件的开发。 软件框架是针对某一类软件设计问题而产生的。  2 MVC框架2.1 MVC简介MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人员给 sma">
 <meta name="twitter:image" content="http://yoursite.com/images/Django/django01/1.png">
 
 
@@ -364,25 +367,51 @@
       
 
       
-        <h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h1><h2 id="1-1-软件框架"><a href="#1-1-软件框架" class="headerlink" title="1.1 软件框架"></a>1.1 软件框架</h2><p>一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。</p>
+        <h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h1><h2 id="1-软件框架"><a href="#1-软件框架" class="headerlink" title="1 软件框架"></a>1 软件框架</h2><p>一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。</p>
 <p>一个软件框架是由其中各个软件模块组成的，每一个模块都有特定的功能，模块与模块之间通过相互配合来完成软件的开发。</p>
 <p>软件框架是针对某一类软件设计问题而产生的。</p>
 <p><img src="\images\Django\django01\1.png" alt="image-20191106230343203"></p>
-<h2 id="1-2-MVC框架"><a href="#1-2-MVC框架" class="headerlink" title="1.2 MVC框架"></a>1.2 MVC框架</h2><h3 id="1-2-1-MVC简介"><a href="#1-2-1-MVC简介" class="headerlink" title="1.2.1 MVC简介"></a>1.2.1 MVC简介</h3><p>MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人员给 smalltalk语言发明的一中软件设计模式。</p>
+<h2 id="2-MVC框架"><a href="#2-MVC框架" class="headerlink" title="2 MVC框架"></a>2 MVC框架</h2><h3 id="2-1-MVC简介"><a href="#2-1-MVC简介" class="headerlink" title="2.1 MVC简介"></a>2.1 MVC简介</h3><p>MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人员给 smalltalk语言发明的一中软件设计模式。</p>
 <p>MVC的产生理念： <strong>分工</strong>。让专门的人去做专门的事。</p>
 <p>MVC的核心思想： <strong>解耦</strong>。</p>
 <p>MVC的思想被应用在的web开发的方面，产生了<strong>web MVC框架</strong>。  </p>
-<h3 id="1-2-2-Web-MVC框架模块功能"><a href="#1-2-2-Web-MVC框架模块功能" class="headerlink" title="1.2.2 Web MVC框架模块功能"></a>1.2.2 Web MVC框架模块功能</h3><p>通过浏览器注册用户信息。</p>
+<h3 id="2-2-Web-MVC框架模块功能"><a href="#2-2-Web-MVC框架模块功能" class="headerlink" title="2.2 Web MVC框架模块功能"></a>2.2 Web MVC框架模块功能</h3><p>通过浏览器注册用户信息。</p>
 <p><img src="\images\Django\django01\2.png" alt="image-20191106230607584"></p>
 <p><strong>M:Model,模型，</strong>和数据库进行交互。</p>
 <p><strong>V:View,视图</strong>， 产生html页面。</p>
 <p><strong>C:Controller,控制器,</strong> 接收请求，进行处理，与M和V进行交互，返回应答。</p>
-<h2 id="1-3-Django框架"><a href="#1-3-Django框架" class="headerlink" title="1.3 Django框架"></a>1.3 Django框架</h2><h3 id="1-3-1-简介"><a href="#1-3-1-简介" class="headerlink" title="1.3.1 简介"></a>1.3.1 简介</h3><p>Django是劳伦斯出版集团的开发人员为开发新闻内容网站而设计出来的一个软件，它遵循MVC思想，但是有自己的一个名词，叫做<strong>MVT</strong>。</p>
+<h2 id="3-Django框架"><a href="#3-Django框架" class="headerlink" title="3 Django框架"></a>3 Django框架</h2><h3 id="3-1-简介"><a href="#3-1-简介" class="headerlink" title="3.1 简介"></a>3.1 简介</h3><p>Django是劳伦斯出版集团的开发人员为开发新闻内容网站而设计出来的一个软件，它遵循MVC思想，但是有自己的一个名词，叫做<strong>MVT</strong>。</p>
 <p>Django遵循快速开发和DRY原则。Do not repeat yourself.不要自己去重复一些工作。</p>
-<h3 id="1-3-2-MVT各部分功能"><a href="#1-3-2-MVT各部分功能" class="headerlink" title="1.3.2  MVT各部分功能"></a>1.3.2  MVT各部分功能</h3><p><img src="\images\Django\django01\3.png" alt="image-20191106230822940"></p>
+<h3 id="3-2-MVT各部分功能"><a href="#3-2-MVT各部分功能" class="headerlink" title="3.2  MVT各部分功能"></a>3.2  MVT各部分功能</h3><p><img src="\images\Django\django01\3.png" alt="image-20191106230822940"></p>
 <p><strong>M:Model,模型</strong>， 和MVC中M功能相同，和数据库进行交互。</p>
 <p><strong>V:View,视图</strong>， 和MVC中C功能相同，接收请求，进行处理，与M和T进行交互，返回应答。</p>
 <p><strong>T:Template,模板</strong>， 和MVC中V功能相同，产生html页面。</p>
+<h1 id="4-项目创建"><a href="#4-项目创建" class="headerlink" title="4 项目创建"></a>4 项目创建</h1><h2 id="4-1-创建Django项目"><a href="#4-1-创建Django项目" class="headerlink" title="4.1 创建Django项目"></a>4.1 创建Django项目</h2><p>命令：<code>django-admin startproject 项目名</code></p>
+<p>注意：创建应用必须先进入虚拟环境。</p>
+<p>项目目录如下：</p>
+<p><img src="\images\Django\django01\4.png" alt="image-20191106231636800"></p>
+<p><strong>init</strong>.py: 说明test1是一个python包。</p>
+<p>settings.py: 项目的配置文件。</p>
+<p>urls.py: 进行url路由的配置。</p>
+<p>wsgi.py: web服务器和Django交互的入口。</p>
+<p>manage.py:  项目的管理文件。</p>
+<h2 id="4-2-创建Django应用"><a href="#4-2-创建Django应用" class="headerlink" title="4.2 创建Django应用"></a>4.2 创建Django应用</h2><p><img src="\images\Django\django01\5.png" alt="image-20191106231733279"></p>
+<p>一个项目由很多个应用组成的，每一个应用完成一个功能模块。</p>
+<p>创建应用的命令如下：</p>
+<p><code>python manage.py startapp 应用名</code></p>
+<p>注意：创建应用时需要先进入项目目录。</p>
+<p>应用目录如下：</p>
+<p><img src="\images\Django\django01\6.png" alt="image-20191106231833699"></p>
+<p><strong>init</strong>.py: 说明目录是一个Python模块。</p>
+<p>models.py: 写和数据库项目的内容, 设计模型类。</p>
+<p>views.py: ，接收请求，进行处理，与M和T进行交互，返回应答。</p>
+<p>定义处理函数，视图函数。</p>
+<p>tests.py: 写测试代码的文件。</p>
+<p>admin.py: 网站后台管理相关的文件。</p>
+<h2 id="4-3-应用注册"><a href="#4-3-应用注册" class="headerlink" title="4.3 应用注册"></a>4.3 应用注册</h2><p>建立应用和项目之间的联系，需要对应用进行注册。</p>
+<p>修改settings.py中的INSTALLED_APPS配置项。</p>
+<h2 id="4-4-启动项目"><a href="#4-4-启动项目" class="headerlink" title="4.4 启动项目"></a>4.4 启动项目</h2><p>运行开发web服务器命令：</p>
+<p>  <code>python manage.py runserver</code></p>
 
       
     </div>
@@ -585,7 +614,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Django"><span class="nav-number">1.</span> <span class="nav-text">Django</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-软件框架"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 软件框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-MVC框架"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 MVC框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-MVC简介"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 MVC简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-Web-MVC框架模块功能"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 Web MVC框架模块功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Django框架"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 Django框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-简介"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-MVT各部分功能"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2  MVT各部分功能</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Django"><span class="nav-number">1.</span> <span class="nav-text">Django</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-软件框架"><span class="nav-number">1.1.</span> <span class="nav-text">1 软件框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-MVC框架"><span class="nav-number">1.2.</span> <span class="nav-text">2 MVC框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-MVC简介"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 MVC简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Web-MVC框架模块功能"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 Web MVC框架模块功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Django框架"><span class="nav-number">1.3.</span> <span class="nav-text">3 Django框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-简介"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-MVT各部分功能"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2  MVT各部分功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-项目创建"><span class="nav-number">2.</span> <span class="nav-text">4 项目创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-创建Django项目"><span class="nav-number">2.1.</span> <span class="nav-text">4.1 创建Django项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-创建Django应用"><span class="nav-number">2.2.</span> <span class="nav-text">4.2 创建Django应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-应用注册"><span class="nav-number">2.3.</span> <span class="nav-text">4.3 应用注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-启动项目"><span class="nav-number">2.4.</span> <span class="nav-text">4.4 启动项目</span></a></li></ol></li></ol></div>
             
 
           </div>
