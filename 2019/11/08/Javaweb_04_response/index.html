@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Java web,request," />
+  <meta name="keywords" content="Java web,response," />
 
 
 
@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="Request对象1. request对象和response对象的原理  request和response对象是由服务器创建的。我们来使用它们 request对象是来获取请求消息，response对象是来设置响应消息  2. request对象继承体系结构：ServletRequest        –    接口        |    继承HttpServletRequest    – 接口">
-<meta name="keywords" content="Java web,request">
+<meta name="description" content="HTTP协议：响应消息 请求消息：客户端发送给服务器端的数据  数据格式：  请求行 请求头 请求空行 请求体   响应消息：服务器端发送给客户端的数据  数据格式：    1. request对象和response对象的原理  request和response对象是由服务器创建的。我们来使用它们 request对象是来获取请求消息，response对象是来设置响应消息  2. request对象">
+<meta name="keywords" content="Java web,response">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java web Request对象">
-<meta property="og:url" content="http://yoursite.com/2019/10/22/Javaweb_03_request/index.html">
+<meta property="og:title" content="Java web response对象">
+<meta property="og:url" content="http://yoursite.com/2019/11/08/Javaweb_04_response/index.html">
 <meta property="og:site_name" content="Edward">
-<meta property="og:description" content="Request对象1. request对象和response对象的原理  request和response对象是由服务器创建的。我们来使用它们 request对象是来获取请求消息，response对象是来设置响应消息  2. request对象继承体系结构：ServletRequest        –    接口        |    继承HttpServletRequest    – 接口">
+<meta property="og:description" content="HTTP协议：响应消息 请求消息：客户端发送给服务器端的数据  数据格式：  请求行 请求头 请求空行 请求体   响应消息：服务器端发送给客户端的数据  数据格式：    1. request对象和response对象的原理  request和response对象是由服务器创建的。我们来使用它们 request对象是来获取请求消息，response对象是来设置响应消息  2. request对象">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/1.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/2.png">
@@ -100,10 +100,10 @@
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/4.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/5.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb03/6.png">
-<meta property="og:updated_time" content="2019-11-08T19:23:58.871Z">
+<meta property="og:updated_time" content="2019-11-08T19:16:31.780Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java web Request对象">
-<meta name="twitter:description" content="Request对象1. request对象和response对象的原理  request和response对象是由服务器创建的。我们来使用它们 request对象是来获取请求消息，response对象是来设置响应消息  2. request对象继承体系结构：ServletRequest        –    接口        |    继承HttpServletRequest    – 接口">
+<meta name="twitter:title" content="Java web response对象">
+<meta name="twitter:description" content="HTTP协议：响应消息 请求消息：客户端发送给服务器端的数据  数据格式：  请求行 请求头 请求空行 请求体   响应消息：服务器端发送给客户端的数据  数据格式：    1. request对象和response对象的原理  request和response对象是由服务器创建的。我们来使用它们 request对象是来获取请求消息，response对象是来设置响应消息  2. request对象">
 <meta name="twitter:image" content="http://yoursite.com/images/JavaWeb/javaweb03/1.png">
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/22/Javaweb_03_request/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/11/08/Javaweb_04_response/"/>
 
 
 
 
 
-  <title>Java web Request对象 | Edward</title>
+  <title>Java web response对象 | Edward</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/22/Javaweb_03_request/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/Javaweb_04_response/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java web Request对象</h1>
+          <h1 class="post-title" itemprop="name headline">Java web response对象</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-22T10:30:08+02:00">
-                2019-10-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-08T09:30:08+01:00">
+                2019-11-08
               </time>
             
 
@@ -337,9 +337,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/10/22/Javaweb_03_request/#comments" itemprop="discussionUrl">
+                <a href="/2019/11/08/Javaweb_04_response/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/10/22/Javaweb_03_request/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/11/08/Javaweb_04_response/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -367,7 +367,23 @@
       
 
       
-        <h1 id="Request对象"><a href="#Request对象" class="headerlink" title="Request对象"></a>Request对象</h1><h2 id="1-request对象和response对象的原理"><a href="#1-request对象和response对象的原理" class="headerlink" title="1. request对象和response对象的原理"></a>1. request对象和response对象的原理</h2><p><img src="\images\JavaWeb\javaweb03\1.png" alt="1571781571159"></p>
+        <h1 id="HTTP协议：响应消息"><a href="#HTTP协议：响应消息" class="headerlink" title="HTTP协议：响应消息"></a>HTTP协议：响应消息</h1><ol>
+<li><p><strong>请求消息：客户端发送给服务器端的数据</strong></p>
+<p> 数据格式：</p>
+<ul>
+<li>请求行</li>
+<li>请求头</li>
+<li>请求空行</li>
+<li>请求体</li>
+</ul>
+</li>
+<li><p><strong>响应消息：服务器端发送给客户端的数据</strong></p>
+<ul>
+<li>数据格式：</li>
+</ul>
+</li>
+</ol>
+<h2 id="1-request对象和response对象的原理"><a href="#1-request对象和response对象的原理" class="headerlink" title="1. request对象和response对象的原理"></a>1. request对象和response对象的原理</h2><p><img src="\images\JavaWeb\javaweb03\1.png" alt="1571781571159"></p>
 <ol>
 <li>request和response对象是由服务器创建的。我们来使用它们</li>
 <li>request对象是来获取请求消息，response对象是来设置响应消息</li>
@@ -426,19 +442,30 @@
 <li>String getRemoteAddr()</li>
 </ul>
 <ol start="2">
-<li><strong><em>获取请求头数据</em></strong></li>
+<li><p><strong><em>获取请求头数据</em></strong></p>
+<pre><code>- (*)String getHeader(String name):通过请求头的名称获取请求头的值
+</code></pre><ul>
+<li><p>Enumeration<string> getHeaderNames():获取所有的请求头名称</string></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">       //演示获取请求头数据</span><br><span class="line">       //1.获取所有请求头名称</span><br><span class="line">       Enumeration&lt;String&gt; headerNames = request.getHeaderNames();</span><br><span class="line">       //2.遍历</span><br><span class="line">       while(headerNames.hasMoreElements())&#123;</span><br><span class="line">           String name = headerNames.nextElement();</span><br><span class="line">           //根据名称获取请求头的值</span><br><span class="line">           String value = request.getHeader(name);</span><br><span class="line">           System.out.println(name+&quot;---&quot;+value);</span><br><span class="line">       &#125;</span><br><span class="line">	</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
 </ol>
-<p><strong>String getHeader(String name):通过请求头的名称获取请求头的值</strong><br><strong>Enumeration<string> getHeaderNames():获取所有的请求头名称</string></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">        //演示获取请求头数据</span><br><span class="line">        //1.获取所有请求头名称</span><br><span class="line">        Enumeration&lt;String&gt; headerNames = request.getHeaderNames();</span><br><span class="line">        //2.遍历</span><br><span class="line">        while(headerNames.hasMoreElements())&#123;</span><br><span class="line">            String name = headerNames.nextElement();</span><br><span class="line">            //根据名称获取请求头的值</span><br><span class="line">            String value = request.getHeader(name);</span><br><span class="line">            System.out.println(name+&quot;---&quot;+value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>也可以直接获取指定的请求头。</p>
+<pre><code>也可以直接获取指定的请求头。
+
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">        //演示获取请求头数据:user-agent</span><br><span class="line">        String agent = request.getHeader(&quot;user-agent&quot;);</span><br><span class="line">        //判断agent的浏览器版本</span><br><span class="line">        if(agent.contains(&quot;Chrome&quot;))&#123;</span><br><span class="line">            //谷歌</span><br><span class="line">            System.out.println(&quot;谷歌...&quot;);</span><br><span class="line">        &#125;else if(agent.contains(&quot;Firefox&quot;))&#123;</span><br><span class="line">            //火狐</span><br><span class="line">            System.out.println(&quot;火狐...&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>使用referer请求头防盗链。</p>
+
+
+使用referer请求头防盗链。
+
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">        //演示获取请求头数据:referer</span><br><span class="line"></span><br><span class="line">        String referer = request.getHeader(&quot;referer&quot;);</span><br><span class="line">        System.out.println(referer); //http://localhost/day14/login.html</span><br><span class="line"></span><br><span class="line">        //防盗链</span><br><span class="line">        if(referer != null )&#123;</span><br><span class="line">            if(referer.contains(&quot;/day14&quot;))&#123;</span><br><span class="line">                //正常访问</span><br><span class="line">                response.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br><span class="line">                response.getWriter().write(&quot;播放电影....&quot;);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                //盗链</span><br><span class="line">                response.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br><span class="line">                response.getWriter().write(&quot;想看电影吗？来优酷吧...&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<ol start="3">
+</code></pre><ol start="3">
 <li><strong><em>获取请求体数据:</em></strong></li>
 </ol>
-<p>请求体：只有POST请求方式，才有请求体，在请求体中封装了POST请求的请求参数</p>
-<p>步骤：</p>
+<ul>
+<li><p>请求体：只有POST请求方式，才有请求体，在请求体中封装了POST请求的请求参数</p>
+</li>
+<li><p>步骤：</p>
 <ol>
 <li>获取流对象<pre><code>*  BufferedReader getReader()：**获取字符输入流，只能操作字符数据**（BufferedReader 高效，带有缓冲区，有readline()）
 </code></pre><ul>
@@ -447,6 +474,8 @@
 </li>
 <li>再从流对象中拿数据</li>
 </ol>
+</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">        //获取请求消息体--请求参数</span><br><span class="line">        //1.获取字符流</span><br><span class="line">        BufferedReader br = request.getReader();</span><br><span class="line">        //2.读取数据</span><br><span class="line">        String line = null;</span><br><span class="line">        while((line = br.readLine()) != null)&#123;</span><br><span class="line">            System.out.println(line);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="4-request其他功能"><a href="#4-request其他功能" class="headerlink" title="4. request其他功能"></a>4. request其他功能</h2><ol>
 <li><p><strong>获取请求参数通用方式：</strong>不论get还是post请求方式都可以使用下列方法来获取请求参数</p>
@@ -465,13 +494,12 @@
 </ol>
 <pre><code>5. 中文乱码问题：
 
-get方式：tomcat 8 已经将get方式乱码问题解决了
+* get方式：tomcat 8 已经将get方式乱码问题解决了
+* post方式：会乱码
 
-post方式：会乱码
+    * 解决：在获取参数前，设置request的编码
 
-* 解决：在获取参数前，设置request的编码
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.setCharacterEncoding(&quot;utf-8&quot;);</span><br></pre></td></tr></table></figure>
+      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.setCharacterEncoding(&quot;utf-8&quot;);</span><br></pre></td></tr></table></figure>
 </code></pre><ol start="2">
 <li><p><strong>请求转发：</strong>一种在服务器内部的资源跳转方式<br> 步骤：</p>
 <ol>
@@ -608,7 +636,7 @@ post方式：会乱码
           
             <a href="/tags/Java-web/" rel="tag"><i class="fa fa-tag"></i> Java web</a>
           
-            <a href="/tags/request/" rel="tag"><i class="fa fa-tag"></i> request</a>
+            <a href="/tags/response/" rel="tag"><i class="fa fa-tag"></i> response</a>
           
         </div>
       
@@ -621,8 +649,8 @@ post方式：会乱码
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/21/Javaweb_02_http/" rel="next" title="java Http使用">
-                <i class="fa fa-chevron-left"></i> java Http使用
+              <a href="/2019/11/08/Javaoop_01_object/" rel="next" title="Java类与对象">
+                <i class="fa fa-chevron-left"></i> Java类与对象
               </a>
             
           </div>
@@ -631,8 +659,8 @@ post方式：会乱码
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/05/Java_16_IDEA/" rel="prev" title="IDEA工具常用命令">
-                IDEA工具常用命令 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/11/08/Java_17_array/" rel="prev" title="Java数组和内存管理">
+                Java数组和内存管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -795,7 +823,7 @@ post方式：会乱码
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Request对象"><span class="nav-number">1.</span> <span class="nav-text">Request对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-request对象和response对象的原理"><span class="nav-number">1.1.</span> <span class="nav-text">1. request对象和response对象的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-request对象继承体系结构："><span class="nav-number">1.2.</span> <span class="nav-text">2. request对象继承体系结构：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-request功能：获取请求消息数据"><span class="nav-number">1.3.</span> <span class="nav-text">3. request功能：获取请求消息数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-request其他功能"><span class="nav-number">1.4.</span> <span class="nav-text">4. request其他功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-用户登录案例"><span class="nav-number">1.5.</span> <span class="nav-text">5. 用户登录案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-用户登录案例需求："><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 用户登录案例需求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-分析"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-开发步骤"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 开发步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-BeanUtils工具类（用于封装JavaBean）"><span class="nav-number">1.6.</span> <span class="nav-text">6. BeanUtils工具类（用于封装JavaBean）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-JavaBean"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1 JavaBean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-成员变量和属性"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2 成员变量和属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-方法"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3 方法</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP协议：响应消息"><span class="nav-number">1.</span> <span class="nav-text">HTTP协议：响应消息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-request对象和response对象的原理"><span class="nav-number">1.1.</span> <span class="nav-text">1. request对象和response对象的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-request对象继承体系结构："><span class="nav-number">1.2.</span> <span class="nav-text">2. request对象继承体系结构：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-request功能：获取请求消息数据"><span class="nav-number">1.3.</span> <span class="nav-text">3. request功能：获取请求消息数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-request其他功能"><span class="nav-number">1.4.</span> <span class="nav-text">4. request其他功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-用户登录案例"><span class="nav-number">1.5.</span> <span class="nav-text">5. 用户登录案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-用户登录案例需求："><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 用户登录案例需求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-分析"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-开发步骤"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 开发步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-BeanUtils工具类（用于封装JavaBean）"><span class="nav-number">1.6.</span> <span class="nav-text">6. BeanUtils工具类（用于封装JavaBean）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-JavaBean"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1 JavaBean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-成员变量和属性"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2 成员变量和属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-方法"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3 方法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -964,9 +992,9 @@ post方式：会乱码
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/10/22/Javaweb_03_request/';
-          this.page.identifier = '2019/10/22/Javaweb_03_request/';
-          this.page.title = 'Java web Request对象';
+          this.page.url = 'http://yoursite.com/2019/11/08/Javaweb_04_response/';
+          this.page.identifier = '2019/11/08/Javaweb_04_response/';
+          this.page.title = 'Java web response对象';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Edward.disqus.com/embed.js';
