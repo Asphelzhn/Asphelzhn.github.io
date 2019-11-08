@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="数据库 - 学习," />
+  <meta name="keywords" content="数据库 - MySQL," />
 
 
 
@@ -86,21 +86,33 @@
 
 
 
-<meta name="description" content="内容 数据库的基本概念   MySQL数据库软件  安装 卸载 配置   SQL   数据库的基本概念1. 数据库的英文单词： DataBase 简称 ： DB 2. 什么数据库？     * 用于存储和管理数据的仓库。  3. 数据库的特点：     1. 持久化存储数据的。其实数据库就是一个文件系统     2. 方便存储和管理数据     3. 使用了统一的方式操作数据库 -- SQL">
-<meta name="keywords" content="数据库 - 学习">
+<meta name="description" content="数据库的基本概念 数据的存储方式 | 存储位置 | 优点                                             | 缺点                         || ——– | ———————————————— | —————————- || 内存     | 速度快                                           |">
+<meta name="keywords" content="数据库 - MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql基础知识">
+<meta property="og:title" content="MySQL数据库基本概念">
 <meta property="og:url" content="http://yoursite.com/2019/03/19/Database_01_MySQLbasic/index.html">
 <meta property="og:site_name" content="Edward">
-<meta property="og:description" content="内容 数据库的基本概念   MySQL数据库软件  安装 卸载 配置   SQL   数据库的基本概念1. 数据库的英文单词： DataBase 简称 ： DB 2. 什么数据库？     * 用于存储和管理数据的仓库。  3. 数据库的特点：     1. 持久化存储数据的。其实数据库就是一个文件系统     2. 方便存储和管理数据     3. 使用了统一的方式操作数据库 -- SQL">
+<meta property="og:description" content="数据库的基本概念 数据的存储方式 | 存储位置 | 优点                                             | 缺点                         || ——– | ———————————————— | —————————- || 内存     | 速度快                                           |">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/Mysql/1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/1.bmp">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/1.png">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/3.png">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/4.png">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/5.png">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/6.png">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/7.png">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/8.png">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/9.png">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/10.png">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/11.png">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/12.png">
+<meta property="og:image" content="http://yoursite.com/images/database/database01/13.png">
 <meta property="og:image" content="http://yoursite.com/images/Mysql/2.bmp">
-<meta property="og:updated_time" content="2019-03-19T05:45:37.374Z">
+<meta property="og:updated_time" content="2019-11-08T23:03:31.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql基础知识">
-<meta name="twitter:description" content="内容 数据库的基本概念   MySQL数据库软件  安装 卸载 配置   SQL   数据库的基本概念1. 数据库的英文单词： DataBase 简称 ： DB 2. 什么数据库？     * 用于存储和管理数据的仓库。  3. 数据库的特点：     1. 持久化存储数据的。其实数据库就是一个文件系统     2. 方便存储和管理数据     3. 使用了统一的方式操作数据库 -- SQL">
-<meta name="twitter:image" content="http://yoursite.com/images/Mysql/1.bmp">
+<meta name="twitter:title" content="MySQL数据库基本概念">
+<meta name="twitter:description" content="数据库的基本概念 数据的存储方式 | 存储位置 | 优点                                             | 缺点                         || ——– | ———————————————— | —————————- || 内存     | 速度快                                           |">
+<meta name="twitter:image" content="http://yoursite.com/images/database/database01/1.bmp">
 
 
 
@@ -136,7 +148,7 @@
 
 
 
-  <title>Mysql基础知识 | Edward</title>
+  <title>MySQL数据库基本概念 | Edward</title>
   
 
 
@@ -280,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mysql基础知识</h1>
+          <h1 class="post-title" itemprop="name headline">MySQL数据库基本概念</h1>
         
 
         <div class="post-meta">
@@ -363,65 +375,67 @@
       
 
       
-        <h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><ol>
-<li>数据库的基本概念</li>
-</ol>
-<ol start="2">
-<li><p>MySQL数据库软件</p>
-<ol>
-<li>安装</li>
-<li>卸载</li>
-<li>配置</li>
-</ol>
+        <h1 id="数据库的基本概念"><a href="#数据库的基本概念" class="headerlink" title="数据库的基本概念"></a>数据库的基本概念</h1><ol>
+<li><p>数据的存储方式</p>
+<p>| 存储位置 | 优点                                             | 缺点                         |<br>| ——– | ———————————————— | —————————- |<br>| 内存     | 速度快                                           | 不能永久保存，数据是临时状态 |<br>| 文件     | 数据可以永久保存                                 | 操作数据，查询某个数据不方便 |<br>| 数据库   | 1)数据可以永久保存2)查询速度快3)对数据的管理方便 | 占用资源，需要购买           |</p>
 </li>
-<li><p>SQL</p>
+<li><p>什么是数据库：用于存储和管理数据的仓库。</p>
+<p><img src="\images\database\database01\1.bmp" alt=""></p>
+</li>
+<li><p>数据库的特点：</p>
+<ul>
+<li>持久化存储数据的。其实数据库就是一个文件系统</li>
+<li>方便存储和管理数据</li>
+<li>所有的关系型数据库都可以使用通用的SQL语句进行管理</li>
+</ul>
+</li>
+<li><p>常见的数据库软件</p>
+<p><img src="\images\database\database01\1.png" alt="image-20191108231634287"></p>
+<ul>
+<li><p>MySQL：开源免费的数据库，小型的数据库，已经被Oracle收购了。MySQL6.x版本也开始收费。后来Sun公司收购了MySQL，而Sun公司又被Oracle收购</p>
+</li>
+<li><p>Oracle：收费的大型数据库，Oracle公司的产品。</p>
+</li>
+<li>DB2 ：IBM公司的数据库产品,收费的。常应用在银行系统中。</li>
+<li>SQL Server：MicroSoft 公司收费的中型的数据库。C#、.net等语言常使用。</li>
+<li>SQLite: 嵌入式的小型数据库，应用在手机端，如：Android。</li>
+</ul>
 </li>
 </ol>
-<h2 id="数据库的基本概念"><a href="#数据库的基本概念" class="headerlink" title="数据库的基本概念"></a>数据库的基本概念</h2><pre><code>1. 数据库的英文单词： DataBase 简称 ： DB
-2. 什么数据库？
-    * 用于存储和管理数据的仓库。
-
-3. 数据库的特点：
-    1. 持久化存储数据的。其实数据库就是一个文件系统
-    2. 方便存储和管理数据
-    3. 使用了统一的方式操作数据库 -- SQL
-
-
-4. 常见的数据库软件
-    * 参见《MySQL基础.pdf》
-</code></pre><p><img src="/images/Mysql/1.bmp" alt=""></p>
-<h1 id="MySQL数据库软件"><a href="#MySQL数据库软件" class="headerlink" title="MySQL数据库软件"></a>MySQL数据库软件</h1><pre><code>1. 安装
-    * 参见《MySQL基础.pdf》
-2. 卸载
-    1. 去mysql的安装目录找到my.ini文件
-        * 复制 datadir=&quot;C:/ProgramData/MySQL/MySQL Server 5.5/Data/&quot;
-    2. 卸载MySQL
-    3. 删除C:/ProgramData目录下的MySQL文件夹。
-
-3. 配置
-    * MySQL服务启动
-        1. 手动。
-        2. cmd--&gt; services.msc 打开服务的窗口
-        3. 使用管理员打开cmd
-            * net start mysql : 启动mysql的服务
-            * net stop mysql:关闭mysql服务
-    * MySQL登录
-        1. mysql -uroot -p密码
-        2. mysql -hip -uroot -p连接目标的密码
-        3. mysql --host=ip --user=root --password=连接目标的密码
-    * MySQL退出
-        1. exit
-        2. quit
-
-    * MySQL目录结构
-        1. MySQL安装目录：basedir=&quot;D:/develop/MySQL/&quot;
-            * 配置文件 my.ini
-        2. MySQL数据目录：datadir=&quot;C:/ProgramData/MySQL/MySQL Server 5.5/Data/&quot;
-            * 几个概念
-                * 数据库：文件夹
-                * 表：文件
-                * 数据：数据
-</code></pre><h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><pre><code>1.什么是SQL？
+<h1 id="MySQL数据库软件"><a href="#MySQL数据库软件" class="headerlink" title="MySQL数据库软件"></a>MySQL数据库软件</h1><h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><p>安装过程分成两个部分：<br>1)文件解压和复制过程，默认的安装目录<br>2)安装好以后必须对MySQL服务器进行配置<br>在mysql中管理员的名字：root</p>
+<p><strong>1.打开下载的mysql安装文件双击解压缩，运行“mysql-5.5.40-win32.msi”。</strong></p>
+<p><strong>2.选择安装类型，</strong>有“Typical（默认）”、“Complete（完全）”、“Custom（用户自定义）”三个选项，选择“Custom”，按“next”键继续。</p>
+<p><img src="\images\database\database01\3.png" alt="image-20191108232619329"></p>
+<p><strong>3.点选“Browse”，手动指定安装目录。</strong></p>
+<p><img src="\images\database\database01\4.png" alt="image-20191108232758907"></p>
+<p><strong>4.确认一下先前的设置，如果有误，按“Back”返回重做。按“Install”开始安装。</strong></p>
+<p><em>数据库安装好了还需要对数据库进行配置才能使用 MYSQL的配置</em></p>
+<p><strong>5.安装完成后，进入mysql配置向导。</strong></p>
+<p><strong>6.选择配置方式</strong>，“Detailed Configuration（手动精确配置）”、“Standard Configuration（标准配置）”</p>
+<p><img src="\images\database\database01\5.png" alt="image-20191108233108701"></p>
+<p><strong>7.选择服务器类型，</strong>“Developer Machine（开发测试类，mysql占用很少资源）”、“Server Machine（服务器类型，mysql占用较多资源）”、“Dedicated MySQL Server Machine（专门的数据库服务器，mysql占用所有可用资源）”</p>
+<p><img src="\images\database\database01\6.png" alt="image-20191108233227612"></p>
+<p><strong>8.选择mysql数据库的大致用途</strong>，“Multifunctional Database（通用多功能型，好）”、“Transactional Database Only（服务器类型，专注于事务处理，一般）”、“Non-Transactional Database Only（非事务处理型，较简单，主要做一些监控、记数用，对MyISAM数据类型的支持仅限于non-transactional），按“Next”继续。</p>
+<p><img src="\images\database\database01\7.png" alt="image-20191108233415898"></p>
+<p><strong>9.选择网站并发连接数</strong>，同时连接的数目，“Decision Support(DSS)/OLAP（20个左右）”、“Online Transaction Processing(OLTP)（500个左右）”、“Manual Setting（手动设置）”。</p>
+<p><img src="\images\database\database01\8.png" alt="image-20191108233517722"></p>
+<p><strong>10.是否启用TCP/IP连接，设定端口。</strong>如果不启用，就只能在自己的机器上访问mysql数据库了，在这个页面上，您还可以选择“启用标准模式”（Enable Strict Mode），这样MySQL就不会允许细小的语法错误。如果是新手，建议您取消标准模式以减少麻烦。但熟悉MySQL以后，尽量使用标准模式，因为它可以降低有害数据进入数据库的可能性。按“Next”继续</p>
+<p><img src="\images\database\database01\9.png" alt="image-20191108233654897"></p>
+<p><strong>11.对mysql默认数据库语言编码进行设置</strong>（重要），一般选UTF-8，按 “Next”继续。</p>
+<p><strong>12.选择是否将mysql安装为windows服务</strong>，还可以指定Service Name（服务标识名称），是否将mysql的bin目录加入到Windows PATH（加入后，就可以直接使用bin下的文件，而不用指出目录名，比如连接，“mysql.exe -uusername -ppassword;”就可以了，不用指出mysql.exe的完整地址，很方便），这里全部打上勾，Service Name不变。按“Next”继续。</p>
+<p><img src="\images\database\database01\10.png" alt="image-20191108233853022"></p>
+<p><strong>13.询问是否要修改默认root用户（超级管理）的密码</strong>。“Enable root access from remote machines（是否允许root用户在其它的机器上登陆，如果要安全，就不要勾上，如果要方便，就勾上它）”。最后“Create An Anonymous Account（新建一个匿名用户，匿名用户可以连接数据库，不能操作数据，包括查询）”</p>
+<p><img src="\images\database\database01\11.png" alt="image-20191108234103269"></p>
+<p><strong>14.确认设置无误，按“Execute”使设置生效，即完成MYSQL的安装和配置。</strong></p>
+<h2 id="2-卸载"><a href="#2-卸载" class="headerlink" title="2.卸载"></a>2.卸载</h2><p>1.停止window的MySQL服务。 找到“控制面板”-&gt; “管理工具”-&gt; “服务”，停止MySQL后台服务。</p>
+<p><img src="\images\database\database01\12.png" alt="image-20191108234611954"></p>
+<p>2.卸载MySQL安装程序。找到“控制面板”-&gt; “程序和功能”，卸载MySQL程序。</p>
+<p>3.删除MySQL安装目录下的所有文件。</p>
+<p>4.删除c盘ProgramDate目录中关于MySQL的目录。路径为：C:\ProgramData\MySQL(是隐藏文件,需要显示出来)</p>
+<h2 id="3-配置"><a href="#3-配置" class="headerlink" title="3.配置"></a>3.配置</h2><p>MySQL服务启动。<br>1)通过服务的方式自动启动</p>
+<p><img src="\images\database\database01\13.png" alt="image-20191108235046830"></p>
+<p>2)命令启动的方式</p>
+<h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><pre><code>1.什么是SQL？
     Structured Query Language：结构化查询语言
     其实就是定义了操作所有关系型数据库的规则。每一种数据库操作的方式存在不一样的地方，称为“方言”。
 
@@ -665,7 +679,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据库-学习/" rel="tag"><i class="fa fa-tag"></i> 数据库 - 学习</a>
+            <a href="/tags/数据库-MySQL/" rel="tag"><i class="fa fa-tag"></i> 数据库 - MySQL</a>
           
         </div>
       
@@ -852,7 +866,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内容"><span class="nav-number">1.</span> <span class="nav-text">内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">数据库的基本概念</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL数据库软件"><span class="nav-number">2.</span> <span class="nav-text">MySQL数据库软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL"><span class="nav-number">3.</span> <span class="nav-text">SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DDL-操作数据库、表"><span class="nav-number">3.1.</span> <span class="nav-text">DDL:操作数据库、表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DML：增删改表中数据"><span class="nav-number">3.2.</span> <span class="nav-text">DML：增删改表中数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DQL：查询表中的记录"><span class="nav-number">3.3.</span> <span class="nav-text">DQL：查询表中的记录</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库的基本概念"><span class="nav-number">1.</span> <span class="nav-text">数据库的基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL数据库软件"><span class="nav-number">2.</span> <span class="nav-text">MySQL数据库软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-卸载"><span class="nav-number">2.2.</span> <span class="nav-text">2.卸载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-配置"><span class="nav-number">2.3.</span> <span class="nav-text">3.配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL"><span class="nav-number">3.</span> <span class="nav-text">SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DDL-操作数据库、表"><span class="nav-number">3.1.</span> <span class="nav-text">DDL:操作数据库、表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DML：增删改表中数据"><span class="nav-number">3.2.</span> <span class="nav-text">DML：增删改表中数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DQL：查询表中的记录"><span class="nav-number">3.3.</span> <span class="nav-text">DQL：查询表中的记录</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1023,7 +1037,7 @@
         var disqus_config = function () {
           this.page.url = 'http://yoursite.com/2019/03/19/Database_01_MySQLbasic/';
           this.page.identifier = '2019/03/19/Database_01_MySQLbasic/';
-          this.page.title = 'Mysql基础知识';
+          this.page.title = 'MySQL数据库基本概念';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Edward.disqus.com/embed.js';

@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Python,Django," />
+  <meta name="keywords" content="Python,virtualenv," />
 
 
 
@@ -86,25 +86,20 @@
 
 
 
-<meta name="description" content="Django1 软件框架一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。 一个软件框架是由其中各个软件模块组成的，每一个模块都有特定的功能，模块与模块之间通过相互配合来完成软件的开发。 软件框架是针对某一类软件设计问题而产生的。  2 MVC框架2.1 MVC简介MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人员给 sma">
-<meta name="keywords" content="Python,Django">
+<meta name="description" content="虚拟环境1 概念 安装python包的命令： sudo pip3 install 包名 包的安装路径：/usr/local/lib/python3.5/dist-packages 在同一个python环境中安装同一个包的不同版本，后安装的包会把原来安装的包覆盖掉。这样，如果同一台机器上两个项目依赖于相同包的不同版本，则会导致一些项目运行失败。 解决的方案就是：虚拟环境。 虚拟环境是真实python">
+<meta name="keywords" content="Python,virtualenv">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django框架笔记">
-<meta property="og:url" content="http://yoursite.com/2019/11/06/django_01_startproject/index.html">
+<meta property="og:title" content="Python虚拟环境">
+<meta property="og:url" content="http://yoursite.com/2019/11/06/pythonweb_01_virtualenv/index.html">
 <meta property="og:site_name" content="Edward">
-<meta property="og:description" content="Django1 软件框架一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。 一个软件框架是由其中各个软件模块组成的，每一个模块都有特定的功能，模块与模块之间通过相互配合来完成软件的开发。 软件框架是针对某一类软件设计问题而产生的。  2 MVC框架2.1 MVC简介MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人员给 sma">
+<meta property="og:description" content="虚拟环境1 概念 安装python包的命令： sudo pip3 install 包名 包的安装路径：/usr/local/lib/python3.5/dist-packages 在同一个python环境中安装同一个包的不同版本，后安装的包会把原来安装的包覆盖掉。这样，如果同一台机器上两个项目依赖于相同包的不同版本，则会导致一些项目运行失败。 解决的方案就是：虚拟环境。 虚拟环境是真实python">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/Django/django01/1.png">
-<meta property="og:image" content="http://yoursite.com/images/Django/django01/2.png">
-<meta property="og:image" content="http://yoursite.com/images/Django/django01/3.png">
-<meta property="og:image" content="http://yoursite.com/images/Django/django01/4.png">
-<meta property="og:image" content="http://yoursite.com/images/Django/django01/5.png">
-<meta property="og:image" content="http://yoursite.com/images/Django/django01/6.png">
-<meta property="og:updated_time" content="2019-11-06T22:20:24.295Z">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/virtualenv/virtualenv01/1.png">
+<meta property="og:updated_time" content="2019-11-06T22:45:55.544Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Django框架笔记">
-<meta name="twitter:description" content="Django1 软件框架一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。 一个软件框架是由其中各个软件模块组成的，每一个模块都有特定的功能，模块与模块之间通过相互配合来完成软件的开发。 软件框架是针对某一类软件设计问题而产生的。  2 MVC框架2.1 MVC简介MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人员给 sma">
-<meta name="twitter:image" content="http://yoursite.com/images/Django/django01/1.png">
+<meta name="twitter:title" content="Python虚拟环境">
+<meta name="twitter:description" content="虚拟环境1 概念 安装python包的命令： sudo pip3 install 包名 包的安装路径：/usr/local/lib/python3.5/dist-packages 在同一个python环境中安装同一个包的不同版本，后安装的包会把原来安装的包覆盖掉。这样，如果同一台机器上两个项目依赖于相同包的不同版本，则会导致一些项目运行失败。 解决的方案就是：虚拟环境。 虚拟环境是真实python">
+<meta name="twitter:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/virtualenv/virtualenv01/1.png">
 
 
 
@@ -134,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/06/django_01_startproject/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/11/06/pythonweb_01_virtualenv/"/>
 
 
 
 
 
-  <title>Django框架笔记 | Edward</title>
+  <title>Python虚拟环境 | Edward</title>
   
 
 
@@ -267,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/06/django_01_startproject/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/06/pythonweb_01_virtualenv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -284,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Django框架笔记</h1>
+          <h1 class="post-title" itemprop="name headline">Python虚拟环境</h1>
         
 
         <div class="post-meta">
@@ -319,8 +314,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/categories/virtualenv/" itemprop="url" rel="index">
+                    <span itemprop="name">virtualenv</span>
                   </a>
                 </span>
 
@@ -337,9 +332,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/06/django_01_startproject/#comments" itemprop="discussionUrl">
+                <a href="/2019/11/06/pythonweb_01_virtualenv/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/11/06/django_01_startproject/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/11/06/pythonweb_01_virtualenv/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -367,51 +362,33 @@
       
 
       
-        <h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h1><h2 id="1-软件框架"><a href="#1-软件框架" class="headerlink" title="1 软件框架"></a>1 软件框架</h2><p>一个公司是由公司中的各部部门来组成的，每一个部门拥有特定的职能，部门与部门之间通过相互的配合来完成让公司运转起来。</p>
-<p>一个软件框架是由其中各个软件模块组成的，每一个模块都有特定的功能，模块与模块之间通过相互配合来完成软件的开发。</p>
-<p>软件框架是针对某一类软件设计问题而产生的。</p>
-<p><img src="\images\Django\django01\1.png" alt="image-20191106230343203"></p>
-<h2 id="2-MVC框架"><a href="#2-MVC框架" class="headerlink" title="2 MVC框架"></a>2 MVC框架</h2><h3 id="2-1-MVC简介"><a href="#2-1-MVC简介" class="headerlink" title="2.1 MVC简介"></a>2.1 MVC简介</h3><p>MVC最初是由施乐公司旗下的帕罗奥多研究中心中的一位研究人员给 smalltalk语言发明的一中软件设计模式。</p>
-<p>MVC的产生理念： <strong>分工</strong>。让专门的人去做专门的事。</p>
-<p>MVC的核心思想： <strong>解耦</strong>。</p>
-<p>MVC的思想被应用在的web开发的方面，产生了<strong>web MVC框架</strong>。  </p>
-<h3 id="2-2-Web-MVC框架模块功能"><a href="#2-2-Web-MVC框架模块功能" class="headerlink" title="2.2 Web MVC框架模块功能"></a>2.2 Web MVC框架模块功能</h3><p>通过浏览器注册用户信息。</p>
-<p><img src="\images\Django\django01\2.png" alt="image-20191106230607584"></p>
-<p><strong>M:Model,模型，</strong>和数据库进行交互。</p>
-<p><strong>V:View,视图</strong>， 产生html页面。</p>
-<p><strong>C:Controller,控制器,</strong> 接收请求，进行处理，与M和V进行交互，返回应答。</p>
-<h2 id="3-Django框架"><a href="#3-Django框架" class="headerlink" title="3 Django框架"></a>3 Django框架</h2><h3 id="3-1-简介"><a href="#3-1-简介" class="headerlink" title="3.1 简介"></a>3.1 简介</h3><p>Django是劳伦斯出版集团的开发人员为开发新闻内容网站而设计出来的一个软件，它遵循MVC思想，但是有自己的一个名词，叫做<strong>MVT</strong>。</p>
-<p>Django遵循快速开发和DRY原则。Do not repeat yourself.不要自己去重复一些工作。</p>
-<h3 id="3-2-MVT各部分功能"><a href="#3-2-MVT各部分功能" class="headerlink" title="3.2  MVT各部分功能"></a>3.2  MVT各部分功能</h3><p><img src="\images\Django\django01\3.png" alt="image-20191106230822940"></p>
-<p><strong>M:Model,模型</strong>， 和MVC中M功能相同，和数据库进行交互。</p>
-<p><strong>V:View,视图</strong>， 和MVC中C功能相同，接收请求，进行处理，与M和T进行交互，返回应答。</p>
-<p><strong>T:Template,模板</strong>， 和MVC中V功能相同，产生html页面。</p>
-<h1 id="4-项目创建"><a href="#4-项目创建" class="headerlink" title="4 项目创建"></a>4 项目创建</h1><h2 id="4-1-创建Django项目"><a href="#4-1-创建Django项目" class="headerlink" title="4.1 创建Django项目"></a>4.1 创建Django项目</h2><p>命令：<code>django-admin startproject 项目名</code></p>
-<p>注意：创建应用必须先进入虚拟环境。</p>
-<p>项目目录如下：</p>
-<p><img src="\images\Django\django01\4.png" alt="image-20191106231636800"></p>
-<p><strong>init</strong>.py: 说明test1是一个python包。</p>
-<p>settings.py: 项目的配置文件。</p>
-<p>urls.py: 进行url路由的配置。</p>
-<p>wsgi.py: web服务器和Django交互的入口。</p>
-<p>manage.py:  项目的管理文件。</p>
-<h2 id="4-2-创建Django应用"><a href="#4-2-创建Django应用" class="headerlink" title="4.2 创建Django应用"></a>4.2 创建Django应用</h2><p><img src="\images\Django\django01\5.png" alt="image-20191106231733279"></p>
-<p>一个项目由很多个应用组成的，每一个应用完成一个功能模块。</p>
-<p>创建应用的命令如下：</p>
-<p><code>python manage.py startapp 应用名</code></p>
-<p>注意：创建应用时需要先进入项目目录。</p>
-<p>应用目录如下：</p>
-<p><img src="\images\Django\django01\6.png" alt="image-20191106231833699"></p>
-<p><strong>init</strong>.py: 说明目录是一个Python模块。</p>
-<p>models.py: 写和数据库项目的内容, 设计模型类。</p>
-<p>views.py: ，接收请求，进行处理，与M和T进行交互，返回应答。</p>
-<p>定义处理函数，视图函数。</p>
-<p>tests.py: 写测试代码的文件。</p>
-<p>admin.py: 网站后台管理相关的文件。</p>
-<h2 id="4-3-应用注册"><a href="#4-3-应用注册" class="headerlink" title="4.3 应用注册"></a>4.3 应用注册</h2><p>建立应用和项目之间的联系，需要对应用进行注册。</p>
-<p>修改settings.py中的INSTALLED_APPS配置项。</p>
-<h2 id="4-4-启动项目"><a href="#4-4-启动项目" class="headerlink" title="4.4 启动项目"></a>4.4 启动项目</h2><p>运行开发web服务器命令：</p>
-<p>  <code>python manage.py runserver</code></p>
+        <h2 id="虚拟环境"><a href="#虚拟环境" class="headerlink" title="虚拟环境"></a>虚拟环境</h2><h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1 概念"></a>1 概念</h2><p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\virtualenv\virtualenv01\1.png" alt="image-20191106233856686"></p>
+<p>安装python包的命令： <code>sudo pip3 install 包名</code></p>
+<p>包的安装路径：<code>/usr/local/lib/python3.5/dist-packages</code></p>
+<p>在同一个python环境中安装同一个包的不同版本，后安装的包会把原来安装的包覆盖掉。这样，如果同一台机器上两个项目依赖于相同包的不同版本，则会导致一些项目运行失败。</p>
+<p>解决的方案就是：虚拟环境。</p>
+<p><strong>虚拟环境是真实python环境的复制版本。</strong></p>
+<p><strong>在虚拟环境中使用的python是复制的python,安装python包也是安装在复制的python中。</strong></p>
+<h2 id="2-安装和配置"><a href="#2-安装和配置" class="headerlink" title="2 安装和配置"></a>2 安装和配置</h2><p><strong>安装虚拟环境的命令：</strong></p>
+<p>1）<code>sudo pip install virtualenv #安装虚拟环境</code></p>
+<p>2）<code>sudo pip install virtualenvwrapper #安装虚拟环境扩展包</code></p>
+<p>3）编辑家目录下面的.bashrc文件，添加下面两行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export WORKON_HOME=$HOME/.virtualenvs</span><br><span class="line"></span><br><span class="line">source /usr/local/bin/virtualenvwrapper.sh</span><br></pre></td></tr></table></figure>
+<p>4）使用source .bashrc使其生效一下。</p>
+<h2 id="3-使用"><a href="#3-使用" class="headerlink" title="3 使用"></a>3 使用</h2><h3 id="3-1-创建虚拟环境命令："><a href="#3-1-创建虚拟环境命令：" class="headerlink" title="3.1 创建虚拟环境命令："></a>3.1 <strong>创建虚拟环境命令：</strong></h3><p>  <code>mkvirtualenv 虚拟环境名</code></p>
+<h3 id="3-2-创建python3虚拟环境："><a href="#3-2-创建python3虚拟环境：" class="headerlink" title="3.2 创建python3虚拟环境："></a>3.2 <strong>创建python3虚拟环境：</strong></h3><p><code>mkvirtualenv -p python3 bj11_py3</code></p>
+<h3 id="3-3-进入虚拟环境工作："><a href="#3-3-进入虚拟环境工作：" class="headerlink" title="3.3 进入虚拟环境工作："></a>3.3 <strong>进入虚拟环境工作：</strong></h3><p><code>workon 虚拟环境名</code></p>
+<h3 id="3-4-查看机器上有多少个虚拟环境："><a href="#3-4-查看机器上有多少个虚拟环境：" class="headerlink" title="3.4 查看机器上有多少个虚拟环境："></a>3.4 <strong>查看机器上有多少个虚拟环境：</strong></h3><p>  <code>workon 空格 + 两个tab键</code></p>
+<h3 id="3-5-退出虚拟环境："><a href="#3-5-退出虚拟环境：" class="headerlink" title="3.5 退出虚拟环境："></a>3.5 <strong>退出虚拟环境：</strong></h3><p>  <code>deactivate</code></p>
+<h3 id="3-6-删除虚拟环境："><a href="#3-6-删除虚拟环境：" class="headerlink" title="3.6 删除虚拟环境："></a>3.6 <strong>删除虚拟环境：</strong></h3><p><code>rmvirtualenv 虚拟环境名</code></p>
+<p>虚拟环境下安装包的命令：</p>
+<p><code>pip install 包名</code></p>
+<p>注意：不能使用sudo pip install 包名，这个命令会把包安装到真实的主机环境上而不是安装到虚拟环境中。</p>
+<h3 id="3-7-查看虚拟环境中安装了哪些python包："><a href="#3-7-查看虚拟环境中安装了哪些python包：" class="headerlink" title="3.7 查看虚拟环境中安装了哪些python包："></a>3.7 <strong>查看虚拟环境中安装了哪些python包：</strong></h3><p>  <code>pip list</code></p>
+<p>  <code>pip freeze</code></p>
+<h3 id="3-8-安装django环境："><a href="#3-8-安装django环境：" class="headerlink" title="3.8 安装django环境："></a>3.8 <strong>安装django环境：</strong></h3><p>  <code>pip install django==1.8.2</code></p>
+<h3 id="3-8-拓展"><a href="#3-8-拓展" class="headerlink" title="3.8 拓展:"></a>3.8 <strong>拓展:</strong></h3><p><code>apt-get install 软件名</code></p>
+<p><code>pip install python包名</code></p>
 
       
     </div>
@@ -431,7 +408,7 @@
           
             <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
           
-            <a href="/tags/Django/" rel="tag"><i class="fa fa-tag"></i> Django</a>
+            <a href="/tags/virtualenv/" rel="tag"><i class="fa fa-tag"></i> virtualenv</a>
           
         </div>
       
@@ -444,8 +421,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/06/virtualenv_01_virtualenv/" rel="next" title="Python虚拟环境">
-                <i class="fa fa-chevron-left"></i> Python虚拟环境
+              <a href="/2019/11/06/pythonweb_02_django/" rel="next" title="Python Django框架笔记">
+                <i class="fa fa-chevron-left"></i> Python Django框架笔记
               </a>
             
           </div>
@@ -618,7 +595,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Django"><span class="nav-number">1.</span> <span class="nav-text">Django</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-软件框架"><span class="nav-number">1.1.</span> <span class="nav-text">1 软件框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-MVC框架"><span class="nav-number">1.2.</span> <span class="nav-text">2 MVC框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-MVC简介"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 MVC简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Web-MVC框架模块功能"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 Web MVC框架模块功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Django框架"><span class="nav-number">1.3.</span> <span class="nav-text">3 Django框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-简介"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-MVT各部分功能"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2  MVT各部分功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-项目创建"><span class="nav-number">2.</span> <span class="nav-text">4 项目创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-创建Django项目"><span class="nav-number">2.1.</span> <span class="nav-text">4.1 创建Django项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-创建Django应用"><span class="nav-number">2.2.</span> <span class="nav-text">4.2 创建Django应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-应用注册"><span class="nav-number">2.3.</span> <span class="nav-text">4.3 应用注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-启动项目"><span class="nav-number">2.4.</span> <span class="nav-text">4.4 启动项目</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟环境"><span class="nav-number">1.</span> <span class="nav-text">虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概念"><span class="nav-number">2.</span> <span class="nav-text">1 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装和配置"><span class="nav-number">3.</span> <span class="nav-text">2 安装和配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用"><span class="nav-number">4.</span> <span class="nav-text">3 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-创建虚拟环境命令："><span class="nav-number">4.1.</span> <span class="nav-text">3.1 创建虚拟环境命令：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-创建python3虚拟环境："><span class="nav-number">4.2.</span> <span class="nav-text">3.2 创建python3虚拟环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-进入虚拟环境工作："><span class="nav-number">4.3.</span> <span class="nav-text">3.3 进入虚拟环境工作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-查看机器上有多少个虚拟环境："><span class="nav-number">4.4.</span> <span class="nav-text">3.4 查看机器上有多少个虚拟环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-退出虚拟环境："><span class="nav-number">4.5.</span> <span class="nav-text">3.5 退出虚拟环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-删除虚拟环境："><span class="nav-number">4.6.</span> <span class="nav-text">3.6 删除虚拟环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-查看虚拟环境中安装了哪些python包："><span class="nav-number">4.7.</span> <span class="nav-text">3.7 查看虚拟环境中安装了哪些python包：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-安装django环境："><span class="nav-number">4.8.</span> <span class="nav-text">3.8 安装django环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-拓展"><span class="nav-number">4.9.</span> <span class="nav-text">3.8 拓展:</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -787,9 +764,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/11/06/django_01_startproject/';
-          this.page.identifier = '2019/11/06/django_01_startproject/';
-          this.page.title = 'Django框架笔记';
+          this.page.url = 'http://yoursite.com/2019/11/06/pythonweb_01_virtualenv/';
+          this.page.identifier = '2019/11/06/pythonweb_01_virtualenv/';
+          this.page.title = 'Python虚拟环境';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Edward.disqus.com/embed.js';
