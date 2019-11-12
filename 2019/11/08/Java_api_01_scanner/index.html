@@ -90,12 +90,12 @@
 <meta name="keywords" content="Java,API">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java常用API Scanner类">
-<meta property="og:url" content="http://yoursite.com/2019/11/08/Java_scanner_01/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/11/08/Java_api_01_scanner/index.html">
 <meta property="og:site_name" content="Edward">
 <meta property="og:description" content="1. API1.1 概述API(Application Programming Interface)，应用程序编程接口。Java API是一本程序员的字典 ，是JDK中提供给我们使用的类的说明文档。这些类将底层的代码实现封装了起来，我们不需要关心这些类是如何实现的，只需要学习这些类如何使用即可。 1.2 API使用步骤  打开帮助文档。 点击显示，找到索引，看到输入框。 你要找谁？在输入框里输入，">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/Java/javaapi/javaapi_01/1.png">
-<meta property="og:updated_time" content="2019-11-09T13:29:38.138Z">
+<meta property="og:updated_time" content="2019-11-09T15:46:43.217Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java常用API Scanner类">
 <meta name="twitter:description" content="1. API1.1 概述API(Application Programming Interface)，应用程序编程接口。Java API是一本程序员的字典 ，是JDK中提供给我们使用的类的说明文档。这些类将底层的代码实现封装了起来，我们不需要关心这些类是如何实现的，只需要学习这些类如何使用即可。 1.2 API使用步骤  打开帮助文档。 点击显示，找到索引，看到输入框。 你要找谁？在输入框里输入，">
@@ -129,7 +129,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/08/Java_scanner_01/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/11/08/Java_api_01_scanner/"/>
 
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/Java_scanner_01/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/Java_api_01_scanner/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -332,9 +332,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/08/Java_scanner_01/#comments" itemprop="discussionUrl">
+                <a href="/2019/11/08/Java_api_01_scanner/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/11/08/Java_scanner_01/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/11/08/Java_api_01_scanner/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -394,7 +394,7 @@
 <li><p>创建匿名对象直接调用方法，没有变量名。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Scanner(System.in).nextInt();</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>一旦调用两次方法，就是创建了两个对象，造成浪费，请看如下代码。一个匿名对象，只能使用一次。</p>
+<li><p>一旦调用两次方法，就是创建了两个对象，造成浪费，请看如下代码。<strong>一个匿名对象，只能使用一次。</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new Scanner(System.in).nextInt();</span><br><span class="line">new Scanner(System.in).nextInt();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>匿名对象可以作为方法的参数和返回值</p>
@@ -405,8 +405,7 @@
 <ul>
 <li>作为返回值</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Test2 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 普通方式</span><br><span class="line">        Scanner sc = getScanner();</span><br><span class="line">    &#125;</span><br><span class="line">    public static Scanner getScanner()&#123;</span><br><span class="line">        //普通方式</span><br><span class="line">        //Scanner sc = new Scanner(System.in);</span><br><span class="line">        //return sc;</span><br><span class="line">        </span><br><span class="line">        //匿名对象作为方法返回值</span><br><span class="line">        return new Scanner(System.in);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Test2 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 普通方式</span><br><span class="line">        Scanner sc = getScanner();</span><br><span class="line">    &#125;</span><br><span class="line">    public static Scanner getScanner()&#123;</span><br><span class="line">        //普通方式</span><br><span class="line">        //Scanner sc = new Scanner(System.in);</span><br><span class="line">        //return sc;</span><br><span class="line">        </span><br><span class="line">        //匿名对象作为方法返回值</span><br><span class="line">        return new Scanner(System.in);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -440,8 +439,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/06/pythonweb_01_virtualenv/" rel="next" title="Python虚拟环境">
-                <i class="fa fa-chevron-left"></i> Python虚拟环境
+              <a href="/2019/11/08/Java_17_array/" rel="next" title="Java数组和内存管理">
+                <i class="fa fa-chevron-left"></i> Java数组和内存管理
               </a>
             
           </div>
@@ -450,8 +449,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/08/Javaoop_01_object/" rel="prev" title="Java类与对象">
-                Java类与对象 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/11/08/Java_api_03_arraylist/" rel="prev" title="Java常用API ArrayList类">
+                Java常用API ArrayList类 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -543,7 +542,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">72</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -783,8 +782,8 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/11/08/Java_scanner_01/';
-          this.page.identifier = '2019/11/08/Java_scanner_01/';
+          this.page.url = 'http://yoursite.com/2019/11/08/Java_api_01_scanner/';
+          this.page.identifier = '2019/11/08/Java_api_01_scanner/';
           this.page.title = 'Java常用API Scanner类';
         };
         var d = document, s = d.createElement('script');

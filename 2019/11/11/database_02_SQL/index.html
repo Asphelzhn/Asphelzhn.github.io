@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库 - MySQL," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. SQL的概念1.1 SQLStructured Query Language 结构化查询语言 1.2 SQL作用1)是一种所有关系型数据库的查询规范，不同的数据库都支持。2)通用的数据库操作语言，可以用在不同的数据库中。3)不同的数据库SQL语句有一些区别  1.3 SQL语句分类1)Data Definition Language (DDL数据定义语言) 如：建库，建表2)Data Man">
+<meta name="keywords" content="数据库 - MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL-SQL基本概念">
+<meta property="og:url" content="http://yoursite.com/2019/11/11/database_02_SQL/index.html">
+<meta property="og:site_name" content="Edward">
+<meta property="og:description" content="1. SQL的概念1.1 SQLStructured Query Language 结构化查询语言 1.2 SQL作用1)是一种所有关系型数据库的查询规范，不同的数据库都支持。2)通用的数据库操作语言，可以用在不同的数据库中。3)不同的数据库SQL语句有一些区别  1.3 SQL语句分类1)Data Definition Language (DDL数据定义语言) 如：建库，建表2)Data Man">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/database/database02/1.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/database/database02/2.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/database/database02/3.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/database/database02/4.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/database/database02/5.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/database/database02/6.png">
+<meta property="og:updated_time" content="2019-11-12T15:50:39.752Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL-SQL基本概念">
+<meta name="twitter:description" content="1. SQL的概念1.1 SQLStructured Query Language 结构化查询语言 1.2 SQL作用1)是一种所有关系型数据库的查询规范，不同的数据库都支持。2)通用的数据库操作语言，可以用在不同的数据库中。3)不同的数据库SQL语句有一些区别  1.3 SQL语句分类1)Data Definition Language (DDL数据定义语言) 如：建库，建表2)Data Man">
+<meta name="twitter:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/database/database02/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/11/database_02_SQL/"/>
+
+
+
+
+
+  <title>MySQL-SQL基本概念 | Edward</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Edward</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Edward's Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/11/database_02_SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL-SQL基本概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-11T09:30:08+01:00">
+                2019-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/11/database_02_SQL/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/11/11/database_02_SQL/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-SQL的概念"><a href="#1-SQL的概念" class="headerlink" title="1. SQL的概念"></a>1. SQL的概念</h1><h2 id="1-1-SQL"><a href="#1-1-SQL" class="headerlink" title="1.1 SQL"></a>1.1 SQL</h2><p><strong>Structured Query Language 结构化查询语言</strong></p>
+<h2 id="1-2-SQL作用"><a href="#1-2-SQL作用" class="headerlink" title="1.2 SQL作用"></a>1.2 SQL作用</h2><p>1)是一种所有关系型数据库的查询规范，不同的数据库都支持。<br>2)通用的数据库操作语言，可以用在不同的数据库中。<br>3)不同的数据库SQL语句有一些区别</p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\database\database02\1.png" alt="image-20191112143702711"></p>
+<h2 id="1-3-SQL语句分类"><a href="#1-3-SQL语句分类" class="headerlink" title="1.3 SQL语句分类"></a>1.3 SQL语句分类</h2><p>1)Data Definition Language (DDL数据定义语言) 如：建库，建表<br>2)Data Manipulation Language(DML数据操纵语言)，如：对表中的记录操作增删改<br>3)Data Query Language(DQL 数据查询语言)，如：对表中的查询操作<br>4)Data Control Language(DCL 数据控制语言)，如：对用户权限的设置</p>
+<h2 id="1-4-MySQL的语法"><a href="#1-4-MySQL的语法" class="headerlink" title="1.4 MySQL的语法"></a>1.4 MySQL的语法</h2><p>1)每条语句以分号结尾，如果在SQLyog中不是必须加的。<br>2)SQL中不区分大小写，关键字中认为大写和小写是一样的<br>3)3种注释：</p>
+<table>
+<thead>
+<tr>
+<th>–空格</th>
+<th>单行注释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/<em> </em>/</td>
+<td>多行注释</td>
+</tr>
+<tr>
+<td>#</td>
+<td>这是mysql特有的注释方式</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-DDL操作数据库"><a href="#2-DDL操作数据库" class="headerlink" title="2. DDL操作数据库"></a>2. DDL操作数据库</h1><h2 id="2-1-创建数据库"><a href="#2-1-创建数据库" class="headerlink" title="2.1 创建数据库"></a>2.1 创建数据库</h2><h3 id="创建数据库的几种方式"><a href="#创建数据库的几种方式" class="headerlink" title="创建数据库的几种方式"></a>创建数据库的几种方式</h3><p><strong>创建数据库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE 数据库名;</span><br></pre></td></tr></table></figure>
+<p><strong>判断数据库是否已经存在，不存在则创建数据库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE IF NOT EXISTS 数据库名;</span><br></pre></td></tr></table></figure>
+<p><strong>创建数据库并指定字符集</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE 数据库名 CHARACTER SET 字符集;</span><br></pre></td></tr></table></figure>
+<p>实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- 直接创建数据库db1</span><br><span class="line">create database db1;</span><br><span class="line">-- 判断是否存在，如果不存在则创建数据库db2</span><br><span class="line">create database if not exists db2;</span><br><span class="line">-- 创建数据库并指定字符集为gbk</span><br><span class="line">create database db3 default character set gbk;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-查看数据库"><a href="#2-2-查看数据库" class="headerlink" title="2.2 查看数据库"></a>2.2 查看数据库</h2><p>按tab键可以自动补全关键字<br><strong>– 查看所有的数据库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
+<p><strong>– 查看某个数据库的定义信息</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show create database db3;</span><br><span class="line">show create database db1;</span><br></pre></td></tr></table></figure>
+<h2 id="2-3-修改数据库"><a href="#2-3-修改数据库" class="headerlink" title="2.3 修改数据库"></a>2.3 修改数据库</h2><p>修改数据库默认的字符集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE 数据库名 DEFAULT CHARACTER SET 字符集;</span><br><span class="line"></span><br><span class="line">alter database db3 character set utf8;</span><br></pre></td></tr></table></figure>
+<h2 id="2-4-删除数据库"><a href="#2-4-删除数据库" class="headerlink" title="2.4 删除数据库"></a>2.4 删除数据库</h2><p>删除数据库的语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP DATABASE 数据库名;</span><br></pre></td></tr></table></figure>
+<p>每行SQL语句需要选中再执行，可以按F9</p>
+<p>删除db2数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop database db2;</span><br></pre></td></tr></table></figure>
+<h2 id="2-5-使用数据库"><a href="#2-5-使用数据库" class="headerlink" title="2.5 使用数据库"></a>2.5 使用数据库</h2><p><strong>查看正在使用的数据库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT DATABASE(); 使用的一个mysql中的全局函数</span><br></pre></td></tr></table></figure>
+<p><strong>使用/切换数据库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">USE 数据库名;</span><br><span class="line">-- 查看正在使用的数据库</span><br><span class="line"></span><br><span class="line">select database();</span><br><span class="line">-- 改变要使用的数据库</span><br><span class="line">use db4;</span><br></pre></td></tr></table></figure>
+<p><strong>面试题：</strong><br>在MySQL数据库软件中，有如下三个数据库：</p>
+<p>登录数据库之后，输入语句：<code>select database test2;</code> 运行结果是什么?<br>这是一条错误的语句，如果要选中一个数据库，应用使用：use test2;</p>
+<h1 id="3-DDL操作表结构"><a href="#3-DDL操作表结构" class="headerlink" title="3. DDL操作表结构"></a>3. DDL操作表结构</h1><h2 id="3-1-创建表"><a href="#3-1-创建表" class="headerlink" title="3.1 创建表"></a>3.1 创建表</h2><p>前提先使用某个数据库<strong>创建表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE 表名 ( 字段名1 字段类型1,</span><br><span class="line">字段名2 字段类型2</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-MySQL数据类型"><a href="#3-2-MySQL数据类型" class="headerlink" title="3.2 MySQL数据类型"></a>3.2 MySQL数据类型</h2><p>常使用的数据类型如下：</p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\database\database02\2.png" alt="image-20191112162858282"></p>
+<p>详细的数据类型如下：</p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\database\database02\3.png" alt="image-20191112163041521"></p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\database\database02\4.png" alt="image-20191112163134549"></p>
+<p><strong>实例</strong></p>
+<p>创建student表包含id,name,birthday字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table student (</span><br><span class="line">id int, -- 整数</span><br><span class="line">name varchar(20), -- 字符串</span><br><span class="line">birthday date -- 生日，最后没有逗号</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-查看表"><a href="#3-3-查看表" class="headerlink" title="3.3 查看表"></a>3.3 查看表</h2><p><strong>查看某个数据库中的所有表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW TABLES;</span><br></pre></td></tr></table></figure>
+<p><strong>查看表结构</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DESC 表名;</span><br></pre></td></tr></table></figure>
+<p><strong>查看创建表的SQL语句</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW CREATE TABLE 表名;</span><br></pre></td></tr></table></figure>
+<p><strong>查看day21数据库中的所有表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use day21;</span><br><span class="line">show tables;</span><br></pre></td></tr></table></figure>
+<p><strong>查看student表的结构</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc student;</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\database\database02\5.png" alt="image-20191112163822261"></p>
+<p><strong>查看student的创建表SQL语句</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show create table student;</span><br></pre></td></tr></table></figure>
+<p>执行结果：<br>`存在的目的是为了避免关键字的冲突</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `student` (</span><br><span class="line">`id` int(11) DEFAULT NULL,</span><br><span class="line">`name` varchar(20) DEFAULT NULL,</span><br><span class="line">`birthday` date DEFAULT NULL</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-快速创建一个表结构相同的表"><a href="#3-4-快速创建一个表结构相同的表" class="headerlink" title="3.4 快速创建一个表结构相同的表"></a>3.4 快速创建一个表结构相同的表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE 新表名 LIKE 旧表名;</span><br></pre></td></tr></table></figure>
+<p>创建s1表，s1表结构和student表结构相同</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-- 创建一个s1的表与student结构相同</span><br><span class="line">create table s1 like student;</span><br><span class="line">desc s1;</span><br></pre></td></tr></table></figure>
+<h2 id="3-5-删除表"><a href="#3-5-删除表" class="headerlink" title="3.5 删除表"></a>3.5 删除表</h2><p><strong>直接删除表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE 表名;</span><br></pre></td></tr></table></figure>
+<p><strong>判断表是否存在，如果存在则删除表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE IF EXISTS 表名;</span><br></pre></td></tr></table></figure>
+<p>具体操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 直接删除表s1表</span><br><span class="line">drop table s1;</span><br><span class="line">-- 判断表是否存在并删除s1表</span><br><span class="line">drop table if exists `create`;</span><br></pre></td></tr></table></figure>
+<p>与直接删除的区别<br><strong>如果表不存在，不删除，存在则删除</strong></p>
+<h2 id="3-6-修改表结构"><a href="#3-6-修改表结构" class="headerlink" title="3.6 修改表结构"></a>3.6 修改表结构</h2><p><strong>添加表列ADD</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 ADD 列名 类型;</span><br></pre></td></tr></table></figure>
+<p>为学生表添加一个新的字段remark,类型为varchar(20)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table student add remark varchar(20);</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\database\database02\6.png" alt="image-20191112165027167"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库-MySQL/" rel="tag"><i class="fa fa-tag"></i> 数据库 - MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/08/Javaoop_01_object/" rel="next" title="Java类与对象">
+                <i class="fa fa-chevron-left"></i> Java类与对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry！Stay foolish！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Asphelzhn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:asphel96@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-SQL的概念"><span class="nav-number">1.</span> <span class="nav-text">1. SQL的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-SQL"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-SQL作用"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 SQL作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-SQL语句分类"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 SQL语句分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-MySQL的语法"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 MySQL的语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-DDL操作数据库"><span class="nav-number">2.</span> <span class="nav-text">2. DDL操作数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-创建数据库"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 创建数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库的几种方式"><span class="nav-number">2.1.1.</span> <span class="nav-text">创建数据库的几种方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-查看数据库"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 查看数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-修改数据库"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 修改数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-删除数据库"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 删除数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-使用数据库"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 使用数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-DDL操作表结构"><span class="nav-number">3.</span> <span class="nav-text">3. DDL操作表结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-创建表"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 创建表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-MySQL数据类型"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 MySQL数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-查看表"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 查看表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-快速创建一个表结构相同的表"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 快速创建一个表结构相同的表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-删除表"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 删除表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-修改表结构"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 修改表结构</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/11/11/database_02_SQL/';
+          this.page.identifier = '2019/11/11/database_02_SQL/';
+          this.page.title = 'MySQL-SQL基本概念';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
