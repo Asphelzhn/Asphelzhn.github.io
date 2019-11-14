@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,API," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.String类1.1 概述java.lang.String 类代表字符串。Java程序中所有的字符串文字（例如”abc” ）都可以被看作是实现此类的实例。类 String 中包括用于检查各个字符串的方法，比如用于比较字符串，搜索字符串，提取子字符串以及创建具有翻译为大写或小写的所有字符的字符串的副本。 1.2 特点 字符串不变：字符串的值在创建后不能被更改。 1234String s1 = &amp;">
+<meta name="keywords" content="Java,API">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java常用API String类">
+<meta property="og:url" content="http://yoursite.com/2019/11/08/Java_api_04_string/index.html">
+<meta property="og:site_name" content="Edward">
+<meta property="og:description" content="1.String类1.1 概述java.lang.String 类代表字符串。Java程序中所有的字符串文字（例如”abc” ）都可以被看作是实现此类的实例。类 String 中包括用于检查各个字符串的方法，比如用于比较字符串，搜索字符串，提取子字符串以及创建具有翻译为大写或小写的所有字符的字符串的副本。 1.2 特点 字符串不变：字符串的值在创建后不能被更改。 1234String s1 = &amp;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/Java/javaapi/javaapi_04/1.png">
+<meta property="og:updated_time" content="2019-11-14T09:47:09.142Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java常用API String类">
+<meta name="twitter:description" content="1.String类1.1 概述java.lang.String 类代表字符串。Java程序中所有的字符串文字（例如”abc” ）都可以被看作是实现此类的实例。类 String 中包括用于检查各个字符串的方法，比如用于比较字符串，搜索字符串，提取子字符串以及创建具有翻译为大写或小写的所有字符的字符串的副本。 1.2 特点 字符串不变：字符串的值在创建后不能被更改。 1234String s1 = &amp;">
+<meta name="twitter:image" content="http://yoursite.com/images/Java/javaapi/javaapi_04/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/08/Java_api_04_string/"/>
+
+
+
+
+
+  <title>Java常用API String类 | Edward</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Edward</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Edward's Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/Java_api_04_string/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java常用API String类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-08T09:30:08+01:00">
+                2019-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-API/" itemprop="url" rel="index">
+                    <span itemprop="name">Java API</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/08/Java_api_04_string/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/11/08/Java_api_04_string/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-String类"><a href="#1-String类" class="headerlink" title="1.String类"></a>1.String类</h1><h2 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h2><p>java.lang.String 类代表字符串。Java程序中所有的字符串文字（例如”abc” ）都可以被看作是实现此类的实<br>例。<br>类 String 中包括用于检查各个字符串的方法，比如用于比较字符串，搜索字符串，提取子字符串以及创建具有翻<br>译为大写或小写的所有字符的字符串的副本。</p>
+<h2 id="1-2-特点"><a href="#1-2-特点" class="headerlink" title="1.2 特点"></a>1.2 特点</h2><ol>
+<li><p>字符串不变：字符串的值在创建后不能被更改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String s1 = &quot;abc&quot;;</span><br><span class="line">s1 += &quot;d&quot;;</span><br><span class="line">System.out.println(s1); // &quot;abcd&quot;</span><br><span class="line">// 内存中有&quot;abc&quot;，&quot;abcd&quot;两个对象，s1从指向&quot;abc&quot;，改变指向，指向了&quot;abcd&quot;。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>因为String对象是不可变的，所以它们可以被共享。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String s1 = &quot;abc&quot;;</span><br><span class="line">String s2 = &quot;abc&quot;;</span><br><span class="line">// 内存中只有一个&quot;abc&quot;对象被创建，同时被s1和s2共享。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>“abc” 等效于 char[] data={ ‘a’ , ‘b’ , ‘c’ } 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">例如：</span><br><span class="line">String str = &quot;abc&quot;;</span><br><span class="line">相当于：</span><br><span class="line">char data[] = &#123;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&#125;;</span><br><span class="line">String str = new String(data);</span><br><span class="line">// String底层是靠字符数组实现的。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="\images\Java\javaapi\javaapi_04\1.png" alt="image-20191113113011277"></p>
+<h2 id="1-3-使用步骤"><a href="#1-3-使用步骤" class="headerlink" title="1.3 使用步骤"></a>1.3 使用步骤</h2><p><strong>查看类</strong><br><code>java.lang.String</code> ：此类不需要导入。<br><strong>查看构造方法</strong><br><code>public String()</code> ：初始化新创建的 String对象，以使其表示空字符序列。<br><code>public String(char[] value)</code> ：通过当前参数中的字符数组来构造新的String。<br><code>public String(byte[] bytes)</code> ：通过使用平台的默认字符集解码当前参数中的字节数组来构造新的String。<br>构造举例，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 无参构造</span><br><span class="line">String str = new String（）；</span><br><span class="line">// 通过字符数组构造</span><br><span class="line">char chars[] = &#123;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&#125;;</span><br><span class="line">String str2 = new String(chars);</span><br><span class="line">// 通过字节数组构造</span><br><span class="line">byte bytes[] = &#123; 97, 98, 99 &#125;;</span><br><span class="line">String str3 = new String(bytes);</span><br></pre></td></tr></table></figure>
+<h2 id="1-4-常用方法"><a href="#1-4-常用方法" class="headerlink" title="1.4 常用方法"></a>1.4 常用方法</h2><p><strong>判断功能的方法</strong></p>
+<p>public boolean equals (Object anObject) ：将此字符串与指定对象进行比较。<br>public boolean equalsIgnoreCase (String anotherString) ：将此字符串与指定对象进行比较，忽略大小<br>写。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class String_Demo01 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 创建字符串对象</span><br><span class="line">        String s1 = &quot;hello&quot;;</span><br><span class="line">        String s2 = &quot;hello&quot;;</span><br><span class="line">        String s3 = &quot;HELLO&quot;;</span><br><span class="line">        // boolean equals(Object obj):比较字符串的内容是否相同</span><br><span class="line">        System.out.println(s1.equals(s2)); // true</span><br><span class="line">        System.out.println(s1.equals(s3)); // false</span><br><span class="line">        System.out.println(&quot;‐‐‐‐‐‐‐‐‐‐‐&quot;);</span><br><span class="line">        //boolean equalsIgnoreCase(String str):比较字符串的内容是否相同,忽略大小写</span><br><span class="line">        System.out.println(s1.equalsIgnoreCase(s2)); // true</span><br><span class="line">        System.out.println(s1.equalsIgnoreCase(s3)); // true</span><br><span class="line">        System.out.println(&quot;‐‐‐‐‐‐‐‐‐‐‐&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Object 是” 对象”的意思，也是一种引用类型。作为参数类型，表示任意对象都可以传递到方法中。</p>
+<p><strong>注意</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class String_Demo01 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">       String str5 = null;</span><br><span class="line">       System.out.println(&quot;abc&quot;.equalsIgnoreCase(str5));// 推荐，false</span><br><span class="line">       System.out.println(&quot;str5&quot;.equalsIgnoreCase(&quot;abc&quot;));// 不推荐，报错，空指针异常</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>获取功能的方法</strong><br><code>public int length ()</code> ：返回此字符串的长度。<br><code>public String concat (String str)</code> ：将指定的字符串连接到该字符串的末尾。<br><code>public char charAt (int index)</code> ：返回指定索引处的 char值。<br><code>public int indexOf (String str)</code> ：返回指定子字符串第一次出现在该字符串内的索引。<br><code>public String substring (int beginIndex)</code> ：返回一个子字符串，从beginIndex开始截取字符串到字符<br>串结尾。<br><code>public String substring (int beginIndex, int endIndex)</code> ：返回一个子字符串，从beginIndex到<br>endIndex截取字符串。含beginIndex，不含endIndex。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class String_Demo02 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //创建字符串对象</span><br><span class="line">        String s = &quot;helloworld&quot;;</span><br><span class="line">        // int length():获取字符串的长度，其实也就是字符个数</span><br><span class="line">        System.out.println(s.length());</span><br><span class="line">        System.out.println(&quot;‐‐‐‐‐‐‐‐&quot;);</span><br><span class="line">        // String concat (String str):将将指定的字符串连接到该字符串的末尾.</span><br><span class="line">        String s = &quot;helloworld&quot;;</span><br><span class="line">        String s2 = s.concat(&quot;**hello itheima&quot;);</span><br><span class="line">        System.out.println(s2);// helloworld**hello itheima</span><br><span class="line">        // char charAt(int index):获取指定索引处的字符</span><br><span class="line">        System.out.println(s.charAt(0));</span><br><span class="line">        System.out.println(s.charAt(1));</span><br><span class="line">        System.out.println(&quot;‐‐‐‐‐‐‐‐&quot;);</span><br><span class="line">        // int indexOf(String str):获取str在字符串对象中第一次出现的索引,没有返回‐1</span><br><span class="line">        System.out.println(s.indexOf(&quot;l&quot;));</span><br><span class="line">        System.out.println(s.indexOf(&quot;owo&quot;));</span><br><span class="line">        System.out.println(s.indexOf(&quot;ak&quot;));</span><br><span class="line">        System.out.println(&quot;‐‐‐‐‐‐‐‐&quot;);</span><br><span class="line">        // String substring(int start):从start开始截取字符串到字符串结尾</span><br><span class="line">        System.out.println(s.substring(0));</span><br><span class="line">        System.out.println(s.substring(5));</span><br><span class="line">        System.out.println(&quot;‐‐‐‐‐‐‐‐&quot;);</span><br><span class="line">        // String substring(int start,int end):从start到end截取字符串。含start，不含end。</span><br><span class="line">        System.out.println(s.substring(0, s.length()));</span><br><span class="line">        System.out.println(s.substring(3,8));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>转换功能的方法</strong><br><code>public char[] toCharArray ()</code> ：将此字符串转换为新的字符数组。<br><code>public byte[] getBytes ()</code> ：使用平台的默认字符集将该 String编码转换为新的字节数组。<br><code>public String replace (CharSequence target, CharSequence replacement)</code> ：将与target匹配的字符串使用replacement字符串替换。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class String_Demo03 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">    //创建字符串对象</span><br><span class="line">    String s = &quot;abcde&quot;;</span><br><span class="line">    // char[] toCharArray():把字符串转换为字符数组</span><br><span class="line">    char[] chs = s.toCharArray();</span><br><span class="line">    for(int x = 0; x &lt; chs.length; x++) &#123;</span><br><span class="line">    	System.out.println(chs[x]);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(&quot;‐‐‐‐‐‐‐‐‐‐‐&quot;);</span><br><span class="line">    // byte[] getBytes ():把字符串转换为字节数组</span><br><span class="line">    byte[] bytes = s.getBytes();</span><br><span class="line">        for(int x = 0; x &lt; bytes.length; x++) &#123;</span><br><span class="line">        System.out.println(bytes[x]);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(&quot;‐‐‐‐‐‐‐‐‐‐‐&quot;);</span><br><span class="line">    // 替换字母it为大写IT</span><br><span class="line">    String str = &quot;itcast itheima&quot;;</span><br><span class="line">    String replace = str.replace(&quot;it&quot;, &quot;IT&quot;);</span><br><span class="line">    System.out.println(replace); // ITcast ITheima</span><br><span class="line">    System.out.println(&quot;‐‐‐‐‐‐‐‐‐‐‐&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>CharSequence 是一个接口，也是一种引用类型。作为参数类型，可以把String对象传递到方法中。</p>
+<p><strong>分割功能的方法</strong><br><code>public String[] split(String regex)</code> ：将此字符串按照给定的regex（规则）拆分为字符串数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class String_Demo03 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        //创建字符串对象</span><br><span class="line">        String s = &quot;aa|bb|cc&quot;;</span><br><span class="line">        String[] strArray = s.split(&quot;|&quot;); // [&quot;aa&quot;,&quot;bb&quot;,&quot;cc&quot;]</span><br><span class="line">        for(int x = 0; x &lt; strArray.length; x++) &#123;</span><br><span class="line">        System.out.println(strArray[x]); // aa bb cc</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          
+            <a href="/tags/API/" rel="tag"><i class="fa fa-tag"></i> API</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/08/Javaweb_04_response/" rel="next" title="Java web response对象">
+                <i class="fa fa-chevron-left"></i> Java web response对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/08/Javaoop_01_object/" rel="prev" title="Java类与对象">
+                Java类与对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry！Stay foolish！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Asphelzhn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:asphel96@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-String类"><span class="nav-number">1.</span> <span class="nav-text">1.String类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-概述"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-特点"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-使用步骤"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-常用方法"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 常用方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/11/08/Java_api_04_string/';
+          this.page.identifier = '2019/11/08/Java_api_04_string/';
+          this.page.title = 'Java常用API String类';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
