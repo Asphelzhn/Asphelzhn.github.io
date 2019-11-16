@@ -97,7 +97,8 @@
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb04/2.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb04/1.png">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb04/3.png">
-<meta property="og:updated_time" content="2019-11-08T19:56:13.621Z">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb04/4.png">
+<meta property="og:updated_time" content="2019-11-16T21:37:17.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java web response对象">
 <meta name="twitter:description" content="1. HTTP协议：响应消息1.1 请求消息：客户端发送给服务器端的数据数据格式：  请求行 请求头 请求空行 请求体  1.2 响应消息：服务器端发送给客户端的数据数据格式： 1.2.1 响应行a. 组成：协议/版本 响应状态码 状态码描述 b. 响应状态码：服务器告诉客户端浏览器本次请求和响应的一个状态。 状态码都是3位数字  分类： 1xx：服务器接收客户端消息，但没有接受完成，等待一段时间">
@@ -401,6 +402,76 @@
 </ul>
 <h3 id="1-2-3-响应空行"><a href="#1-2-3-响应空行" class="headerlink" title="1.2.3 响应空行"></a>1.2.3 响应空行</h3><h3 id="1-2-4-响应体"><a href="#1-2-4-响应体" class="headerlink" title="1.2.4 响应体"></a>1.2.4 响应体</h3><p>传输的数据</p>
 <h3 id="1-2-5-响应字符串格式"><a href="#1-2-5-响应字符串格式" class="headerlink" title="1.2.5 响应字符串格式"></a>1.2.5 响应字符串格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/html;charset=UTF-8</span><br><span class="line">Content-Length: 101</span><br><span class="line">Date: Wed, 06 Jun 2018 07:08:42 GMT</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;$Title$&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  hello , response</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="2-Response对象"><a href="#2-Response对象" class="headerlink" title="2.Response对象"></a>2.Response对象</h1><p><strong>功能：设置响应消息</strong></p>
+<h2 id="2-1设置响应行"><a href="#2-1设置响应行" class="headerlink" title="2.1设置响应行"></a>2.1设置响应行</h2><p>格式：HTTP/1.1 200 ok</p>
+<p>设置状态码：<code>setStatus(int sc)</code> </p>
+<h2 id="2-2设置响应头"><a href="#2-2设置响应头" class="headerlink" title="2.2设置响应头"></a>2.2设置响应头</h2><p><code>setHeader(String name, String value)</code> </p>
+<h2 id="2-3-设置响应体"><a href="#2-3-设置响应体" class="headerlink" title="2.3 设置响应体"></a>2.3 设置响应体</h2><p>使用步骤：</p>
+<p><strong>1.获取输出流</strong></p>
+<ul>
+<li><p>字符输出流：<code>PrintWriter getWriter()</code></p>
+</li>
+<li><p>字节输出流：<code>ServletOutputStream getOutputStream()</code></p>
+</li>
+</ul>
+<p><strong>2.使用输出流</strong>，</p>
+<p>将数据输出到客户端浏览器</p>
+<h2 id="2-4案例"><a href="#2-4案例" class="headerlink" title="2.4案例"></a>2.4案例</h2><p><strong>1.完成重定向</strong></p>
+<p>重定向：资源跳转的方式</p>
+<p><img src="\images\JavaWeb\javaweb04\4.png" alt="image-20191116150432958"></p>
+<p>代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//1. 设置状态码为302</span><br><span class="line">response.setStatus(302);</span><br><span class="line">//2.设置响应头location</span><br><span class="line">response.setHeader(&quot;location&quot;,&quot;/day15/responseDemo2&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//简单的重定向方法，方法2</span><br><span class="line">response.sendRedirect(&quot;/day15/responseDemo2&quot;);</span><br></pre></td></tr></table></figure>
+<p><strong>2.重定向的特点:redirect</strong></p>
+<p>地址栏发生变化</p>
+<p>重定向可以访问其他站点(服务器)的资源</p>
+<p>重定向是两次请求。不能使用request对象来共享数据</p>
+<p><strong>3.转发的特点：forward</strong></p>
+<p>转发地址栏路径不变</p>
+<p>转发只能访问当前服务器下的资源</p>
+<p>转发是一次请求，可以使用request对象来共享数据</p>
+<p><strong><em>forward 和  redirect 区别</em></strong></p>
+<h1 id="3-路径写法"><a href="#3-路径写法" class="headerlink" title="3.路径写法"></a>3.路径写法</h1><h2 id="3-1路径分类"><a href="#3-1路径分类" class="headerlink" title="3.1路径分类"></a>3.1路径分类</h2><p><strong>1.相对路径：通过相对路径不可以确定唯一资源</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如：./index.html</span><br></pre></td></tr></table></figure>
+<p>不以/开头，以.开头路径</p>
+<p>规则：找到当前资源和目标资源之间的相对位置关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./：当前目录</span><br><span class="line">../:后退一级目录</span><br></pre></td></tr></table></figure>
+<p><strong>2.绝对路径：通过绝对路径可以确定唯一资源</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如：http://localhost/day15/responseDemo2		/day15/responseDemo2</span><br></pre></td></tr></table></figure>
+<p><em>以/开头的路径</em></p>
+<p><strong>3.规则：判断定义的路径是给谁用的？判断请求将来从哪儿发出</strong></p>
+<ul>
+<li>给客户端浏览器使用：需要加虚拟目录(项目的访问路径)，重定向也需要</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">建议虚拟目录动态获取：String contextPath = request.getContextPath() // 等于/day15</span><br><span class="line"></span><br><span class="line">&lt;a href=&quot;/day15/responseDemo2&quot;&gt; , &lt;form&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>给服务器使用：不需要加虚拟目录</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">转发路径</span><br><span class="line">request.getRequestDispatcher(&quot;/responseDemo2&quot;).forward(request,response);</span><br></pre></td></tr></table></figure>
+<h1 id="4-服务器输出字符数据到浏览器"><a href="#4-服务器输出字符数据到浏览器" class="headerlink" title="4.服务器输出字符数据到浏览器"></a>4.服务器输出字符数据到浏览器</h1><p>步骤：</p>
+<pre><code>1. 获取字符输出流
+2. 输出数据
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PrintWriter pw = response.getWriter();</span><br><span class="line">pw.write(&quot;&lt;h1&gt;hello&lt;/h1&gt;&quot;) //可以输出html</span><br></pre></td></tr></table></figure>
+<p><strong>乱码问题：</strong></p>
+<ol>
+<li><p>PrintWriter pw = response.getWriter();获取的流的默认编码是ISO-8859-1</p>
+</li>
+<li><p>设置该流的默认编码</p>
+</li>
+<li><p>告诉浏览器响应体使用的编码</p>
+<p> //1.设置编码，是在获取流之前设置<br> response.setCharacterEncoding(“utf-8”);</p>
+<p> //2.告诉浏览器，服务器发送的消息体数据的编码，建议使用该编码解码，text/html是mime类型<br> response.setHeader(“content-type”,”text/html;charset=utf-8”);</p>
+<p> //3.简单的形式<br> response.setContentType(“text/html;charset=utf-8”)</p>
+<h1 id="5-服务器输出字节数据到浏览器"><a href="#5-服务器输出字节数据到浏览器" class="headerlink" title="5.服务器输出字节数据到浏览器"></a>5.服务器输出字节数据到浏览器</h1></li>
+<li><p>获取字节输出流</p>
+</li>
+<li>输出数据</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">response.setContentType(&quot;text/html;charset=utf-8&quot;) // 设置response编码</span><br><span class="line">ServletOutputStream sos = response.getOutputStream();</span><br><span class="line"></span><br><span class="line">sos.write(&quot;hello&quot;.getBytes(“utf-8&quot;));</span><br></pre></td></tr></table></figure>
+<h1 id="6-验证码"><a href="#6-验证码" class="headerlink" title="6.验证码"></a>6.验证码</h1><p><strong>本质</strong>：图片<br><strong>目的</strong>：防止恶意表单注册</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">@WebServlet(&quot;/checkCodeServlet&quot;)</span><br><span class="line">public class CheckCodeServlet extends HttpServlet &#123;</span><br><span class="line">    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        int width = 100;</span><br><span class="line">        int height = 50;</span><br><span class="line"></span><br><span class="line">        //1.创建一对象，在内存中图片(验证码图片对象)</span><br><span class="line">        BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //2.美化图片</span><br><span class="line">        //2.1 填充背景色</span><br><span class="line">        Graphics g = image.getGraphics();//画笔对象</span><br><span class="line">        g.setColor(Color.PINK);//设置画笔颜色</span><br><span class="line">        g.fillRect(0,0,width,height);</span><br><span class="line"></span><br><span class="line">        //2.2画边框</span><br><span class="line">        g.setColor(Color.BLUE);</span><br><span class="line">        g.drawRect(0,0,width - 1,height - 1);</span><br><span class="line"></span><br><span class="line">        String str = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghigklmnopqrstuvwxyz0123456789&quot;;</span><br><span class="line">        //生成随机角标</span><br><span class="line">        Random ran = new Random();</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt;= 4; i++) &#123;</span><br><span class="line">            int index = ran.nextInt(str.length());</span><br><span class="line">            //获取字符</span><br><span class="line">            char ch = str.charAt(index);//随机字符</span><br><span class="line">            //2.3写验证码</span><br><span class="line">            g.drawString(ch+&quot;&quot;,width/5*i,height/2);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //2.4画干扰线</span><br><span class="line">        g.setColor(Color.GREEN);</span><br><span class="line"></span><br><span class="line">        //随机生成坐标点</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">            int x1 = ran.nextInt(width);</span><br><span class="line">            int x2 = ran.nextInt(width);</span><br><span class="line"></span><br><span class="line">            int y1 = ran.nextInt(height);</span><br><span class="line">            int y2 = ran.nextInt(height);</span><br><span class="line">            g.drawLine(x1,y1,x2,y2);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //3.将图片输出到页面展示</span><br><span class="line">        ImageIO.write(image,&quot;jpg&quot;,response.getOutputStream());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">        this.doPost(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编写HTML文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        /*</span><br><span class="line">            分析：</span><br><span class="line">                点击超链接或者图片，需要换一张</span><br><span class="line">                1.给超链接和图片绑定单击事件</span><br><span class="line"></span><br><span class="line">                2.重新设置图片的src属性值</span><br><span class="line"></span><br><span class="line">         */</span><br><span class="line">    window.onload = function()&#123;</span><br><span class="line">        //1.获取图片对象</span><br><span class="line">        var img = document.getElementById(&quot;checkCode&quot;);</span><br><span class="line">        //2.绑定单击事件</span><br><span class="line">        img.onclick = function()&#123;</span><br><span class="line">            //加时间戳</span><br><span class="line">            var date = new Date().getTime();</span><br><span class="line"></span><br><span class="line">            img.src = &quot;/day15/checkCodeServlet?&quot;+date;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    &lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;img id=&quot;checkCode&quot; src=&quot;/day15/checkCodeServlet&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;a id=&quot;change&quot; href=&quot;&quot;&gt;看不清换一张？&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -432,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/08/Javaoop_01_object/" rel="next" title="Java类与对象">
-                <i class="fa fa-chevron-left"></i> Java类与对象
+              <a href="/2019/11/08/Java_api_02_random/" rel="next" title="Java常用API Random类">
+                <i class="fa fa-chevron-left"></i> Java常用API Random类
               </a>
             
           </div>
@@ -442,8 +513,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/08/Java_api_02_random/" rel="prev" title="Java常用API Random类">
-                Java常用API Random类 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/11/08/Java_api_04_string/" rel="prev" title="Java常用API String类">
+                Java常用API String类 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -535,7 +606,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -557,7 +628,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -606,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-HTTP协议：响应消息"><span class="nav-number">1.</span> <span class="nav-text">1. HTTP协议：响应消息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-请求消息：客户端发送给服务器端的数据"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 请求消息：客户端发送给服务器端的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-响应消息：服务器端发送给客户端的数据"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 响应消息：服务器端发送给客户端的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-响应行"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 响应行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-响应头"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 响应头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-响应空行"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 响应空行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-响应体"><span class="nav-number">1.2.4.</span> <span class="nav-text">1.2.4 响应体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-5-响应字符串格式"><span class="nav-number">1.2.5.</span> <span class="nav-text">1.2.5 响应字符串格式</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-HTTP协议：响应消息"><span class="nav-number">1.</span> <span class="nav-text">1. HTTP协议：响应消息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-请求消息：客户端发送给服务器端的数据"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 请求消息：客户端发送给服务器端的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-响应消息：服务器端发送给客户端的数据"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 响应消息：服务器端发送给客户端的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-响应行"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 响应行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-响应头"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 响应头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-响应空行"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 响应空行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-响应体"><span class="nav-number">1.2.4.</span> <span class="nav-text">1.2.4 响应体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-5-响应字符串格式"><span class="nav-number">1.2.5.</span> <span class="nav-text">1.2.5 响应字符串格式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Response对象"><span class="nav-number">2.</span> <span class="nav-text">2.Response对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1设置响应行"><span class="nav-number">2.1.</span> <span class="nav-text">2.1设置响应行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2设置响应头"><span class="nav-number">2.2.</span> <span class="nav-text">2.2设置响应头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-设置响应体"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 设置响应体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4案例"><span class="nav-number">2.4.</span> <span class="nav-text">2.4案例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-路径写法"><span class="nav-number">3.</span> <span class="nav-text">3.路径写法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1路径分类"><span class="nav-number">3.1.</span> <span class="nav-text">3.1路径分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-服务器输出字符数据到浏览器"><span class="nav-number">4.</span> <span class="nav-text">4.服务器输出字符数据到浏览器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-服务器输出字节数据到浏览器"><span class="nav-number">5.</span> <span class="nav-text">5.服务器输出字节数据到浏览器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-验证码"><span class="nav-number">6.</span> <span class="nav-text">6.验证码</span></a></li></ol></div>
             
 
           </div>
