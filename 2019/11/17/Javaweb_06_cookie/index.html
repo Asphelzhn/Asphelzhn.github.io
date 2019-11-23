@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Java web,Session," />
+  <meta name="keywords" content="Java web,Cookie," />
 
 
 
@@ -87,17 +87,18 @@
 
 
 <meta name="description" content="1. 会话技术会话：一次会话中包含多次请求和响应。 * 一次会话：浏览器第一次给服务器资源发送请求，会话建立，直到有一方断开为止 功能：在一次会话的范围内的多次请求间，共享数据 方式：  客户端会话技术：Cookie 服务器端会话技术：Session  2. Cookie2.1 概念客户端会话技术，将数据保存到客户端 2.2 使用步骤123456781. 创建Cookie对象，绑定数据new Co">
-<meta name="keywords" content="Java web,Session">
+<meta name="keywords" content="Java web,Cookie">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java web 会话技术">
-<meta property="og:url" content="http://yoursite.com/2019/11/17/Javaweb_06_session/index.html">
+<meta property="og:title" content="Java web Cookie">
+<meta property="og:url" content="http://yoursite.com/2019/11/17/Javaweb_06_cookie/index.html">
 <meta property="og:site_name" content="Edward">
 <meta property="og:description" content="1. 会话技术会话：一次会话中包含多次请求和响应。 * 一次会话：浏览器第一次给服务器资源发送请求，会话建立，直到有一方断开为止 功能：在一次会话的范围内的多次请求间，共享数据 方式：  客户端会话技术：Cookie 服务器端会话技术：Session  2. Cookie2.1 概念客户端会话技术，将数据保存到客户端 2.2 使用步骤123456781. 创建Cookie对象，绑定数据new Co">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb06/1.png">
-<meta property="og:updated_time" content="2019-11-18T15:16:39.251Z">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb06/2.png">
+<meta property="og:updated_time" content="2019-11-18T17:12:43.598Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java web 会话技术">
+<meta name="twitter:title" content="Java web Cookie">
 <meta name="twitter:description" content="1. 会话技术会话：一次会话中包含多次请求和响应。 * 一次会话：浏览器第一次给服务器资源发送请求，会话建立，直到有一方断开为止 功能：在一次会话的范围内的多次请求间，共享数据 方式：  客户端会话技术：Cookie 服务器端会话技术：Session  2. Cookie2.1 概念客户端会话技术，将数据保存到客户端 2.2 使用步骤123456781. 创建Cookie对象，绑定数据new Co">
 <meta name="twitter:image" content="http://yoursite.com/images/JavaWeb/javaweb06/1.png">
 
@@ -129,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/17/Javaweb_06_session/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/11/17/Javaweb_06_cookie/"/>
 
 
 
 
 
-  <title>Java web 会话技术 | Edward</title>
+  <title>Java web Cookie | Edward</title>
   
 
 
@@ -262,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/17/Javaweb_06_session/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/17/Javaweb_06_cookie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -279,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java web 会话技术</h1>
+          <h1 class="post-title" itemprop="name headline">Java web Cookie</h1>
         
 
         <div class="post-meta">
@@ -332,9 +333,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/17/Javaweb_06_session/#comments" itemprop="discussionUrl">
+                <a href="/2019/11/17/Javaweb_06_cookie/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/11/17/Javaweb_06_session/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/11/17/Javaweb_06_cookie/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -420,6 +421,28 @@
 </ul>
 </li>
 </ul>
+<h1 id="3-案例"><a href="#3-案例" class="headerlink" title="3. 案例"></a>3. 案例</h1><p><strong>案例：记住上一次访问时间</strong></p>
+<p><img src="\images\JavaWeb\javaweb06\2.png" alt="image-20191118172307692"></p>
+<p><strong>需求：</strong></p>
+<ol>
+<li>访问一个Servlet，如果是第一次访问，则提示：您好，欢迎您首次访问。</li>
+<li>如果不是第一次访问，则提示：欢迎回来，您上次访问时间为：显示时间字符串</li>
+</ol>
+<p><strong>分析：</strong></p>
+<pre><code>1. 可以采用Cookie来完成
+</code></pre><ol start="2">
+<li><p>在服务器中的Servlet判断是否有一个名为lastTime的cookie</p>
+</li>
+<li><p>有：不是第一次访问</p>
+<p>响应数据：欢迎回来，您上次访问时间为:2018年6月10日11:50:20</p>
+<p>写回 Cookie：lastTime=2018年6月10日11:50:01</p>
+</li>
+<li><p>没有：是第一次访问</p>
+<p>响应数据：您好，欢迎您首次访问</p>
+<p>写回Cookie：lastTime=2018年6月10日11:50:01</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">@WebServlet(&quot;/cookieTest&quot;)</span><br><span class="line">public class CookieTest extends HttpServlet &#123;</span><br><span class="line">    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">        </span><br><span class="line">        //设置响应的消息体的数据格式以及编码</span><br><span class="line">        response.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br><span class="line"></span><br><span class="line">        //1.获取所有Cookie</span><br><span class="line">        Cookie[] cookies = request.getCookies();</span><br><span class="line">        boolean flag = false;//没有cookie为lastTime</span><br><span class="line">        //2.遍历cookie数组</span><br><span class="line">        if(cookies != null &amp;&amp; cookies.length &gt; 0)&#123;</span><br><span class="line">            for (Cookie cookie : cookies) &#123;</span><br><span class="line">                //3.获取cookie的名称</span><br><span class="line">                String name = cookie.getName();</span><br><span class="line">                //4.判断名称是否是：lastTime</span><br><span class="line">                if(&quot;lastTime&quot;.equals(name))&#123;</span><br><span class="line">                    //有该Cookie，不是第一次访问</span><br><span class="line"></span><br><span class="line">                    flag = true;//有lastTime的cookie</span><br><span class="line"></span><br><span class="line">                    //设置Cookie的value</span><br><span class="line">                    //获取当前时间的字符串，重新设置Cookie的值，重新发送cookie</span><br><span class="line">                    Date date  = new Date();</span><br><span class="line">                    SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy年MM月dd日 HH:mm:ss&quot;);</span><br><span class="line">                    String str_date = sdf.format(date);</span><br><span class="line">                    System.out.println(&quot;编码前：&quot;+str_date);</span><br><span class="line">                    //URL编码</span><br><span class="line">                    str_date = URLEncoder.encode(str_date,&quot;utf-8&quot;);</span><br><span class="line">                    System.out.println(&quot;编码后：&quot;+str_date);</span><br><span class="line">                    cookie.setValue(str_date);</span><br><span class="line">                    //设置cookie的存活时间</span><br><span class="line">                    cookie.setMaxAge(60 * 60 * 24 * 30);//一个月</span><br><span class="line">                    response.addCookie(cookie);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                    //响应数据</span><br><span class="line">                    //获取Cookie的value，时间</span><br><span class="line">                    String value = cookie.getValue();</span><br><span class="line">                    System.out.println(&quot;解码前：&quot;+value);</span><br><span class="line">                    //URL解码：</span><br><span class="line">                    value = URLDecoder.decode(value,&quot;utf-8&quot;);</span><br><span class="line">                    System.out.println(&quot;解码后：&quot;+value);</span><br><span class="line">                    response.getWriter().write(&quot;&lt;h1&gt;欢迎回来，您上次访问时间为:&quot;+value+&quot;&lt;/h1&gt;&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                    break;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        if(cookies == null || cookies.length == 0 || flag == false)&#123;</span><br><span class="line">            //没有，第一次访问</span><br><span class="line"></span><br><span class="line">            //设置Cookie的value</span><br><span class="line">            //获取当前时间的字符串，重新设置Cookie的值，重新发送cookie</span><br><span class="line">            Date date  = new Date();</span><br><span class="line">            SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy年MM月dd日 HH:mm:ss&quot;);</span><br><span class="line">            String str_date = sdf.format(date);</span><br><span class="line">            System.out.println(&quot;编码前：&quot;+str_date);</span><br><span class="line">            //URL编码</span><br><span class="line">            str_date = URLEncoder.encode(str_date,&quot;utf-8&quot;);</span><br><span class="line">            System.out.println(&quot;编码后：&quot;+str_date);</span><br><span class="line"></span><br><span class="line">            Cookie cookie = new Cookie(&quot;lastTime&quot;,str_date);</span><br><span class="line">            //设置cookie的存活时间</span><br><span class="line">            cookie.setMaxAge(60 * 60 * 24 * 30);//一个月</span><br><span class="line">            response.addCookie(cookie);</span><br><span class="line"></span><br><span class="line">            response.getWriter().write(&quot;&lt;h1&gt;您好，欢迎您首次访问&lt;/h1&gt;&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">        this.doPost(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -439,7 +462,7 @@
           
             <a href="/tags/Java-web/" rel="tag"><i class="fa fa-tag"></i> Java web</a>
           
-            <a href="/tags/Session/" rel="tag"><i class="fa fa-tag"></i> Session</a>
+            <a href="/tags/Cookie/" rel="tag"><i class="fa fa-tag"></i> Cookie</a>
           
         </div>
       
@@ -461,6 +484,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/22/Javaweb_07_jsp/" rel="prev" title="Java web JSP">
+                Java web JSP <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -551,7 +578,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -573,7 +600,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -622,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-会话技术"><span class="nav-number">1.</span> <span class="nav-text">1. 会话技术</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Cookie"><span class="nav-number">2.</span> <span class="nav-text">2. Cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-概念"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-使用步骤"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-实现原理"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-cookie的细节"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 cookie的细节</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-会话技术"><span class="nav-number">1.</span> <span class="nav-text">1. 会话技术</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Cookie"><span class="nav-number">2.</span> <span class="nav-text">2. Cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-概念"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-使用步骤"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-实现原理"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-cookie的细节"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 cookie的细节</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-案例"><span class="nav-number">3.</span> <span class="nav-text">3. 案例</span></a></li></ol></div>
             
 
           </div>
@@ -791,9 +818,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2019/11/17/Javaweb_06_session/';
-          this.page.identifier = '2019/11/17/Javaweb_06_session/';
-          this.page.title = 'Java web 会话技术';
+          this.page.url = 'http://yoursite.com/2019/11/17/Javaweb_06_cookie/';
+          this.page.identifier = '2019/11/17/Javaweb_06_cookie/';
+          this.page.title = 'Java web Cookie';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://Edward.disqus.com/embed.js';
