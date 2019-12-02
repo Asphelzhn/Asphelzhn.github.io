@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/Java_api_03_arraylist/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/Javaweb_04_response/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/08/Java_api_03_arraylist/" itemprop="url">Java常用API ArrayList类</a></h1>
+                <a class="post-title-link" href="/2019/11/08/Javaweb_04_response/" itemprop="url">Java web response对象</a></h1>
         
 
         <div class="post-meta">
@@ -313,8 +313,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-API/" itemprop="url" rel="index">
-                    <span itemprop="name">Java API</span>
+                  <a href="/categories/Java-web/" itemprop="url" rel="index">
+                    <span itemprop="name">Java web</span>
                   </a>
                 </span>
 
@@ -331,9 +331,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/08/Java_api_03_arraylist/#comments" itemprop="discussionUrl">
+                <a href="/2019/11/08/Javaweb_04_response/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/11/08/Java_api_03_arraylist/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/11/08/Javaweb_04_response/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,12 +363,23 @@
       
         
           
-          1. ArrayList类1.1 引入——对象数组使用学生数组，存储三个学生对象，代码如下：
-1234567891011121314151617181920212223242526272829303132333435363738394041public class Student &#123;    private String name;    private int age;    publi
+          1. HTTP协议：响应消息1.1 请求消息：客户端发送给服务器端的数据数据格式：
+
+请求行
+请求头
+请求空行
+请求体
+
+1.2 响应消息：服务器端发送给客户端的数据数据格式：
+1.2.1 响应行a. 组成：协议/版本 响应状态码 状态码描述
+b. 响应状态码：服务器告诉客户端浏览器本次请求和响应的一个状态。
+状态码都是3位数字 
+分类：
+1xx：服务器接收客户端消息，但没有接受完成，等待一段时间
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/11/08/Java_api_03_arraylist/#more" rel="contents">
+            <a class="btn" href="/2019/11/08/Javaweb_04_response/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -419,7 +430,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/Java_api_02_random/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/Javaoop_01_object/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -438,7 +449,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/08/Java_api_02_random/" itemprop="url">Java常用API Random类</a></h1>
+                <a class="post-title-link" href="/2019/11/08/Javaoop_01_object/" itemprop="url">Java类与对象</a></h1>
         
 
         <div class="post-meta">
@@ -473,8 +484,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-API/" itemprop="url" rel="index">
-                    <span itemprop="name">Java API</span>
+                  <a href="/categories/Java面向对象/" itemprop="url" rel="index">
+                    <span itemprop="name">Java面向对象</span>
                   </a>
                 </span>
 
@@ -491,9 +502,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/08/Java_api_02_random/#comments" itemprop="discussionUrl">
+                <a href="/2019/11/08/Javaoop_01_object/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/11/08/Java_api_02_random/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/11/08/Javaoop_01_object/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -523,15 +534,12 @@
       
         
           
-          1. Random类1.1 概述此类的实例用于生成伪随机数。例如，以下代码使用户能够得到一个随机数：
-12Random r = new Random();int i = r.nextInt();
-1.2 Random使用步骤查看类java.util.Random ：该类需要 import导入使后使用。查看构造方法public Random() ：创建一个新的随机数生成器。查看成员方法
-
-publi
+          Java面向对象1.类的定义定义类：就是定义类的成员，包括成员变量和成员方法。成员变量：和以前定义变量几乎是一样的。只不过位置发生了改变。在类中，方法外。成员方法：和以前定义方法几乎是一样的。只不过把static去掉。
+1234567891011121314public class Student &#123;    //成员变量    String name；//姓名    int age；//
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/11/08/Java_api_02_random/#more" rel="contents">
+            <a class="btn" href="/2019/11/08/Javaoop_01_object/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -749,7 +757,7 @@ publi
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/Javaoop_01_object/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/Java_api_03_arraylist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -768,7 +776,7 @@ publi
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/08/Javaoop_01_object/" itemprop="url">Java类与对象</a></h1>
+                <a class="post-title-link" href="/2019/11/08/Java_api_03_arraylist/" itemprop="url">Java常用API ArrayList类</a></h1>
         
 
         <div class="post-meta">
@@ -803,8 +811,8 @@ publi
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java面向对象/" itemprop="url" rel="index">
-                    <span itemprop="name">Java面向对象</span>
+                  <a href="/categories/Java-API/" itemprop="url" rel="index">
+                    <span itemprop="name">Java API</span>
                   </a>
                 </span>
 
@@ -821,9 +829,9 @@ publi
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/11/08/Javaoop_01_object/#comments" itemprop="discussionUrl">
+                <a href="/2019/11/08/Java_api_03_arraylist/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/11/08/Javaoop_01_object/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/11/08/Java_api_03_arraylist/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -853,12 +861,12 @@ publi
       
         
           
-          Java面向对象1.类的定义定义类：就是定义类的成员，包括成员变量和成员方法。成员变量：和以前定义变量几乎是一样的。只不过位置发生了改变。在类中，方法外。成员方法：和以前定义方法几乎是一样的。只不过把static去掉。
-1234567891011121314public class Student &#123;    //成员变量    String name；//姓名    int age；//
+          1. ArrayList类1.1 引入——对象数组使用学生数组，存储三个学生对象，代码如下：
+1234567891011121314151617181920212223242526272829303132333435363738394041public class Student &#123;    private String name;    private int age;    publi
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/11/08/Javaoop_01_object/#more" rel="contents">
+            <a class="btn" href="/2019/11/08/Java_api_03_arraylist/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1729,7 +1737,7 @@ request对象是来获取请求消息，response对象是来设置响应消息
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/20/Java_15_junit/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/20/Javaweb_01_servlet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1748,7 +1756,7 @@ request对象是来获取请求消息，response对象是来设置响应消息
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/10/20/Java_15_junit/" itemprop="url">Junit测试框架使用</a></h1>
+                <a class="post-title-link" href="/2019/10/20/Javaweb_01_servlet/" itemprop="url">java Servlet使用</a></h1>
         
 
         <div class="post-meta">
@@ -1783,8 +1791,8 @@ request对象是来获取请求消息，response对象是来设置响应消息
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/Java-web/" itemprop="url" rel="index">
+                    <span itemprop="name">Java web</span>
                   </a>
                 </span>
 
@@ -1801,9 +1809,9 @@ request对象是来获取请求消息，response对象是来设置响应消息
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/10/20/Java_15_junit/#comments" itemprop="discussionUrl">
+                <a href="/2019/10/20/Javaweb_01_servlet/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/10/20/Java_15_junit/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/10/20/Javaweb_01_servlet/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1833,30 +1841,29 @@ request对象是来获取请求消息，response对象是来设置响应消息
       
         
           
-          Junit单元测试测试分类：
-黑盒测试：不需要写代码，给输入值，看程序是否能够输出期望的值。
+          Servlet使用
+1. 概念:servlet: server applet 运行在服务器端的程序。
+
+Servelet是一个接口，定义了java类被浏览器访问到（tomcat识别）的规则。
+我们自定义一个类，实现servelet接口，复写方法
+
+2. 步骤
+创建javaEE项目
+定义一个类，实现servlet接口 
 
 
 
-白盒测试：需要写代码的。关注程序具体的执行流程。
+实现接口中的抽象方法
+配置servlet
 
 
-Junit白盒测试步骤
-定义一个测试类(测试用例)
+3. 执行原理
 
-
-建议：
-测试类名：被测试的类名Test        CalculatorTest
-包名：xxx.xxx.xx.test        com.exercise.test
-
-
-
-
-定义测试方
+4. 生命
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/10/20/Java_15_junit/#more" rel="contents">
+            <a class="btn" href="/2019/10/20/Javaweb_01_servlet/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
