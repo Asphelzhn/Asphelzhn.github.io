@@ -94,10 +94,12 @@
 <meta property="og:site_name" content="Edward">
 <meta property="og:description" content="1. Filter：过滤器1.1 概念：生活中的过滤器：净水器，空气净化器web中的过滤器：当访问服务器的资源时，过滤器可以将请求拦截下来，完成一些特殊的功能。过滤器的作用：  一般用于完成通用的操作。如：登录验证、统一编码处理、敏感字符过滤…  1.2 使用步骤：  定义一个类，实现接口Filter 复写方法 配置拦截路径 web.xml 注解    代码： 123456789101112131">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-03T15:57:56.041Z">
+<meta property="og:image" content="http://yoursite.com/images/JavaWeb/javaweb10/1.png">
+<meta property="og:updated_time" content="2019-12-03T19:05:09.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java web 监听器和过滤器">
 <meta name="twitter:description" content="1. Filter：过滤器1.1 概念：生活中的过滤器：净水器，空气净化器web中的过滤器：当访问服务器的资源时，过滤器可以将请求拦截下来，完成一些特殊的功能。过滤器的作用：  一般用于完成通用的操作。如：登录验证、统一编码处理、敏感字符过滤…  1.2 使用步骤：  定义一个类，实现接口Filter 复写方法 配置拦截路径 web.xml 注解    代码： 123456789101112131">
+<meta name="twitter:image" content="http://yoursite.com/images/JavaWeb/javaweb10/1.png">
 
 
 
@@ -400,6 +402,59 @@
 </ol>
 </li>
 </ol>
+<h3 id="1-4-过滤器配置详解"><a href="#1-4-过滤器配置详解" class="headerlink" title="1.4 过滤器配置详解"></a>1.4 过滤器配置详解</h3><p><strong>拦截路径配置：</strong></p>
+<ol>
+<li>具体资源路径： <code>/index.jsp</code>   只有访问index.jsp资源时，过滤器才会被执行</li>
+<li>拦截目录： <code>/user/*</code>    访问/user下的所有资源时，过滤器都会被执行</li>
+<li>后缀名拦截： <code>*.jsp</code>        访问所有后缀名为jsp资源时，过滤器都会被执行</li>
+<li><em>拦截所有资源：`/ </em>`        访问所有资源时，过滤器都会被执行</li>
+</ol>
+<p><strong>拦截方式配置：</strong>资源被访问的方式</p>
+<ol>
+<li><p>注解配置：</p>
+<p>设置dispatcherTypes属性</p>
+<ul>
+<li>REQUEST：默认值。浏览器直接请求资源</li>
+<li>FORWARD：转发访问资源</li>
+<li>INCLUDE：包含访问资源</li>
+<li>ERROR：错误跳转资源</li>
+<li>ASYNC：异步访问资源</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//浏览器直接请求index.jsp资源时，该过滤器会被执行</span><br><span class="line">//@WebFilter(value=&quot;/index.jsp&quot;,dispatcherTypes = DispatcherType.REQUEST)</span><br><span class="line">//只有转发访问index.jsp时，该过滤器才会被执行</span><br><span class="line">//@WebFilter(value=&quot;/index.jsp&quot;,dispatcherTypes = DispatcherType.FORWARD)</span><br><span class="line"></span><br><span class="line">//浏览器直接请求index.jsp或者转发访问index.jsp。该过滤器才会被执行</span><br><span class="line">//@WebFilter(value=&quot;/*&quot;,dispatcherTypes =&#123; DispatcherType.FORWARD,DispatcherType.REQUEST&#125;)</span><br><span class="line">public class FilterDemo5 implements Filter &#123;</span><br><span class="line"></span><br><span class="line">    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException &#123;</span><br><span class="line">        System.out.println(&quot;filterDemo5....&quot;);</span><br><span class="line">        chain.doFilter(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void init(FilterConfig config) throws ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void destroy() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>web.xml配置</p>
+<p> //设置<dispatcher></dispatcher>标签即可</p>
+</li>
+</ol>
+<h2 id="1-5-过滤器链-配置多个过滤器"><a href="#1-5-过滤器链-配置多个过滤器" class="headerlink" title="1.5 过滤器链(配置多个过滤器)"></a>1.5 过滤器链(配置多个过滤器)</h2><p><strong>拦截执行顺序：如果有两个过滤器：过滤器1和过滤器2</strong></p>
+<ol>
+<li>过滤器1</li>
+<li>过滤器2</li>
+<li>资源执行</li>
+<li>过滤器2</li>
+<li>过滤器1 </li>
+</ol>
+<p><strong>过滤器先后顺序问题：</strong></p>
+<ol>
+<li>注解配置：按照类名的字符串比较规则比较，值小的先执行<ul>
+<li>如： AFilter 和 BFilter，AFilter就先执行了。</li>
+</ul>
+</li>
+<li>web.xml配置： <code>&lt;filter-mapping&gt;</code>谁定义在上边，谁先执行</li>
+</ol>
+<h2 id="1-6-案例"><a href="#1-6-案例" class="headerlink" title="1.6 案例"></a>1.6 案例</h2><p><strong>案例1_登录验证</strong></p>
+<ul>
+<li>需求：<ol>
+<li>访问day17_case案例的资源。验证其是否登录</li>
+<li>如果登录了，则直接放行。</li>
+<li>如果没有登录，则跳转到登录页面，提示”您尚未登录，请先登录”。</li>
+</ol>
+</li>
+</ul>
+<p><img src="\images\JavaWeb\javaweb10\1.png" alt="image-20191203195728155"></p>
+<h3 id="编写LoginFilter对登录状态进行过滤"><a href="#编写LoginFilter对登录状态进行过滤" class="headerlink" title="编写LoginFilter对登录状态进行过滤"></a>编写LoginFilter对登录状态进行过滤</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.web.filter;</span><br><span class="line"></span><br><span class="line">import javax.servlet.*;</span><br><span class="line">import javax.servlet.annotation.WebFilter;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 登录验证的过滤器</span><br><span class="line"> */</span><br><span class="line">@WebFilter(&quot;/*&quot;)</span><br><span class="line">public class LoginFilter implements Filter &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException &#123;</span><br><span class="line">        System.out.println(req);</span><br><span class="line">        //0.强制转换</span><br><span class="line">        HttpServletRequest request = (HttpServletRequest) req;</span><br><span class="line"></span><br><span class="line">        //1.获取资源请求路径</span><br><span class="line">        String uri = request.getRequestURI();</span><br><span class="line">        //2.判断是否包含登录相关资源路径,要注意排除掉 css/js/图片/验证码等资源</span><br><span class="line">        if(uri.contains(&quot;/login.jsp&quot;) || uri.contains(&quot;/loginServlet&quot;) || uri.contains(&quot;/css/&quot;) || uri.contains(&quot;/js/&quot;) || uri.contains(&quot;/fonts/&quot;) || uri.contains(&quot;/checkCodeServlet&quot;)  )&#123;</span><br><span class="line">            //包含，用户就是想登录。放行</span><br><span class="line">            chain.doFilter(req, resp);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            //不包含，需要验证用户是否登录</span><br><span class="line">            //3.从获取session中获取user</span><br><span class="line">            Object user = request.getSession().getAttribute(&quot;user&quot;);</span><br><span class="line">            if(user != null)&#123;</span><br><span class="line">                //登录了。放行</span><br><span class="line">                chain.doFilter(req, resp);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                //没有登录。跳转登录页面</span><br><span class="line"></span><br><span class="line">                request.setAttribute(&quot;login_msg&quot;,&quot;您尚未登录，请登录&quot;);</span><br><span class="line">                request.getRequestDispatcher(&quot;/login.jsp&quot;).forward(request,resp);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        // chain.doFilter(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void init(FilterConfig config) throws ServletException &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void destroy() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -602,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Filter：过滤器"><span class="nav-number">1.</span> <span class="nav-text">1. Filter：过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-概念："><span class="nav-number">1.1.</span> <span class="nav-text">1.1 概念：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-使用"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-过滤器细节："><span class="nav-number">1.3.</span> <span class="nav-text">1.3 过滤器细节：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Filter：过滤器"><span class="nav-number">1.</span> <span class="nav-text">1. Filter：过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-概念："><span class="nav-number">1.1.</span> <span class="nav-text">1.1 概念：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-使用"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-过滤器细节："><span class="nav-number">1.3.</span> <span class="nav-text">1.3 过滤器细节：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-过滤器配置详解"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.4 过滤器配置详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-过滤器链-配置多个过滤器"><span class="nav-number">1.4.</span> <span class="nav-text">1.5 过滤器链(配置多个过滤器)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-案例"><span class="nav-number">1.5.</span> <span class="nav-text">1.6 案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编写LoginFilter对登录状态进行过滤"><span class="nav-number">1.5.1.</span> <span class="nav-text">编写LoginFilter对登录状态进行过滤</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
