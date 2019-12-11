@@ -95,7 +95,7 @@
 <meta property="og:description" content="JQuery 基础1.概念一个JavaScript框架。简化JS开发 * jQuery是一个快速、简洁的JavaScript框架，是继Prototype之后又一个优秀的JavaScript代码库（或JavaScript框架）。jQuery设计的宗旨    是“write Less，Do More”，即倡导写更少的代码，做更多的事情。它封装JavaScript常用的功能代码，提供一种简便的JavaS">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/image-20191210222220877.png">
-<meta property="og:updated_time" content="2019-12-11T10:26:00.867Z">
+<meta property="og:updated_time" content="2019-12-11T13:10:26.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JQuery笔记">
 <meta name="twitter:description" content="JQuery 基础1.概念一个JavaScript框架。简化JS开发 * jQuery是一个快速、简洁的JavaScript框架，是继Prototype之后又一个优秀的JavaScript代码库（或JavaScript框架）。jQuery设计的宗旨    是“write Less，Do More”，即倡导写更少的代码，做更多的事情。它封装JavaScript常用的功能代码，提供一种简便的JavaS">
@@ -519,22 +519,23 @@
 <h4 id="属性操作"><a href="#属性操作" class="headerlink" title="属性操作"></a><strong>属性操作</strong></h4><p><strong>通用属性操作</strong></p>
 <ol>
 <li><p>attr(): 获取/设置元素的属性</p>
-<ol start="2">
-<li>removeAttr():删除属性</li>
-<li>prop():获取/设置元素的属性</li>
-<li>removeProp():删除属性</li>
-</ol>
-<ul>
-<li>attr和prop区别？<ol>
+</li>
+<li><p>removeAttr():删除属性</p>
+</li>
+<li><p>prop():获取/设置元素的属性</p>
+</li>
+<li><p>removeProp():删除属性</p>
+<p>attr和prop区别？</p>
+<ol>
 <li>如果操作的是元素的固有属性，则建议使用prop</li>
 <li>如果操作的是元素自定义的属性，则建议使用attr</li>
 </ol>
 </li>
-</ul>
+</ol>
+<p><strong>对class属性操作</strong></p>
+<ol>
+<li><p>addClass():添加class属性值</p>
 </li>
-<li><p>对class属性操作</p>
-<pre><code>1. addClass():添加class属性值
-</code></pre><ol start="2">
 <li><p>removeClass():删除class属性值</p>
 </li>
 <li><p>toggleClass():切换class属性</p>
@@ -548,7 +549,64 @@
 </ul>
 </li>
 </ol>
-</li>
+<h4 id="CRUD操作"><a href="#CRUD操作" class="headerlink" title="CRUD操作:"></a>CRUD操作:</h4><p>append():父元素将子元素追加到末尾</p>
+<ul>
+<li>对象1.append(对象2): 将对象2添加到对象1元素内部，并且在末尾</li>
+</ul>
+<p>prepend():父元素将子元素追加到开头</p>
+<ul>
+<li>对象1.prepend(对象2):将对象2添加到对象1元素内部，并且在开头</li>
+</ul>
+<p>appendTo():</p>
+<ul>
+<li>对象1.appendTo(对象2):将对象1添加到对象2内部，并且在末尾</li>
+</ul>
+<p>prependTo()：</p>
+<ul>
+<li>对象1.prependTo(对象2):将对象1添加到对象2内部，并且在开头</li>
+</ul>
+<p>after():添加元素到元素后边</p>
+<ul>
+<li>对象1.after(对象2)： 将对象2添加到对象1后边。对象1和对象2是兄弟关系</li>
+</ul>
+<p>before():添加元素到元素前边</p>
+<ul>
+<li>对象1.before(对象2)： 将对象2添加到对象1前边。对象1和对象2是兄弟关系</li>
+</ul>
+<p>insertAfter()</p>
+<ul>
+<li>对象1.insertAfter(对象2)：将对象2添加到对象1后边。对象1和对象2是兄弟关系</li>
+</ul>
+<p>insertBefore()</p>
+<ul>
+<li>对象1.insertBefore(对象2)： 将对象2添加到对象1前边。对象1和对象2是兄弟关系</li>
+</ul>
+<p>remove():移除元素</p>
+<ul>
+<li>对象.remove():将对象删除掉</li>
+</ul>
+<p>empty():清空元素的所有后代元素。</p>
+<ul>
+<li>对象.empty():将对象的后代元素全部清空，但是保留当前对象以及其属性节点</li>
+</ul>
+<h1 id="JQuery-高级"><a href="#JQuery-高级" class="headerlink" title="JQuery 高级"></a>JQuery 高级</h1><h2 id="1-动画"><a href="#1-动画" class="headerlink" title="1. 动画"></a>1. 动画</h2><h3 id="1-1-三种方式显示和隐藏元素"><a href="#1-1-三种方式显示和隐藏元素" class="headerlink" title="1.1 三种方式显示和隐藏元素"></a>1.1 三种方式显示和隐藏元素</h3><h4 id="默认显示和隐藏方式"><a href="#默认显示和隐藏方式" class="headerlink" title="默认显示和隐藏方式"></a>默认显示和隐藏方式</h4><ol>
+<li>show([speed,[easing],[fn]])</li>
+</ol>
+<p>参数：</p>
+<p>speed：动画的速度。三个预定义的值(“slow”,”normal”, “fast”)或表示动画时长的毫秒数值(如：1000)<br>easing：用来指定切换效果，默认是”swing”，可用参数”linear”</p>
+<ul>
+<li>swing：动画执行时效果是 先慢，中间快，最后又慢</li>
+<li>linear：动画执行时速度是匀速的</li>
+</ul>
+<p>fn：在动画完成时执行的函数，每个元素执行一次。</p>
+<ol start="2">
+<li>hide([speed,[easing],[fn]])</li>
+<li>toggle([speed],[easing],[fn])</li>
+</ol>
+<h4 id="滑动显示和隐藏方式"><a href="#滑动显示和隐藏方式" class="headerlink" title="滑动显示和隐藏方式"></a>滑动显示和隐藏方式</h4><ol>
+<li>slideDown([speed],[easing],[fn])</li>
+<li>slideUp([speed,[easing],[fn]])</li>
+<li>slideToggle([speed],[easing],[fn])</li>
 </ol>
 
       
@@ -750,7 +808,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JQuery-基础"><span class="nav-number">1.</span> <span class="nav-text">JQuery 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概念"><span class="nav-number">1.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-使用"><span class="nav-number">1.2.</span> <span class="nav-text">2. 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-JQuery对象和JS对象区别与转换"><span class="nav-number">1.3.</span> <span class="nav-text">3. JQuery对象和JS对象区别与转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-选择器：筛选具有相似特征的元素-标签"><span class="nav-number">1.4.</span> <span class="nav-text">4. 选择器：筛选具有相似特征的元素(标签)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-DOM操作"><span class="nav-number">1.5.</span> <span class="nav-text">5. DOM操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内容操作"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">内容操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#属性操作"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">属性操作</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JQuery-基础"><span class="nav-number">1.</span> <span class="nav-text">JQuery 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概念"><span class="nav-number">1.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-使用"><span class="nav-number">1.2.</span> <span class="nav-text">2. 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-JQuery对象和JS对象区别与转换"><span class="nav-number">1.3.</span> <span class="nav-text">3. JQuery对象和JS对象区别与转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-选择器：筛选具有相似特征的元素-标签"><span class="nav-number">1.4.</span> <span class="nav-text">4. 选择器：筛选具有相似特征的元素(标签)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-DOM操作"><span class="nav-number">1.5.</span> <span class="nav-text">5. DOM操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内容操作"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">内容操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#属性操作"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">属性操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CRUD操作"><span class="nav-number">1.5.0.3.</span> <span class="nav-text">CRUD操作:</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JQuery-高级"><span class="nav-number">2.</span> <span class="nav-text">JQuery 高级</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-动画"><span class="nav-number">2.1.</span> <span class="nav-text">1. 动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-三种方式显示和隐藏元素"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1 三种方式显示和隐藏元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#默认显示和隐藏方式"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">默认显示和隐藏方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#滑动显示和隐藏方式"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">滑动显示和隐藏方式</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
