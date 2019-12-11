@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="AJAX," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="AJAX1.概念 ASynchronous JavaScript And XML    异步的JavaScript 和 XML 1. 异步和同步：客户端和服务器端相互通信的基础上  * 客户端必须等待服务器端的响应。在等待的期间客户端不能做其他操作。  * 客户端不需要等待服务器端的响应。在服务器处理请求的过程中，客户端可以进行其他的操作。 Ajax 是一种在无需重新加载整个网页的情况下，能够更新">
+<meta name="keywords" content="AJAX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AJAX笔记">
+<meta property="og:url" content="http://yoursite.com/2019/12/10/front_06_Ajax/index.html">
+<meta property="og:site_name" content="Edward">
+<meta property="og:description" content="AJAX1.概念 ASynchronous JavaScript And XML    异步的JavaScript 和 XML 1. 异步和同步：客户端和服务器端相互通信的基础上  * 客户端必须等待服务器端的响应。在等待的期间客户端不能做其他操作。  * 客户端不需要等待服务器端的响应。在服务器处理请求的过程中，客户端可以进行其他的操作。 Ajax 是一种在无需重新加载整个网页的情况下，能够更新">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/Frontend/ajax/1.png">
+<meta property="og:image" content="http://yoursite.com/images/Frontend/ajax/2.png">
+<meta property="og:updated_time" content="2019-12-11T22:07:19.814Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AJAX笔记">
+<meta name="twitter:description" content="AJAX1.概念 ASynchronous JavaScript And XML    异步的JavaScript 和 XML 1. 异步和同步：客户端和服务器端相互通信的基础上  * 客户端必须等待服务器端的响应。在等待的期间客户端不能做其他操作。  * 客户端不需要等待服务器端的响应。在服务器处理请求的过程中，客户端可以进行其他的操作。 Ajax 是一种在无需重新加载整个网页的情况下，能够更新">
+<meta name="twitter:image" content="http://yoursite.com/images/Frontend/ajax/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/10/front_06_Ajax/"/>
+
+
+
+
+
+  <title>AJAX笔记 | Edward</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Edward</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Edward's Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/10/front_06_Ajax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AJAX笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-10T04:22:08+01:00">
+                2019-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/10/front_06_Ajax/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/12/10/front_06_Ajax/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h2><p> ASynchronous JavaScript And XML    异步的JavaScript 和 XML</p>
+<pre><code>1. 异步和同步：客户端和服务器端相互通信的基础上
+ * 客户端必须等待服务器端的响应。在等待的期间客户端不能做其他操作。
+ * 客户端不需要等待服务器端的响应。在服务器处理请求的过程中，客户端可以进行其他的操作。
+</code></pre><p>Ajax 是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术。</p>
+<ul>
+<li>通过在后台与服务器进行少量数据交换，Ajax 可以使网页实现异步更新。</li>
+<li>这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</li>
+<li>传统的网页（不使用 Ajax）如果需要更新内容，必须重载整个网页页面。</li>
+<li>提升用户的体验</li>
+</ul>
+<p><img src="\images\Frontend\ajax\1.png" alt="image-20191211170413481"></p>
+<h2 id="2-实现方式："><a href="#2-实现方式：" class="headerlink" title="2. 实现方式："></a>2. 实现方式：</h2><h3 id="原生的JS实现方式（了解）"><a href="#原生的JS实现方式（了解）" class="headerlink" title="原生的JS实现方式（了解）"></a>原生的JS实现方式（了解）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">//1.创建核心对象</span><br><span class="line">        var xmlhttp;</span><br><span class="line">        if (window.XMLHttpRequest)</span><br><span class="line">        &#123;// code for IE7+, Firefox, Chrome, Opera, Safari</span><br><span class="line">            xmlhttp=new XMLHttpRequest();</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;// code for IE6, IE5</span><br><span class="line">            xmlhttp=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        //2. 建立连接</span><br><span class="line">    /*</span><br><span class="line">        参数：</span><br><span class="line">            1. 请求方式：GET、POST</span><br><span class="line">                * get方式，请求参数在URL后边拼接。send方法为空参</span><br><span class="line">                * post方式，请求参数在send方法中定义</span><br><span class="line">            2. 请求的URL：</span><br><span class="line">            3. 同步或异步请求：true（异步）或 false（同步）</span><br><span class="line"></span><br><span class="line">     */</span><br><span class="line">    xmlhttp.open(&quot;GET&quot;,&quot;ajaxServlet?username=tom&quot;,true);</span><br><span class="line"></span><br><span class="line">    //3.发送请求</span><br><span class="line">    xmlhttp.send();</span><br><span class="line"></span><br><span class="line">    //4.接受并处理来自服务器的响应结果</span><br><span class="line">    //获取方式 ：xmlhttp.responseText</span><br><span class="line">    //什么时候获取？当服务器响应成功后再获取</span><br><span class="line"></span><br><span class="line">    //当xmlhttp对象的就绪状态改变时，触发事件onreadystatechange。</span><br><span class="line">    xmlhttp.onreadystatechange=function()</span><br><span class="line">    &#123;</span><br><span class="line">        //判断readyState就绪状态是否为4，判断status响应状态码是否为200</span><br><span class="line">        if (xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200)</span><br><span class="line">        &#123;</span><br><span class="line">           //获取服务器的响应结果</span><br><span class="line">            var responseText = xmlhttp.responseText;</span><br><span class="line">            alert(responseText);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="JQeury实现方式"><a href="#JQeury实现方式" class="headerlink" title="JQeury实现方式"></a>JQeury实现方式</h3><h4 id="1-ajax"><a href="#1-ajax" class="headerlink" title="1. $.ajax()"></a>1. $.ajax()</h4><ul>
+<li><p>语法：$.ajax({键值对});</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//使用$.ajax()发送异步请求</span><br><span class="line">     $.ajax(&#123;</span><br><span class="line">         url:&quot;ajaxServlet&quot; , // 请求路径</span><br><span class="line">         type:&quot;POST&quot; , //请求方式</span><br><span class="line">         //data: &quot;username=jack&amp;age=23&quot;,//请求参数</span><br><span class="line">         data:&#123;&quot;username&quot;:&quot;jack&quot;,&quot;age&quot;:23&#125;,</span><br><span class="line">         success:function (data) &#123;</span><br><span class="line">             alert(data);</span><br><span class="line">         &#125;,//响应成功后的回调函数</span><br><span class="line">         error:function () &#123;</span><br><span class="line">          alert(&quot;出错啦...&quot;)</span><br><span class="line">         &#125;,//表示如果请求响应出现错误，会执行的回调函数</span><br><span class="line">         dataType:&quot;text&quot;//设置接受到的响应数据的格式</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-get-：发送get请求"><a href="#2-get-：发送get请求" class="headerlink" title="2. $.get()：发送get请求"></a>2. $.get()：发送get请求</h4><p>语法：$.get(url, [data], [callback], [type])</p>
+<pre><code>         * 参数：
+* url：请求路径
+* data：请求参数
+* callback：回调函数
+* type：响应结果的类型
+</code></pre><h4 id="3-post-：发送post请求"><a href="#3-post-：发送post请求" class="headerlink" title="3. $.post()：发送post请求"></a>3. $.post()：发送post请求</h4><p>语法：$.post(url, [data], [callback], [type])</p>
+<pre><code>         * 参数：
+* url：请求路径
+* data：请求参数
+* callback：回调函数
+* type：响应结果的类型
+</code></pre><h1 id="Json"><a href="#Json" class="headerlink" title="Json"></a>Json</h1><h2 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>JavaScript Object Notation        JavaScript对象表示法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person p = new Person();</span><br><span class="line">p.setName(&quot;张三&quot;);</span><br><span class="line">p.setAge(23);</span><br><span class="line">p.setGender(&quot;男&quot;);</span><br><span class="line"></span><br><span class="line">var p = &#123;&quot;name&quot;:&quot;张三&quot;,&quot;age&quot;:23,&quot;gender&quot;:&quot;男&quot;&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>json现在多用于存储和交换文本信息的语法</li>
+<li>进行数据的传输</li>
+<li>JSON 比 XML 更小、更快，更易解析。</li>
+</ul>
+<h2 id="2-语法"><a href="#2-语法" class="headerlink" title="2. 语法"></a>2. 语法</h2><ol>
+<li><p>基本规则</p>
+<pre><code>* 数据在名称/值对中：json数据是由键值对构成的
+</code></pre><ul>
+<li>键用引号(单双都行)引起来，也可以不使用引号</li>
+<li>值得取值类型：<ol>
+<li>数字（整数或浮点数）</li>
+<li>字符串（在双引号中）</li>
+<li>逻辑值（true 或 false）</li>
+<li>数组（在方括号中）    {“persons”:[{},{}]}</li>
+<li>对象（在花括号中） {“address”:{“province”：”陕西”….}}</li>
+<li>null</li>
+</ol>
+</li>
+<li>数据由逗号分隔：多个键值对由逗号分隔</li>
+<li>花括号保存对象：使用{}定义json 格式</li>
+<li>方括号保存数组：[]</li>
+</ul>
+</li>
+<li><p>获取数据:</p>
+<pre><code>1. json对象.键名
+</code></pre><ol start="2">
+<li>json对象[“键名”]</li>
+<li>数组对象[索引]</li>
+<li>遍历</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//1.定义基本格式</span><br><span class="line">     var person = &#123;&quot;name&quot;: &quot;张三&quot;, age: 23, &apos;gender&apos;: true&#125;;</span><br><span class="line">		</span><br><span class="line">     var ps = [&#123;&quot;name&quot;: &quot;张三&quot;, &quot;age&quot;: 23, &quot;gender&quot;: true&#125;,</span><br><span class="line">         &#123;&quot;name&quot;: &quot;李四&quot;, &quot;age&quot;: 24, &quot;gender&quot;: true&#125;,</span><br><span class="line">         &#123;&quot;name&quot;: &quot;王五&quot;, &quot;age&quot;: 25, &quot;gender&quot;: false&#125;];</span><br><span class="line">         </span><br><span class="line">     //获取person对象中所有的键和值</span><br><span class="line">     //for in 循环</span><br><span class="line">    /* for(var key in person)&#123;</span><br><span class="line">         //这样的方式获取不行。因为相当于  person.&quot;name&quot;</span><br><span class="line">         //alert(key + &quot;:&quot; + person.key);</span><br><span class="line">         alert(key+&quot;:&quot;+person[key]);</span><br><span class="line">     &#125;*/</span><br><span class="line">		</span><br><span class="line">    //获取ps中的所有值</span><br><span class="line">     for (var i = 0; i &lt; ps.length; i++) &#123;</span><br><span class="line">         var p = ps[i];</span><br><span class="line">         for(var key in p)&#123;</span><br><span class="line">             alert(key+&quot;:&quot;+p[key]);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-JSON数据和Java对象的相互转换"><a href="#3-JSON数据和Java对象的相互转换" class="headerlink" title="3. JSON数据和Java对象的相互转换"></a>3. JSON数据和Java对象的相互转换</h2><p>JSON解析器：</p>
+<ul>
+<li>常见的解析器：Jsonlib，Gson，fastjson，jackson</li>
+</ul>
+<h3 id="JSON转为Java对象"><a href="#JSON转为Java对象" class="headerlink" title="JSON转为Java对象"></a>JSON转为Java对象</h3><ol>
+<li>导入jackson的相关jar包</li>
+<li>创建Jackson核心对象 ObjectMapper</li>
+<li>调用ObjectMapper的相关方法进行转换<ul>
+<li>readValue(json字符串数据,Class)</li>
+</ul>
+</li>
+</ol>
+<h3 id="Java对象转换JSON"><a href="#Java对象转换JSON" class="headerlink" title="Java对象转换JSON"></a>Java对象转换JSON</h3><p>使用步骤：</p>
+<ol>
+<li>导入jackson的相关jar包</li>
+<li>创建Jackson核心对象 ObjectMapper</li>
+<li>调用ObjectMapper的相关方法进行转换</li>
+</ol>
+<h4 id="转换方法："><a href="#转换方法：" class="headerlink" title="转换方法："></a>转换方法：</h4><ul>
+<li>writeValue(参数1，obj):<pre><code>      * 参数1：
+File：将obj对象转换为JSON字符串，并保存到指定的文件中
+Writer：将obj对象转换为JSON字符串，并将json数据填充到字符输出流中
+OutputStream：将obj对象转换为JSON字符串，并将json数据填充到字节输出流中
+</code></pre></li>
+<li>writeValueAsString(obj):将对象转为json字符串              </li>
+</ul>
+<h4 id="注解："><a href="#注解：" class="headerlink" title="注解："></a>注解：</h4><pre><code>1. @JsonIgnore：排除属性。
+2. @JsonFormat：属性值得格式化
+3. @JsonFormat(pattern = &quot;yyyy-MM-dd&quot;)
+</code></pre><h4 id="复杂java对象转换"><a href="#复杂java对象转换" class="headerlink" title="复杂java对象转换"></a>复杂java对象转换</h4><ol>
+<li>List：数组</li>
+<li>Map：对象格式一致    </li>
+</ol>
+<h2 id="4-案例"><a href="#4-案例" class="headerlink" title="4. 案例"></a>4. 案例</h2><p>校验用户名是否存在</p>
+<p><img src="\images\Frontend\ajax\2.png" alt="image-20191211230422543"></p>
+<pre><code>1. 服务器响应的数据，在客户端使用时，要想当做json数据格式使用。有两种解决方案：
+     1. $.get(type):将最后一个参数type指定为&quot;json&quot;
+     2. 在服务器端设置MIME类型
+     response.setContentType(&quot;application/json;charset=utf-8&quot;);
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AJAX/" rel="tag"><i class="fa fa-tag"></i> AJAX</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/09/front_05_JQuery/" rel="next" title="JQuery笔记">
+                <i class="fa fa-chevron-left"></i> JQuery笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry！Stay foolish！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Asphelzhn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:asphel96@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX"><span class="nav-number">1.</span> <span class="nav-text">AJAX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概念"><span class="nav-number">1.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-实现方式："><span class="nav-number">1.2.</span> <span class="nav-text">2. 实现方式：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原生的JS实现方式（了解）"><span class="nav-number">1.2.1.</span> <span class="nav-text">原生的JS实现方式（了解）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JQeury实现方式"><span class="nav-number">1.2.2.</span> <span class="nav-text">JQeury实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-ajax"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">1. $.ajax()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-get-：发送get请求"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2. $.get()：发送get请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-post-：发送post请求"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">3. $.post()：发送post请求</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Json"><span class="nav-number">2.</span> <span class="nav-text">Json</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概念-1"><span class="nav-number">2.1.</span> <span class="nav-text">1. 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-语法"><span class="nav-number">2.2.</span> <span class="nav-text">2. 语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-JSON数据和Java对象的相互转换"><span class="nav-number">2.3.</span> <span class="nav-text">3. JSON数据和Java对象的相互转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON转为Java对象"><span class="nav-number">2.3.1.</span> <span class="nav-text">JSON转为Java对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java对象转换JSON"><span class="nav-number">2.3.2.</span> <span class="nav-text">Java对象转换JSON</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#转换方法："><span class="nav-number">2.3.2.1.</span> <span class="nav-text">转换方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注解："><span class="nav-number">2.3.2.2.</span> <span class="nav-text">注解：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂java对象转换"><span class="nav-number">2.3.2.3.</span> <span class="nav-text">复杂java对象转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-案例"><span class="nav-number">2.4.</span> <span class="nav-text">4. 案例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/12/10/front_06_Ajax/';
+          this.page.identifier = '2019/12/10/front_06_Ajax/';
+          this.page.title = 'AJAX笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
