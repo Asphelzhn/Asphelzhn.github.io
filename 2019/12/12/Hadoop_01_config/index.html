@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hadoop - 学习," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Hadoop01-集群环境搭建大数据概述​     大数据: 就是对海量数据进行分析处理，得到一些有价值的信息，然后帮助企业做出判断和决策. ​     处理流程: ​             1:获取数据 ​              2:处理数据 ​              3:展示结果 1：Hadoop介绍Hadoop是一个分布式系基础框架,它允许使用简单的编程模型跨大型计算机的大型数据集">
+<meta name="keywords" content="Hadoop - 学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop01-集群环境搭建">
+<meta property="og:url" content="http://yoursite.com/2019/12/12/Hadoop_01_config/index.html">
+<meta property="og:site_name" content="Edward">
+<meta property="og:description" content="Hadoop01-集群环境搭建大数据概述​     大数据: 就是对海量数据进行分析处理，得到一些有价值的信息，然后帮助企业做出判断和决策. ​     处理流程: ​             1:获取数据 ​              2:处理数据 ​              3:展示结果 1：Hadoop介绍Hadoop是一个分布式系基础框架,它允许使用简单的编程模型跨大型计算机的大型数据集">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/1.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/2.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/3.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/4.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/5.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/6.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/7.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/8.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/9.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/10.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/11.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/12.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/13.jpg">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/14.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/15.png">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/16.jpg">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/17.jpg">
+<meta property="og:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/18.png">
+<meta property="og:image" content="http://ppw6n93dt.bkt.clouddn.com/2e9d31054f9bf9a6b5dc792348fa0d0b.png">
+<meta property="og:image" content="http://ppw6n93dt.bkt.clouddn.com/4adae8d5abec9f518b585f0cbb4986b0.png">
+<meta property="og:image" content="http://ppw6n93dt.bkt.clouddn.com/2711fe62d98e0c238a23305f83c9e4c6.png">
+<meta property="og:image" content="http://ppw6n93dt.bkt.clouddn.com/0b874b5500f451e567d89809324be191.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/12/Hadoop_01_config/assets/wps4-1555914009906.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/12/12/Hadoop_01_config/assets/wps5-1555914009906.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/12/12/Hadoop_01_config/assets/wps1-1555925038423.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/12/12/Hadoop_01_config/assets/wps3-1555925038423.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/12/12/Hadoop_01_config/assets/wps4-1555925038423.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/12/12/Hadoop_01_config/assets/wps5-1555925038423.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/12/12/Hadoop_01_config/assets/wps6-1555925038424.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/12/12/Hadoop_01_config/assets/wps7-1555925038424.jpg">
+<meta property="og:updated_time" content="2019-12-13T22:57:31.547Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop01-集群环境搭建">
+<meta name="twitter:description" content="Hadoop01-集群环境搭建大数据概述​     大数据: 就是对海量数据进行分析处理，得到一些有价值的信息，然后帮助企业做出判断和决策. ​     处理流程: ​             1:获取数据 ​              2:处理数据 ​              3:展示结果 1：Hadoop介绍Hadoop是一个分布式系基础框架,它允许使用简单的编程模型跨大型计算机的大型数据集">
+<meta name="twitter:image" content="c:/Users/56871/Desktop/Myblog/blog/source/images/Hadoop/hadoop01/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/12/Hadoop_01_config/"/>
+
+
+
+
+
+  <title>Hadoop01-集群环境搭建 | Edward</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Edward</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Edward's Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/12/Hadoop_01_config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Edward">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hadoop01-集群环境搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-12T09:30:08+01:00">
+                2019-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/12/Hadoop_01_config/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/12/12/Hadoop_01_config/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Hadoop01-集群环境搭建"><a href="#Hadoop01-集群环境搭建" class="headerlink" title="Hadoop01-集群环境搭建"></a>Hadoop01-集群环境搭建</h1><h3 id="大数据概述"><a href="#大数据概述" class="headerlink" title="大数据概述"></a>大数据概述</h3><p>​     大数据: 就是对海量数据进行分析处理，得到一些有价值的信息，然后帮助企业做出判断和决策.</p>
+<p>​     处理流程:</p>
+<p>​             1:获取数据</p>
+<p>​              2:处理数据</p>
+<p>​              3:展示结果</p>
+<h2 id="1：Hadoop介绍"><a href="#1：Hadoop介绍" class="headerlink" title="1：Hadoop介绍"></a>1：Hadoop介绍</h2><p>Hadoop是一个分布式系基础框架,它允许使用简单的编程模型跨大型计算机的大型数据集进行分布式处理.</p>
+<p>它主要解决两个问题</p>
+<p>​      <strong>大数据存储问题</strong>： HDFS</p>
+<p>​      <strong>大数据计算问题</strong>：MapReduce</p>
+<h5 id="问题一-大文件怎么存储"><a href="#问题一-大文件怎么存储" class="headerlink" title="问题一:  大文件怎么存储?"></a>问题一:  大文件怎么存储?</h5><blockquote>
+<p>假设一个文件非常非常大，大小为1PB/a.txt, 大到世界上所有的高级计算机都存储不下, 怎么办?</p>
+</blockquote>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\1.png" alt="image-20191125212512213"></p>
+<ul>
+<li>为了保存大文件, 需要把文件放在多个机器上<ul>
+<li>文件要分块 block(128M)</li>
+<li>不同的块放在不同的 <code>HDFS</code> 节点</li>
+</ul>
+</li>
+<li>同时为了对外提供统一的访问, 让外部可以像是访问本机一样访问分布式文件系统<ul>
+<li>有一个统一的 <code>HDFS Master</code></li>
+<li>它保存整个系统的文件信息</li>
+<li>所有的文件元数据的修改都从 <code>Master</code> 开始</li>
+</ul>
+</li>
+</ul>
+<h5 id="问题二-大数据怎么计算"><a href="#问题二-大数据怎么计算" class="headerlink" title="问题二: 大数据怎么计算?"></a>问题二: 大数据怎么计算?</h5><blockquote>
+<p>从一个网络日志文件中计算独立 IP, 以及其出现的次数<br>如果数据量特别大，我们可以将,整个任务拆开, 划分为比较小的任务, 从而进行计算呢。</p>
+</blockquote>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\2.png" alt="image-20191125212727839"></p>
+<h5 id="问题三-如何将这些计算任务跑在集群中"><a href="#问题三-如何将这些计算任务跑在集群中" class="headerlink" title="问题三: 如何将这些计算任务跑在集群中?"></a>问题三: 如何将这些计算任务跑在集群中?</h5><blockquote>
+<p>如果能够在不同的节点上并行执行, 更有更大的提升, 如何把这些任务跑在集群中?</p>
+</blockquote>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\3.png" alt="image-20191125212916828"></p>
+<ul>
+<li>可以设置一个集群的管理者, 这个地方叫做 <code>Yarn</code><ul>
+<li>这个集群管理者有一个 <code>Master</code>, 用于接收和分配任务</li>
+<li>这个集群管理者有多个 <code>Slave</code>, 用于运行任务</li>
+</ul>
+</li>
+</ul>
+<h5 id="Hadoop-的组成"><a href="#Hadoop-的组成" class="headerlink" title="Hadoop 的组成"></a>Hadoop 的组成</h5><ul>
+<li><strong>Hadoop分布式文件系统(HDFS)</strong> 提供对应用程序数据的高吞吐量访问的分布式文件系统</li>
+</ul>
+<ul>
+<li><strong>Hadoop Common</strong> 其他Hadoop模块所需的Java库和实用程序。这些库提供文件系统和操作系统级抽象，并包含启动Hadoop所需的必要Java文件和脚本</li>
+<li><strong>Hadoop MapReduce</strong> 基于YARN的大型数据集并行处理系统</li>
+<li><strong>Hadoop YARN</strong> 作业调度和集群资源管理的框架</li>
+</ul>
+<h2 id="2：环境搭建"><a href="#2：环境搭建" class="headerlink" title="2：环境搭建"></a>2：环境搭建</h2><p>在 Hadoop 具体开始前, 先来搭建一下环境</p>
+<ol>
+<li>创建虚拟机<ol>
+<li>安装虚拟机 VMWare</li>
+<li>创建虚拟机</li>
+<li>安装 CentOS</li>
+<li>组成集群</li>
+</ol>
+</li>
+<li>配置每台主机<ol>
+<li>关闭防火墙</li>
+<li>关闭 SELinux</li>
+<li>设置主机名</li>
+<li>重启</li>
+<li>设置时钟同步服务</li>
+<li>配置用户权限</li>
+<li>免密登录</li>
+</ol>
+</li>
+<li>安装辅助软件<ol>
+<li>JDK</li>
+<li>Zookeeper</li>
+</ol>
+</li>
+<li>安装 Hadoop<ol>
+<li>下载并解压</li>
+<li>修改配置</li>
+<li>分发到每个节点</li>
+<li>格式化 HDFS</li>
+<li>启动集群</li>
+</ol>
+</li>
+</ol>
+<h3 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h3><p>1：通过ISO镜像安装</p>
+<p>2:   直接复制安装好的虚拟机</p>
+<p><strong>注意事项</strong>：windows系统确认所有的关于VmWare的服务都已经启动，</p>
+<p><strong>确认好VmWare生成的网关地址，另外确认VmNet8网卡已经配置好了IP地址。</strong></p>
+<ol>
+<li>网络模式</li>
+<li>内存设置</li>
+<li>规划集群, 创建多台虚拟机</li>
+</ol>
+<h4 id="1-网络模式详解"><a href="#1-网络模式详解" class="headerlink" title="1. 网络模式详解"></a>1. 网络模式详解</h4><ul>
+<li><p><strong>桥接</strong></p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\4.png" alt="image-20191125213105436"></p>
+<ul>
+<li>把虚拟出来的网卡直接连接外部的路由器, 看起来就好像是网络中多出了一台真正的计算机一样</li>
+<li>从路由器来看, 虚拟机等同于局域网内其它的物理机</li>
+</ul>
+</li>
+<li><p><strong>NAT</strong></p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\5.png" alt="image-20191125213222547"></p>
+<ul>
+<li>在宿主机中创建一个子网, 把虚拟机放入子网中, 子网中有一个NAT服务</li>
+</ul>
+</li>
+<li><p><strong>仅主机</strong></p>
+</li>
+</ul>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\6.png" alt="image-20191125213309265"></p>
+<ul>
+<li>创建子网, 把虚拟机放入这个子网</li>
+</ul>
+<h4 id="2-内存设置"><a href="#2-内存设置" class="headerlink" title="2. 内存设置"></a>2. 内存设置</h4><ul>
+<li>需要三台虚拟机, 并且需要同时运行, 所以总体上的占用为: $每台虚拟机内存 \times 3$</li>
+<li>在分配的时候, 需要在总内存大小的基础上, 减去1-2G作为系统内存, 剩余的除以3, 作为每台虚拟机的内存</li>
+</ul>
+<p>$每台机器的内存 = \left ( 总内存 - 4\right ) \div 3$</p>
+<h4 id="3-集群规划"><a href="#3-集群规划" class="headerlink" title="3. 集群规划"></a>3. 集群规划</h4><table>
+<thead>
+<tr>
+<th>IP</th>
+<th>主机名</th>
+<th>环境配置</th>
+<th>安装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.174.100</td>
+<td>node01</td>
+<td>关防火墙和selinux, host映射, 时钟同步</td>
+<td>JDK, NameNode, ResourceManager, Zookeeper</td>
+</tr>
+<tr>
+<td>192.168.174.120</td>
+<td>node02</td>
+<td>关防火墙和selinux, host映射, 时钟同步</td>
+<td>JDK, DataNode, NodeManager, Zeekeeper</td>
+</tr>
+<tr>
+<td>192.168.174.130</td>
+<td>node03</td>
+<td>关防火墙和selinux, host映射, 时钟同步</td>
+<td>JDK, DataNode, NodeManager, Zeekeeper</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4-设置ip和Mac地址"><a href="#4-设置ip和Mac地址" class="headerlink" title="4:设置ip和Mac地址"></a>4:设置ip和Mac地址</h4><p>更改mac地址：生成一个MAC地址，然后配置虚拟机</p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\7.png" alt="image-20191125215714743"></p>
+<p>  <code>vim /etc/udev/rules.d/70-persistent-net.rules</code></p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\8.png" alt="1555843415254"></p>
+<p>更改IP地址:</p>
+<p> <code>vim /etc/sysconfig/network-scripts/ifcfg-eth0</code></p>
+<p>​    <img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\9.png" alt="1555843445784"></p>
+<p>修改主机名(重启后永久生效)</p>
+<p><code>vi /ect/sysconfig/network</code></p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\10.png" alt="image-20191125220536027"></p>
+<p>HOSTNAME=node01</p>
+<p>设置ip和域名映射</p>
+<p>  <code>vim /etc/hosts</code></p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\11.png" alt="image-20191125220622179"></p>
+<h2 id="3-Liux常用的命令"><a href="#3-Liux常用的命令" class="headerlink" title="3:Liux常用的命令"></a>3:Liux常用的命令</h2><h5 id="3-1-查找命令"><a href="#3-1-查找命令" class="headerlink" title="3.1 查找命令"></a>3.1 查找命令</h5><p>  <strong>grep</strong>命令 命令是一种强大的文本搜索工具</p>
+<p> 格式： grep [option] pattern [file] 可使用 —help 查看更多参数。 使用实例：</p>
+<p> <code>ps -ef | grep sshd</code> 查找指定 ssh 服务进程</p>
+<p> <code>ps -ef | grep sshd | grep -v grep</code> 查找指定服务进程，排除 gerp 本身 </p>
+<p><code>grep -n &#39;hello&#39; a.txt</code>  从文件中查找关键词，并显示行号 </p>
+<hr>
+<p><strong>find命令</strong></p>
+<p>find 命令在目录结构中搜索文件，并对搜索结果执行指定的操作。<br>使用实例：<br><code>find . -name &quot;*.log&quot; -ls</code> 在当前目录查找以.log 结尾的文件， 并显示详细信息。<br><code>find /root/ -perm 777</code> 查找/root/目录下权限为 777 的文件<br><code>find . -size +100M</code> 查找当前目录大于 100M 的文件</p>
+<hr>
+<p><strong>Locate命令</strong></p>
+<p>locate 让使用者可以很快速的搜寻档案系统内是否有指定的档案。其方法<br>是先建立一个包括系统内所有档案名称及路径的数据库。之后当寻找时就只需查<br>询这个数据库（ /var/lib/locatedb）。<br>Linux 系统自动创建这个数据库， 默认每天自动更新一次，所以使用 locate<br>命令查不到最新变动过的文件。为了避免这种情况，可以在使用 locate 之前，<br>先使用 updatedb 命令，手动更新数据库。<br>yum -y install mlocate<br>使用实例：<br>locate /etc/sh<br>搜索 etc 目录下所有以 sh 开头的文件<br>locate pwd<br>查找和 pwd 相关的所有文件</p>
+<h5 id="3-2-用户管理命令"><a href="#3-2-用户管理命令" class="headerlink" title="3.2 用户管理命令"></a>3.2 用户管理命令</h5><p>添加普通用户</p>
+<p>useradd   hadoop    #   这个就表示我们创建了一个普通用户</p>
+<p>passwd   hadoop    # 表示我们需要给hadoop这个普通用户分配一个密码,密</p>
+<p>切换用户:</p>
+<p>   su -  用户名</p>
+<p><strong>3.3 用户权限管理命令</strong></p>
+<p> <img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\12.png" alt="1555854343556"></p>
+<p><code>chmod 777 a.txt</code>                #表示给某个文件赋予所有人的所有权限</p>
+<p><code>chmod u-x a.txt</code>                   #取消a.txt文件，用户“执行”权限</p>
+<p><code>chmod g+x a.txt</code>              #添加a.txt文件，组“执行”权限</p>
+<p><code>chown -R hadoop:hadoop a.txt</code>  改变某个文件或者文件夹的所属的用户以及用户组 </p>
+<p><strong>3.4 系统服务命令</strong></p>
+<p><code>service  iptables status</code>  #查看防火墙状态</p>
+<p><code>service  iptables stop</code>  #关闭防火墙</p>
+<p><code>service --status-all</code> # 查看系统所有的后台服务进程<br><code>service sshd status</code> # 查看指定的后台服务进程的状态<br><code>service sshd stop</code><br><code>service sshd start</code><br><code>service sshd restart</code><br>配置后台服务进程的开机自启或关闭</p>
+<p><code>chkconfig iptables on</code>  #配置防火墙开机开启</p>
+<p><code>chkconfig iptables off</code> #配置防火墙开机关闭<br><code>chkconfig httpd on</code>   ## 让 httpd 服务开机自启<br><code>chkconfig httpd off</code>   ## 让 httpd 服务开机不要自启</p>
+<hr>
+<h2 id="4-Linux的Shell编程"><a href="#4-Linux的Shell编程" class="headerlink" title="4:Linux的Shell编程"></a>4:Linux的Shell编程</h2><p> Shell 编程一般指 shell 脚本编程。</p>
+<p> <strong>语法:</strong></p>
+<p>​    使用 vi 编辑器新建一个文件 hello.sh </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash </span></span><br><span class="line"> echo "Hello World !"</span><br></pre></td></tr></table></figure>
+<p> <strong>执行</strong>：</p>
+<p>​    方式1：</p>
+<p>​          sh    hello.sh</p>
+<p>   方式2</p>
+<p>​          chmod +x ./hello.sh   #使脚本具有执行权限</p>
+<p>​          ./hello.sh    #执行脚本</p>
+<p> <strong>4.1变量:</strong></p>
+<p>   局部变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">str="hello"</span><br><span class="line">echo $&#123;str&#125;world</span><br></pre></td></tr></table></figure>
+<p>  环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo $PATH</span><br><span class="line"></span><br><span class="line">echo $HOME</span><br></pre></td></tr></table></figure>
+<p>在/etc/profile可以申明环境变量 </p>
+<p><strong>4.2 特殊字符</strong></p>
+<table>
+<thead>
+<tr>
+<th>$#</th>
+<th>传递到脚本的参数个数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$*</td>
+<td>以一个单字符串显示所有向脚本传递的参数。</td>
+</tr>
+<tr>
+<td>$$</td>
+<td>脚本运行的当前进程 ID 号</td>
+</tr>
+<tr>
+<td>$!</td>
+<td>后台运行的最后一个进程的 ID 号</td>
+</tr>
+<tr>
+<td>$@</td>
+<td>与$*相同，但是使用时加引号，并在引号中返回每个参数。</td>
+</tr>
+<tr>
+<td>$?</td>
+<td>显示最后命令的退出状态。 0 表示没有错误，其他任何值表明有错误。用于获取返回值</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">echo "第一个参数为： $1";</span><br><span class="line">echo "参数个数为： $#";</span><br><span class="line">echo "传递的参数作为一个字符串显示： $*";</span><br></pre></td></tr></table></figure>
+<p>  执行: ./test.sh 1 2 3 </p>
+<p> <strong>4.3 运算符</strong></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">a=1;</span><br><span class="line">b=2;</span><br><span class="line">echo `expr $a + $b`;</span><br><span class="line">echo  $((a+b));</span><br><span class="line">echo  $[a+b];</span><br></pre></td></tr></table></figure>
+<p>做乘法时用<code>\*</code>做转义</p>
+<p>4.4 if语句**</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">read -p "please input your name:" NAME ## read命令用于从控制台读取输入数据</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># printf '%s\n' $NAME</span></span></span><br><span class="line">if [ $NAME = root ]</span><br><span class="line">	then</span><br><span class="line">		echo "hello $&#123;NAME&#125;, welcome !"</span><br><span class="line">	elif [ $NAME = itcast ]</span><br><span class="line">	then</span><br><span class="line">		echo "hello $&#123;NAME&#125;, welcome !"</span><br><span class="line">	else</span><br><span class="line">		echo "Get out Please!"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p><strong>4.5 for语句</strong></p>
+<p> 方式1：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for N in 1 2 3 </span><br><span class="line">do</span><br><span class="line">    echo $N</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>方式2：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for ((i = 0; i &lt;= 5; i++)) </span><br><span class="line"> do </span><br><span class="line">    echo "welcome $i times" </span><br><span class="line"> done</span><br></pre></td></tr></table></figure>
+<p><strong>4.6 函数</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">funWithReturn()&#123;</span><br><span class="line">echo "这个函数会对输入的两个数字进行相加运算..."</span><br><span class="line">echo "输入第一个数字: "</span><br><span class="line">read aNum</span><br><span class="line">echo "输入第二个数字: "</span><br><span class="line">read anotherNum</span><br><span class="line">echo "两个数字分别为 $aNum 和 $anotherNum !"</span><br><span class="line">return $(($aNum+$anotherNum))</span><br><span class="line">&#125; </span><br><span class="line">funWithReturn</span><br><span class="line">echo "输入的两个数字之和为 $? !"</span><br></pre></td></tr></table></figure>
+<h2 id="5-环境配置"><a href="#5-环境配置" class="headerlink" title="5:环境配置"></a>5:环境配置</h2><h4 id="5-1-三台虚拟机关闭防火墙"><a href="#5-1-三台虚拟机关闭防火墙" class="headerlink" title="5.1:三台虚拟机关闭防火墙"></a>5.1:三台虚拟机关闭防火墙</h4><p>三台机器执行以下命令（root用户来执行）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop   #关闭防火墙</span><br><span class="line">chkconfig iptables off  #禁止开机启动</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\13.jpg" alt="img"> </p>
+<h4 id="5-2三台机器关闭selinux"><a href="#5-2三台机器关闭selinux" class="headerlink" title="5.2三台机器关闭selinux"></a>5.2三台机器关闭selinux</h4><ul>
+<li>什么是SELinux<ul>
+<li>SELinux是Linux的一种安全子系统</li>
+<li>Linux中的权限管理是针对于文件的, 而不是针对进程的, 也就是说, 如果root启动了某个进程, 则这个进程可以操作任何一个文件</li>
+<li>SELinux在Linux的文件权限之外, 增加了对进程的限制, 进程只能在进程允许的范围内操作资源</li>
+</ul>
+</li>
+<li>为什么要关闭SELinux<ul>
+<li>如果开启了SELinux, 需要做非常复杂的配置, 才能正常使用系统, 在学习阶段, 在非生产环境, 一般不使用SELinux</li>
+</ul>
+</li>
+<li>SELinux的工作模式<ul>
+<li><code>enforcing</code> 强制模式</li>
+<li><code>permissive</code> 宽容模式</li>
+<li><code>disable</code> 关闭</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改selinux的配置文件</span></span><br><span class="line">vi /etc/selinux/config</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\14.png" alt="image-20191213233208845"></p>
+<h4 id="5-3-三台机器机器免密码登录"><a href="#5-3-三台机器机器免密码登录" class="headerlink" title="5.3 三台机器机器免密码登录"></a>5.3 三台机器机器免密码登录</h4><p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\15.png" alt="image-20191213233225337"></p>
+<ul>
+<li><strong>为什么要免密登录</strong><ul>
+<li>Hadoop 节点众多, 所以一般在主节点启动从节点, 这个时候就需要程序自动在主节点登录到从节点中, 如果不能免密就每次都要输入密码, 非常麻烦</li>
+</ul>
+</li>
+<li><strong>免密 SSH 登录的原理</strong><ol>
+<li>需要先在 B节点 配置 A节点 的公钥</li>
+<li>A节点 请求 B节点 要求登录</li>
+<li>B节点 使用 A节点 的公钥, 加密一段随机文本</li>
+<li>A节点 使用私钥解密, 并发回给 B节点</li>
+<li>B节点 验证文本是否正确</li>
+</ol>
+</li>
+</ul>
+<p><strong>第一步：三台机器生成公钥与私钥</strong></p>
+<p>在三台机器执行以下命令，生成公钥与私钥</p>
+<p>ssh-keygen -t rsa</p>
+<p>执行该命令之后，按下三个回车即可</p>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\16.jpg" alt="img"> </p>
+<p><strong>第二步：拷贝公钥到同一台机器</strong></p>
+<p>三台机器将拷贝公钥到第一台机器</p>
+<p>三台机器执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id node01</span><br></pre></td></tr></table></figure>
+<p> <strong>第三步:复制第一台机器的认证到其他机器</strong></p>
+<p>将第一台机器的公钥拷贝到其他机器上</p>
+<p>在第一台机器上面指向以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp /root/.ssh/authorized_keys node02:/root/.ssh</span><br><span class="line"></span><br><span class="line">scp /root/.ssh/authorized_keys node03:/root/.ssh</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\17.jpg" alt="img"> </p>
+<h4 id="5-4三台机器时钟同步"><a href="#5-4三台机器时钟同步" class="headerlink" title="5.4三台机器时钟同步"></a>5.4三台机器时钟同步</h4><p><img src="C:\Users\56871\Desktop\Myblog\blog\source\images\Hadoop\hadoop01\18.png" alt="image-20191213234403454"></p>
+<ul>
+<li>为什么需要时间同步<ul>
+<li>因为很多分布式系统是有状态的, 比如说存储一个数据, A节点 记录的时间是 1, B节点 记录的时间是 2, 就会出问题</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 安装</span></span></span><br><span class="line">yum install -y ntp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 启动定时任务</span></span></span><br><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
+<p>随后在输入界面键入</p>
+<p>每分钟执行定时服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/1 * * * * /usr/sbin/ntpdate ntp4.aliyun.com;</span><br></pre></td></tr></table></figure>
+<h2 id="6-装辅助软件"><a href="#6-装辅助软件" class="headerlink" title="6:装辅助软件"></a>6:装辅助软件</h2><h4 id="6-1-每台主机安装jdk"><a href="#6-1-每台主机安装jdk" class="headerlink" title="6.1 每台主机安装jdk"></a>6.1 每台主机安装jdk</h4><p> 查看自带的openjdk</p>
+<p><code>rpm -qa | grep java</code></p>
+<p>卸载系统自带的openjdk</p>
+<p><code>rpm -e java-1.6.0-openjdk-1.6.0.41-1.13.13.1.el6_8.x86_64 tzdata-java-2016j-1.el6.noarch java-1.7.0-openjdk-1.7.0.131-2.6.9.0.el6_8.x86_64 --nodeps</code></p>
+<p>上传jdk并解压然后配置环境变量</p>
+<p>所有软件的安装路径</p>
+<p><code>mkdir -p /export/servers</code></p>
+<p>所有软件压缩包的存放路径</p>
+<p><code>mkdir -p /export/softwares</code></p>
+<p>上传jdk到/export/softwares路径下去，并解压</p>
+<p><code>tar -zxvf jdk-8u141-linux-x64.tar.gz -C ../servers/</code></p>
+<p>配置环境变量</p>
+<p><code>vim /etc/profile</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/export/servers/jdk1.8.0_141</span><br><span class="line">export PATH=:$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>修改完成之后记得  source /etc/profile生效</p>
+<h2 id="7-Zookeeper"><a href="#7-Zookeeper" class="headerlink" title="7:Zookeeper"></a>7:Zookeeper</h2><p>####7.1 Zookeeper 的概述</p>
+<ul>
+<li>Zookeeper 是一个开源的分布式协调服务框架 ,主要用来解决分布式集群中 应用系统的一致性问题</li>
+<li>Zookeeper 是 Google Chubby 思想的一个开源实现</li>
+<li>Zookeeper 本质上是一个分布式文件系统, 适合存放小文件, 通过文件系统来实现分布式协调</li>
+</ul>
+<p>分布式文件系统?</p>
+<p><img src="http://ppw6n93dt.bkt.clouddn.com/2e9d31054f9bf9a6b5dc792348fa0d0b.png" alt=""></p>
+<ul>
+<li>在上图左侧, Zookeeper 中存储的其实是一个又一个 Znode, Znode 是 Zookeeper 中的节点<ul>
+<li>Znode 是有路径的, 例如 <code>/data/host1</code>, <code>/data/host2</code>, 这个路径也可以理解为是 Znode 的 Name</li>
+<li>Znode 也可以携带数据, 例如说某个 Znode 的路径是 <code>/data/host1</code>, 其值是一个字符串 <code>&quot;192.168.0.1&quot;</code></li>
+</ul>
+</li>
+<li>正因为 Znode 的特性, 所以 Zookeeper 可以对外提供出一个类似于文件系统的试图, 可以通过操作文件系统的方式操作 Zookeeper<ul>
+<li>使用路径获取 Znode</li>
+<li>获取 Znode 携带的数据</li>
+<li>修改 Znode 携带的数据</li>
+<li>删除 Znode</li>
+<li>添加 Znode</li>
+<li>等等…</li>
+</ul>
+</li>
+</ul>
+<p>Zookeeper 是分布式的</p>
+<p>首先呢, Zookeeper 是分为服务端和客户端的, 客户端有 Java 的客户端, 有 Shell 命令行的客户端等, 客户端通过一个类似于文件系统的 API 来访问 Zookeeper 集群</p>
+<p><img src="http://ppw6n93dt.bkt.clouddn.com/4adae8d5abec9f518b585f0cbb4986b0.png" alt=""></p>
+<p>但是事实上, 客户端最终是直接访问 Zookeeper 集群, 集群中有两大类角色, 一类是 Leader, 一类是 Follower, 其实就是主从, Leader 负责读和写, Follower 只能读, 遇到会产生修改的请求会转发给 Leader 处理, 这是因为 Zookeeper 本质上就是为了在分布式环境中对消息的一致性的支持, 而 Zookeeper 所基于的 ZAB 协议是 Paxos 协议的一个变种, ZAB 协议中是有一个全局的事务生成者, 就是 Leader, 修改设计到在分布式环境下对事务达成一致, 必须由 Leader 发起</p>
+<p><img src="http://ppw6n93dt.bkt.clouddn.com/2711fe62d98e0c238a23305f83c9e4c6.png" alt=""></p>
+<p>举个例子?</p>
+<p><img src="http://ppw6n93dt.bkt.clouddn.com/0b874b5500f451e567d89809324be191.png" alt=""></p>
+<p>比如说一个常见的分布式主从系统, 如果有 ZK 在的话, 主节点不需要和每个从节点保持连接, 只需要监听从节点创建的 Znode, 便可以知道谁在线</p>
+<p>Zookeeper 能做什么?</p>
+<ul>
+<li>发布订阅</li>
+<li>命名服务</li>
+<li>分布式锁</li>
+<li>分布式协调</li>
+</ul>
+<h4 id="7-2-Zookeeper安装"><a href="#7-2-Zookeeper安装" class="headerlink" title="7.2 Zookeeper安装"></a>7.2 Zookeeper安装</h4><table>
+<thead>
+<tr>
+<th>服务器IP</th>
+<th>主机名</th>
+<th>myid的值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.174.100</td>
+<td>node01</td>
+<td>1</td>
+</tr>
+<tr>
+<td>192.168.174.110</td>
+<td>node02</td>
+<td>2</td>
+</tr>
+<tr>
+<td>192.168.174.120</td>
+<td>node03</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p> <strong>第一步：下载zookeeeper的压缩包，下载网址如下</strong></p>
+<p><a href="http://archive.apache.org/dist/zookeeper/" target="_blank" rel="noopener">http://archive.apache.org/dist/zookeeper/</a></p>
+<p>我们在这个网址下载我们使用的zk版本为3.4.9</p>
+<p>下载完成之后，上传到我们的linux的/export/softwares路径下准备进行安装</p>
+<p><strong>第二步：解压</strong></p>
+<p>解压zookeeper的压缩包到/export/servers路径下去，然后准备进行安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /export/software</span><br><span class="line"></span><br><span class="line">tar -zxvf zookeeper-3.4.9.tar.gz -C ../servers/</span><br></pre></td></tr></table></figure>
+<p><strong>第三步：修改配置文件</strong></p>
+<p>第一台机器修改配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /export/servers/zookeeper-3.4.9/conf/</span><br><span class="line"></span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br><span class="line"></span><br><span class="line">mkdir -p /export/servers/zookeeper-3.4.9/zkdatas/</span><br></pre></td></tr></table></figure>
+<p><code>vim  zoo.cfg</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dataDir=/export/servers/zookeeper-3.4.9/zkdatas</span><br><span class="line"><span class="meta">#</span><span class="bash"> 保留多少个快照</span></span><br><span class="line">autopurge.snapRetainCount=3</span><br><span class="line"><span class="meta">#</span><span class="bash"> 日志多少小时清理一次</span></span><br><span class="line">autopurge.purgeInterval=1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 集群中服务器地址</span></span><br><span class="line">server.1=node01:2888:3888</span><br><span class="line">server.2=node02:2888:3888</span><br><span class="line">server.3=node03:2888:3888</span><br></pre></td></tr></table></figure>
+<p><strong>第四步：添加myid配置</strong></p>
+<p>在第一台机器的</p>
+<p>/export/servers/zookeeper-3.4.9/zkdatas /这个路径下创建一个文件，文件名为myid ,文件内容为1</p>
+<p><code>echo 1 &gt; /export/servers/zookeeper-3.4.9/zkdatas/myid</code> </p>
+<p><strong>第五步：安装包分发并修改myid的值</strong></p>
+<p>安装包分发到其他机器</p>
+<p>第一台机器上面执行以下两个命令</p>
+<p><code>scp -r  /export/servers/zookeeper-3.4.9/ node02:/export/servers/</code></p>
+<p><code>scp -r  /export/servers/zookeeper-3.4.9/ node03:/export/servers/</code></p>
+<p>第二台机器上修改myid的值为2</p>
+<p><code>echo 2 &gt; /export/servers/zookeeper-3.4.9/zkdatas/myid</code></p>
+<p><img src="assets/wps4-1555914009906.jpg" alt="img"> </p>
+<p>第三台机器上修改myid的值为3</p>
+<p><code>echo 3 &gt; /export/servers/zookeeper-3.4.9/zkdatas/myid</code></p>
+<p><img src="assets/wps5-1555914009906.jpg" alt="img"> </p>
+<p><strong>第六步</strong>：三台机器启动zookeeper服务</p>
+<p>三台机器启动zookeeper服务</p>
+<p>这个命令三台机器都要执行</p>
+<p><code>/export/servers/zookeeper-3.4.9/bin/zkServer.sh start</code></p>
+<p>查看启动状态</p>
+<p><code>/export/servers/zookeeper-3.4.9/bin/zkServer.sh  status</code></p>
+<hr>
+<h4 id="7-3-Zookeeper的Shell-客户端操作"><a href="#7-3-Zookeeper的Shell-客户端操作" class="headerlink" title="7.3 Zookeeper的Shell 客户端操作"></a>7.3 Zookeeper的Shell 客户端操作</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>create [-s] [-e] path data acl</code></td>
+<td>创建Znode</td>
+<td>-s 指定是顺序节点<br>-e 指定是临时节点</td>
+</tr>
+<tr>
+<td><code>ls path [watch]</code></td>
+<td>列出Path下所有子Znode</td>
+<td></td>
+</tr>
+<tr>
+<td><code>get path [watch]</code></td>
+<td>获取Path对应的Znode的数据和属性</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ls2 path [watch]</code></td>
+<td>查看Path下所有子Znode以及子Znode的属性</td>
+<td></td>
+</tr>
+<tr>
+<td><code>set path data [version]</code></td>
+<td>更新节点</td>
+<td>version 数据版本</td>
+</tr>
+<tr>
+<td><code>delete path [version]</code></td>
+<td>删除节点, 如果要删除的节点有子Znode则无法删除</td>
+<td>version 数据版本</td>
+</tr>
+<tr>
+<td><code>rmr path</code></td>
+<td>删除节点, 如果有子Znode则递归删除</td>
+<td></td>
+</tr>
+<tr>
+<td>`setquota -n</td>
+<td>-b val path`</td>
+<td>修改Znode配额</td>
+<td>-n 设置子节点最大个数<br>-b 设置节点数据最大长度</td>
+</tr>
+<tr>
+<td><code>history</code></td>
+<td>列出历史记录</td>
+</tr>
+</tbody>
+</table>
+<p>1：创建普通节点</p>
+<p> <code>create /app1 hello</code></p>
+<p>2: 创建顺序节点</p>
+<p><code>create -s /app3 world</code></p>
+<p>3:创建临时节点</p>
+<p><code>create -e /tempnode world</code></p>
+<p>4:创建顺序的临时节点</p>
+<p><code>create -s -e /tempnode2 aaa</code></p>
+<p>5:获取节点数据</p>
+<p>   <code>get /app1</code></p>
+<p>6:修改节点数据</p>
+<p>   <code>set /app1  xxx</code></p>
+<p>7:删除节点</p>
+<p>   delete  /app1 删除的节点不能有子节点</p>
+<p>​    rmr    /app1 递归删除</p>
+<p>Znode 的特点</p>
+<ul>
+<li>文件系统的核心是 <code>Znode</code></li>
+<li>如果想要选取一个 <code>Znode</code>, 需要使用路径的形式, 例如 <code>/test1/test11</code></li>
+<li>Znode 本身并不是文件, 也不是文件夹, Znode 因为具有一个类似于 Name 的路径, 所以可以从逻辑上实现一个树状文件系统</li>
+<li>ZK 保证 Znode 访问的原子性, 不会出现部分 ZK 节点更新成功, 部分 ZK 节点更新失败的问题</li>
+<li><code>Znode</code> 中数据是有大小限制的, 最大只能为<code>1M</code></li>
+<li><code>Znode</code>是由三个部分构成<ul>
+<li><code>stat</code>: 状态, Znode的权限信息, 版本等</li>
+<li><code>data</code>: 数据, 每个Znode都是可以携带数据的, 无论是否有子节点</li>
+<li><code>children</code>: 子节点列表</li>
+</ul>
+</li>
+</ul>
+<p>Znode 的类型</p>
+<ul>
+<li>每个<code>Znode</code>有两大特性, 可以构成四种不同类型的<code>Znode</code><ul>
+<li>持久性<ul>
+<li><code>持久</code> 客户端断开时, 不会删除持有的Znode</li>
+<li><code>临时</code> 客户端断开时, 删除所有持有的Znode, <strong>临时Znode不允许有子Znode</strong></li>
+</ul>
+</li>
+<li>顺序性<ul>
+<li><code>有序</code> 创建的Znode有先后顺序, 顺序就是在后面追加一个序列号, 序列号是由父节点管理的自增</li>
+<li><code>无序</code> 创建的Znode没有先后顺序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Znode</code>的属性<ul>
+<li><code>dataVersion</code> 数据版本, 每次当<code>Znode</code>中的数据发生变化的时候, <code>dataVersion</code>都会自增一下</li>
+<li><code>cversion</code> 节点版本, 每次当<code>Znode</code>的节点发生变化的时候, <code>cversion</code>都会自增</li>
+<li><code>aclVersion</code> <code>ACL(Access Control List)</code>的版本号, 当<code>Znode</code>的权限信息发生变化的时候aclVersion会自增</li>
+<li><code>zxid</code> 事务ID</li>
+<li><code>ctime</code> 创建时间</li>
+<li><code>mtime</code> 最近一次更新的时间</li>
+<li><code>ephemeralOwner</code> 如果<code>Znode</code>为临时节点, <code>ephemeralOwner</code>表示与该节点关联的<code>SessionId</code></li>
+</ul>
+</li>
+</ul>
+<p>通知机制</p>
+<ul>
+<li>通知类似于数据库中的触发器, 对某个Znode设置 <code>Watcher</code>, 当Znode发生变化的时候, <code>WatchManager</code>会调用对应的<code>Watcher</code></li>
+<li>当Znode发生删除, 修改, 创建, 子节点修改的时候, 对应的<code>Watcher</code>会得到通知</li>
+<li><code>Watcher</code>的特点<ul>
+<li><strong>一次性触发</strong> 一个 <code>Watcher</code> 只会被触发一次, 如果需要继续监听, 则需要再次添加 <code>Watcher</code></li>
+<li>事件封装: <code>Watcher</code> 得到的事件是被封装过的, 包括三个内容 <code>keeperState, eventType, path</code></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>KeeperState</th>
+<th>EventType</th>
+<th>触发条件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>None</td>
+<td>连接成功</td>
+<td></td>
+</tr>
+<tr>
+<td>SyncConnected</td>
+<td>NodeCreated</td>
+<td>Znode被创建</td>
+<td>此时处于连接状态</td>
+</tr>
+<tr>
+<td>SyncConnected</td>
+<td>NodeDeleted</td>
+<td>Znode被删除</td>
+<td>此时处于连接状态</td>
+</tr>
+<tr>
+<td>SyncConnected</td>
+<td>NodeDataChanged</td>
+<td>Znode数据被改变</td>
+<td>此时处于连接状态</td>
+</tr>
+<tr>
+<td>SyncConnected</td>
+<td>NodeChildChanged</td>
+<td>Znode的子Znode数据被改变</td>
+<td>此时处于连接状态</td>
+</tr>
+<tr>
+<td>Disconnected</td>
+<td>None</td>
+<td>客户端和服务端断开连接</td>
+<td>此时客户端和服务器处于断开连接状态</td>
+</tr>
+<tr>
+<td>Expired</td>
+<td>None</td>
+<td>会话超时</td>
+<td>会收到一个SessionExpiredException</td>
+</tr>
+<tr>
+<td>AuthFailed</td>
+<td>None</td>
+<td>权限验证失败</td>
+<td>会收到一个AuthFailedException</td>
+</tr>
+</tbody>
+</table>
+<p>会话</p>
+<ul>
+<li>在ZK中所有的客户端和服务器的交互都是在某一个<code>Session</code>中的, 客户端和服务器创建一个连接的时候同时也会创建一个<code>Session</code></li>
+<li><code>Session</code>会在不同的状态之间进行切换: <code>CONNECTING</code>, <code>CONNECTED</code>, <code>RECONNECTING</code>, <code>RECONNECTED</code>, <code>CLOSED</code></li>
+<li>ZK中的会话两端也需要进行心跳检测, 服务端会检测如果超过超时时间没收到客户端的心跳, 则会关闭连接, 释放资源, 关闭会话</li>
+</ul>
+<p>##8:Hadoop</p>
+<h4 id="8-1-Hadoop的介绍"><a href="#8-1-Hadoop的介绍" class="headerlink" title="8.1 Hadoop的介绍"></a>8.1 Hadoop的介绍</h4><ol>
+<li>Hadoop最早起源于<strong>Nutch</strong>。Nutch的设计目标是构建一个大型的全网搜索引擎，包括网页抓取、索引、查询等功能，但随着抓取网页数量的增加，遇到了严重的可扩展性问题——如何解决数十亿网页的存储和索引问题。</li>
+<li>2003年、2004年谷歌发表的两篇论文为该问题提供了可行的解决方案。</li>
+</ol>
+<p>——分布式文件系统（GFS），可用于处理海量网页的<strong>存储</strong></p>
+<p>——分布式计算框架MAPREDUCE，可用于处理海量网页的<strong>索引计算</strong>问题。</p>
+<ol start="3">
+<li>Nutch的开发人员完成了相应的开源实现<strong>HDFS</strong>和<strong>MAPREDUCE</strong>，并从Nutch中剥离成为独立项目HADOOP，到2008年1月，HADOOP成为Apache顶级项目.</li>
+</ol>
+<p><strong>狭义上来说，hadoop就是单独指代hadoop这个软件，</strong></p>
+<p>   HDFS    ：分布式文件系统</p>
+<p>   MapReduce : 分布式计算系统</p>
+<p><strong>广义上来说，hadoop指代大数据的一个生态圈，包括很多其他的软件</strong></p>
+<p><img src="assets/wps1-1555925038423.jpg" alt="img"> </p>
+<h4 id="8-2、hadoop的历史版本介绍"><a href="#8-2、hadoop的历史版本介绍" class="headerlink" title="8.2、hadoop的历史版本介绍"></a>8.2、hadoop的历史版本介绍</h4><p>1.x版本系列：hadoop版本当中的第二代开源版本，主要修复0.x版本的一些bug等</p>
+<p>2.x版本系列：架构产生重大变化，引入了yarn平台等许多新特性</p>
+<p>3.x版本系列:  加入多namenoode新特性</p>
+<h4 id="8-3、hadoop三大公司发型版本介绍"><a href="#8-3、hadoop三大公司发型版本介绍" class="headerlink" title="8.3、hadoop三大公司发型版本介绍"></a>8.3、hadoop三大公司发型版本介绍</h4><p><strong>免费开源版本apache:</strong></p>
+<p><a href="http://hadoop.apache.org/" target="_blank" rel="noopener">http://hadoop.apache.org/</a></p>
+<p>优点：拥有全世界的开源贡献者，代码更新迭代版本比较快，</p>
+<p>缺点：版本的升级，版本的维护，版本的兼容性，版本的补丁都可能考虑不太周到，\</p>
+<p>apache所有软件的下载地址（包括各种历史版本）：</p>
+<p><a href="http://archive.apache.org/dist/" target="_blank" rel="noopener">http://archive.apache.org/dist/</a></p>
+<p><strong>免费开源版本hortonWorks：</strong></p>
+<p><a href="https://hortonworks.com/" target="_blank" rel="noopener">https://hortonworks.com/</a></p>
+<p>hortonworks主要是雅虎主导Hadoop开发的副总裁，带领二十几个核心成员成立Hortonworks，核心产品软件HDP（ambari），HDF免费开源，并且提供一整套的web管理界面，供我们可以通过web界面管理我们的集群状态，web管理界面软件HDF网址（<a href="http://ambari.apache.org/" target="_blank" rel="noopener">http://ambari.apache.org/</a>）</p>
+<p><strong>软件收费版本ClouderaManager:</strong></p>
+<p><a href="https://www.cloudera.com/" target="_blank" rel="noopener">https://www.cloudera.com/</a></p>
+<p>cloudera主要是美国一家大数据公司在apache开源hadoop的版本上，通过自己公司内部的各种补丁，实现版本之间的稳定运行，大数据生态圈的各个版本的软件都提供了对应的版本，解决了版本的升级困难，版本兼容性等各种问题</p>
+<h4 id="8-4、hadoop的架构模型（1-x，2-x的各种架构模型介绍）"><a href="#8-4、hadoop的架构模型（1-x，2-x的各种架构模型介绍）" class="headerlink" title="8.4、hadoop的架构模型（1.x，2.x的各种架构模型介绍）"></a>8.4、hadoop的架构模型（1.x，2.x的各种架构模型介绍）</h4><p><strong>8.4.1、1.x的版本架构模型介绍</strong></p>
+<p><img src="assets/wps3-1555925038423.jpg" alt="img"> </p>
+<p>文件系统核心模块：</p>
+<p>NameNode：集群当中的主节点，管理元数据(文件的大小，文件的位置，文件的权限)，主要用于管理集群当中的各种数据</p>
+<p>secondaryNameNode：主要能用于hadoop当中元数据信息的辅助管理</p>
+<p>DataNode：集群当中的从节点，主要用于存储集群当中的各种数据</p>
+<p>数据计算核心模块：</p>
+<p>JobTracker：接收用户的计算请求任务，并分配任务给从节点</p>
+<p>TaskTracker：负责执行主节点JobTracker分配的任务</p>
+<p><strong>8.4.2、2.x的版本架构模型介绍</strong></p>
+<p> <strong>第一种：NameNode与ResourceManager单节点架构模型</strong></p>
+<p><img src="assets/wps4-1555925038423.jpg" alt="img"> </p>
+<p>文件系统核心模块：</p>
+<p>NameNode：集群当中的主节点，主要用于管理集群当中的各种数据</p>
+<p>secondaryNameNode：主要能用于hadoop当中元数据信息的辅助管理</p>
+<p>DataNode：集群当中的从节点，主要用于存储集群当中的各种数据</p>
+<p>数据计算核心模块：</p>
+<p>ResourceManager：接收用户的计算请求任务，并负责集群的资源分配</p>
+<p>NodeManager：负责执行主节点APPmaster分配的任务</p>
+<p><strong>第二种：NameNode单节点与ResourceManager高可用架构模型</strong></p>
+<p><img src="assets/wps5-1555925038423.jpg" alt="img"> </p>
+<p>文件系统核心模块：</p>
+<p>NameNode：集群当中的主节点，主要用于管理集群当中的各种数据</p>
+<p>secondaryNameNode：主要能用于hadoop当中元数据信息的辅助管理</p>
+<p>DataNode：集群当中的从节点，主要用于存储集群当中的各种数据</p>
+<p>数据计算核心模块：</p>
+<p>ResourceManager：接收用户的计算请求任务，并负责集群的资源分配，以及计算任务的划分，通过zookeeper实现ResourceManager的高可用</p>
+<p>NodeManager：负责执行主节点ResourceManager分配的任务</p>
+<p><strong>第三种：NameNode高可用与ResourceManager单节点架构模型</strong></p>
+<p><img src="assets/wps6-1555925038424.jpg" alt="img"> </p>
+<p>文件系统核心模块：</p>
+<p>NameNode：集群当中的主节点，主要用于管理集群当中的各种数据，其中nameNode可以有两个，形成高可用状态</p>
+<p>DataNode：集群当中的从节点，主要用于存储集群当中的各种数据</p>
+<p>JournalNode：文件系统元数据信息管理</p>
+<p>数据计算核心模块：</p>
+<p>ResourceManager：接收用户的计算请求任务，并负责集群的资源分配，以及计算任务的划分</p>
+<p>NodeManager：负责执行主节点ResourceManager分配的任务</p>
+<p><strong>第四种：NameNode与ResourceManager高可用架构模型</strong></p>
+<p><img src="assets/wps7-1555925038424.jpg" alt="img"> </p>
+<p>文件系统核心模块：</p>
+<p>NameNode：集群当中的主节点，主要用于管理集群当中的各种数据，一般都是使用两个，实现HA高可用</p>
+<p>JournalNode：元数据信息管理进程，一般都是奇数个</p>
+<p>DataNode：从节点，用于数据的存储</p>
+<p>数据计算核心模块：</p>
+<p>ResourceManager：Yarn平台的主节点，主要用于接收各种任务，通过两个，构建成高可用</p>
+<p>NodeManager：Yarn平台的从节点，主要用于处理ResourceManager分配的任务</p>
+<h4 id="8-2-Hadoop的安装"><a href="#8-2-Hadoop的安装" class="headerlink" title="8.2 Hadoop的安装"></a>8.2 Hadoop的安装</h4><p>集群的规划:</p>
+<table>
+<thead>
+<tr>
+<th>服务器IP</th>
+<th>192.168.174.100</th>
+<th>192.168.174.110</th>
+<th>192.168.174.120</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主机名</td>
+<td>node01</td>
+<td>node02</td>
+<td>node03</td>
+</tr>
+<tr>
+<td>NameNode</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>SecondaryNameNode</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>dataNode</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>ResourceManager</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>NodeManager</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>上传并解压</li>
+<li>修改配置文件</li>
+<li>分发安装包</li>
+<li>格式化HDFS</li>
+<li>启动集群</li>
+</ol>
+<h5 id="1-上传并解压"><a href="#1-上传并解压" class="headerlink" title="1. 上传并解压"></a><strong>1. 上传并解压</strong></h5><ol>
+<li>上传压缩包到/export/software目录</li>
+<li><code>cd /export/software</code></li>
+<li><code>tar xzvf hadoop-3.1.1.tar.gz  -C ../servers</code></li>
+</ol>
+<p>#####<strong>2. 修改配置文件</strong></p>
+<p>配置文件的位置在 <code>hadoop/etc/hadoop</code></p>
+<p>######core-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://node01:8020<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 临时文件存储目录 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>/export/servers/hadoop-3.1.1/datas/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  缓冲区大小，实际工作中根据服务器性能动态调整 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>io.file.buffer.size<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>8192<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  开启hdfs的垃圾桶机制，删除掉的数据可以从垃圾桶中回收，单位分钟 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.trash.interval<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>10080<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>######hadoop-env.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/export/servers/jdk1.8.0_141</span><br></pre></td></tr></table></figure>
+<p>######hdfs-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///export/servers/hadoop-3.1.1/datas/namenode/namenodedatas<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.blocksize<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>134217728<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.handler.count<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>10<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///export/servers/hadoop-3.1.1/datas/datanode/datanodeDatas<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.http-address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>node01:50070<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.permissions.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.checkpoint.edits.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///export/servers/hadoop-3.1.1/datas/dfs/nn/snn/edits<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.secondary.http-address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>node01.hadoop.com:50090<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.edits.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///export/servers/hadoop-3.1.1/datas/dfs/nn/edits<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.checkpoint.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///export/servers/hadoop-3.1.1/datas/dfs/snn/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>######mapred-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.map.memory.mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>1024<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.map.java.opts<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>-Xmx512M<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.reduce.memory.mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>1024<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.reduce.java.opts<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>-Xmx512M<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.task.io.sort.mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>256<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.task.io.sort.factor<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>100<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.reduce.shuffle.parallelcopies<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>25<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>node01.hadoop.com:10020<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.webapp.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>node01.hadoop.com:19888<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.intermediate-done-dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>/export/servers/hadoop-3.1.1/datas/jobhsitory/intermediateDoneDatas<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.done-dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>/export/servers/hadoop-3.1.1/datas/jobhsitory/DoneDatas<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.app.mapreduce.am.env<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">value</span>&gt;</span>HADOOP_MAPRED_HOME=/export/servers/hadoop-3.1.1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.map.env<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">value</span>&gt;</span>HADOOP_MAPRED_HOME=/export/servers/hadoop-3.1.1/<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.reduce.env<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">value</span>&gt;</span>HADOOP_MAPRED_HOME=/export/servers/hadoop-3.1.1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>######yarn-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.handler.count<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>100<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.log-aggregation-enable<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>node01:8032<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>node01:8030<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.resource-tracker.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>node01:8031<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.admin.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>node01:8033<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.webapp.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>node01:8088<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.hostname<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>node01<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.minimum-allocation-mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>1024<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.scheduler.maximum-allocation-mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>2048<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.vmem-pmem-ratio<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>2.1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 设置不检查虚拟内存的值，不然内存不够会报错 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.vmem-check-enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.resource.memory-mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>1024<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.resource.detect-hardware-capabilities<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.local-dirs<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///export/servers/hadoop-3.1.1/datas/nodemanager/nodemanagerDatas<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.log-dirs<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///export/servers/hadoop-3.1.1/datas/nodemanager/nodemanagerLogs<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.log.retain-seconds<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>10800<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.remote-app-log-dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>/export/servers/hadoop-3.1.1/datas/remoteAppLog/remoteAppLogs<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.remote-app-log-dir-suffix<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>logs<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.log-aggregation.retain-seconds<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>18144000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.log-aggregation.retain-check-interval-seconds<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>86400<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- yarn上面运行一个任务，最少需要1.5G内存，虚拟机没有这么大的内存就调小这个值，不然会报错 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.app.mapreduce.am.resource.mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>1024<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>######worker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node01</span><br><span class="line">node02</span><br><span class="line">node03</span><br></pre></td></tr></table></figure>
+<h4 id="3-创建数据和临时文件夹"><a href="#3-创建数据和临时文件夹" class="headerlink" title="3. 创建数据和临时文件夹"></a>3. 创建数据和临时文件夹</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /export/servers/hadoop-3.1.1/datas/tmp</span><br><span class="line">mkdir -p /export/servers/hadoop-3.1.1/datas/dfs/nn/snn/edits</span><br><span class="line">mkdir -p /export/servers/hadoop-3.1.1/datas/namenode/namenodedatas</span><br><span class="line">mkdir -p /export/servers/hadoop-3.1.1/datas/datanode/datanodeDatas</span><br><span class="line">mkdir -p /export/servers/hadoop-3.1.1/datas/dfs/nn/edits</span><br><span class="line">mkdir -p /export/servers/hadoop-3.1.1/datas/dfs/snn/name</span><br><span class="line">mkdir -p /export/servers/hadoop-3.1.1/datas/jobhsitory/intermediateDoneDatas</span><br><span class="line">mkdir -p /export/servers/hadoop-3.1.1/datas/jobhsitory/DoneDatas</span><br><span class="line">mkdir -p /export/servers/hadoop-3.1.1/datas/nodemanager/nodemanagerDatas</span><br><span class="line">mkdir -p /export/servers/hadoop-3.1.1/datas/nodemanager/nodemanagerLogs</span><br><span class="line">mkdir -p /export/servers/hadoop-3.1.1/datas/remoteAppLog/remoteAppLogs</span><br></pre></td></tr></table></figure>
+<h4 id="4-分发安装包到其它机器"><a href="#4-分发安装包到其它机器" class="headerlink" title="4. 分发安装包到其它机器"></a>4. 分发安装包到其它机器</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /export/servers</span><br><span class="line">scp -r hadoop-3.1.1/ node02:$PWD</span><br><span class="line">scp -r hadoop-3.1.1/ node03:$PWD</span><br></pre></td></tr></table></figure>
+<h4 id="5-在每个节点配置环境变量"><a href="#5-在每个节点配置环境变量" class="headerlink" title="5. 在每个节点配置环境变量"></a>5. 在每个节点配置环境变量</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME=/export/servers/hadoop-3.1.1/</span><br><span class="line">export PATH=:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH</span><br></pre></td></tr></table></figure>
+<h4 id="6-格式化HDFS"><a href="#6-格式化HDFS" class="headerlink" title="6. 格式化HDFS"></a>6. 格式化HDFS</h4><ul>
+<li>为什么要格式化HDFS<ul>
+<li>HDFS需要一个格式化的过程来创建存放元数据(image, editlog)的目录</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/hdfs namenode -format</span><br></pre></td></tr></table></figure>
+<h4 id="7-启动集群"><a href="#7-启动集群" class="headerlink" title="7. 启动集群"></a>7. 启动集群</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 会登录进所有的worker启动相关进行, 也可以手动进行, 但是没必要</span></span><br><span class="line">/export/servers/hadoop-3.1.1/sbin/start-dfs.sh</span><br><span class="line">/export/servers/hadoop-3.1.1/sbin/start-yarn.sh</span><br><span class="line">mapred --daemon start historyserver</span><br></pre></td></tr></table></figure>
+<p>此时便可以通过如下三个URL访问Hadoop了</p>
+<ul>
+<li>HDFS: <code>http://192.168.174.100:50070/dfshealth.html#tab-overview</code></li>
+<li>Yarn: <code>http://192.168.174.100:8088/cluster</code></li>
+</ul>
+<p>报错：设置hadoop-env.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export HDFS_NAMENODE_USER="root"</span><br><span class="line">export HDFS_DATANODE_USER="root"</span><br><span class="line">export HDFS_SECONDARYNAMENODE_USER="root"</span><br><span class="line">export YARN_RESOURCEMANAGER_USER="root"</span><br><span class="line">export YARN_NODEMANAGER_USER="root"</span><br></pre></td></tr></table></figure>
+<p>### </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hadoop-学习/" rel="tag"><i class="fa fa-tag"></i> Hadoop - 学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/10/front_06_Ajax/" rel="next" title="AJAX笔记">
+                <i class="fa fa-chevron-left"></i> AJAX笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545151264345&di=3142133106fdfdce70d9b3866056d52c&imgtype=0&src=http%3A%2F%2Fimg4q.duitang.com%2Fuploads%2Fitem%2F201209%2F10%2F20120910083757_PdTei.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">Stay hungry！Stay foolish！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Asphelzhn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:asphel96@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop01-集群环境搭建"><span class="nav-number">1.</span> <span class="nav-text">Hadoop01-集群环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#大数据概述"><span class="nav-number">1.0.1.</span> <span class="nav-text">大数据概述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1：Hadoop介绍"><span class="nav-number">1.1.</span> <span class="nav-text">1：Hadoop介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题一-大文件怎么存储"><span class="nav-number">1.1.0.0.1.</span> <span class="nav-text">问题一:  大文件怎么存储?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题二-大数据怎么计算"><span class="nav-number">1.1.0.0.2.</span> <span class="nav-text">问题二: 大数据怎么计算?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题三-如何将这些计算任务跑在集群中"><span class="nav-number">1.1.0.0.3.</span> <span class="nav-text">问题三: 如何将这些计算任务跑在集群中?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hadoop-的组成"><span class="nav-number">1.1.0.0.4.</span> <span class="nav-text">Hadoop 的组成</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2：环境搭建"><span class="nav-number">1.2.</span> <span class="nav-text">2：环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建虚拟机"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-网络模式详解"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">1. 网络模式详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-内存设置"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">2. 内存设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-集群规划"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">3. 集群规划</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-设置ip和Mac地址"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">4:设置ip和Mac地址</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Liux常用的命令"><span class="nav-number">1.3.</span> <span class="nav-text">3:Liux常用的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-查找命令"><span class="nav-number">1.3.0.0.1.</span> <span class="nav-text">3.1 查找命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-用户管理命令"><span class="nav-number">1.3.0.0.2.</span> <span class="nav-text">3.2 用户管理命令</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Linux的Shell编程"><span class="nav-number">1.4.</span> <span class="nav-text">4:Linux的Shell编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-环境配置"><span class="nav-number">1.5.</span> <span class="nav-text">5:环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-三台虚拟机关闭防火墙"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">5.1:三台虚拟机关闭防火墙</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2三台机器关闭selinux"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">5.2三台机器关闭selinux</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-三台机器机器免密码登录"><span class="nav-number">1.5.0.3.</span> <span class="nav-text">5.3 三台机器机器免密码登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4三台机器时钟同步"><span class="nav-number">1.5.0.4.</span> <span class="nav-text">5.4三台机器时钟同步</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-装辅助软件"><span class="nav-number">1.6.</span> <span class="nav-text">6:装辅助软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-每台主机安装jdk"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">6.1 每台主机安装jdk</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Zookeeper"><span class="nav-number">1.7.</span> <span class="nav-text">7:Zookeeper</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-Zookeeper安装"><span class="nav-number">1.7.0.1.</span> <span class="nav-text">7.2 Zookeeper安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-Zookeeper的Shell-客户端操作"><span class="nav-number">1.7.0.2.</span> <span class="nav-text">7.3 Zookeeper的Shell 客户端操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-Hadoop的介绍"><span class="nav-number">1.7.0.3.</span> <span class="nav-text">8.1 Hadoop的介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2、hadoop的历史版本介绍"><span class="nav-number">1.7.0.4.</span> <span class="nav-text">8.2、hadoop的历史版本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-3、hadoop三大公司发型版本介绍"><span class="nav-number">1.7.0.5.</span> <span class="nav-text">8.3、hadoop三大公司发型版本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-4、hadoop的架构模型（1-x，2-x的各种架构模型介绍）"><span class="nav-number">1.7.0.6.</span> <span class="nav-text">8.4、hadoop的架构模型（1.x，2.x的各种架构模型介绍）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-Hadoop的安装"><span class="nav-number">1.7.0.7.</span> <span class="nav-text">8.2 Hadoop的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-上传并解压"><span class="nav-number">1.7.0.7.1.</span> <span class="nav-text">1. 上传并解压</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-创建数据和临时文件夹"><span class="nav-number">1.7.0.8.</span> <span class="nav-text">3. 创建数据和临时文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-分发安装包到其它机器"><span class="nav-number">1.7.0.9.</span> <span class="nav-text">4. 分发安装包到其它机器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-在每个节点配置环境变量"><span class="nav-number">1.7.0.10.</span> <span class="nav-text">5. 在每个节点配置环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-格式化HDFS"><span class="nav-number">1.7.0.11.</span> <span class="nav-text">6. 格式化HDFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-启动集群"><span class="nav-number">1.7.0.12.</span> <span class="nav-text">7. 启动集群</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Edward.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/12/12/Hadoop_01_config/';
+          this.page.identifier = '2019/12/12/Hadoop_01_config/';
+          this.page.title = 'Hadoop01-集群环境搭建';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Edward.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
