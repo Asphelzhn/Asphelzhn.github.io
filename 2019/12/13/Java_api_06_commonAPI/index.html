@@ -100,8 +100,9 @@
 <meta property="og:image" content="http://yoursite.com/2019/12/13/Java_api_06_commonAPI/img/equals方法3.png">
 <meta property="og:image" content="http://yoursite.com/2019/12/13/Java_api_06_commonAPI/img/日历.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/12/13/Java_api_06_commonAPI/img/String拼接问题.bmp">
-<meta property="og:image" content="http://yoursite.com/2019/12/13/Java_api_06_commonAPI/img/06-StringBuilder的原理.png">
-<meta property="og:updated_time" content="2019-12-31T13:05:01.130Z">
+<meta property="og:image" content="http://yoursite.com/images/Java/javaapi/javaapi_06/01.bmp">
+<meta property="og:image" content="http://yoursite.com/images/Java/javaapi/javaapi_06/02.bmp">
+<meta property="og:updated_time" content="2019-12-31T13:11:03.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java常用API Object，Date，Calendar，System类">
 <meta name="twitter:description" content="第一章 Object类1.1 概述java.lang.Object类是Java语言中的根类，即所有类的父类。它中描述的所有方法子类都可以使用。在对象实例化的时候，最终找的父类就是Object。 如果一个类没有特别指定父类，    那么默认则继承自Object类。例如： 123public class MyClass /*extends Object*/ &amp;#123;  	// ...&amp;#125;">
@@ -633,7 +634,7 @@
 <h2 id="4-2-StringBuilder概述"><a href="#4-2-StringBuilder概述" class="headerlink" title="4.2 StringBuilder概述"></a>4.2 StringBuilder概述</h2><p>查阅<code>java.lang.StringBuilder</code>的API，StringBuilder又称为可变字符序列，它是一个类似于 String 的字符串缓冲区，通过某些方法调用可以改变该序列的长度和内容。</p>
 <p>原来StringBuilder是个字符串的缓冲区，即它是一个容器，容器中可以装很多字符串。并且能够对其中的字符串进行各种操作。</p>
 <p>它的内部拥有一个数组用来存放字符串内容，进行字符串拼接时，直接在数组中加入新内容。StringBuilder会自动维护数组的扩容。原理如下图所示：(默认16字符空间，超过自动扩充)</p>
-<p><img src="img\06-StringBuilder的原理.png" alt="06-StringBuilder的原理"></p>
+<p><img src="\images\Java\javaapi\javaapi_06\01.bmp" alt="06-StringBuilder的原理"></p>
 <h2 id="4-3-构造方法"><a href="#4-3-构造方法" class="headerlink" title="4.3 构造方法"></a>4.3 构造方法</h2><p>根据StringBuilder的API文档，常用构造方法有2个：</p>
 <ul>
 <li><code>public StringBuilder()</code>：构造一个空的StringBuilder容器。</li>
@@ -652,7 +653,8 @@
 </blockquote>
 <h3 id="toString方法"><a href="#toString方法" class="headerlink" title="toString方法"></a>toString方法</h3><p>通过toString方法，StringBuilder对象将会转换为不可变的String对象。如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo16StringBuilder</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 链式创建</span></span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">"Hello"</span>).append(<span class="string">"World"</span>).append(<span class="string">"Java"</span>);</span><br><span class="line">        <span class="comment">// 调用方法</span></span><br><span class="line">        String str = sb.toString();</span><br><span class="line">        System.out.println(str); <span class="comment">// HelloWorldJava</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="第五章-包装类"><a href="#第五章-包装类" class="headerlink" title="第五章 包装类"></a>第五章 包装类</h1><h2 id="5-1-概述"><a href="#5-1-概述" class="headerlink" title="5.1 概述"></a>5.1 概述</h2><p>Java提供了两个类型系统，基本类型与引用类型，使用基本类型在于效率，然而很多情况，会创建对象使用，因为对象可以做更多的功能，如果想要我们的基本类型像对象一样操作，就可以使用基本类型对应的包装类，如下：</p>
+<h1 id="第五章-包装类"><a href="#第五章-包装类" class="headerlink" title="第五章 包装类"></a>第五章 包装类</h1><p><img src="\images\Java\javaapi\javaapi_06\02.bmp" alt=""></p>
+<h2 id="5-1-概述"><a href="#5-1-概述" class="headerlink" title="5.1 概述"></a>5.1 概述</h2><p>Java提供了两个类型系统，基本类型与引用类型，使用基本类型在于效率，然而很多情况，会创建对象使用，因为对象可以做更多的功能，如果想要我们的基本类型像对象一样操作，就可以使用基本类型对应的包装类，如下：</p>
 <table>
 <thead>
 <tr>
