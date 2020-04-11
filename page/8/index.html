@@ -1798,7 +1798,7 @@ command：命令名，相应功能的英文单词或单词的缩写[-options]：
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/linux_02_系统目录/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/Linux_03_shebang符号/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1817,7 +1817,7 @@ command：命令名，相应功能的英文单词或单词的缩写[-options]：
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/20/linux_02_系统目录/" itemprop="url">linux系统目录</a></h1>
+                <a class="post-title-link" href="/2018/12/20/Linux_03_shebang符号/" itemprop="url">linux Shebang符号</a></h1>
         
 
         <div class="post-meta">
@@ -1852,8 +1852,8 @@ command：命令名，相应功能的英文单词或单词的缩写[-options]：
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
                   </a>
                 </span>
 
@@ -1870,9 +1870,9 @@ command：命令名，相应功能的英文单词或单词的缩写[-options]：
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/20/linux_02_系统目录/#comments" itemprop="discussionUrl">
+                <a href="/2018/12/20/Linux_03_shebang符号/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/12/20/linux_02_系统目录/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/12/20/Linux_03_shebang符号/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1902,23 +1902,27 @@ command：命令名，相应功能的英文单词或单词的缩写[-options]：
       
         
           
-          Linux系统目录1. 单用户操作系统和多用户操作系统
-单用户操作系统：指一台计算机在同一时间 只能由一个用户 使用，一个用户独自享用系统的全部硬件和软件资源
+          LINUX Shebang 符号(#!)
+#!这个符号叫做 Shebang 或者 Sha-bang
+Shebang 通常在 Unix 系统脚本的中 第一行开头 使用
+指明 执行这个脚本文件 的 解释程序
 
-Windows XP 之前的版本都是单用户操作系统
+使用 Shebang 的步骤
 
-
-多用户操作系统：指一台计算机在同一时间可以由 多个用户 使用，多个用户共同享用系统的全部硬件和软件资源
-
-Unix 和 Linux 的设计初衷就是多用户操作系统
-
+使用 which 查询 python3 解释器所在路径
 
 
-2. Wind
+
+1$ which python3
+
+
+修改要运行的 主 python 文件，在第一行增加以下内容
+
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/12/20/linux_02_系统目录/#more" rel="contents">
+            <a class="btn" href="/2018/12/20/Linux_03_shebang符号/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

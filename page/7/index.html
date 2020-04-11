@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/10/tensor_04_docker_serving/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/10/tensor_05_print_tensor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/10/tensor_04_docker_serving/" itemprop="url">使用 TensorFlow Serving 和 Docker 快速部署机器学习服务</a></h1>
+                <a class="post-title-link" href="/2019/03/10/tensor_05_print_tensor/" itemprop="url">tensorflow打印tensor值</a></h1>
         
 
         <div class="post-meta">
@@ -331,9 +331,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/10/tensor_04_docker_serving/#comments" itemprop="discussionUrl">
+                <a href="/2019/03/10/tensor_05_print_tensor/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/03/10/tensor_04_docker_serving/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/03/10/tensor_05_print_tensor/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,12 +363,16 @@
       
         
           
-          从实验到生产，简单快速部署机器学习模型一直是一个挑战。这个过程要做的就是将训练好的模型对外提供预测服务。在生产中，这个过程需要可重现，隔离和安全。这里，我们使用基于Docker的TensorFlow Serving来简单地完成这个过程。TensorFlow 从1.8版本开始支持Docker部署，包括CPU和GPU，非常方便。
-获得训练好的模型获取模型的第一步当然是训练一个模型，但是这不是本篇的重点
+          tensorflow打印tensor值在tensorflow中，打印一个tensor值必须在在一个会话Session中进行，并且可以使用Session.run()或Tensor.eval()进行打印x的值： 
+
+使用 print(sess.run(x)) 
+使用print(x.eval())
+
+Session.run和Tensor.eval1.联系：如果t是一个tf.Tensor对象，则tf.Te
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/03/10/tensor_04_docker_serving/#more" rel="contents">
+            <a class="btn" href="/2019/03/10/tensor_05_print_tensor/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -903,7 +907,7 @@ f —
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Java_03_ 代码块 /">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Java_02_ static和代码块/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -922,7 +926,7 @@ f —
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/20/Java_03_ 代码块 /" itemprop="url">static静态关键字和代码块</a></h1>
+                <a class="post-title-link" href="/2019/02/20/Java_02_ static和代码块/" itemprop="url">static静态关键字和代码块</a></h1>
         
 
         <div class="post-meta">
@@ -975,9 +979,9 @@ f —
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/20/Java_03_ 代码块 /#comments" itemprop="discussionUrl">
+                <a href="/2019/02/20/Java_02_ static和代码块/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/20/Java_03_ 代码块 /" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/02/20/Java_02_ static和代码块/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1017,7 +1021,7 @@ B:非静态成员既可以访问非
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/02/20/Java_03_ 代码块 /#more" rel="contents">
+            <a class="btn" href="/2019/02/20/Java_02_ static和代码块/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1231,7 +1235,7 @@ B: 被static修饰的成员可以通过类名直接访问
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Java_02_ static和代码块/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Java_03_ 代码块 /">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1250,7 +1254,7 @@ B: 被static修饰的成员可以通过类名直接访问
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/20/Java_02_ static和代码块/" itemprop="url">static静态关键字和代码块</a></h1>
+                <a class="post-title-link" href="/2019/02/20/Java_03_ 代码块 /" itemprop="url">static静态关键字和代码块</a></h1>
         
 
         <div class="post-meta">
@@ -1303,9 +1307,9 @@ B: 被static修饰的成员可以通过类名直接访问
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/20/Java_02_ static和代码块/#comments" itemprop="discussionUrl">
+                <a href="/2019/02/20/Java_03_ 代码块 /#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/02/20/Java_02_ static和代码块/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/02/20/Java_03_ 代码块 /" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1345,7 +1349,7 @@ B:非静态成员既可以访问非
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/02/20/Java_02_ static和代码块/#more" rel="contents">
+            <a class="btn" href="/2019/02/20/Java_03_ 代码块 /#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
