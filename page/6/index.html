@@ -1732,7 +1732,7 @@ HTML标签：表单标签* 表单：
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/10/tensor_04_docker_serving/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/10/tensor_05_print_tensor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1751,7 +1751,7 @@ HTML标签：表单标签* 表单：
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/10/tensor_04_docker_serving/" itemprop="url">使用 TensorFlow Serving 和 Docker 快速部署机器学习服务</a></h1>
+                <a class="post-title-link" href="/2019/03/10/tensor_05_print_tensor/" itemprop="url">tensorflow打印tensor值</a></h1>
         
 
         <div class="post-meta">
@@ -1804,9 +1804,9 @@ HTML标签：表单标签* 表单：
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/10/tensor_04_docker_serving/#comments" itemprop="discussionUrl">
+                <a href="/2019/03/10/tensor_05_print_tensor/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/03/10/tensor_04_docker_serving/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/03/10/tensor_05_print_tensor/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1836,12 +1836,16 @@ HTML标签：表单标签* 表单：
       
         
           
-          从实验到生产，简单快速部署机器学习模型一直是一个挑战。这个过程要做的就是将训练好的模型对外提供预测服务。在生产中，这个过程需要可重现，隔离和安全。这里，我们使用基于Docker的TensorFlow Serving来简单地完成这个过程。TensorFlow 从1.8版本开始支持Docker部署，包括CPU和GPU，非常方便。
-获得训练好的模型获取模型的第一步当然是训练一个模型，但是这不是本篇的重点
+          tensorflow打印tensor值在tensorflow中，打印一个tensor值必须在在一个会话Session中进行，并且可以使用Session.run()或Tensor.eval()进行打印x的值： 
+
+使用 print(sess.run(x)) 
+使用print(x.eval())
+
+Session.run和Tensor.eval1.联系：如果t是一个tf.Tensor对象，则tf.Te
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/03/10/tensor_04_docker_serving/#more" rel="contents">
+            <a class="btn" href="/2019/03/10/tensor_05_print_tensor/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
